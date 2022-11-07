@@ -1,0 +1,59 @@
+import { ModelInit, MutableModel } from "@aws-amplify/datastore";
+// @ts-ignore
+import { LazyLoading, LazyLoadingDisabled } from "@aws-amplify/datastore";
+
+type IngaboMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type EagerIngabo = {
+  readonly id: string;
+  readonly fullName?: string | null;
+  readonly gender?: string | null;
+  readonly nationalID?: string | null;
+  readonly dateofbirth?: string | null;
+  readonly telephone?: string | null;
+  readonly cooperative?: string | null;
+  readonly addressCell?: string | null;
+  readonly addressSector?: string | null;
+  readonly addressDistrict?: string | null;
+  readonly activity1?: boolean | null;
+  readonly activity2?: boolean | null;
+  readonly activity3?: boolean | null;
+  readonly activity4?: boolean | null;
+  readonly activity5?: boolean | null;
+  readonly activity6?: boolean | null;
+  readonly activity7?: boolean | null;
+  readonly activity8?: boolean | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyIngabo = {
+  readonly id: string;
+  readonly fullName?: string | null;
+  readonly gender?: string | null;
+  readonly nationalID?: string | null;
+  readonly dateofbirth?: string | null;
+  readonly telephone?: string | null;
+  readonly cooperative?: string | null;
+  readonly addressCell?: string | null;
+  readonly addressSector?: string | null;
+  readonly addressDistrict?: string | null;
+  readonly activity1?: boolean | null;
+  readonly activity2?: boolean | null;
+  readonly activity3?: boolean | null;
+  readonly activity4?: boolean | null;
+  readonly activity5?: boolean | null;
+  readonly activity6?: boolean | null;
+  readonly activity7?: boolean | null;
+  readonly activity8?: boolean | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Ingabo = LazyLoading extends LazyLoadingDisabled ? EagerIngabo : LazyIngabo
+
+export declare const Ingabo: (new (init: ModelInit<Ingabo, IngaboMetaData>) => Ingabo) & {
+  copyOf(source: Ingabo, mutator: (draft: MutableModel<Ingabo, IngaboMetaData>) => MutableModel<Ingabo, IngaboMetaData> | void): Ingabo;
+}
