@@ -5,23 +5,22 @@
     "serviceName": "AppSync",
     "defaultAuthType": {
       "mode": "API_KEY",
-      "expirationTime": 365,
-      "apiKeyExpirationDate": "2023-11-08T11:59:04.340Z",
-      "keyDescription": "graphqlapikeyingabofinal"
+      "keyDescription": "api key description",
+      "expirationTime": 30
     },
+    "additionalAuthTypes": [
+      {
+        "mode": "AWS_IAM"
+      },
+      {
+        "mode": "AMAZON_COGNITO_USER_POOLS",
+        "cognitoUserPoolId": "authingabofinal"
+      }
+    ],
     "conflictResolution": {
       "defaultResolutionStrategy": {
         "type": "AUTOMERGE"
-      },
-      "perModelResolutionStrategy": [
-        {
-          "resolutionStrategy": {
-            "type": "AUTOMERGE"
-          },
-          "entityName": "Ingabo"
-        }
-      ]
-    },
-    "additionalAuthTypes": []
+      }
+    }
   }
 }

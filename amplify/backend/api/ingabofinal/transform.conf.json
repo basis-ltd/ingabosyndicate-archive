@@ -5,12 +5,6 @@
         "project": {
             "ConflictHandler": "AUTOMERGE",
             "ConflictDetection": "VERSION"
-        },
-        "models": {
-            "Ingabo": {
-                "ConflictHandler": "AUTOMERGE",
-                "ConflictDetection": "VERSION"
-            }
         }
     }
 }

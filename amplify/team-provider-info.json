@@ -10,6 +10,12 @@
       "StackName": "amplify-ingabofinal-staging-234106",
       "StackId": "arn:aws:cloudformation:us-east-1:575463654172:stack/amplify-ingabofinal-staging-234106/a673d180-5ef5-11ed-913b-0ae00a88f7bf",
       "AmplifyAppId": "dcx6w14ai3mos"
+    },
+    "categories": {
+      "auth": {
+        "ingabofinal69ba8a65": {},
+        "ingabofinal": {}
+      }
     }
   }
 }
