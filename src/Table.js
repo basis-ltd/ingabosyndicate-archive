@@ -4,7 +4,10 @@ import { Button, PageButton } from './Button'
 import React, { Component, useState, useMemo, useEffect } from 'react'
 import './App.css'
 import { useGlobalFilter, useTable, useAsyncDebounce, useFilters, usesortBy, useSortBy, usePagination } from "react-table";
-import { API, graphqlOperation } from 'aws-amplify'
+import config from './aws-exports'
+import { Amplify, API, graphqlOperation } from 'aws-amplify';
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
 
 const listIngabos = `
 query {
@@ -72,7 +75,7 @@ function GlobalFilter({
       <span className="text-gray-700">Search: </span>
       <input
         type="text"
-        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         value={value || ""}
         onChange={e => {
           setValue(e.target.value);
@@ -91,10 +94,10 @@ function Table() {
 
   const pullData = async () => { 
 
-    let response = await axios.get("https://dummyjson.com/products").catch((err) => console.log(err))
+    let response = await API.graphql(graphqlOperation(listIngabos))
 
     if (response) {
-      records = response.data.products
+      records = response.data.listIngabos.items
       console.log(records)
       setRecords(records)
     }
@@ -106,23 +109,67 @@ function Table() {
   const columns = React.useMemo(
     () => [
       {
-        Header: "Name",
-        accessor: "brand",
+        Header: "No",
+        accessor: "id",
+      },
+      {
+        Header: "Amazina Yombi",
+        accessor: "fullName",
+      },
+      {
+        Header: "Igihe Yavukiye",
+        accessor: "dateofbirth",
+      },
+      {
+        Header: "Igitsina",
+        accessor: "gender",
+      },
+      {
+        Header: "Telephone",
+        accessor: "telephone",
+      },
+      {
+        Header: "Cooperative",
+        accessor: "cooperative",
+      },
+      {
+        Header: "Aho Atuye",
+        accessor: "addressDistrict",
+      },
+      {
+        Header: "Arahinga",
+        accessor: "activity1",
         Filter: SelectColumnFilter,
         filter: 'includes',
       },
       {
-        Header: "Description",
-        accessor: "description",
+        Header: "Aroroye",
+        accessor: "activity2",
       },
-      {
-        Header: "Price",
-        accessor: "price",
-      },
-      {
-        Header: "Category",
-        accessor: "category",
-      },
+      // {
+      //   Header: "Arahinga",
+      //   accessor: "activity3",
+      // },
+      // {
+      //   Header: "Activity",
+      //   accessor: "activity4",
+      // },
+      // {
+      //   Header: "Activity",
+      //   accessor: "activity5",
+      // },
+      // {
+      //   Header: "Activity",
+      //   accessor: "activity6",
+      // },
+      // {
+      //   Header: "Activity",
+      //   accessor: "activity7",
+      // },
+      // {
+      //   Header: "Activity",
+      //   accessor: "activity8",
+      // },
     ],
     []
   );
@@ -155,7 +202,7 @@ function Table() {
         headerGroup.headers.map((column) =>
           column.Filter ? (
             <div key={column.id}>
-              <label for={column.id}>{column.render("Header")}: </label>
+              <label for={column.id}></label>
               {column.render("Filter")}
             </div>
           ) : null
@@ -238,7 +285,7 @@ function Table() {
       setPageSize(Number(e.target.value));
     }}
   >
-    {[5, 10, 20].map((pageSize) => (
+    {[5, 10, 20, 50].map((pageSize) => (
       <option key={pageSize} value={pageSize}>
         Show {pageSize}
       </option>
