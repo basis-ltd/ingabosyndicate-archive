@@ -17,10 +17,10 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "gender": {
-                    "name": "gender",
+                "dateofbirth": {
+                    "name": "dateofbirth",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSDate",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -31,22 +31,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "dateofbirth": {
-                    "name": "dateofbirth",
-                    "isArray": false,
-                    "type": "AWSDate",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "telephone": {
-                    "name": "telephone",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "cooperative": {
-                    "name": "cooperative",
+                "gender": {
+                    "name": "gender",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -68,6 +54,20 @@ export const schema = {
                 },
                 "addressDistrict": {
                     "name": "addressDistrict",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "cooperative": {
+                    "name": "cooperative",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "telephone": {
+                    "name": "telephone",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -129,6 +129,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "no": {
+                    "name": "no",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -165,6 +172,27 @@ export const schema = {
                                     "delete",
                                     "read"
                                 ]
+                            },
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "read",
+                                    "update"
+                                ]
+                            },
+                            {
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groups": [
+                                    "admin"
+                                ],
+                                "operations": [
+                                    "read",
+                                    "create",
+                                    "update",
+                                    "delete"
+                                ]
                             }
                         ]
                     }
@@ -175,5 +203,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.1",
-    "version": "4c988d1a23454c49ce18c67e3a98446d"
+    "version": "d6deb45a49b594f3ac31d2e33e63b5ef"
 };

@@ -7,13 +7,17 @@ import { useGlobalFilter, useTable, useAsyncDebounce, useFilters, usesortBy, use
 import config from './aws-exports'
 import { Amplify, API, graphqlOperation } from 'aws-amplify';
 import awsconfig from './aws-exports';
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+
+
 Amplify.configure(awsconfig);
 
 const listIngabos = `
 query {
   listIngabos {
     items{
-      fullName dateofbirth nationalID gender telephone cooperative addressCell addressSector addressDistrict activity1 activity2 activity3 activity4 activity5 activity6 activity7 activity8
+      fullName dateofbirth nationalID gender telephone cooperative addressCell addressSector addressDistrict activity1 activity2 activity3 activity4 activity5 activity6 activity7 activity8 no
     }
   }
 }
@@ -81,7 +85,7 @@ function GlobalFilter({
           setValue(e.target.value);
           onChange(e.target.value);
         }}
-        placeholder={`${count} records...`}
+        placeholder={`${count} people...`}
       />
     </label>
   )
@@ -90,250 +94,294 @@ function GlobalFilter({
 
 function Table() {
 
+
+
   let [records, setRecords] = useState([])
 
-  const pullData = async () => { 
+  const pullData = async () => {
 
     let response = await API.graphql(graphqlOperation(listIngabos))
 
+
     if (response) {
       records = response.data.listIngabos.items
-      console.log(records)
+      for (let i = 1; i <= records.length; i++){
+        records[i-1].no = i;
+        const activity1 = records[i - 1].activity1 == true ? records[i - 1].activity1 = "Yego" : records[i - 1].activity1 = "Oya"
+        const activity2 = records[i-1].activity2 == true ? records[i-1].activity2 = "Yego" : records[i-1].activity2 = "Oya"
+        const activity3 = records[i-1].activity3 == true ? records[i-1].activity3 = "Yego" : records[i-1].activity3 = "Oya"
+        const activity4 = records[i-1].activity4 == true ? records[i-1].activity4 = "Yego" : records[i-1].activity4 = "Oya"
+        const activity5 = records[i-1].activity5 == true ? records[i-1].activity5 = "Yego" : records[i-1].activity5 = "Oya"
+        const activity6 = records[i-1].activity6 == true ? records[i-1].activity6 = "Yego" : records[i-1].activity6 = "Oya"
+        const activity7 = records[i-1].activity7 == true ? records[i-1].activity7 = "Yego" : records[i-1].activity7 = "Oya"
+        const activity8 = records[i-1].activity8 == true ? records[i-1].activity8 = "Yego" : records[i-1].activity8 = "Oya"
+      
+      }
+      console.log(records);
       setRecords(records)
     }
 
   }
 
-  const data = records;
-
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: "No",
-        accessor: "id",
-      },
-      {
-        Header: "Amazina Yombi",
-        accessor: "fullName",
-      },
-      {
-        Header: "Igihe Yavukiye",
-        accessor: "dateofbirth",
-      },
-      {
-        Header: "Igitsina",
-        accessor: "gender",
-      },
-      {
-        Header: "Telephone",
-        accessor: "telephone",
-      },
-      {
-        Header: "Cooperative",
-        accessor: "cooperative",
-      },
-      {
-        Header: "Aho Atuye",
-        accessor: "addressDistrict",
-      },
-      {
-        Header: "Arahinga",
-        accessor: "activity1",
-        Filter: SelectColumnFilter,
-        filter: 'includes',
-      },
-      {
-        Header: "Aroroye",
-        accessor: "activity2",
-      },
-      // {
-      //   Header: "Arahinga",
-      //   accessor: "activity3",
-      // },
-      // {
-      //   Header: "Activity",
-      //   accessor: "activity4",
-      // },
-      // {
-      //   Header: "Activity",
-      //   accessor: "activity5",
-      // },
-      // {
-      //   Header: "Activity",
-      //   accessor: "activity6",
-      // },
-      // {
-      //   Header: "Activity",
-      //   accessor: "activity7",
-      // },
-      // {
-      //   Header: "Activity",
-      //   accessor: "activity8",
-      // },
-    ],
-    []
-  );
-  
-  useEffect(() => { 
+    
+  useEffect(() => {
 
     pullData()
 
   }, [])
+
+  const data = records;
+
+    const columns = React.useMemo(
+      () => [
+        {
+          Header: "No",
+          accessor: "no",
+        },
+        {
+          Header: "Amazina Yombi",
+          accessor: "fullName",
+        },
+        {
+          Header: "Igihe Yavukiye",
+          accessor: "dateofbirth",
+        },
+        {
+          Header: "Igitsina",
+          accessor: "gender",
+        },
+        {
+          Header: "Telephone",
+          accessor: "telephone",
+        },
+        {
+          Header: "Cooperative",
+          accessor: "cooperative",
+        },
+        {
+          Header: "Aho Atuye",
+          accessor: "addressDistrict",
+        },
+        {
+          Header: "Arahinga",
+          accessor: "activity1",
+          Filter: SelectColumnFilter,
+          filter: 'includes',
+        },
+        {
+          Header: "Aroroye",
+          accessor: "activity2",
+        },
+        {
+          Header: "Imyumbati ",
+          accessor: "activity3",
+        },
+        {
+          Header: "Umuceri",
+          accessor: "activity4",
+        },
+        {
+          Header: "Ibinyampeke",
+          accessor: "activity5",
+        },
+        {
+          Header: "Inka",
+          accessor: "activity6",
+        },
+        {
+          Header: "Ingurube",
+          accessor: "activity7",
+        },
+        {
+          Header: "Inkoko",
+          accessor: "activity8",
+        },
+      ],
+      []
+    );
+
+    const TableInstance = useTable({ columns, data }, useGlobalFilter, useFilters, useSortBy, usePagination)
   
-  const TableInstance = useTable({ columns, data }, useGlobalFilter, useFilters, useSortBy,usePagination)
+    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, state, preGlobalFilteredRows, setGlobalFilter, page, canPreviousPage, canNextPage, pageOptions, pageCount, gotoPage, nextPage, previousPage, setPageSize } = TableInstance;
+
+
+    const exportPDF = () => {
+      const unit = "pt";
+      const size = "A4"; // Use A1, A2, A3 or A4
+      const orientation = "portrait"; // portrait or landscape
   
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, state, preGlobalFilteredRows, setGlobalFilter, page, canPreviousPage, canNextPage, pageOptions, pageCount, gotoPage, nextPage, previousPage, setPageSize} = TableInstance;
+      const marginLeft = 40;
+      const doc = new jsPDF(orientation, unit, size);
+  
+      doc.setFontSize(15);
+  
+      const title = "My Awesome Report";
+      const headers = [["NAME", "PROFESSION"]];
+  
+      const data = records;
 
+      let content = {
+        startY: 50,
+        head: headers,
+        body: data
+      };
 
+      doc.text(title, marginLeft, 40);
+      doc.autoTable(content);
+      doc.save("report.pdf") 
 
-  return (
+      console.log(data)
+  
+    }
+  
 
-    <>
-      <div className="flex gap-x-2">
+    return (
+
+      <>
+        <div className="flex gap-x-2">
 
       
-      <GlobalFilter
-        preGlobalFilteredRows={preGlobalFilteredRows}
-        globalFilter={state.globalFilter}
-        setGlobalFilter={setGlobalFilter}
-      />
+          <GlobalFilter
+            preGlobalFilteredRows={preGlobalFilteredRows}
+            globalFilter={state.globalFilter}
+            setGlobalFilter={setGlobalFilter}
+          />
 
-        {headerGroups.map((headerGroup) =>
-        headerGroup.headers.map((column) =>
-          column.Filter ? (
-            <div key={column.id}>
-              <label for={column.id}></label>
-              {column.render("Filter")}
-            </div>
-          ) : null
-        )
-      )}
-
-      </div>
-      {/* global search and filter */}
-      {/* table */}
+          {headerGroups.map((headerGroup) =>
+            headerGroup.headers.map((column) =>
+              column.Filter ? (
+                <div key={column.id}>
+                  <label for={column.id}></label>
+                  {column.render("Filter")}
+                </div>
+              ) : null
+            )
+          )}
+        </div>
+        {/* global search and filter */}
+        {/* table */}
 
         
-      <div className="mt-2 flex flex-col">
-      <div className="mt-2 flex flex-col">
-        <div className="-my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
-          <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <div className="mt-2 flex flex-col">
+          <div className="mt-2 flex flex-col">
+            <div className="-my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
+              <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
             
-      <table {...getTableProps()} border="1" className="min-w-full divide-y divide-gray-200">
-      <thead className="bg-gray-50">
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <th scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              {...column.getHeaderProps(column.getSortByToggleProps())}>
-                {column.render("Header")}
-                <span>
-                    {column.isSorted
-                      ? column.isSortedDesc
-                        ? ' ▼'
-                        : ' ▲'
-                      : ''}
-                  </span>
-              </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody className="bg-white divide-y divide-gray-200"
-      {...getTableBodyProps()}>
-        {page.map((row, i) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell) => {
-                return <td {...cell.getCellProps()}
-                className="px-6 py-4 whitespace-nowrap"
-                >{cell.render("Cell")}</td>;
-              })}
-            </tr>
-          );
-        })}
-      </tbody>
-      </table>
+                  <table {...getTableProps()} border="1" className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-gray-50">
+                      {headerGroups.map((headerGroup) => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                          {headerGroup.headers.map((column) => (
+                            <th scope="col"
+                              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                              {...column.getHeaderProps(column.getSortByToggleProps())}>
+                              {column.render("Header")}
+                              <span>
+                                {column.isSorted
+                                  ? column.isSortedDesc
+                                    ? ' ▼'
+                                    : ' ▲'
+                                  : ''}
+                              </span>
+                            </th>
+                          ))}
+                        </tr>
+                      ))}
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200"
+                      {...getTableBodyProps()}>
+                      {page.map((row, i) => {
+                        prepareRow(row);
+                        return (
+                          <tr {...row.getRowProps()}>
+                            {row.cells.map((cell) => {
+                              return <td {...cell.getCellProps()}
+                                className="px-6 py-4 whitespace-nowrap"
+                              >{cell.render("Cell")}</td>;
+                            })}
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
 
-      </div>
-      </div>
-      </div>
-      </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-      </div>
-      <div className="pagination">
+        </div>
+        <div className="pagination">
         
-      <div className="py-3 flex items-center justify-between">
-        <div className="flex-1 flex justify-between sm:hidden">
-          <Button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</Button>
-          <Button onClick={() => nextPage()} disabled={!canNextPage}>Next</Button>
-        </div>
-        <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-          <div className="flex gap-x-2">
-            <span className="text-sm text-gray-700">
-              Page <span className="font-medium">{state.pageIndex + 1}</span> of <span className="font-medium">{pageOptions.length}</span>
-            </span>
-            <label>
-  <span className="sr-only">Items Per Page</span>
-  <select
-    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-    value={state.pageSize}
-    onChange={(e) => {
-      setPageSize(Number(e.target.value));
-    }}
-  >
-    {[5, 10, 20, 50].map((pageSize) => (
-      <option key={pageSize} value={pageSize}>
-        Show {pageSize}
-      </option>
-    ))}
-  </select>
-</label>
+          <div className="py-3 flex items-center justify-between">
+            <div className="flex-1 flex justify-between sm:hidden">
+              <Button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</Button>
+              <Button onClick={() => nextPage()} disabled={!canNextPage}>Next</Button>
+            </div>
+            <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+              <div className="flex gap-x-2">
+                <span className="text-sm text-gray-700">
+                  Page <span className="font-medium">{state.pageIndex + 1}</span> of <span className="font-medium">{pageOptions.length}</span>
+                </span>
+                <label>
+                  <span className="sr-only">Items Per Page</span>
+                  <select
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    value={state.pageSize}
+                    onChange={(e) => {
+                      setPageSize(Number(e.target.value));
+                    }}
+                  >
+                    {[5, 10, 20, 50].map((pageSize) => (
+                      <option key={pageSize} value={pageSize}>
+                        Show {pageSize}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+              <div>
+                <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                  <PageButton
+                    className="rounded-l-md"
+                    onClick={() => gotoPage(0)}
+                    disabled={!canPreviousPage}
+                  >
+                    <span className="sr-only">First</span>
+                    <ChevronDoubleLeftIcon className="h-5 w-5" aria-hidden="true" />
+                  </PageButton>
+                  <PageButton
+                    onClick={() => previousPage()}
+                    disabled={!canPreviousPage}
+                  >
+                    <span className="sr-only">Previous</span>
+                    <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+                  </PageButton>
+                  <PageButton
+                    onClick={() => nextPage()}
+                    disabled={!canNextPage
+                    }>
+                    <span className="sr-only">Next</span>
+                    <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+                  </PageButton>
+                  <PageButton
+                    className="rounded-r-md"
+                    onClick={() => gotoPage(pageCount - 1)}
+                    disabled={!canNextPage}
+                  >
+                    <span className="sr-only">Last</span>
+                    <ChevronDoubleRightIcon className="h-5 w-5" aria-hidden="true" />
+                  </PageButton>
+                </nav>
+              </div>
+            </div>
           </div>
-          <div>
-            <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-              <PageButton
-                className="rounded-l-md"
-                onClick={() => gotoPage(0)}
-                disabled={!canPreviousPage}
-              >
-                <span className="sr-only">First</span>
-                <ChevronDoubleLeftIcon className="h-5 w-5" aria-hidden="true" />
-              </PageButton>
-              <PageButton
-                onClick={() => previousPage()}
-                disabled={!canPreviousPage}
-              >
-                <span className="sr-only">Previous</span>
-                <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-              </PageButton>
-              <PageButton
-                onClick={() => nextPage()}
-                disabled={!canNextPage
-                }>
-                <span className="sr-only">Next</span>
-                <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-              </PageButton>
-              <PageButton
-                className="rounded-r-md"
-                onClick={() => gotoPage(pageCount - 1)}
-                disabled={!canNextPage}
-              >
-                <span className="sr-only">Last</span>
-                <ChevronDoubleRightIcon className="h-5 w-5" aria-hidden="true" />
-              </PageButton>
-            </nav>
-          </div>
         </div>
-      </div>
-      </div>
     
-    </>
-  );
+      </>
+    );
 
-}
+  }
 
 export default Table;

@@ -9,14 +9,14 @@ type IngaboMetaData = {
 type EagerIngabo = {
   readonly id: string;
   readonly fullName?: string | null;
-  readonly gender?: string | null;
-  readonly nationalID?: string | null;
   readonly dateofbirth?: string | null;
-  readonly telephone?: string | null;
-  readonly cooperative?: string | null;
+  readonly nationalID?: string | null;
+  readonly gender?: string | null;
   readonly addressCell?: string | null;
   readonly addressSector?: string | null;
   readonly addressDistrict?: string | null;
+  readonly cooperative?: string | null;
+  readonly telephone?: string | null;
   readonly activity1?: boolean | null;
   readonly activity2?: boolean | null;
   readonly activity3?: boolean | null;
@@ -25,6 +25,7 @@ type EagerIngabo = {
   readonly activity6?: boolean | null;
   readonly activity7?: boolean | null;
   readonly activity8?: boolean | null;
+  readonly no?: number | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -32,14 +33,14 @@ type EagerIngabo = {
 type LazyIngabo = {
   readonly id: string;
   readonly fullName?: string | null;
-  readonly gender?: string | null;
-  readonly nationalID?: string | null;
   readonly dateofbirth?: string | null;
-  readonly telephone?: string | null;
-  readonly cooperative?: string | null;
+  readonly nationalID?: string | null;
+  readonly gender?: string | null;
   readonly addressCell?: string | null;
   readonly addressSector?: string | null;
   readonly addressDistrict?: string | null;
+  readonly cooperative?: string | null;
+  readonly telephone?: string | null;
   readonly activity1?: boolean | null;
   readonly activity2?: boolean | null;
   readonly activity3?: boolean | null;
@@ -48,6 +49,7 @@ type LazyIngabo = {
   readonly activity6?: boolean | null;
   readonly activity7?: boolean | null;
   readonly activity8?: boolean | null;
+  readonly no?: number | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

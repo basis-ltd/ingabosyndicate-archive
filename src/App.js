@@ -1,11 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
 import Table from './Table'
-import { Amplify, API, graphqlOperation } from 'aws-amplify';
+import { Amplify, API, graphqlOperation } from 'aws-amplify/';
 import awsconfig from './aws-exports';
-Amplify.configure(awsconfig);
+import { withAuthenticator } from '@aws-amplify/ui-react'
+import '@aws-amplify/ui-react/styles.css';
+import { Button } from './Button'
 
-function App() {
+
+function App({ signOut, user }) {
+
+
   return (
     <div className="App">
      
@@ -15,12 +20,12 @@ function App() {
           <h1 className="text-xl font-semibold">INGABO SYNDICATE</h1>
         </div>
         <div className="mt-4">
-          <Table />
+            <Table />
         </div>
       </main>
-    </div>
+      </div>
       </div>
   );
 }
 
-export default App;
+export default withAuthenticator(App);
