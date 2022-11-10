@@ -14,7 +14,32 @@ export const createTodo = /* GraphQL */ `
       updatedAt
     }
   }
-`;
+
+# mutation create{createIngabo(input: {
+#     no
+#     fullName
+#     dateofbirth
+#     nationalID
+#     gender
+#     addressCell
+#     addressSector
+#     addressDistrict
+#     cooperative
+#     telephone
+#     activity1
+#     activity2
+#     activity3
+#     activity4
+#     activity5
+#     activity6
+#     activity7
+#     activity8
+# }){
+
+# }
+# }
+# `
+  ;
 export const updateTodo = /* GraphQL */ `
   mutation UpdateTodo(
     $input: UpdateTodoInput!

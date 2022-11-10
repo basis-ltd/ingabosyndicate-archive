@@ -12,21 +12,12 @@ export const getTodo = /* GraphQL */ `
     }
   }
 `;
-export const listTodos = /* GraphQL */ `
-  query ListTodos(
-    $filter: ModelTodoFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        description
-        createdAt
-        updatedAt
-      }
-      nextToken
+export const listIngabos = `
+query {
+  listIngabos {
+    items{
+      fullName dateofbirth nationalID gender telephone cooperative addressCell addressSector addressDistrict activity1 activity2 activity3 activity4 activity5 activity6 activity7 activity8 no
     }
   }
-`;
+}
+`
