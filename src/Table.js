@@ -4,24 +4,16 @@ import { Button, PageButton } from './Button'
 import React, { Component, useState, useMemo, useEffect } from 'react'
 import './App.css'
 import { useGlobalFilter, useTable, useAsyncDebounce, useFilters, usesortBy, useSortBy, usePagination } from "react-table";
-import config from './aws-exports'
 import { Amplify, API, graphqlOperation } from 'aws-amplify';
 import awsconfig from './aws-exports';
-import jsPDF from "jspdf";
-import "jspdf-autotable";
+import { CSVLink } from 'react-csv'
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import { listIngabos } from './graphql/queries'
+import {DataStore} from '@aws-amplify/datastore';
 
 
 Amplify.configure(awsconfig);
-
-const listIngabos = `
-query {
-  listIngabos {
-    items{
-      fullName dateofbirth nationalID gender telephone cooperative addressCell addressSector addressDistrict activity1 activity2 activity3 activity4 activity5 activity6 activity7 activity8 no
-    }
-  }
-}
-`
 
 // This is a custom filter UI for selecting
 // a unique option from a list
@@ -157,6 +149,8 @@ function Table() {
         {
           Header: "Cooperative",
           accessor: "cooperative",
+          Filter: SelectColumnFilter,
+          filter: 'includes',
         },
         {
           Header: "Aho Atuye",
@@ -171,6 +165,8 @@ function Table() {
         {
           Header: "Aroroye",
           accessor: "activity2",
+          Filter: SelectColumnFilter,
+          filter: 'includes',
         },
         {
           Header: "Imyumbati ",
@@ -196,6 +192,10 @@ function Table() {
           Header: "Inkoko",
           accessor: "activity8",
         },
+        {
+          Header: "Signature",
+          accessor: ""
+        }
       ],
       []
     );
@@ -203,37 +203,37 @@ function Table() {
     const TableInstance = useTable({ columns, data }, useGlobalFilter, useFilters, useSortBy, usePagination)
   
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, state, preGlobalFilteredRows, setGlobalFilter, page, canPreviousPage, canNextPage, pageOptions, pageCount, gotoPage, nextPage, previousPage, setPageSize } = TableInstance;
+  
+  
+  const exportPDF = () => {
+
+    let info = [], header = []
+
+    data.forEach((element, index, array) => {
+      info.push([element.no, element.fullName, element.gender, element.nationalID, element.cooperative])
+    })
+
+    // columns.forEach((col, index) => {
+    //   header.push(col.Header)
+    // })
+
+    // for (let i = 0; i < 5; i++){
+    //   header.push(columns[i]);
+    // }
+
+    const doc = new jsPDF('landscape', 'mm', 'a3');
+
+    doc.autoTable({
+      head: [['No', 'Amazina Yombi', 'Igitsina', 'Ingandamuntu', 'Koperative']],
+      body: info
+    })
 
 
-    const exportPDF = () => {
-      const unit = "pt";
-      const size = "A4"; // Use A1, A2, A3 or A4
-      const orientation = "portrait"; // portrait or landscape
-  
-      const marginLeft = 40;
-      const doc = new jsPDF(orientation, unit, size);
-  
-      doc.setFontSize(15);
-  
-      const title = "My Awesome Report";
-      const headers = [["NAME", "PROFESSION"]];
-  
-      const data = records;
+    // doc.text("Ingabo Syndicate Report", 20, 20);
 
-      let content = {
-        startY: 50,
-        head: headers,
-        body: data
-      };
-
-      doc.text(title, marginLeft, 40);
-      doc.autoTable(content);
-      doc.save("report.pdf") 
-
-      console.log(data)
-  
-    }
-  
+    doc.save('Report.pdf')
+    console.log(header)
+  }
 
     return (
 
@@ -267,7 +267,11 @@ function Table() {
             <div className="-my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
               <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                 <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-            
+                
+                  <CSVLink data={records}>Export Excel</CSVLink>
+
+                  <button onClick={exportPDF}>Export PDF</button>
+
                   <table {...getTableProps()} border="1" className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">
                       {headerGroups.map((headerGroup) => (
