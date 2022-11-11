@@ -17,7 +17,6 @@ export declare type IngaboUpdateFormInputValues = {
     fullName?: string;
     dateofbirth?: string;
     nationalID?: string;
-    gender?: string;
     addressCell?: string;
     addressSector?: string;
     addressDistrict?: string;
@@ -32,12 +31,12 @@ export declare type IngaboUpdateFormInputValues = {
     activity7?: boolean;
     activity8?: boolean;
     no?: number;
+    igitsina?: string;
 };
 export declare type IngaboUpdateFormValidationValues = {
     fullName?: ValidationFunction<string>;
     dateofbirth?: ValidationFunction<string>;
     nationalID?: ValidationFunction<string>;
-    gender?: ValidationFunction<string>;
     addressCell?: ValidationFunction<string>;
     addressSector?: ValidationFunction<string>;
     addressDistrict?: ValidationFunction<string>;
@@ -52,6 +51,7 @@ export declare type IngaboUpdateFormValidationValues = {
     activity7?: ValidationFunction<boolean>;
     activity8?: ValidationFunction<boolean>;
     no?: ValidationFunction<number>;
+    igitsina?: ValidationFunction<string>;
 };
 export declare type FormProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type IngaboUpdateFormOverridesProps = {
@@ -59,7 +59,6 @@ export declare type IngaboUpdateFormOverridesProps = {
     fullName?: FormProps<TextFieldProps>;
     dateofbirth?: FormProps<TextFieldProps>;
     nationalID?: FormProps<TextFieldProps>;
-    gender?: FormProps<TextFieldProps>;
     addressCell?: FormProps<TextFieldProps>;
     addressSector?: FormProps<TextFieldProps>;
     addressDistrict?: FormProps<TextFieldProps>;
@@ -74,6 +73,7 @@ export declare type IngaboUpdateFormOverridesProps = {
     activity7?: FormProps<SwitchFieldProps>;
     activity8?: FormProps<SwitchFieldProps>;
     no?: FormProps<TextFieldProps>;
+    igitsina?: FormProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type IngaboUpdateFormProps = React.PropsWithChildren<{
     overrides?: IngaboUpdateFormOverridesProps | undefined | null;

@@ -31,13 +31,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "gender": {
-                    "name": "gender",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
                 "addressCell": {
                     "name": "addressCell",
                     "isArray": false,
@@ -69,7 +62,7 @@ export const schema = {
                 "telephone": {
                     "name": "telephone",
                     "isArray": false,
-                    "type": "AWSPhone",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -133,6 +126,13 @@ export const schema = {
                     "name": "no",
                     "isArray": false,
                     "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "igitsina": {
+                    "name": "igitsina",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -203,5 +203,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.1",
-    "version": "c1c71d31e604fb71abf116d48466293a"
+    "version": "712a74588c335629f210e88216652f7e"
 };
