@@ -3,12 +3,11 @@ type Ingabo @model @auth(rules: [{allow: public}, {allow: private, operations: [
   fullName: String
   dateofbirth: AWSDate
   nationalID: String
-  gender: String
   addressCell: String
   addressSector: String
   addressDistrict: String
   cooperative: String
-  telephone: AWSPhone
+  telephone: String
   activity1: Boolean
   activity2: Boolean
   activity3: Boolean
@@ -18,5 +17,6 @@ type Ingabo @model @auth(rules: [{allow: public}, {allow: private, operations: [
   activity7: Boolean
   activity8: Boolean
   no: Int
+  igitsina: String
 }
  

@@ -6,7 +6,7 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { CheckboxFieldProps, GridProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { CheckboxFieldProps, GridProps, HeadingProps, SelectFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 export declare type ValidationResponse = {
     hasError: boolean;
     errorMessage?: string;
@@ -15,7 +15,7 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type IngaboCreateFormInputValues = {
     fullName?: string;
     dateofbirth?: string;
-    gender?: string;
+    igitsina?: string;
     nationalID?: string;
     cooperative?: string;
     telephone?: string;
@@ -32,7 +32,7 @@ export declare type IngaboCreateFormInputValues = {
 export declare type IngaboCreateFormValidationValues = {
     fullName?: ValidationFunction<string>;
     dateofbirth?: ValidationFunction<string>;
-    gender?: ValidationFunction<string>;
+    igitsina?: ValidationFunction<string>;
     nationalID?: ValidationFunction<string>;
     cooperative?: ValidationFunction<string>;
     telephone?: ValidationFunction<string>;
@@ -49,22 +49,26 @@ export declare type IngaboCreateFormValidationValues = {
 export declare type FormProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type IngaboCreateFormOverridesProps = {
     IngaboCreateFormGrid?: FormProps<GridProps>;
-    RowGrid0?: FormProps<GridProps>;
+    SectionalElement0?: FormProps<HeadingProps>;
+    RowGrid1?: FormProps<GridProps>;
     fullName?: FormProps<TextFieldProps>;
     dateofbirth?: FormProps<TextFieldProps>;
-    gender?: FormProps<TextFieldProps>;
+    igitsina?: FormProps<SelectFieldProps>;
+    RowGrid2?: FormProps<GridProps>;
     nationalID?: FormProps<TextFieldProps>;
     cooperative?: FormProps<TextFieldProps>;
     telephone?: FormProps<TextFieldProps>;
+    SectionalElement1?: FormProps<HeadingProps>;
     RowGrid4?: FormProps<GridProps>;
     addressCell?: FormProps<TextFieldProps>;
     addressSector?: FormProps<TextFieldProps>;
     addressDistrict?: FormProps<TextFieldProps>;
-    RowGrid5?: FormProps<GridProps>;
+    SectionalElement2?: FormProps<HeadingProps>;
+    RowGrid6?: FormProps<GridProps>;
     activity1?: FormProps<CheckboxFieldProps>;
     activity2?: FormProps<CheckboxFieldProps>;
     activity4?: FormProps<CheckboxFieldProps>;
-    RowGrid6?: FormProps<GridProps>;
+    RowGrid7?: FormProps<GridProps>;
     activity5?: FormProps<CheckboxFieldProps>;
     activity6?: FormProps<CheckboxFieldProps>;
     activity3?: FormProps<CheckboxFieldProps>;

@@ -5,12 +5,11 @@ import Table from './Table'
 import { Amplify, API, graphqlOperation } from 'aws-amplify/';
 import awsconfig from './aws-exports';
 import { withAuthenticator } from '@aws-amplify/ui-react'
-import '@aws-amplify/ui-react/styles.css';
 import { Button } from './Button'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import IngaboCreateForm from './ui-components/IngaboCreateForm';
 import NavBar from './NavBar';
-import sendMessage from './SmsApi';
+import DataEntryForm from './Input'
 
 
 
@@ -42,7 +41,7 @@ function App({ signOut, user }) {
               </Route>
 
               <Route path="/input">
-              <sendMessage />  
+              <IngaboCreateForm />  
               </Route>
 
           </Switch>

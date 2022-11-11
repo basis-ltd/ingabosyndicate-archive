@@ -11,7 +11,6 @@ type EagerIngabo = {
   readonly fullName?: string | null;
   readonly dateofbirth?: string | null;
   readonly nationalID?: string | null;
-  readonly gender?: string | null;
   readonly addressCell?: string | null;
   readonly addressSector?: string | null;
   readonly addressDistrict?: string | null;
@@ -26,6 +25,7 @@ type EagerIngabo = {
   readonly activity7?: boolean | null;
   readonly activity8?: boolean | null;
   readonly no?: number | null;
+  readonly igitsina?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -35,7 +35,6 @@ type LazyIngabo = {
   readonly fullName?: string | null;
   readonly dateofbirth?: string | null;
   readonly nationalID?: string | null;
-  readonly gender?: string | null;
   readonly addressCell?: string | null;
   readonly addressSector?: string | null;
   readonly addressDistrict?: string | null;
@@ -50,6 +49,7 @@ type LazyIngabo = {
   readonly activity7?: boolean | null;
   readonly activity8?: boolean | null;
   readonly no?: number | null;
+  readonly igitsina?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

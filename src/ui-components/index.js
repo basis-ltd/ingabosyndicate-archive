@@ -18,7 +18,6 @@ export { default as ActionCard } from "./ActionCard";
 export { default as MyIcon } from "./MyIcon";
 export { default as Features2x2 } from "./Features2x2";
 export { default as NavBar } from "./NavBar";
-export { default as IngaboInputForm } from "./IngaboInputForm";
 export { default as ProductDetail } from "./ProductDetail";
 export { default as HeroLayout2 } from "./HeroLayout2";
 export { default as ContactUs } from "./ContactUs";

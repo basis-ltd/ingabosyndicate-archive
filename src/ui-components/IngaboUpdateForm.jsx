@@ -34,7 +34,6 @@ export default function IngaboUpdateForm(props) {
     fullName: undefined,
     dateofbirth: undefined,
     nationalID: undefined,
-    gender: undefined,
     addressCell: undefined,
     addressSector: undefined,
     addressDistrict: undefined,
@@ -49,13 +48,13 @@ export default function IngaboUpdateForm(props) {
     activity7: false,
     activity8: false,
     no: undefined,
+    igitsina: undefined,
   };
   const [fullName, setFullName] = React.useState(initialValues.fullName);
   const [dateofbirth, setDateofbirth] = React.useState(
     initialValues.dateofbirth
   );
   const [nationalID, setNationalID] = React.useState(initialValues.nationalID);
-  const [gender, setGender] = React.useState(initialValues.gender);
   const [addressCell, setAddressCell] = React.useState(
     initialValues.addressCell
   );
@@ -78,13 +77,13 @@ export default function IngaboUpdateForm(props) {
   const [activity7, setActivity7] = React.useState(initialValues.activity7);
   const [activity8, setActivity8] = React.useState(initialValues.activity8);
   const [no, setNo] = React.useState(initialValues.no);
+  const [igitsina, setIgitsina] = React.useState(initialValues.igitsina);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = { ...initialValues, ...ingaboRecord };
     setFullName(cleanValues.fullName);
     setDateofbirth(cleanValues.dateofbirth);
     setNationalID(cleanValues.nationalID);
-    setGender(cleanValues.gender);
     setAddressCell(cleanValues.addressCell);
     setAddressSector(cleanValues.addressSector);
     setAddressDistrict(cleanValues.addressDistrict);
@@ -99,6 +98,7 @@ export default function IngaboUpdateForm(props) {
     setActivity7(cleanValues.activity7);
     setActivity8(cleanValues.activity8);
     setNo(cleanValues.no);
+    setIgitsina(cleanValues.igitsina);
     setErrors({});
   };
   const [ingaboRecord, setIngaboRecord] = React.useState(ingabo);
@@ -114,12 +114,11 @@ export default function IngaboUpdateForm(props) {
     fullName: [],
     dateofbirth: [],
     nationalID: [],
-    gender: [],
     addressCell: [],
     addressSector: [],
     addressDistrict: [],
     cooperative: [],
-    telephone: [{ type: "Phone" }],
+    telephone: [],
     activity1: [],
     activity2: [],
     activity3: [],
@@ -129,6 +128,7 @@ export default function IngaboUpdateForm(props) {
     activity7: [],
     activity8: [],
     no: [],
+    igitsina: [],
   };
   const runValidationTasks = async (fieldName, value) => {
     let validationResponse = validateField(value, validations[fieldName]);
@@ -151,7 +151,6 @@ export default function IngaboUpdateForm(props) {
           fullName,
           dateofbirth,
           nationalID,
-          gender,
           addressCell,
           addressSector,
           addressDistrict,
@@ -166,6 +165,7 @@ export default function IngaboUpdateForm(props) {
           activity7,
           activity8,
           no,
+          igitsina,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -219,7 +219,6 @@ export default function IngaboUpdateForm(props) {
               fullName: value,
               dateofbirth,
               nationalID,
-              gender,
               addressCell,
               addressSector,
               addressDistrict,
@@ -234,6 +233,7 @@ export default function IngaboUpdateForm(props) {
               activity7,
               activity8,
               no,
+              igitsina,
             };
             const result = onChange(modelFields);
             value = result?.fullName ?? value;
@@ -261,7 +261,6 @@ export default function IngaboUpdateForm(props) {
               fullName,
               dateofbirth: value,
               nationalID,
-              gender,
               addressCell,
               addressSector,
               addressDistrict,
@@ -276,6 +275,7 @@ export default function IngaboUpdateForm(props) {
               activity7,
               activity8,
               no,
+              igitsina,
             };
             const result = onChange(modelFields);
             value = result?.dateofbirth ?? value;
@@ -302,7 +302,6 @@ export default function IngaboUpdateForm(props) {
               fullName,
               dateofbirth,
               nationalID: value,
-              gender,
               addressCell,
               addressSector,
               addressDistrict,
@@ -317,6 +316,7 @@ export default function IngaboUpdateForm(props) {
               activity7,
               activity8,
               no,
+              igitsina,
             };
             const result = onChange(modelFields);
             value = result?.nationalID ?? value;
@@ -332,47 +332,6 @@ export default function IngaboUpdateForm(props) {
         {...getOverrideProps(overrides, "nationalID")}
       ></TextField>
       <TextField
-        label="Gender"
-        isRequired={false}
-        isReadOnly={false}
-        defaultValue={gender}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              fullName,
-              dateofbirth,
-              nationalID,
-              gender: value,
-              addressCell,
-              addressSector,
-              addressDistrict,
-              cooperative,
-              telephone,
-              activity1,
-              activity2,
-              activity3,
-              activity4,
-              activity5,
-              activity6,
-              activity7,
-              activity8,
-              no,
-            };
-            const result = onChange(modelFields);
-            value = result?.gender ?? value;
-          }
-          if (errors.gender?.hasError) {
-            runValidationTasks("gender", value);
-          }
-          setGender(value);
-        }}
-        onBlur={() => runValidationTasks("gender", gender)}
-        errorMessage={errors.gender?.errorMessage}
-        hasError={errors.gender?.hasError}
-        {...getOverrideProps(overrides, "gender")}
-      ></TextField>
-      <TextField
         label="Address cell"
         isRequired={false}
         isReadOnly={false}
@@ -384,7 +343,6 @@ export default function IngaboUpdateForm(props) {
               fullName,
               dateofbirth,
               nationalID,
-              gender,
               addressCell: value,
               addressSector,
               addressDistrict,
@@ -399,6 +357,7 @@ export default function IngaboUpdateForm(props) {
               activity7,
               activity8,
               no,
+              igitsina,
             };
             const result = onChange(modelFields);
             value = result?.addressCell ?? value;
@@ -425,7 +384,6 @@ export default function IngaboUpdateForm(props) {
               fullName,
               dateofbirth,
               nationalID,
-              gender,
               addressCell,
               addressSector: value,
               addressDistrict,
@@ -440,6 +398,7 @@ export default function IngaboUpdateForm(props) {
               activity7,
               activity8,
               no,
+              igitsina,
             };
             const result = onChange(modelFields);
             value = result?.addressSector ?? value;
@@ -466,7 +425,6 @@ export default function IngaboUpdateForm(props) {
               fullName,
               dateofbirth,
               nationalID,
-              gender,
               addressCell,
               addressSector,
               addressDistrict: value,
@@ -481,6 +439,7 @@ export default function IngaboUpdateForm(props) {
               activity7,
               activity8,
               no,
+              igitsina,
             };
             const result = onChange(modelFields);
             value = result?.addressDistrict ?? value;
@@ -507,7 +466,6 @@ export default function IngaboUpdateForm(props) {
               fullName,
               dateofbirth,
               nationalID,
-              gender,
               addressCell,
               addressSector,
               addressDistrict,
@@ -522,6 +480,7 @@ export default function IngaboUpdateForm(props) {
               activity7,
               activity8,
               no,
+              igitsina,
             };
             const result = onChange(modelFields);
             value = result?.cooperative ?? value;
@@ -540,7 +499,6 @@ export default function IngaboUpdateForm(props) {
         label="Telephone"
         isRequired={false}
         isReadOnly={false}
-        type="tel"
         defaultValue={telephone}
         onChange={(e) => {
           let { value } = e.target;
@@ -549,7 +507,6 @@ export default function IngaboUpdateForm(props) {
               fullName,
               dateofbirth,
               nationalID,
-              gender,
               addressCell,
               addressSector,
               addressDistrict,
@@ -564,6 +521,7 @@ export default function IngaboUpdateForm(props) {
               activity7,
               activity8,
               no,
+              igitsina,
             };
             const result = onChange(modelFields);
             value = result?.telephone ?? value;
@@ -590,7 +548,6 @@ export default function IngaboUpdateForm(props) {
               fullName,
               dateofbirth,
               nationalID,
-              gender,
               addressCell,
               addressSector,
               addressDistrict,
@@ -605,6 +562,7 @@ export default function IngaboUpdateForm(props) {
               activity7,
               activity8,
               no,
+              igitsina,
             };
             const result = onChange(modelFields);
             value = result?.activity1 ?? value;
@@ -631,7 +589,6 @@ export default function IngaboUpdateForm(props) {
               fullName,
               dateofbirth,
               nationalID,
-              gender,
               addressCell,
               addressSector,
               addressDistrict,
@@ -646,6 +603,7 @@ export default function IngaboUpdateForm(props) {
               activity7,
               activity8,
               no,
+              igitsina,
             };
             const result = onChange(modelFields);
             value = result?.activity2 ?? value;
@@ -672,7 +630,6 @@ export default function IngaboUpdateForm(props) {
               fullName,
               dateofbirth,
               nationalID,
-              gender,
               addressCell,
               addressSector,
               addressDistrict,
@@ -687,6 +644,7 @@ export default function IngaboUpdateForm(props) {
               activity7,
               activity8,
               no,
+              igitsina,
             };
             const result = onChange(modelFields);
             value = result?.activity3 ?? value;
@@ -713,7 +671,6 @@ export default function IngaboUpdateForm(props) {
               fullName,
               dateofbirth,
               nationalID,
-              gender,
               addressCell,
               addressSector,
               addressDistrict,
@@ -728,6 +685,7 @@ export default function IngaboUpdateForm(props) {
               activity7,
               activity8,
               no,
+              igitsina,
             };
             const result = onChange(modelFields);
             value = result?.activity4 ?? value;
@@ -754,7 +712,6 @@ export default function IngaboUpdateForm(props) {
               fullName,
               dateofbirth,
               nationalID,
-              gender,
               addressCell,
               addressSector,
               addressDistrict,
@@ -769,6 +726,7 @@ export default function IngaboUpdateForm(props) {
               activity7,
               activity8,
               no,
+              igitsina,
             };
             const result = onChange(modelFields);
             value = result?.activity5 ?? value;
@@ -795,7 +753,6 @@ export default function IngaboUpdateForm(props) {
               fullName,
               dateofbirth,
               nationalID,
-              gender,
               addressCell,
               addressSector,
               addressDistrict,
@@ -810,6 +767,7 @@ export default function IngaboUpdateForm(props) {
               activity7,
               activity8,
               no,
+              igitsina,
             };
             const result = onChange(modelFields);
             value = result?.activity6 ?? value;
@@ -836,7 +794,6 @@ export default function IngaboUpdateForm(props) {
               fullName,
               dateofbirth,
               nationalID,
-              gender,
               addressCell,
               addressSector,
               addressDistrict,
@@ -851,6 +808,7 @@ export default function IngaboUpdateForm(props) {
               activity7: value,
               activity8,
               no,
+              igitsina,
             };
             const result = onChange(modelFields);
             value = result?.activity7 ?? value;
@@ -877,7 +835,6 @@ export default function IngaboUpdateForm(props) {
               fullName,
               dateofbirth,
               nationalID,
-              gender,
               addressCell,
               addressSector,
               addressDistrict,
@@ -892,6 +849,7 @@ export default function IngaboUpdateForm(props) {
               activity7,
               activity8: value,
               no,
+              igitsina,
             };
             const result = onChange(modelFields);
             value = result?.activity8 ?? value;
@@ -927,7 +885,6 @@ export default function IngaboUpdateForm(props) {
               fullName,
               dateofbirth,
               nationalID,
-              gender,
               addressCell,
               addressSector,
               addressDistrict,
@@ -942,6 +899,7 @@ export default function IngaboUpdateForm(props) {
               activity7,
               activity8,
               no: value,
+              igitsina,
             };
             const result = onChange(modelFields);
             value = result?.no ?? value;
@@ -955,6 +913,47 @@ export default function IngaboUpdateForm(props) {
         errorMessage={errors.no?.errorMessage}
         hasError={errors.no?.hasError}
         {...getOverrideProps(overrides, "no")}
+      ></TextField>
+      <TextField
+        label="Igitsina"
+        isRequired={false}
+        isReadOnly={false}
+        defaultValue={igitsina}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              fullName,
+              dateofbirth,
+              nationalID,
+              addressCell,
+              addressSector,
+              addressDistrict,
+              cooperative,
+              telephone,
+              activity1,
+              activity2,
+              activity3,
+              activity4,
+              activity5,
+              activity6,
+              activity7,
+              activity8,
+              no,
+              igitsina: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.igitsina ?? value;
+          }
+          if (errors.igitsina?.hasError) {
+            runValidationTasks("igitsina", value);
+          }
+          setIgitsina(value);
+        }}
+        onBlur={() => runValidationTasks("igitsina", igitsina)}
+        errorMessage={errors.igitsina?.errorMessage}
+        hasError={errors.igitsina?.hasError}
+        {...getOverrideProps(overrides, "igitsina")}
       ></TextField>
       <Flex
         justifyContent="space-between"
