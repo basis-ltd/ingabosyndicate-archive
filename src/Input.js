@@ -58,12 +58,14 @@ function Form() {
 
         )
 
+        console.log("Data saved successfully");
+
     }
 
     return (
         <>
             <div className="dataEntryForm">
-                <form onSubmit={createIngabo}>
+                <form>
 
                 <h2 className="inputGroupTitle" >INDENTIFICATION</h2>
                     <div className="idSection">
@@ -140,7 +142,7 @@ function Form() {
                         </div>
                     </div>
                     <div className="action-btns">
-                        <button type="submit" className="cta-btns save-btn">Save</button>
+                        <button type="submit" onClick={createIngabo} className="cta-btns save-btn">Save</button>
                         <button type="reset" className="cta-btns reset-btn">Reset</button>
                     </div>
 

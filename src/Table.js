@@ -153,8 +153,6 @@ function Table() {
         {
           Header: "Cooperative",
           accessor: "cooperative",
-          Filter: SelectColumnFilter,
-          filter: 'includes',
         },
         {
           Header: "Aho Atuye",
@@ -204,7 +202,29 @@ function Table() {
       []
     );
 
-    const TableInstance = useTable({ columns, data }, useGlobalFilter, useFilters, useSortBy, usePagination)
+  const tableHooks = (hooks) => {
+    hooks.visibleColumns.push((columns) => [
+      {
+        id: "edit",
+        Header: "Edit",
+        Cell: ({ row }) => (
+          <Button onClick={() => alert("Editing: " + row.values.telephone)}>
+            Edit
+          </Button>
+        )
+      },
+      {
+        id: "checkbox",
+        Header: "Select",
+        Cell: ({ row }) => (
+          <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+        )
+      },
+      ...columns
+    ]);
+  };
+  
+    const TableInstance = useTable({ columns, data }, useGlobalFilter, useFilters, useSortBy, usePagination, tableHooks)
   
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, state, preGlobalFilteredRows, setGlobalFilter, page, canPreviousPage, canNextPage, pageOptions, pageCount, gotoPage, nextPage, previousPage, setPageSize } = TableInstance;
   
@@ -266,9 +286,9 @@ function Table() {
         {/* table */}
 
         
-        <CSVLink data={records}>Export Excel</CSVLink>
+        <Button className="ml auto"><CSVLink data={records}>Export Excel</CSVLink></Button>
 
-      <button onClick={exportPDF}>Export PDF</button>
+      <Button onClick={exportPDF}>Export PDF</Button>
 
         
         <div className="mt-2 flex flex-col">

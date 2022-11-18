@@ -41,7 +41,7 @@ function App({ signOut, user }) {
               </Route>
 
               <Route path="/input">
-              <IngaboCreateForm />  
+              <DataEntryForm />
               </Route>
 
           </Switch>
