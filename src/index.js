@@ -13,11 +13,27 @@ import awsconfig from './aws-exports';
 
 Amplify.configure(awsconfig);
 
+const updatedTheme = createTheme({
+  // Extend the theme to update the button color
+  name: "my-theme-updates", 
+  tokens: {
+      components: {
+          button: {
+              primary: {
+                  backgroundColor: {
+                      value: "#0000"
+                  },
+              },
+          },
+      },
+  },
+}, studioTheme)
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 root.render(
-      <ThemeProvider theme={studioTheme} >
+      <ThemeProvider theme={updatedTheme} >
     <App />
   </ThemeProvider>
 

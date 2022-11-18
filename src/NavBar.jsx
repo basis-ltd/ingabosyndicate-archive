@@ -3,6 +3,8 @@ import awsconfig from './aws-exports';
 import { withAuthenticator } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css';
 import './Input.css';
+import './App.css';
+import { Button, PageButton } from './Button'
 
 function NavBar({ signOut, user }) {
     
@@ -13,7 +15,7 @@ function NavBar({ signOut, user }) {
                 <a href="" className="nav-btn"><li>Home</li></a>
                 <a href="" className="nav-btn"><li>Insert record</li></a>
                 <a href="" className="nav-btn"><li>Shop</li></a>
-                <button onClick={signOut} className="nav-btn nav-logout-btn"><li>Sign out</li></button>
+                <Button onClick={signOut} className="nav-btn nav-logout-btn"><li>Sign out</li></Button>
             </ul>
 
         </div>
