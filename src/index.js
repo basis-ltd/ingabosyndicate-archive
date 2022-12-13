@@ -5,35 +5,21 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Amplify} from 'aws-amplify'
 import config from './aws-exports'
-import { ThemeProvider, createTheme, AmplifyProvider } from "@aws-amplify/ui-react";
-import { studioTheme } from './ui-components';
-import '@aws-amplify/ui-react/styles.css';
+import { ThemeProvider } from "@aws-amplify/ui-react";
+
 import awsconfig from './aws-exports';
 
+import "@aws-amplify/ui-react/styles.css";
+import { studioTheme } from "./ui-components";
 
 Amplify.configure(awsconfig);
 
-const updatedTheme = createTheme({
-  // Extend the theme to update the button color
-  name: "my-theme-updates", 
-  tokens: {
-      components: {
-          button: {
-              primary: {
-                  backgroundColor: {
-                      value: "#0000"
-                  },
-              },
-          },
-      },
-  },
-}, studioTheme)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 root.render(
-      <ThemeProvider theme={updatedTheme} >
+      <ThemeProvider theme={studioTheme} >
     <App />
   </ThemeProvider>
 

@@ -10,7 +10,10 @@ import { CSVLink } from 'react-csv'
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { listIngabos } from './graphql/queries'
-import {DataStore} from '@aws-amplify/datastore';
+import { DataStore } from '@aws-amplify/datastore';
+import { Ingabo } from './models';
+import './Table.css';
+import {Helmet} from "react-helmet";
 
 
 Amplify.configure(awsconfig);
@@ -33,7 +36,7 @@ export function SelectColumnFilter({
   // Render a multi-select box
   return (
     <label className="flex gap-x-2 items-baseline">
-      <span className="text-gray-700">{render("Header")}: </span>
+      <span className="text-gray-1000">{render("Header")}: </span>
       <select
         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         name={id}
@@ -92,23 +95,22 @@ function Table() {
 
   const pullData = async () => {
 
-    let response = await API.graphql(graphqlOperation(listIngabos))
+    let records = await DataStore.query(Ingabo);
 
 
-    if (response) {
-      records = response.data.listIngabos.items
-      for (let i = 1; i <= records.length; i++){
-        records[i-1].no = i;
-        const activity1 = records[i - 1].activity1 == true ? records[i - 1].activity1 = "Yego" : records[i - 1].activity1 = "Oya"
-        const activity2 = records[i-1].activity2 == true ? records[i-1].activity2 = "Yego" : records[i-1].activity2 = "Oya"
-        const activity3 = records[i-1].activity3 == true ? records[i-1].activity3 = "Yego" : records[i-1].activity3 = "Oya"
-        const activity4 = records[i-1].activity4 == true ? records[i-1].activity4 = "Yego" : records[i-1].activity4 = "Oya"
-        const activity5 = records[i-1].activity5 == true ? records[i-1].activity5 = "Yego" : records[i-1].activity5 = "Oya"
-        const activity6 = records[i-1].activity6 == true ? records[i-1].activity6 = "Yego" : records[i-1].activity6 = "Oya"
-        const activity7 = records[i-1].activity7 == true ? records[i-1].activity7 = "Yego" : records[i-1].activity7 = "Oya"
-        const activity8 = records[i-1].activity8 == true ? records[i-1].activity8 = "Yego" : records[i-1].activity8 = "Oya"
+    if (records) {
+      // for (let i = 1; i <= records.length; i++){
+      //   records[i-1].no = i;
+      //   const activity1 = records[i-1].activity1 == true ? records[i - 1].activity1 = "Yego" : records[i - 1].activity1 = "Oya"
+      //   const activity2 = records[i-1].activity2 == true ? records[i-1].activity2 = "Yego" : records[i-1].activity2 = "Oya"
+      //   const activity3 = records[i-1].activity3 == true ? records[i-1].activity3 = "Yego" : records[i-1].activity3 = "Oya"
+      //   const activity4 = records[i-1].activity4 == true ? records[i-1].activity4 = "Yego" : records[i-1].activity4 = "Oya"
+      //   const activity5 = records[i-1].activity5 == true ? records[i-1].activity5 = "Yego" : records[i-1].activity5 = "Oya"
+      //   const activity6 = records[i-1].activity6 == true ? records[i-1].activity6 = "Yego" : records[i-1].activity6 = "Oya"
+      //   const activity7 = records[i-1].activity7 == true ? records[i-1].activity7 = "Yego" : records[i-1].activity7 = "Oya"
+      //   const activity8 = records[i-1].activity8 == true ? records[i-1].activity8 = "Yego" : records[i-1].activity8 = "Oya"
       
-      }
+      // }
       console.log(records);
       setRecords(records)
     }
@@ -118,7 +120,15 @@ function Table() {
     
   useEffect(() => {
 
-    pullData()
+    pullData();
+
+    // Data changes
+
+    const resp = DataStore.observe(Ingabo).subscribe(() => {
+      pullData();
+    })
+
+    return () => resp.unsubscribe();
 
   }, [])
 
@@ -237,14 +247,6 @@ function Table() {
       info.push([element.no, element.fullName, element.gender, element.nationalID, element.cooperative])
     })
 
-    // columns.forEach((col, index) => {
-    //   header.push(col.Header)
-    // })
-
-    // for (let i = 0; i < 5; i++){
-    //   header.push(columns[i]);
-    // }
-
     const doc = new jsPDF('landscape', 'mm', 'a3');
 
     doc.autoTable({
@@ -253,105 +255,173 @@ function Table() {
     })
 
 
-    // doc.text("Ingabo Syndicate Report", 20, 20);
-
     doc.save('Report.pdf')
     console.log(header)
   }
 
     return (
-
       <>
-        <div className="flex gap-x-2">
+        <Helmet>
+                <meta charSet="utf-8" />
+                <title>Ingabo Syndicate - Insert Member</title>
+            </Helmet>
+        <div className="container">
+          <div className="table-header-container flex gap-x-2">
 
-      
-          <GlobalFilter
-            preGlobalFilteredRows={preGlobalFilteredRows}
-            globalFilter={state.globalFilter}
-            setGlobalFilter={setGlobalFilter}
-          />
+            <div className="search-filter">
 
-          {headerGroups.map((headerGroup) =>
-            headerGroup.headers.map((column) =>
-              column.Filter ? (
-                <div key={column.id}>
-                  <label for={column.id}></label>
-                  {column.render("Filter")}
-                </div>
-              ) : null
-            )
-          )}
-        </div>
-        {/* global search and filter */}
-        {/* table */}
+            <GlobalFilter
+              preGlobalFilteredRows={preGlobalFilteredRows}
+              globalFilter={state.globalFilter}
+              setGlobalFilter={setGlobalFilter}
+            />
 
-        
-        <Button className="ml auto"><CSVLink data={records}>Export Excel</CSVLink></Button>
+            {headerGroups.map((headerGroup) =>
+              headerGroup.headers.map((column) =>
+                column.Filter ? (
+                  <div key={column.id}>
+                    <label for={column.id}></label>
+                    {column.render("Filter")}
+                  </div>
+                ) : null
+              )
+            )}
 
-      <Button onClick={exportPDF}>Export PDF</Button>
+            </div>
 
-        
-        <div className="mt-2 flex flex-col">
+            <div className="table-header-cta">
+
+               {/* BUTTON TO EXPORT EXCEL */}
+            <Button className="ml auto">
+                <CSVLink data={records}>
+                  Excel  
+                </CSVLink>
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0112 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
+                    />
+                  </svg>
+                </span>
+            </Button>
+
+            {/* BUTTON TO PRINT PDF */}
+            <Button onClick={exportPDF}>
+              Print PDF{" "}
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z"
+                  />
+                </svg>
+              </span>
+            </Button>
+          </div>
+
+            </div>
+          {/* global search and filter */}
+          {/* table */}
+
           <div className="mt-2 flex flex-col">
-            <div className="-my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
-              <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-
-                  <table {...getTableProps()} border="1" className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
-                      {headerGroups.map((headerGroup) => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                          {headerGroup.headers.map((column) => (
-                            <th scope="col"
-                              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                              {...column.getHeaderProps(column.getSortByToggleProps())}>
-                              {column.render("Header")}
-                              <span>
-                                {column.isSorted
-                                  ? column.isSortedDesc
-                                    ? ' ▼'
-                                    : ' ▲'
-                                  : ''}
-                              </span>
-                            </th>
-                          ))}
-                        </tr>
-                      ))}
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200"
-                      {...getTableBodyProps()}>
-                      {page.map((row, i) => {
-                        prepareRow(row);
-                        return (
-                          <tr {...row.getRowProps()}>
-                            {row.cells.map((cell) => {
-                              return <td {...cell.getCellProps()}
-                                className="px-6 py-4 whitespace-nowrap"
-                              >{cell.render("Cell")}</td>;
-                            })}
+            <div className="mt-2 flex flex-col">
+              <div className="-my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
+                <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                  <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                    <table
+                      {...getTableProps()}
+                      border="1"
+                      className="min-w-full divide-y divide-gray-200"
+                    >
+                      <thead className="bg-gray-50">
+                        {headerGroups.map((headerGroup) => (
+                          <tr {...headerGroup.getHeaderGroupProps()}>
+                            {headerGroup.headers.map((column) => (
+                              <th
+                                scope="col"
+                                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                {...column.getHeaderProps(
+                                  column.getSortByToggleProps()
+                                )}
+                              >
+                                {column.render("Header")}
+                                <span>
+                                  {column.isSorted
+                                    ? column.isSortedDesc
+                                      ? " ▼"
+                                      : " ▲"
+                                    : ""}
+                                </span>
+                              </th>
+                            ))}
                           </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-
+                        ))}
+                      </thead>
+                      <tbody
+                        className="bg-white divide-y divide-gray-200"
+                        {...getTableBodyProps()}
+                      >
+                        {page.map((row, i) => {
+                          prepareRow(row);
+                          return (
+                            <tr {...row.getRowProps()}>
+                              {row.cells.map((cell) => {
+                                return (
+                                  <td
+                                    {...cell.getCellProps()}
+                                    className="px-6 py-4 whitespace-nowrap"
+                                  >
+                                    {cell.render("Cell")}
+                                  </td>
+                                );
+                              })}
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
         <div className="pagination">
-        
           <div className="py-3 flex items-center justify-between">
             <div className="flex-1 flex justify-between sm:hidden">
-              <Button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</Button>
-              <Button onClick={() => nextPage()} disabled={!canNextPage}>Next</Button>
+              <Button
+                onClick={() => previousPage()}
+                disabled={!canPreviousPage}
+              >
+                Previous
+              </Button>
+              <Button onClick={() => nextPage()} disabled={!canNextPage}>
+                Next
+              </Button>
             </div>
             <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
               <div className="flex gap-x-2">
                 <span className="text-sm text-gray-700">
-                  Page <span className="font-medium">{state.pageIndex + 1}</span> of <span className="font-medium">{pageOptions.length}</span>
+                  {" "}
+                  <span className="font-medium">{state.pageIndex + 1}</span> of{" "}
+                  <span className="font-medium">{pageOptions.length}</span>
                 </span>
                 <label>
                   <span className="sr-only">Items Per Page</span>
@@ -371,14 +441,20 @@ function Table() {
                 </label>
               </div>
               <div>
-                <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                <nav
+                  className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
+                  aria-label="Pagination"
+                >
                   <PageButton
                     className="rounded-l-md"
                     onClick={() => gotoPage(0)}
                     disabled={!canPreviousPage}
                   >
                     <span className="sr-only">First</span>
-                    <ChevronDoubleLeftIcon className="h-5 w-5" aria-hidden="true" />
+                    <ChevronDoubleLeftIcon
+                      className="h-5 w-5"
+                      aria-hidden="true"
+                    />
                   </PageButton>
                   <PageButton
                     onClick={() => previousPage()}
@@ -389,8 +465,8 @@ function Table() {
                   </PageButton>
                   <PageButton
                     onClick={() => nextPage()}
-                    disabled={!canNextPage
-                    }>
+                    disabled={!canNextPage}
+                  >
                     <span className="sr-only">Next</span>
                     <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
                   </PageButton>
@@ -400,14 +476,16 @@ function Table() {
                     disabled={!canNextPage}
                   >
                     <span className="sr-only">Last</span>
-                    <ChevronDoubleRightIcon className="h-5 w-5" aria-hidden="true" />
+                    <ChevronDoubleRightIcon
+                      className="h-5 w-5"
+                      aria-hidden="true"
+                    />
                   </PageButton>
                 </nav>
               </div>
             </div>
           </div>
         </div>
-    
       </>
     );
 
