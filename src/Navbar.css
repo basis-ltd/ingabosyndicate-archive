@@ -12,12 +12,15 @@
   padding: 30px 70px;
 
   background-color: rgb(243,244,246);
+  height: auto;
 }
 
 .nav-logo {
   display: flex;
   align-items: center;
-  font-size: 30px;
+  font-size: 25px;
+  letter-spacing: -2px;
+  text-transform: uppercase;
 }
 .nav-tabs {
   display: flex;
