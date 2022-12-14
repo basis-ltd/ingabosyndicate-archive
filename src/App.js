@@ -26,7 +26,7 @@ function App({ signOut, user }) {
             </Helmet>
       <div className="App">
         <div className="content">
-          {/* <NavBar /> */}
+          <NavBar />
 
           <Switch>
             <Route exact path="/">
@@ -40,6 +40,8 @@ function App({ signOut, user }) {
               </div>
             </Route>
 
+            <div className="input-container">
+
             <Route path="/input">
               <IngaboCreateForm
                 onSuccess={() => {
@@ -47,9 +49,8 @@ function App({ signOut, user }) {
                 }}
               />
             </Route>
-            <Route path="/navbar">
-              <NavBar />
-            </Route>
+
+            </div>
           </Switch>
         </div>
       </div>

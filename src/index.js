@@ -5,11 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Amplify} from 'aws-amplify'
 import config from './aws-exports'
-import { ThemeProvider } from "@aws-amplify/ui-react";
+import { ThemeProvider, Button, Card } from "@aws-amplify/ui-react";
 
 import awsconfig from './aws-exports';
 
-import "@aws-amplify/ui-react/styles.css";
+// import "@aws-amplify/ui-react/styles.css";
 import { studioTheme } from "./ui-components";
 
 Amplify.configure(awsconfig);

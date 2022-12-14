@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root, [data-amplify-theme] {
+  --amplify-colors-font-primary: green;
+  /* you can also use references: */
+  --amplify-colors-font-secondary: var(--amplify-colors-neutral-60);
+}
+
 .App {
   text-align: center;
 }
@@ -30,6 +36,11 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.input-container {
+  max-width: 90%;
+  margin: 0 auto;
 }
 
 @keyframes App-logo-spin {

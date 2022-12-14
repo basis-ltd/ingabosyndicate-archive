@@ -32,3 +32,20 @@ Primary Color: rgb(0,100,0) */
 .table-header-cta Button:hover {
     background-color: rgb(0,80,0);
 }
+
+.edit-delete {
+    display: flex;
+    gap:3px;
+}
+
+#delete-btn:hover {
+    background-color: rgb(246,88,88);
+    transform: scale(1.01);
+    color: white;
+}
+
+#edit-btn:hover {
+    background-color: rgb(0,80,0);
+    transform: scale(1.01);
+    color: white;
+}
