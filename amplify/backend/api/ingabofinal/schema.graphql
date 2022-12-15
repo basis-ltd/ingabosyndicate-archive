@@ -5,7 +5,6 @@ type Ingabo @model @auth(rules: [{allow: public}]) {
   nationalID: String
   cooperative: String
   telephone: String
-  gender: String
   activity1: Boolean
   activity2: Boolean
   activity3: Boolean
@@ -15,4 +14,9 @@ type Ingabo @model @auth(rules: [{allow: public}]) {
   activity7: Boolean
   activity8: Boolean
   no: Int
+  cell: String
+  sector: String
+  district: String
+  gender: String
 }
+ 

@@ -15,7 +15,6 @@ import {
   Flex,
   Grid,
   Heading,
-  SelectField,
   TextField,
   useTheme,
 } from "@aws-amplify/ui-react";
@@ -36,13 +35,13 @@ export default function IngaboCreateForm(props) {
   const initialValues = {
     fullName: undefined,
     dateofbirth: undefined,
-    igitsina: undefined,
+    gender: undefined,
     nationalID: undefined,
     telephone: undefined,
     cooperative: undefined,
-    addressCell: undefined,
-    addressSector: undefined,
-    addressDistrict: undefined,
+    cell: undefined,
+    sector: undefined,
+    district: undefined,
     activity1: false,
     activity2: false,
     activity3: false,
@@ -56,21 +55,15 @@ export default function IngaboCreateForm(props) {
   const [dateofbirth, setDateofbirth] = React.useState(
     initialValues.dateofbirth
   );
-  const [igitsina, setIgitsina] = React.useState(initialValues.igitsina);
+  const [gender, setGender] = React.useState(initialValues.gender);
   const [nationalID, setNationalID] = React.useState(initialValues.nationalID);
   const [telephone, setTelephone] = React.useState(initialValues.telephone);
   const [cooperative, setCooperative] = React.useState(
     initialValues.cooperative
   );
-  const [addressCell, setAddressCell] = React.useState(
-    initialValues.addressCell
-  );
-  const [addressSector, setAddressSector] = React.useState(
-    initialValues.addressSector
-  );
-  const [addressDistrict, setAddressDistrict] = React.useState(
-    initialValues.addressDistrict
-  );
+  const [cell, setCell] = React.useState(initialValues.cell);
+  const [sector, setSector] = React.useState(initialValues.sector);
+  const [district, setDistrict] = React.useState(initialValues.district);
   const [activity1, setActivity1] = React.useState(initialValues.activity1);
   const [activity2, setActivity2] = React.useState(initialValues.activity2);
   const [activity3, setActivity3] = React.useState(initialValues.activity3);
@@ -83,13 +76,13 @@ export default function IngaboCreateForm(props) {
   const resetStateValues = () => {
     setFullName(initialValues.fullName);
     setDateofbirth(initialValues.dateofbirth);
-    setIgitsina(initialValues.igitsina);
+    setGender(initialValues.gender);
     setNationalID(initialValues.nationalID);
     setTelephone(initialValues.telephone);
     setCooperative(initialValues.cooperative);
-    setAddressCell(initialValues.addressCell);
-    setAddressSector(initialValues.addressSector);
-    setAddressDistrict(initialValues.addressDistrict);
+    setCell(initialValues.cell);
+    setSector(initialValues.sector);
+    setDistrict(initialValues.district);
     setActivity1(initialValues.activity1);
     setActivity2(initialValues.activity2);
     setActivity3(initialValues.activity3);
@@ -109,13 +102,13 @@ export default function IngaboCreateForm(props) {
         validationMessage: "The value must be before 01/01/2006",
       },
     ],
-    igitsina: [],
+    gender: [],
     nationalID: [],
     telephone: [],
     cooperative: [],
-    addressCell: [],
-    addressSector: [],
-    addressDistrict: [],
+    cell: [],
+    sector: [],
+    district: [],
     activity1: [],
     activity2: [],
     activity3: [],
@@ -145,13 +138,13 @@ export default function IngaboCreateForm(props) {
         let modelFields = {
           fullName,
           dateofbirth,
-          igitsina,
+          gender,
           nationalID,
           telephone,
           cooperative,
-          addressCell,
-          addressSector,
-          addressDistrict,
+          cell,
+          sector,
+          district,
           activity1,
           activity2,
           activity3,
@@ -220,13 +213,13 @@ export default function IngaboCreateForm(props) {
               const modelFields = {
                 fullName: value,
                 dateofbirth,
-                igitsina,
+                gender,
                 nationalID,
                 telephone,
                 cooperative,
-                addressCell,
-                addressSector,
-                addressDistrict,
+                cell,
+                sector,
+                district,
                 activity1,
                 activity2,
                 activity3,
@@ -260,13 +253,13 @@ export default function IngaboCreateForm(props) {
               const modelFields = {
                 fullName,
                 dateofbirth: value,
-                igitsina,
+                gender,
                 nationalID,
                 telephone,
                 cooperative,
-                addressCell,
-                addressSector,
-                addressDistrict,
+                cell,
+                sector,
+                district,
                 activity1,
                 activity2,
                 activity3,
@@ -289,23 +282,24 @@ export default function IngaboCreateForm(props) {
           hasError={errors.dateofbirth?.hasError}
           {...getOverrideProps(overrides, "dateofbirth")}
         ></TextField>
-        <SelectField
+        <TextField
           label="Gender"
+          isRequired={false}
+          isReadOnly={false}
           placeholder="M/F"
-          value={igitsina}
           onChange={(e) => {
             let { value } = e.target;
             if (onChange) {
               const modelFields = {
                 fullName,
                 dateofbirth,
-                igitsina: value,
+                gender: value,
                 nationalID,
                 telephone,
                 cooperative,
-                addressCell,
-                addressSector,
-                addressDistrict,
+                cell,
+                sector,
+                district,
                 activity1,
                 activity2,
                 activity3,
@@ -316,29 +310,18 @@ export default function IngaboCreateForm(props) {
                 activity8,
               };
               const result = onChange(modelFields);
-              value = result?.igitsina ?? value;
+              value = result?.gender ?? value;
             }
-            if (errors.igitsina?.hasError) {
-              runValidationTasks("igitsina", value);
+            if (errors.gender?.hasError) {
+              runValidationTasks("gender", value);
             }
-            setIgitsina(value);
+            setGender(value);
           }}
-          onBlur={() => runValidationTasks("igitsina", igitsina)}
-          errorMessage={errors.igitsina?.errorMessage}
-          hasError={errors.igitsina?.hasError}
-          {...getOverrideProps(overrides, "igitsina")}
-        >
-          <option
-            children="M"
-            value="M"
-            {...getOverrideProps(overrides, "igitsinaoption0")}
-          ></option>
-          <option
-            children="F"
-            value="F"
-            {...getOverrideProps(overrides, "igitsinaoption1")}
-          ></option>
-        </SelectField>
+          onBlur={() => runValidationTasks("gender", gender)}
+          errorMessage={errors.gender?.errorMessage}
+          hasError={errors.gender?.hasError}
+          {...getOverrideProps(overrides, "gender")}
+        ></TextField>
       </Grid>
       <Grid
         columnGap="inherit"
@@ -356,13 +339,13 @@ export default function IngaboCreateForm(props) {
               const modelFields = {
                 fullName,
                 dateofbirth,
-                igitsina,
+                gender,
                 nationalID: value,
                 telephone,
                 cooperative,
-                addressCell,
-                addressSector,
-                addressDistrict,
+                cell,
+                sector,
+                district,
                 activity1,
                 activity2,
                 activity3,
@@ -395,13 +378,13 @@ export default function IngaboCreateForm(props) {
               const modelFields = {
                 fullName,
                 dateofbirth,
-                igitsina,
+                gender,
                 nationalID,
                 telephone: value,
                 cooperative,
-                addressCell,
-                addressSector,
-                addressDistrict,
+                cell,
+                sector,
+                district,
                 activity1,
                 activity2,
                 activity3,
@@ -434,13 +417,13 @@ export default function IngaboCreateForm(props) {
               const modelFields = {
                 fullName,
                 dateofbirth,
-                igitsina,
+                gender,
                 nationalID,
                 telephone,
                 cooperative: value,
-                addressCell,
-                addressSector,
-                addressDistrict,
+                cell,
+                sector,
+                district,
                 activity1,
                 activity2,
                 activity3,
@@ -477,19 +460,20 @@ export default function IngaboCreateForm(props) {
         <TextField
           label="Cell"
           isRequired={false}
+          isReadOnly={false}
           onChange={(e) => {
             let { value } = e.target;
             if (onChange) {
               const modelFields = {
                 fullName,
                 dateofbirth,
-                igitsina,
+                gender,
                 nationalID,
                 telephone,
                 cooperative,
-                addressCell: value,
-                addressSector,
-                addressDistrict,
+                cell: value,
+                sector,
+                district,
                 activity1,
                 activity2,
                 activity3,
@@ -500,34 +484,35 @@ export default function IngaboCreateForm(props) {
                 activity8,
               };
               const result = onChange(modelFields);
-              value = result?.addressCell ?? value;
+              value = result?.cell ?? value;
             }
-            if (errors.addressCell?.hasError) {
-              runValidationTasks("addressCell", value);
+            if (errors.cell?.hasError) {
+              runValidationTasks("cell", value);
             }
-            setAddressCell(value);
+            setCell(value);
           }}
-          onBlur={() => runValidationTasks("addressCell", addressCell)}
-          errorMessage={errors.addressCell?.errorMessage}
-          hasError={errors.addressCell?.hasError}
-          {...getOverrideProps(overrides, "addressCell")}
+          onBlur={() => runValidationTasks("cell", cell)}
+          errorMessage={errors.cell?.errorMessage}
+          hasError={errors.cell?.hasError}
+          {...getOverrideProps(overrides, "cell")}
         ></TextField>
         <TextField
           label="Sector"
           isRequired={false}
+          isReadOnly={false}
           onChange={(e) => {
             let { value } = e.target;
             if (onChange) {
               const modelFields = {
                 fullName,
                 dateofbirth,
-                igitsina,
+                gender,
                 nationalID,
                 telephone,
                 cooperative,
-                addressCell,
-                addressSector: value,
-                addressDistrict,
+                cell,
+                sector: value,
+                district,
                 activity1,
                 activity2,
                 activity3,
@@ -538,34 +523,35 @@ export default function IngaboCreateForm(props) {
                 activity8,
               };
               const result = onChange(modelFields);
-              value = result?.addressSector ?? value;
+              value = result?.sector ?? value;
             }
-            if (errors.addressSector?.hasError) {
-              runValidationTasks("addressSector", value);
+            if (errors.sector?.hasError) {
+              runValidationTasks("sector", value);
             }
-            setAddressSector(value);
+            setSector(value);
           }}
-          onBlur={() => runValidationTasks("addressSector", addressSector)}
-          errorMessage={errors.addressSector?.errorMessage}
-          hasError={errors.addressSector?.hasError}
-          {...getOverrideProps(overrides, "addressSector")}
+          onBlur={() => runValidationTasks("sector", sector)}
+          errorMessage={errors.sector?.errorMessage}
+          hasError={errors.sector?.hasError}
+          {...getOverrideProps(overrides, "sector")}
         ></TextField>
         <TextField
           label="District"
           isRequired={false}
+          isReadOnly={false}
           onChange={(e) => {
             let { value } = e.target;
             if (onChange) {
               const modelFields = {
                 fullName,
                 dateofbirth,
-                igitsina,
+                gender,
                 nationalID,
                 telephone,
                 cooperative,
-                addressCell,
-                addressSector,
-                addressDistrict: value,
+                cell,
+                sector,
+                district: value,
                 activity1,
                 activity2,
                 activity3,
@@ -576,17 +562,17 @@ export default function IngaboCreateForm(props) {
                 activity8,
               };
               const result = onChange(modelFields);
-              value = result?.addressDistrict ?? value;
+              value = result?.district ?? value;
             }
-            if (errors.addressDistrict?.hasError) {
-              runValidationTasks("addressDistrict", value);
+            if (errors.district?.hasError) {
+              runValidationTasks("district", value);
             }
-            setAddressDistrict(value);
+            setDistrict(value);
           }}
-          onBlur={() => runValidationTasks("addressDistrict", addressDistrict)}
-          errorMessage={errors.addressDistrict?.errorMessage}
-          hasError={errors.addressDistrict?.hasError}
-          {...getOverrideProps(overrides, "addressDistrict")}
+          onBlur={() => runValidationTasks("district", district)}
+          errorMessage={errors.district?.errorMessage}
+          hasError={errors.district?.hasError}
+          {...getOverrideProps(overrides, "district")}
         ></TextField>
       </Grid>
       <Grid
@@ -607,13 +593,13 @@ export default function IngaboCreateForm(props) {
               const modelFields = {
                 fullName,
                 dateofbirth,
-                igitsina,
+                gender,
                 nationalID,
                 telephone,
                 cooperative,
-                addressCell,
-                addressSector,
-                addressDistrict,
+                cell,
+                sector,
+                district,
                 activity1: value,
                 activity2,
                 activity3,
@@ -648,13 +634,13 @@ export default function IngaboCreateForm(props) {
               const modelFields = {
                 fullName,
                 dateofbirth,
-                igitsina,
+                gender,
                 nationalID,
                 telephone,
                 cooperative,
-                addressCell,
-                addressSector,
-                addressDistrict,
+                cell,
+                sector,
+                district,
                 activity1,
                 activity2: value,
                 activity3,
@@ -689,13 +675,13 @@ export default function IngaboCreateForm(props) {
               const modelFields = {
                 fullName,
                 dateofbirth,
-                igitsina,
+                gender,
                 nationalID,
                 telephone,
                 cooperative,
-                addressCell,
-                addressSector,
-                addressDistrict,
+                cell,
+                sector,
+                district,
                 activity1,
                 activity2,
                 activity3: value,
@@ -730,13 +716,13 @@ export default function IngaboCreateForm(props) {
               const modelFields = {
                 fullName,
                 dateofbirth,
-                igitsina,
+                gender,
                 nationalID,
                 telephone,
                 cooperative,
-                addressCell,
-                addressSector,
-                addressDistrict,
+                cell,
+                sector,
+                district,
                 activity1,
                 activity2,
                 activity3,
@@ -778,13 +764,13 @@ export default function IngaboCreateForm(props) {
               const modelFields = {
                 fullName,
                 dateofbirth,
-                igitsina,
+                gender,
                 nationalID,
                 telephone,
                 cooperative,
-                addressCell,
-                addressSector,
-                addressDistrict,
+                cell,
+                sector,
+                district,
                 activity1,
                 activity2,
                 activity3,
@@ -819,13 +805,13 @@ export default function IngaboCreateForm(props) {
               const modelFields = {
                 fullName,
                 dateofbirth,
-                igitsina,
+                gender,
                 nationalID,
                 telephone,
                 cooperative,
-                addressCell,
-                addressSector,
-                addressDistrict,
+                cell,
+                sector,
+                district,
                 activity1,
                 activity2,
                 activity3,
@@ -860,13 +846,13 @@ export default function IngaboCreateForm(props) {
               const modelFields = {
                 fullName,
                 dateofbirth,
-                igitsina,
+                gender,
                 nationalID,
                 telephone,
                 cooperative,
-                addressCell,
-                addressSector,
-                addressDistrict,
+                cell,
+                sector,
+                district,
                 activity1,
                 activity2,
                 activity3,
@@ -901,13 +887,13 @@ export default function IngaboCreateForm(props) {
               const modelFields = {
                 fullName,
                 dateofbirth,
-                igitsina,
+                gender,
                 nationalID,
                 telephone,
                 cooperative,
-                addressCell,
-                addressSector,
-                addressDistrict,
+                cell,
+                sector,
+                district,
                 activity1,
                 activity2,
                 activity3,
