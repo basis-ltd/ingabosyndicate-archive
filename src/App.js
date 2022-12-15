@@ -4,7 +4,7 @@ import './App.css';
 import Table from './Table'
 import { Amplify, API, graphqlOperation } from 'aws-amplify/';
 import awsconfig from './aws-exports';
-// import { withAuthenticator } from '@aws-amplify/ui-react'
+import { withAuthenticator } from '@aws-amplify/ui-react'
 import { Button } from './Button'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import IngaboCreateForm from './ui-components/IngaboCreateForm';
@@ -69,6 +69,4 @@ function App() {
   );
 }
 
-// export default withAuthenticator(App);
-
-export default App;
+export default withAuthenticator(App);
