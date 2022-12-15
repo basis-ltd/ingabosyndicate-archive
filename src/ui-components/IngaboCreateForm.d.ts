@@ -83,5 +83,5 @@ export declare type IngaboCreateFormProps = React.PropsWithChildren<{
     onCancel?: () => void;
     onChange?: (fields: IngaboCreateFormInputValues) => IngaboCreateFormInputValues;
     onValidate?: IngaboCreateFormValidationValues;
-}>;
+} & React.CSSProperties>;
 export default function IngaboCreateForm(props: IngaboCreateFormProps): React.ReactElement;

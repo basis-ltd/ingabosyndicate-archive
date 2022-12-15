@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 import awsconfig from "./aws-exports";
-import { withAuthenticator } from "@aws-amplify/ui-react";
+// import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import "./Navbar.css";
 import { Button, PageButton } from "./Button";
 
-function NavBar({ signOut, user }) {
+function NavBar() {
   return (
     <div className="nav-bar">
       <a href="https://www.ingabosyndicate.org/" className="nav-logo">
@@ -14,7 +14,9 @@ function NavBar({ signOut, user }) {
       </a>
       <ul className="nav-tabs">
         <a href="https://www.ingabosyndicate.org/" className="nav-btn">
-          <li>Home</li>
+                  <li>
+                  <Link to="/">Dashboard</Link>
+          </li>
         </a>
         <a href="" className="nav-btn">
           <li>
@@ -27,11 +29,13 @@ function NavBar({ signOut, user }) {
       </ul>
 
       <div className="logout-btn-container">
-        <Button onClick={signOut}>Logout</Button>
+        {/* <Button onClick={signOut}>Logout</Button> */}
+        <Button>Sign Out</Button>
       </div>
     </div>
   );
 }
 
-export default withAuthenticator(NavBar);
+// export default withAuthenticator(NavBar);
 
+export default NavBar;

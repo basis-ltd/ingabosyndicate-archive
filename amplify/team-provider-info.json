@@ -14,7 +14,8 @@
     "categories": {
       "auth": {
         "ingabofinal69ba8a65": {},
-        "ingabofinal": {}
+        "ingabofinal": {},
+        "userPoolGroups": {}
       },
       "api": {
         "ingabofinal": {}
