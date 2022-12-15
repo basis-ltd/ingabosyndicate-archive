@@ -11,11 +11,9 @@ type EagerIngabo = {
   readonly fullName?: string | null;
   readonly dateofbirth?: string | null;
   readonly nationalID?: string | null;
-  readonly addressCell?: string | null;
-  readonly addressSector?: string | null;
-  readonly addressDistrict?: string | null;
   readonly cooperative?: string | null;
   readonly telephone?: string | null;
+  readonly gender?: string | null;
   readonly activity1?: boolean | null;
   readonly activity2?: boolean | null;
   readonly activity3?: boolean | null;
@@ -25,7 +23,6 @@ type EagerIngabo = {
   readonly activity7?: boolean | null;
   readonly activity8?: boolean | null;
   readonly no?: number | null;
-  readonly igitsina?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -35,11 +32,9 @@ type LazyIngabo = {
   readonly fullName?: string | null;
   readonly dateofbirth?: string | null;
   readonly nationalID?: string | null;
-  readonly addressCell?: string | null;
-  readonly addressSector?: string | null;
-  readonly addressDistrict?: string | null;
   readonly cooperative?: string | null;
   readonly telephone?: string | null;
+  readonly gender?: string | null;
   readonly activity1?: boolean | null;
   readonly activity2?: boolean | null;
   readonly activity3?: boolean | null;
@@ -49,7 +44,6 @@ type LazyIngabo = {
   readonly activity7?: boolean | null;
   readonly activity8?: boolean | null;
   readonly no?: number | null;
-  readonly igitsina?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

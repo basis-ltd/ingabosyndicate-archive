@@ -2,13 +2,7 @@
   "AppSyncApiName": "ingabofinal",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
-  "AuthCognitoUserPoolId": {
-    "Fn::GetAtt": [
-      "authingabofinal",
-      "Outputs.UserPoolId"
-    ]
-  },
-  "AuthModeLastUpdated": "2022-12-14T13:51:47.224Z",
-  "APIKeyExpirationEpoch": 63072000,
-  "CreateApiKey": 1
+  "CreateApiKey": 1,
+  "APIKeyExpirationEpoch": 31536000,
+  "AuthModeLastUpdated": "2022-12-15T22:38:36.723Z"
 }

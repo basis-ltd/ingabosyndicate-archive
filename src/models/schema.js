@@ -31,27 +31,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "addressCell": {
-                    "name": "addressCell",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "addressSector": {
-                    "name": "addressSector",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "addressDistrict": {
-                    "name": "addressDistrict",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
                 "cooperative": {
                     "name": "cooperative",
                     "isArray": false,
@@ -61,6 +40,13 @@ export const schema = {
                 },
                 "telephone": {
                     "name": "telephone",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "gender": {
+                    "name": "gender",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -129,13 +115,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "igitsina": {
-                    "name": "igitsina",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -172,27 +151,6 @@ export const schema = {
                                     "delete",
                                     "read"
                                 ]
-                            },
-                            {
-                                "allow": "private",
-                                "operations": [
-                                    "read",
-                                    "update"
-                                ]
-                            },
-                            {
-                                "groupClaim": "cognito:groups",
-                                "provider": "userPools",
-                                "allow": "groups",
-                                "groups": [
-                                    "admin"
-                                ],
-                                "operations": [
-                                    "read",
-                                    "create",
-                                    "update",
-                                    "delete"
-                                ]
                             }
                         ]
                     }
@@ -203,5 +161,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.2",
-    "version": "712a74588c335629f210e88216652f7e"
+    "version": "a1381c0ace63f1a06d71995157f03c7d"
 };

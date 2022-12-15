@@ -4,9 +4,9 @@ import './Update.css';
 import { ThemeProvider, Card } from "@aws-amplify/ui-react";
 import awsconfig from './aws-exports';
 import IngaboUpdateForm from './ui-components/IngaboUpdateForm';
-import { Amplify, API, graphqlOperation } from 'aws-amplify/';
+import { Amplify } from 'aws-amplify/';
 import "@aws-amplify/ui-react/styles.css";
-import { studioTheme } from "./ui-components";
+import { studioTheme } from "./ui-components/studioTheme";
 
 Amplify.configure(awsconfig);
 

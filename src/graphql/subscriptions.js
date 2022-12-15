@@ -8,11 +8,9 @@ export const onCreateIngabo = /* GraphQL */ `
       fullName
       dateofbirth
       nationalID
-      addressCell
-      addressSector
-      addressDistrict
       cooperative
       telephone
+      gender
       activity1
       activity2
       activity3
@@ -22,7 +20,6 @@ export const onCreateIngabo = /* GraphQL */ `
       activity7
       activity8
       no
-      igitsina
       createdAt
       updatedAt
       _version
@@ -38,11 +35,9 @@ export const onUpdateIngabo = /* GraphQL */ `
       fullName
       dateofbirth
       nationalID
-      addressCell
-      addressSector
-      addressDistrict
       cooperative
       telephone
+      gender
       activity1
       activity2
       activity3
@@ -52,7 +47,6 @@ export const onUpdateIngabo = /* GraphQL */ `
       activity7
       activity8
       no
-      igitsina
       createdAt
       updatedAt
       _version
@@ -68,11 +62,9 @@ export const onDeleteIngabo = /* GraphQL */ `
       fullName
       dateofbirth
       nationalID
-      addressCell
-      addressSector
-      addressDistrict
       cooperative
       telephone
+      gender
       activity1
       activity2
       activity3
@@ -82,7 +74,6 @@ export const onDeleteIngabo = /* GraphQL */ `
       activity7
       activity8
       no
-      igitsina
       createdAt
       updatedAt
       _version
