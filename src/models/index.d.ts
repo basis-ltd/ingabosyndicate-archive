@@ -13,7 +13,6 @@ type EagerIngabo = {
   readonly nationalID?: string | null;
   readonly cooperative?: string | null;
   readonly telephone?: string | null;
-  readonly gender?: string | null;
   readonly activity1?: boolean | null;
   readonly activity2?: boolean | null;
   readonly activity3?: boolean | null;
@@ -23,6 +22,10 @@ type EagerIngabo = {
   readonly activity7?: boolean | null;
   readonly activity8?: boolean | null;
   readonly no?: number | null;
+  readonly cell?: string | null;
+  readonly sector?: string | null;
+  readonly district?: string | null;
+  readonly gender?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -34,7 +37,6 @@ type LazyIngabo = {
   readonly nationalID?: string | null;
   readonly cooperative?: string | null;
   readonly telephone?: string | null;
-  readonly gender?: string | null;
   readonly activity1?: boolean | null;
   readonly activity2?: boolean | null;
   readonly activity3?: boolean | null;
@@ -44,6 +46,10 @@ type LazyIngabo = {
   readonly activity7?: boolean | null;
   readonly activity8?: boolean | null;
   readonly no?: number | null;
+  readonly cell?: string | null;
+  readonly sector?: string | null;
+  readonly district?: string | null;
+  readonly gender?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

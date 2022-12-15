@@ -8,6 +8,7 @@ import awsconfig from './aws-exports';
 import { Button } from './Button'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import IngaboCreateForm from './ui-components/IngaboCreateForm';
+import IngaboUpdateForm from './ui-components/IngaboUpdateForm';
 import NavBar from './NavBar';
 import { Helmet } from "react-helmet";
 import Modal from './Update.js'
@@ -29,8 +30,6 @@ function App() {
         <div className="content">
           <NavBar />
 
-          <Modal />
-
 
           <Switch>
             <Route exact path="/">
@@ -48,6 +47,14 @@ function App() {
 
             <Route path="/input">
               <IngaboCreateForm
+                onSuccess={() => {
+                  console.log("Data saved successfully");
+                }}
+              />
+              </Route>
+              
+              <Route path="/update">
+              <IngaboUpdateForm
                 onSuccess={() => {
                   console.log("Data saved successfully");
                 }}

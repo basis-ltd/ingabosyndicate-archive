@@ -36,3 +36,4 @@ export { default as ReviewCard } from "./ReviewCard";
 export { default as EditProfile } from "./EditProfile";
 export { default as studioTheme } from "./studioTheme";
 export { default as IngaboCreateForm } from "./IngaboCreateForm";
+export { default as IngaboUpdateForm } from "./IngaboUpdateForm";

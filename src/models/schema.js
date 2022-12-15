@@ -45,13 +45,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "gender": {
-                    "name": "gender",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
                 "activity1": {
                     "name": "activity1",
                     "isArray": false,
@@ -115,6 +108,34 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "cell": {
+                    "name": "cell",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "sector": {
+                    "name": "sector",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "district": {
+                    "name": "district",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "gender": {
+                    "name": "gender",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -161,5 +182,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.2",
-    "version": "a1381c0ace63f1a06d71995157f03c7d"
+    "version": "9837dc8ae66f8c74e3449c5900c82ce8"
 };
