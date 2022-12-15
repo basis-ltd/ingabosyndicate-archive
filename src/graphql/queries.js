@@ -8,11 +8,9 @@ export const getIngabo = /* GraphQL */ `
       fullName
       dateofbirth
       nationalID
-      addressCell
-      addressSector
-      addressDistrict
       cooperative
       telephone
+      gender
       activity1
       activity2
       activity3
@@ -22,7 +20,6 @@ export const getIngabo = /* GraphQL */ `
       activity7
       activity8
       no
-      igitsina
       createdAt
       updatedAt
       _version
@@ -43,11 +40,9 @@ export const listIngabos = /* GraphQL */ `
         fullName
         dateofbirth
         nationalID
-        addressCell
-        addressSector
-        addressDistrict
         cooperative
         telephone
+        gender
         activity1
         activity2
         activity3
@@ -57,7 +52,6 @@ export const listIngabos = /* GraphQL */ `
         activity7
         activity8
         no
-        igitsina
         createdAt
         updatedAt
         _version
@@ -87,11 +81,9 @@ export const syncIngabos = /* GraphQL */ `
         fullName
         dateofbirth
         nationalID
-        addressCell
-        addressSector
-        addressDistrict
         cooperative
         telephone
+        gender
         activity1
         activity2
         activity3
@@ -101,7 +93,6 @@ export const syncIngabos = /* GraphQL */ `
         activity7
         activity8
         no
-        igitsina
         createdAt
         updatedAt
         _version

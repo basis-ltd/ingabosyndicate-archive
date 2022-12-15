@@ -99,24 +99,23 @@ function Table() {
     let records = await DataStore.query(Ingabo);
 
 
-    if (records) {
-      // for (let i = 1; i <= records.length; i++){
-      //   records[i-1].no = i;
-      //   const activity1 = records[i-1].activity1 == true ? records[i - 1].activity1 = "Yego" : records[i - 1].activity1 = "Oya"
-      //   const activity2 = records[i-1].activity2 == true ? records[i-1].activity2 = "Yego" : records[i-1].activity2 = "Oya"
-      //   const activity3 = records[i-1].activity3 == true ? records[i-1].activity3 = "Yego" : records[i-1].activity3 = "Oya"
-      //   const activity4 = records[i-1].activity4 == true ? records[i-1].activity4 = "Yego" : records[i-1].activity4 = "Oya"
-      //   const activity5 = records[i-1].activity5 == true ? records[i-1].activity5 = "Yego" : records[i-1].activity5 = "Oya"
-      //   const activity6 = records[i-1].activity6 == true ? records[i-1].activity6 = "Yego" : records[i-1].activity6 = "Oya"
-      //   const activity7 = records[i-1].activity7 == true ? records[i-1].activity7 = "Yego" : records[i-1].activity7 = "Oya"
-      //   const activity8 = records[i-1].activity8 == true ? records[i-1].activity8 = "Yego" : records[i-1].activity8 = "Oya"
+    // if (records) {
+    //   for (let i = 1; i <= records.length; i++){
+    //     records[i-1].no = i;
+    //     const activity1 = records[i-1].activity1 == true ? records[i - 1].activity1 = "Yego" : records[i - 1].activity1 = "Oya"
+    //     const activity2 = records[i-1].activity2 == true ? records[i-1].activity2 = "Yego" : records[i-1].activity2 = "Oya"
+    //     const activity3 = records[i-1].activity3 == true ? records[i-1].activity3 = "Yego" : records[i-1].activity3 = "Oya"
+    //     const activity4 = records[i-1].activity4 == true ? records[i-1].activity4 = "Yego" : records[i-1].activity4 = "Oya"
+    //     const activity5 = records[i-1].activity5 == true ? records[i-1].activity5 = "Yego" : records[i-1].activity5 = "Oya"
+    //     const activity6 = records[i-1].activity6 == true ? records[i-1].activity6 = "Yego" : records[i-1].activity6 = "Oya"
+    //     const activity7 = records[i-1].activity7 == true ? records[i-1].activity7 = "Yego" : records[i-1].activity7 = "Oya"
+    //     const activity8 = records[i-1].activity8 == true ? records[i-1].activity8 = "Yego" : records[i-1].activity8 = "Oya"
       
-      // }
+    //   }
       console.log(records);
       setRecords(records)
     }
 
-  }
 
     
   useEffect(() => {
@@ -207,7 +206,7 @@ function Table() {
         },
         {
           Header: "Signature",
-          accessor: ""
+          accessor: "fullName"
         }
       ],
       []
@@ -539,6 +538,7 @@ function Table() {
       </>
     );
 
+                    
   }
 
 export default Table;

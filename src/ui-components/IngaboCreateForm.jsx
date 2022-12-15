@@ -38,17 +38,19 @@ export default function IngaboCreateForm(props) {
     dateofbirth: undefined,
     igitsina: undefined,
     nationalID: undefined,
-    cooperative: undefined,
     telephone: undefined,
+    cooperative: undefined,
     addressCell: undefined,
     addressSector: undefined,
     addressDistrict: undefined,
     activity1: false,
     activity2: false,
+    activity3: false,
     activity4: false,
     activity5: false,
     activity6: false,
-    activity3: false,
+    activity7: false,
+    activity8: false,
   };
   const [fullName, setFullName] = React.useState(initialValues.fullName);
   const [dateofbirth, setDateofbirth] = React.useState(
@@ -56,10 +58,10 @@ export default function IngaboCreateForm(props) {
   );
   const [igitsina, setIgitsina] = React.useState(initialValues.igitsina);
   const [nationalID, setNationalID] = React.useState(initialValues.nationalID);
+  const [telephone, setTelephone] = React.useState(initialValues.telephone);
   const [cooperative, setCooperative] = React.useState(
     initialValues.cooperative
   );
-  const [telephone, setTelephone] = React.useState(initialValues.telephone);
   const [addressCell, setAddressCell] = React.useState(
     initialValues.addressCell
   );
@@ -71,45 +73,57 @@ export default function IngaboCreateForm(props) {
   );
   const [activity1, setActivity1] = React.useState(initialValues.activity1);
   const [activity2, setActivity2] = React.useState(initialValues.activity2);
+  const [activity3, setActivity3] = React.useState(initialValues.activity3);
   const [activity4, setActivity4] = React.useState(initialValues.activity4);
   const [activity5, setActivity5] = React.useState(initialValues.activity5);
   const [activity6, setActivity6] = React.useState(initialValues.activity6);
-  const [activity3, setActivity3] = React.useState(initialValues.activity3);
+  const [activity7, setActivity7] = React.useState(initialValues.activity7);
+  const [activity8, setActivity8] = React.useState(initialValues.activity8);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setFullName(initialValues.fullName);
     setDateofbirth(initialValues.dateofbirth);
     setIgitsina(initialValues.igitsina);
     setNationalID(initialValues.nationalID);
-    setCooperative(initialValues.cooperative);
     setTelephone(initialValues.telephone);
+    setCooperative(initialValues.cooperative);
     setAddressCell(initialValues.addressCell);
     setAddressSector(initialValues.addressSector);
     setAddressDistrict(initialValues.addressDistrict);
     setActivity1(initialValues.activity1);
     setActivity2(initialValues.activity2);
+    setActivity3(initialValues.activity3);
     setActivity4(initialValues.activity4);
     setActivity5(initialValues.activity5);
     setActivity6(initialValues.activity6);
-    setActivity3(initialValues.activity3);
+    setActivity7(initialValues.activity7);
+    setActivity8(initialValues.activity8);
     setErrors({});
   };
   const validations = {
     fullName: [],
-    dateofbirth: [],
+    dateofbirth: [
+      {
+        type: "BeBefore",
+        strValues: ["01/01/2006"],
+        validationMessage: "The value must be before 01/01/2006",
+      },
+    ],
     igitsina: [],
     nationalID: [],
-    cooperative: [],
     telephone: [],
+    cooperative: [],
     addressCell: [],
     addressSector: [],
     addressDistrict: [],
     activity1: [],
     activity2: [],
+    activity3: [],
     activity4: [],
     activity5: [],
     activity6: [],
-    activity3: [],
+    activity7: [],
+    activity8: [],
   };
   const runValidationTasks = async (fieldName, value) => {
     let validationResponse = validateField(value, validations[fieldName]);
@@ -123,7 +137,7 @@ export default function IngaboCreateForm(props) {
   return (
     <Grid
       as="form"
-      rowGap={tokens.space.medium.value}
+      rowGap={tokens.space.large.value}
       columnGap={tokens.space.medium.value}
       padding={tokens.space.medium.value}
       onSubmit={async (event) => {
@@ -133,17 +147,19 @@ export default function IngaboCreateForm(props) {
           dateofbirth,
           igitsina,
           nationalID,
-          cooperative,
           telephone,
+          cooperative,
           addressCell,
           addressSector,
           addressDistrict,
           activity1,
           activity2,
+          activity3,
           activity4,
           activity5,
           activity6,
-          activity3,
+          activity7,
+          activity8,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -185,8 +201,7 @@ export default function IngaboCreateForm(props) {
       {...getOverrideProps(overrides, "IngaboCreateForm")}
     >
       <Heading
-        level={6}
-        children="IDENTIFICATOIN"
+        children="IDENTIFICATION"
         {...getOverrideProps(overrides, "SectionalElement0")}
       ></Heading>
       <Grid
@@ -196,7 +211,7 @@ export default function IngaboCreateForm(props) {
         {...getOverrideProps(overrides, "RowGrid1")}
       >
         <TextField
-          label="Amazina Yombi"
+          label="Full Name"
           isRequired={false}
           isReadOnly={false}
           onChange={(e) => {
@@ -207,17 +222,19 @@ export default function IngaboCreateForm(props) {
                 dateofbirth,
                 igitsina,
                 nationalID,
-                cooperative,
                 telephone,
+                cooperative,
                 addressCell,
                 addressSector,
                 addressDistrict,
                 activity1,
                 activity2,
+                activity3,
                 activity4,
                 activity5,
                 activity6,
-                activity3,
+                activity7,
+                activity8,
               };
               const result = onChange(modelFields);
               value = result?.fullName ?? value;
@@ -233,7 +250,7 @@ export default function IngaboCreateForm(props) {
           {...getOverrideProps(overrides, "fullName")}
         ></TextField>
         <TextField
-          label="Igihe Yavukiye"
+          label="Date of Birth"
           isRequired={false}
           isReadOnly={false}
           type="date"
@@ -245,17 +262,19 @@ export default function IngaboCreateForm(props) {
                 dateofbirth: value,
                 igitsina,
                 nationalID,
-                cooperative,
                 telephone,
+                cooperative,
                 addressCell,
                 addressSector,
                 addressDistrict,
                 activity1,
                 activity2,
+                activity3,
                 activity4,
                 activity5,
                 activity6,
-                activity3,
+                activity7,
+                activity8,
               };
               const result = onChange(modelFields);
               value = result?.dateofbirth ?? value;
@@ -271,9 +290,8 @@ export default function IngaboCreateForm(props) {
           {...getOverrideProps(overrides, "dateofbirth")}
         ></TextField>
         <SelectField
-          label="Igitsina"
+          label="Gender"
           placeholder="M/F"
-          isDisabled={false}
           value={igitsina}
           onChange={(e) => {
             let { value } = e.target;
@@ -283,17 +301,19 @@ export default function IngaboCreateForm(props) {
                 dateofbirth,
                 igitsina: value,
                 nationalID,
-                cooperative,
                 telephone,
+                cooperative,
                 addressCell,
                 addressSector,
                 addressDistrict,
                 activity1,
                 activity2,
+                activity3,
                 activity4,
                 activity5,
                 activity6,
-                activity3,
+                activity7,
+                activity8,
               };
               const result = onChange(modelFields);
               value = result?.igitsina ?? value;
@@ -327,10 +347,9 @@ export default function IngaboCreateForm(props) {
         {...getOverrideProps(overrides, "RowGrid2")}
       >
         <TextField
-          label="Indangamuntu"
+          label="National ID"
           isRequired={false}
           isReadOnly={false}
-          placeholder="- ---- - ------- - --"
           onChange={(e) => {
             let { value } = e.target;
             if (onChange) {
@@ -339,17 +358,19 @@ export default function IngaboCreateForm(props) {
                 dateofbirth,
                 igitsina,
                 nationalID: value,
-                cooperative,
                 telephone,
+                cooperative,
                 addressCell,
                 addressSector,
                 addressDistrict,
                 activity1,
                 activity2,
+                activity3,
                 activity4,
                 activity5,
                 activity6,
-                activity3,
+                activity7,
+                activity8,
               };
               const result = onChange(modelFields);
               value = result?.nationalID ?? value;
@@ -365,7 +386,7 @@ export default function IngaboCreateForm(props) {
           {...getOverrideProps(overrides, "nationalID")}
         ></TextField>
         <TextField
-          label="Koperative"
+          label="Telephone"
           isRequired={false}
           isReadOnly={false}
           onChange={(e) => {
@@ -376,55 +397,19 @@ export default function IngaboCreateForm(props) {
                 dateofbirth,
                 igitsina,
                 nationalID,
-                cooperative: value,
-                telephone,
-                addressCell,
-                addressSector,
-                addressDistrict,
-                activity1,
-                activity2,
-                activity4,
-                activity5,
-                activity6,
-                activity3,
-              };
-              const result = onChange(modelFields);
-              value = result?.cooperative ?? value;
-            }
-            if (errors.cooperative?.hasError) {
-              runValidationTasks("cooperative", value);
-            }
-            setCooperative(value);
-          }}
-          onBlur={() => runValidationTasks("cooperative", cooperative)}
-          errorMessage={errors.cooperative?.errorMessage}
-          hasError={errors.cooperative?.hasError}
-          {...getOverrideProps(overrides, "cooperative")}
-        ></TextField>
-        <TextField
-          label="Telefone"
-          isRequired={false}
-          isReadOnly={false}
-          placeholder="---- --- ---"
-          onChange={(e) => {
-            let { value } = e.target;
-            if (onChange) {
-              const modelFields = {
-                fullName,
-                dateofbirth,
-                igitsina,
-                nationalID,
-                cooperative,
                 telephone: value,
+                cooperative,
                 addressCell,
                 addressSector,
                 addressDistrict,
                 activity1,
                 activity2,
+                activity3,
                 activity4,
                 activity5,
                 activity6,
-                activity3,
+                activity7,
+                activity8,
               };
               const result = onChange(modelFields);
               value = result?.telephone ?? value;
@@ -439,19 +424,8 @@ export default function IngaboCreateForm(props) {
           hasError={errors.telephone?.hasError}
           {...getOverrideProps(overrides, "telephone")}
         ></TextField>
-      </Grid>
-      <Heading
-        children="ADDRESS"
-        {...getOverrideProps(overrides, "SectionalElement1")}
-      ></Heading>
-      <Grid
-        columnGap="inherit"
-        rowGap="inherit"
-        templateColumns="repeat(3, auto)"
-        {...getOverrideProps(overrides, "RowGrid4")}
-      >
         <TextField
-          label="Akagari"
+          label="Cooperative"
           isRequired={false}
           isReadOnly={false}
           onChange={(e) => {
@@ -462,17 +436,68 @@ export default function IngaboCreateForm(props) {
                 dateofbirth,
                 igitsina,
                 nationalID,
-                cooperative,
                 telephone,
+                cooperative: value,
+                addressCell,
+                addressSector,
+                addressDistrict,
+                activity1,
+                activity2,
+                activity3,
+                activity4,
+                activity5,
+                activity6,
+                activity7,
+                activity8,
+              };
+              const result = onChange(modelFields);
+              value = result?.cooperative ?? value;
+            }
+            if (errors.cooperative?.hasError) {
+              runValidationTasks("cooperative", value);
+            }
+            setCooperative(value);
+          }}
+          onBlur={() => runValidationTasks("cooperative", cooperative)}
+          errorMessage={errors.cooperative?.errorMessage}
+          hasError={errors.cooperative?.hasError}
+          {...getOverrideProps(overrides, "cooperative")}
+        ></TextField>
+      </Grid>
+      <Heading
+        children="RESIDENCE"
+        {...getOverrideProps(overrides, "SectionalElement1")}
+      ></Heading>
+      <Grid
+        columnGap="inherit"
+        rowGap="inherit"
+        templateColumns="repeat(3, auto)"
+        {...getOverrideProps(overrides, "RowGrid4")}
+      >
+        <TextField
+          label="Cell"
+          isRequired={false}
+          onChange={(e) => {
+            let { value } = e.target;
+            if (onChange) {
+              const modelFields = {
+                fullName,
+                dateofbirth,
+                igitsina,
+                nationalID,
+                telephone,
+                cooperative,
                 addressCell: value,
                 addressSector,
                 addressDistrict,
                 activity1,
                 activity2,
+                activity3,
                 activity4,
                 activity5,
                 activity6,
-                activity3,
+                activity7,
+                activity8,
               };
               const result = onChange(modelFields);
               value = result?.addressCell ?? value;
@@ -488,9 +513,8 @@ export default function IngaboCreateForm(props) {
           {...getOverrideProps(overrides, "addressCell")}
         ></TextField>
         <TextField
-          label="Umurenge"
+          label="Sector"
           isRequired={false}
-          isReadOnly={false}
           onChange={(e) => {
             let { value } = e.target;
             if (onChange) {
@@ -499,17 +523,19 @@ export default function IngaboCreateForm(props) {
                 dateofbirth,
                 igitsina,
                 nationalID,
-                cooperative,
                 telephone,
+                cooperative,
                 addressCell,
                 addressSector: value,
                 addressDistrict,
                 activity1,
                 activity2,
+                activity3,
                 activity4,
                 activity5,
                 activity6,
-                activity3,
+                activity7,
+                activity8,
               };
               const result = onChange(modelFields);
               value = result?.addressSector ?? value;
@@ -527,7 +553,6 @@ export default function IngaboCreateForm(props) {
         <TextField
           label="District"
           isRequired={false}
-          isReadOnly={false}
           onChange={(e) => {
             let { value } = e.target;
             if (onChange) {
@@ -536,17 +561,19 @@ export default function IngaboCreateForm(props) {
                 dateofbirth,
                 igitsina,
                 nationalID,
-                cooperative,
                 telephone,
+                cooperative,
                 addressCell,
                 addressSector,
                 addressDistrict: value,
                 activity1,
                 activity2,
+                activity3,
                 activity4,
                 activity5,
                 activity6,
-                activity3,
+                activity7,
+                activity8,
               };
               const result = onChange(modelFields);
               value = result?.addressDistrict ?? value;
@@ -562,18 +589,14 @@ export default function IngaboCreateForm(props) {
           {...getOverrideProps(overrides, "addressDistrict")}
         ></TextField>
       </Grid>
-      <Heading
-        children="ACTIVITIES"
-        {...getOverrideProps(overrides, "SectionalElement2")}
-      ></Heading>
       <Grid
         columnGap="inherit"
         rowGap="inherit"
-        templateColumns="repeat(3, auto)"
-        {...getOverrideProps(overrides, "RowGrid6")}
+        templateColumns="repeat(4, auto)"
+        {...getOverrideProps(overrides, "RowGrid5")}
       >
         <CheckboxField
-          label="Umuceri"
+          label="Imyumbati"
           name="activity1"
           value="activity1"
           isDisabled={false}
@@ -586,17 +609,19 @@ export default function IngaboCreateForm(props) {
                 dateofbirth,
                 igitsina,
                 nationalID,
-                cooperative,
                 telephone,
+                cooperative,
                 addressCell,
                 addressSector,
                 addressDistrict,
                 activity1: value,
                 activity2,
+                activity3,
                 activity4,
                 activity5,
                 activity6,
-                activity3,
+                activity7,
+                activity8,
               };
               const result = onChange(modelFields);
               value = result?.activity1 ?? value;
@@ -612,7 +637,7 @@ export default function IngaboCreateForm(props) {
           {...getOverrideProps(overrides, "activity1")}
         ></CheckboxField>
         <CheckboxField
-          label="Imyumbati"
+          label="Umuceri"
           name="activity2"
           value="activity2"
           isDisabled={false}
@@ -625,17 +650,19 @@ export default function IngaboCreateForm(props) {
                 dateofbirth,
                 igitsina,
                 nationalID,
-                cooperative,
                 telephone,
+                cooperative,
                 addressCell,
                 addressSector,
                 addressDistrict,
                 activity1,
                 activity2: value,
+                activity3,
                 activity4,
                 activity5,
                 activity6,
-                activity3,
+                activity7,
+                activity8,
               };
               const result = onChange(modelFields);
               value = result?.activity2 ?? value;
@@ -651,7 +678,48 @@ export default function IngaboCreateForm(props) {
           {...getOverrideProps(overrides, "activity2")}
         ></CheckboxField>
         <CheckboxField
-          label="Inka"
+          label="Ibigori"
+          name="activity3"
+          value="activity3"
+          isDisabled={false}
+          checked={activity3}
+          onChange={(e) => {
+            let value = e.target.checked;
+            if (onChange) {
+              const modelFields = {
+                fullName,
+                dateofbirth,
+                igitsina,
+                nationalID,
+                telephone,
+                cooperative,
+                addressCell,
+                addressSector,
+                addressDistrict,
+                activity1,
+                activity2,
+                activity3: value,
+                activity4,
+                activity5,
+                activity6,
+                activity7,
+                activity8,
+              };
+              const result = onChange(modelFields);
+              value = result?.activity3 ?? value;
+            }
+            if (errors.activity3?.hasError) {
+              runValidationTasks("activity3", value);
+            }
+            setActivity3(value);
+          }}
+          onBlur={() => runValidationTasks("activity3", activity3)}
+          errorMessage={errors.activity3?.errorMessage}
+          hasError={errors.activity3?.hasError}
+          {...getOverrideProps(overrides, "activity3")}
+        ></CheckboxField>
+        <CheckboxField
+          label="Ibinyamisogwe"
           name="activity4"
           value="activity4"
           isDisabled={false}
@@ -664,17 +732,19 @@ export default function IngaboCreateForm(props) {
                 dateofbirth,
                 igitsina,
                 nationalID,
-                cooperative,
                 telephone,
+                cooperative,
                 addressCell,
                 addressSector,
                 addressDistrict,
                 activity1,
                 activity2,
+                activity3,
                 activity4: value,
                 activity5,
                 activity6,
-                activity3,
+                activity7,
+                activity8,
               };
               const result = onChange(modelFields);
               value = result?.activity4 ?? value;
@@ -693,11 +763,11 @@ export default function IngaboCreateForm(props) {
       <Grid
         columnGap="inherit"
         rowGap="inherit"
-        templateColumns="repeat(3, auto)"
-        {...getOverrideProps(overrides, "RowGrid7")}
+        templateColumns="repeat(4, auto)"
+        {...getOverrideProps(overrides, "RowGrid6")}
       >
         <CheckboxField
-          label="Ingurube"
+          label="Imboga n'Imbuto"
           name="activity5"
           value="activity5"
           isDisabled={false}
@@ -710,17 +780,19 @@ export default function IngaboCreateForm(props) {
                 dateofbirth,
                 igitsina,
                 nationalID,
-                cooperative,
                 telephone,
+                cooperative,
                 addressCell,
                 addressSector,
                 addressDistrict,
                 activity1,
                 activity2,
+                activity3,
                 activity4,
                 activity5: value,
                 activity6,
-                activity3,
+                activity7,
+                activity8,
               };
               const result = onChange(modelFields);
               value = result?.activity5 ?? value;
@@ -749,17 +821,19 @@ export default function IngaboCreateForm(props) {
                 dateofbirth,
                 igitsina,
                 nationalID,
-                cooperative,
                 telephone,
+                cooperative,
                 addressCell,
                 addressSector,
                 addressDistrict,
                 activity1,
                 activity2,
+                activity3,
                 activity4,
                 activity5,
                 activity6: value,
-                activity3,
+                activity7,
+                activity8,
               };
               const result = onChange(modelFields);
               value = result?.activity6 ?? value;
@@ -775,11 +849,11 @@ export default function IngaboCreateForm(props) {
           {...getOverrideProps(overrides, "activity6")}
         ></CheckboxField>
         <CheckboxField
-          label="Ibinyampeke"
-          name="activity3"
-          value="activity3"
+          label="Ingurube"
+          name="activity7"
+          value="activity7"
           isDisabled={false}
-          checked={activity3}
+          checked={activity7}
           onChange={(e) => {
             let value = e.target.checked;
             if (onChange) {
@@ -788,30 +862,73 @@ export default function IngaboCreateForm(props) {
                 dateofbirth,
                 igitsina,
                 nationalID,
-                cooperative,
                 telephone,
+                cooperative,
                 addressCell,
                 addressSector,
                 addressDistrict,
                 activity1,
                 activity2,
+                activity3,
                 activity4,
                 activity5,
                 activity6,
-                activity3: value,
+                activity7: value,
+                activity8,
               };
               const result = onChange(modelFields);
-              value = result?.activity3 ?? value;
+              value = result?.activity7 ?? value;
             }
-            if (errors.activity3?.hasError) {
-              runValidationTasks("activity3", value);
+            if (errors.activity7?.hasError) {
+              runValidationTasks("activity7", value);
             }
-            setActivity3(value);
+            setActivity7(value);
           }}
-          onBlur={() => runValidationTasks("activity3", activity3)}
-          errorMessage={errors.activity3?.errorMessage}
-          hasError={errors.activity3?.hasError}
-          {...getOverrideProps(overrides, "activity3")}
+          onBlur={() => runValidationTasks("activity7", activity7)}
+          errorMessage={errors.activity7?.errorMessage}
+          hasError={errors.activity7?.hasError}
+          {...getOverrideProps(overrides, "activity7")}
+        ></CheckboxField>
+        <CheckboxField
+          label="Inka"
+          name="activity8"
+          value="activity8"
+          isDisabled={false}
+          checked={activity8}
+          onChange={(e) => {
+            let value = e.target.checked;
+            if (onChange) {
+              const modelFields = {
+                fullName,
+                dateofbirth,
+                igitsina,
+                nationalID,
+                telephone,
+                cooperative,
+                addressCell,
+                addressSector,
+                addressDistrict,
+                activity1,
+                activity2,
+                activity3,
+                activity4,
+                activity5,
+                activity6,
+                activity7,
+                activity8: value,
+              };
+              const result = onChange(modelFields);
+              value = result?.activity8 ?? value;
+            }
+            if (errors.activity8?.hasError) {
+              runValidationTasks("activity8", value);
+            }
+            setActivity8(value);
+          }}
+          onBlur={() => runValidationTasks("activity8", activity8)}
+          errorMessage={errors.activity8?.errorMessage}
+          hasError={errors.activity8?.hasError}
+          {...getOverrideProps(overrides, "activity8")}
         ></CheckboxField>
       </Grid>
       <Flex

@@ -1,13 +1,11 @@
-type Ingabo @model @auth(rules: [{allow: public}, {allow: private, operations: [read, update]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}]) {
+type Ingabo @model @auth(rules: [{allow: public}]) {
   id: ID!
   fullName: String
   dateofbirth: AWSDate
   nationalID: String
-  addressCell: String
-  addressSector: String
-  addressDistrict: String
   cooperative: String
   telephone: String
+  gender: String
   activity1: Boolean
   activity2: Boolean
   activity3: Boolean
@@ -17,6 +15,4 @@ type Ingabo @model @auth(rules: [{allow: public}, {allow: private, operations: [
   activity7: Boolean
   activity8: Boolean
   no: Int
-  igitsina: String
 }
- 

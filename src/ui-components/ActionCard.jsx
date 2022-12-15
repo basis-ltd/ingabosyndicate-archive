@@ -111,16 +111,8 @@ export default function ActionCard(props) {
           ></Text>
         </Flex>
         <Rating
-          display="flex"
-          gap="8px"
-          direction="row"
           width="174px"
-          height="unset"
-          justifyContent="flex-start"
-          alignItems="center"
           shrink="0"
-          position="relative"
-          padding="0px 0px 0px 0px"
           size="default"
           {...getOverrideProps(overrides, "Rating")}
         ></Rating>
@@ -147,16 +139,8 @@ export default function ActionCard(props) {
           {...getOverrideProps(overrides, "$99 USD")}
         ></Text>
         <Button
-          display="flex"
-          gap="0"
-          direction="row"
-          width="unset"
-          height="unset"
-          justifyContent="center"
-          alignItems="center"
           shrink="0"
           alignSelf="stretch"
-          position="relative"
           size="large"
           isDisabled={false}
           variation="primary"
