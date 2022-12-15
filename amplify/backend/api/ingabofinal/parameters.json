@@ -9,5 +9,6 @@
     ]
   },
   "AuthModeLastUpdated": "2022-12-14T13:51:47.224Z",
-  "APIKeyExpirationEpoch": -1
+  "APIKeyExpirationEpoch": 63072000,
+  "CreateApiKey": 1
 }
