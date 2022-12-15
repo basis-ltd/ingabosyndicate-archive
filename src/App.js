@@ -4,17 +4,18 @@ import './App.css';
 import Table from './Table'
 import { Amplify, API, graphqlOperation } from 'aws-amplify/';
 import awsconfig from './aws-exports';
-import { withAuthenticator } from '@aws-amplify/ui-react'
+// import { withAuthenticator } from '@aws-amplify/ui-react'
 import { Button } from './Button'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import IngaboCreateForm from './ui-components/IngaboCreateForm';
 import NavBar from './NavBar';
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
+import Modal from './Update.js'
 
 
 
 
-function App({ signOut, user }) {
+function App() {
 
 
   return (
@@ -27,6 +28,9 @@ function App({ signOut, user }) {
       <div className="App">
         <div className="content">
           <NavBar />
+
+          <Modal />
+
 
           <Switch>
             <Route exact path="/">
@@ -58,4 +62,6 @@ function App({ signOut, user }) {
   );
 }
 
-export default withAuthenticator(App);
+// export default withAuthenticator(App);
+
+export default App;

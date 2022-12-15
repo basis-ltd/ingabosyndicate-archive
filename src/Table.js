@@ -9,11 +9,12 @@ import awsconfig from './aws-exports';
 import { CSVLink } from 'react-csv'
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import { listIngabos } from './graphql/queries'
 import { DataStore } from '@aws-amplify/datastore';
 import { Ingabo } from './models';
 import './Table.css';
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
+import IngaboUpdateForm from './ui-components/IngaboUpdateForm';
+import './Update.css'
 
 
 Amplify.configure(awsconfig);
@@ -212,9 +213,9 @@ function Table() {
       []
     );
 
-  const [showModal, setShowModal] = useState({isOpen: false, data:null})
-
   const tableHooks = (hooks) => {
+    
+
     hooks.visibleColumns.push((columns) => [
       {
         id: "edit",
@@ -223,7 +224,7 @@ function Table() {
           <div className="edit-delete">
             <Button id="edit-btn"
               className="relative inline-flex items-center px-2 py-1.5 border border-gray-100 rounded-full"
-              onClick={() => setShowModal({isOpen: true, data: row.original})}
+              
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -304,12 +305,16 @@ function Table() {
     console.log(header)
   }
 
-    return (
+
+  return (
+      
       <>
         <Helmet>
                 <meta charSet="utf-8" />
                 <title>Ingabo Syndicate - Insert Member</title>
-            </Helmet>
+      </Helmet>
+        
+
         <div className="container">
           <div className="table-header-container flex gap-x-2">
 

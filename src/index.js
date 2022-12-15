@@ -9,7 +9,7 @@ import { ThemeProvider, Button, Card } from "@aws-amplify/ui-react";
 
 import awsconfig from './aws-exports';
 
-// import "@aws-amplify/ui-react/styles.css";
+import "@aws-amplify/ui-react/styles.css";
 import { studioTheme } from "./ui-components";
 
 Amplify.configure(awsconfig);

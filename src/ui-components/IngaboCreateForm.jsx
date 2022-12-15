@@ -43,12 +43,12 @@ export default function IngaboCreateForm(props) {
     addressCell: undefined,
     addressSector: undefined,
     addressDistrict: undefined,
-    activity1: undefined,
-    activity2: undefined,
-    activity4: undefined,
-    activity5: undefined,
-    activity6: undefined,
-    activity3: undefined,
+    activity1: false,
+    activity2: false,
+    activity4: false,
+    activity5: false,
+    activity6: false,
+    activity3: false,
   };
   const [fullName, setFullName] = React.useState(initialValues.fullName);
   const [dateofbirth, setDateofbirth] = React.useState(
@@ -123,9 +123,9 @@ export default function IngaboCreateForm(props) {
   return (
     <Grid
       as="form"
-      rowGap={tokens.space.large.value}
-      columnGap={tokens.space.xxxs.value}
-      padding={tokens.space.xxxl.value}
+      rowGap={tokens.space.medium.value}
+      columnGap={tokens.space.medium.value}
+      padding={tokens.space.medium.value}
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
@@ -577,7 +577,7 @@ export default function IngaboCreateForm(props) {
           name="activity1"
           value="activity1"
           isDisabled={false}
-          defaultChecked={false}
+          checked={activity1}
           onChange={(e) => {
             let value = e.target.checked;
             if (onChange) {
@@ -616,7 +616,7 @@ export default function IngaboCreateForm(props) {
           name="activity2"
           value="activity2"
           isDisabled={false}
-          defaultChecked={false}
+          checked={activity2}
           onChange={(e) => {
             let value = e.target.checked;
             if (onChange) {
@@ -655,7 +655,7 @@ export default function IngaboCreateForm(props) {
           name="activity4"
           value="activity4"
           isDisabled={false}
-          defaultChecked={false}
+          checked={activity4}
           onChange={(e) => {
             let value = e.target.checked;
             if (onChange) {
@@ -701,7 +701,7 @@ export default function IngaboCreateForm(props) {
           name="activity5"
           value="activity5"
           isDisabled={false}
-          defaultChecked={false}
+          checked={activity5}
           onChange={(e) => {
             let value = e.target.checked;
             if (onChange) {
@@ -740,7 +740,7 @@ export default function IngaboCreateForm(props) {
           name="activity6"
           value="activity6"
           isDisabled={false}
-          defaultChecked={false}
+          checked={activity6}
           onChange={(e) => {
             let value = e.target.checked;
             if (onChange) {
@@ -779,7 +779,7 @@ export default function IngaboCreateForm(props) {
           name="activity3"
           value="activity3"
           isDisabled={false}
-          defaultChecked={false}
+          checked={activity3}
           onChange={(e) => {
             let value = e.target.checked;
             if (onChange) {
@@ -824,7 +824,10 @@ export default function IngaboCreateForm(props) {
           onClick={resetStateValues}
           {...getOverrideProps(overrides, "ClearButton")}
         ></Button>
-        <Flex {...getOverrideProps(overrides, "RightAlignCTASubFlex")}>
+        <Flex
+          gap={tokens.space.medium.value}
+          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
+        >
           <Button
             children="Cancel"
             type="button"
