@@ -49,3 +49,81 @@ Primary Color: rgb(0,100,0) */
     transform: scale(1.01);
     color: white;
 }
+
+input[type="checkbox"]{
+    cursor: pointer;
+}
+
+/* <------- MODAL -----> */
+
+body {
+    background-color: rgb(243,244,246);
+}
+
+body.active-modal {
+    overflow-y: hidden;
+}
+
+.btn-modal {
+    padding: 10px 20px;
+    display: block;
+    margin: 100px auto 0;
+    font-size: 18px;
+}
+
+.modal, .overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    z-index: 1000;
+}
+
+.overlay {
+    background: rgba(49,49,49,0.8);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: #f1f1f1;
+    padding: 14px 28px;
+    border-radius: 3px;
+    max-width: 600px;
+    min-width: 300px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 7px;
+}
+
+.modal-delete-cta {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin: 5px auto;
+}
+
+.modal-delete-cta .delete-confirmation {
+    background-color: rgb(187, 70, 49);
+    color: white;
+}
+
+.modal-delete-cta .delete-confirmation:hover {
+    background-color: red;
+    color: white;
+}
+
+.modal-delete-cta Button {
+    padding: 5px 10px;
+}
