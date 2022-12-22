@@ -1,22 +1,36 @@
-import axios from 'axios'
-import { ChevronDoubleLeftIcon, ChevronLeftIcon, ChevronRightIcon, ChevronDoubleRightIcon } from '@heroicons/react/solid'
-import { Button, PageButton } from './Button'
-import React, { Component, useState, useMemo, useEffect } from 'react'
-import './App.css'
-import { useGlobalFilter, useTable, useAsyncDebounce, useFilters, usesortBy, useSortBy, usePagination } from "react-table";
-import { Amplify, API, graphqlOperation } from 'aws-amplify';
-import awsconfig from './aws-exports';
-import { CSVLink } from 'react-csv'
-import jsPDF from 'jspdf';
-import 'jspdf-autotable';
-import { DataStore } from '@aws-amplify/datastore';
-import { Ingabo } from './models';
-import './Table.css';
+import axios from "axios";
+import {
+  ChevronDoubleLeftIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronDoubleRightIcon,
+} from "@heroicons/react/solid";
+import { Button, PageButton } from "./Button";
+import React, { Component, useState, useMemo, useEffect } from "react";
+import "./App.css";
+import {
+  useGlobalFilter,
+  useTable,
+  useAsyncDebounce,
+  useFilters,
+  usesortBy,
+  useSortBy,
+  usePagination,
+} from "react-table";
+import { Amplify, API, graphqlOperation } from "aws-amplify";
+import awsconfig from "./aws-exports";
+import { CSVLink } from "react-csv";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import { DataStore } from "@aws-amplify/datastore";
+import { Ingabo } from "./models";
+import "./Table.css";
 import { Helmet } from "react-helmet";
-import IngaboUpdateForm from './ui-components/IngaboUpdateForm';
-import './Update.css';
+import IngaboUpdateForm from "./ui-components/IngaboUpdateForm";
+import "./Update.css";
 import { Link } from "react-router-dom";
-
+import './Update.css';
+import Modal from "./Update.js";
 
 Amplify.configure(awsconfig);
 
@@ -44,8 +58,8 @@ export function SelectColumnFilter({
         name={id}
         id={id}
         value={filterValue}
-        onChange={e => {
-          setFilter(e.target.value || undefined)
+        onChange={(e) => {
+          setFilter(e.target.value || undefined);
         }}
       >
         <option value="">All</option>
@@ -65,11 +79,11 @@ function GlobalFilter({
   globalFilter,
   setGlobalFilter,
 }) {
-  const count = preGlobalFilteredRows.length
-  const [value, setValue] = React.useState(globalFilter)
-  const onChange = useAsyncDebounce(value => {
-    setGlobalFilter(value || undefined)
-  }, 200)
+  const count = preGlobalFilteredRows.length;
+  const [value, setValue] = React.useState(globalFilter);
+  const onChange = useAsyncDebounce((value) => {
+    setGlobalFilter(value || undefined);
+  }, 200);
 
   return (
     <label className="flex gap-x-2 items-baseline">
@@ -78,177 +92,240 @@ function GlobalFilter({
         type="text"
         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         value={value || ""}
-        onChange={e => {
+        onChange={(e) => {
           setValue(e.target.value);
           onChange(e.target.value);
         }}
         placeholder={`${count} people...`}
       />
     </label>
-  )
+  );
 }
 
-
 function Table() {
-
-
-
-  let [records, setRecords] = useState([])
+  let [records, setRecords] = useState([]);
 
   const pullData = async () => {
-
     let records = await DataStore.query(Ingabo);
 
+    records.forEach(async (record, index) => {
+      let original = await DataStore.query(Ingabo, record.id);
 
-    // if (records) {
-    //   for (let i = 1; i <= records.length; i++){
-    //     records[i-1].no = i;
-    //     const activity1 = records[i-1].activity1 == true ? records[i - 1].activity1 = "Yego" : records[i - 1].activity1 = "Oya"
-    //     const activity2 = records[i-1].activity2 == true ? records[i-1].activity2 = "Yego" : records[i-1].activity2 = "Oya"
-    //     const activity3 = records[i-1].activity3 == true ? records[i-1].activity3 = "Yego" : records[i-1].activity3 = "Oya"
-    //     const activity4 = records[i-1].activity4 == true ? records[i-1].activity4 = "Yego" : records[i-1].activity4 = "Oya"
-    //     const activity5 = records[i-1].activity5 == true ? records[i-1].activity5 = "Yego" : records[i-1].activity5 = "Oya"
-    //     const activity6 = records[i-1].activity6 == true ? records[i-1].activity6 = "Yego" : records[i-1].activity6 = "Oya"
-    //     const activity7 = records[i-1].activity7 == true ? records[i-1].activity7 = "Yego" : records[i-1].activity7 = "Oya"
-    //     const activity8 = records[i-1].activity8 == true ? records[i-1].activity8 = "Yego" : records[i-1].activity8 = "Oya"
-      
-    //   }
-      console.log(records);
-      setRecords(records)
-    }
+      let updatedActivity1;
+      let updatedActivity2;
+      let updatedActivity3;
+      let updatedActivity4;
+      let updatedActivity5;
+      let updatedActivity6;
+      let updatedActivity7;
+      let updatedActivity8;
 
+      record.activity1 == true
+        ? (updatedActivity1 = "Yego")
+        : (updatedActivity1 = "Oya");
+      record.activity2 == true
+        ? (updatedActivity2 = "Yego")
+        : (updatedActivity2 = "Oya");
+      record.activity3 == true
+        ? (updatedActivity3 = "Yego")
+        : (updatedActivity3 = "Oya");
+      record.activity4 == true
+        ? (updatedActivity4 = "Yego")
+        : (updatedActivity4 = "Oya");
+      record.activity5 == true
+        ? (updatedActivity5 = "Yego")
+        : (updatedActivity5 = "Oya");
+      record.activity6 == true
+        ? (updatedActivity6 = "Yego")
+        : (updatedActivity6 = "Oya");
+      record.activity7 == true
+        ? (updatedActivity7 = "Yego")
+        : (updatedActivity7 = "Oya");
+      record.activity8 == true
+        ? (updatedActivity8 = "Yego")
+        : (updatedActivity8 = "Oya");
 
-    
+      await DataStore.save(
+        Ingabo.copyOf(original, (updated) => {
+          updated.no = index + 1;
+          updated.imyumbati = updatedActivity1;
+          updated.umuceri = updatedActivity2;
+          updated.ibigori = updatedActivity3;
+          updated.ibinyamisogwe = updatedActivity4;
+          updated.imboga_imbuto = updatedActivity5;
+          updated.inkoko = updatedActivity6;
+          updated.ingurube = updatedActivity7;
+          updated.inka = updatedActivity8;
+        })
+      );
+    });
+
+    console.log(records);
+    setRecords(records);
+  };
+
   useEffect(() => {
-
     pullData();
 
     // Data changes
 
     const resp = DataStore.observe(Ingabo).subscribe(() => {
       pullData();
-    })
+    });
 
     return () => resp.unsubscribe();
-
-  }, [])
+  }, []);
 
   const data = records;
 
-    const columns = React.useMemo(
-      () => [
-        {
-          Header: "No",
-          accessor: "no",
-        },
-        {
-          Header: "Amazina Yombi",
-          accessor: "fullName",
-        },
-        {
-          Header: "Igihe Yavukiye",
-          accessor: "dateofbirth",
-        },
-        {
-          Header: "Igitsina",
-          accessor: "igitsina",
-        },
-        {
-          Header: "Ingandamuntu",
-          accessor: "nationalID",
-        },
-        {
-          Header: "Telephone",
-          accessor: "telephone",
-        },
-        {
-          Header: "Cooperative",
-          accessor: "cooperative",
-        },
-        {
-          Header: "Aho Atuye",
-          accessor: "addressDistrict",
-        },
-        {
-          Header: "Arahinga",
-          accessor: "activity1",
-          Filter: SelectColumnFilter,
-          filter: 'includes',
-        },
-        {
-          Header: "Aroroye",
-          accessor: "activity2",
-          Filter: SelectColumnFilter,
-          filter: 'includes',
-        },
-        {
-          Header: "Imyumbati ",
-          accessor: "activity3",
-        },
-        {
-          Header: "Umuceri",
-          accessor: "activity4",
-        },
-        {
-          Header: "Ibinyampeke",
-          accessor: "activity5",
-        },
-        {
-          Header: "Inka",
-          accessor: "activity6",
-        },
-        {
-          Header: "Ingurube",
-          accessor: "activity7",
-        },
-        {
-          Header: "Inkoko",
-          accessor: "activity8",
-        },
-        {
-          Header: "Signature",
-          accessor: ""
-        }
-      ],
-      []
-    );
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: "No",
+        accessor: "no",
+      },
+      {
+        Header: "Amazina Yombi",
+        accessor: "fullName",
+      },
+      {
+        Header: "Igihe Yavukiye",
+        accessor: "dateofbirth",
+      },
+      {
+        Header: "Igitsina",
+        accessor: "igitsina",
+      },
+      {
+        Header: "Ingandamuntu",
+        accessor: "nationalID",
+      },
+      {
+        Header: "Telephone",
+        accessor: "telephone",
+      },
+      {
+        Header: "Cooperative",
+        accessor: "cooperative",
+      },
+      {
+        Header: "Aho Atuye",
+        accessor: "district",
+      },
+      // {
+      //   Header: "Aroroye",
+      //   accessor: "aroroye",
+      // },
+      // {
+      //   Header: "Arahinga",
+      //   accessor: "arahinga",
+      // },
+      {
+        Header: "Imyumbati",
+        accessor: "imyumbati",
+        Filter: SelectColumnFilter,
+        filter: "includes",
+      },
+      {
+        Header: "Umuceri",
+        accessor: "umuceri",
+        Filter: SelectColumnFilter,
+        filter: "includes",
+      },
+      {
+        Header: "Ibigori",
+        accessor: "ibigori",
+      },
+      {
+        Header: "Ibinyamisogwe",
+        accessor: "ibinyamisogwe",
+      },
+      {
+        Header: "Imboga n' Imbuto",
+        accessor: "imboga_imbuto",
+      },
+      {
+        Header: "Inkoko",
+        accessor: "inkoko",
+      },
+      {
+        Header: "Ingurube",
+        accessor: "ingurube",
+      },
+      {
+        Header: "Inka",
+        accessor: "inka",
+      },
+      {
+        Header: "Signature",
+        accessor: "",
+      },
+    ],
+    []
+  );
+
+
+  // EDIT MODAL
+
+  const [modalEdit, setModalEdit] = useState(false);
+  const [editId, setEditId] = useState('');
+
+  const toggleEditModal = async (id) => {
+    let modelEdit = await DataStore.query(Ingabo, id);
+    setEditId(modelEdit);
+    setModalEdit(!modalEdit);
+  }
+
+  // DELETE MODAL
+
+  const [modalDelete, setModalDelete] = useState(false);
+  const [deleteId, setDeleteId] = useState('');
+
+  const toggleDeleteModal = async (id) => {
+    setDeleteId(id);
+    setModalDelete(!modalDelete);
+  }
+
+  
 
   const tableHooks = (hooks) => {
-    
-
     hooks.visibleColumns.push((columns) => [
       {
         id: "edit",
         Header: "Edit",
         Cell: ({ row }) => (
           <div className="edit-delete">
-            <Button id="edit-btn"
+            <Button
+              id="edit-btn"
               className="relative inline-flex items-center px-2 py-1.5 border border-gray-100 rounded-full"
-              
+              onClick={async () => {
+                toggleEditModal(row.original.id)
+              }}
             >
-              <Link to="/update">
-
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                />
-              </svg>
-
-              </Link>
+              {/* <Link to="/update"> */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                  />
+                </svg>
+              {/* </Link> */}
             </Button>
 
-            <Button id="delete-btn"
+            <Button
+              id="delete-btn"
               className="relative inline-flex items-center px-2 py-1.5 border border-gray-100 rounded-full"
-              onClick={() => alert("Deleting: " + row.values.telephone)}
+              onClick={async () => {
+                toggleDeleteModal(row.original.id);
+              }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -270,7 +347,7 @@ function Table() {
       },
       {
         id: "checkbox",
-        Header: "Select",
+        Header: "",
         Cell: ({ row }) => (
           <input
             id="default-checkbox"
@@ -283,47 +360,154 @@ function Table() {
       ...columns,
     ]);
   };
-  
-    const TableInstance = useTable({ columns, data }, useGlobalFilter, useFilters, useSortBy, usePagination, tableHooks)
-  
-    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, state, preGlobalFilteredRows, setGlobalFilter, page, canPreviousPage, canNextPage, pageOptions, pageCount, gotoPage, nextPage, previousPage, setPageSize } = TableInstance;
-  
-  
-  const exportPDF = () => {
 
-    let info = [], header = []
+  const TableInstance = useTable(
+    { columns, data },
+    useGlobalFilter,
+    useFilters,
+    useSortBy,
+    usePagination,
+    tableHooks,
+  );
+
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    state,
+    preGlobalFilteredRows,
+    setGlobalFilter,
+    page,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+  } = TableInstance;
+
+  const exportPDF = () => {
+    let info = [];
 
     data.forEach((element, index, array) => {
-      info.push([element.no, element.fullName, element.gender, element.nationalID, element.cooperative])
-    })
+      info.push([
+        element.no,
+        element.fullName,
+        element.dateofbirth,
+        element.district,
+        element.gender,
+        element.cooperative,
+        element.telephone,
+        element.ndationalID,
+        element.imyumbati,
+        element.umuceri,
+        element.ibigori,
+        element.ibinyamisogwe,
+        element.imboga_imbuto,
+        element.inkoko,
+        element.ingurube,
+        element.inka,
+      ]);
+    });
 
-    const doc = new jsPDF('landscape', 'mm', 'a3');
+    const doc = new jsPDF("landscape", "mm", "a3");
 
     doc.autoTable({
-      head: [['No', 'Amazina Yombi', 'Igitsina', 'Ingandamuntu', 'Koperative']],
-      body: info
-    })
+      head: [
+        [
+          "No",
+          "Amazina Yombi",
+          "Igihe Yavukiye",
+          "Aho Atuye",
+          "Igitsina",
+          "Koperative",
+          "Telephone",
+          "Indangamuntu",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "Signature"
+        ],
+      ],
+      body: info,
+    });
 
-
-    doc.save('Report.pdf')
-    console.log(header)
-  }
-
+    doc.save("Ingabo Syndicate PDF Report.pdf");
+    console.log(info);
+  };
 
   return (
-      
-      <>
-        <Helmet>
-                <meta charSet="utf-8" />
-                <title>Ingabo Syndicate - Insert Member</title>
+    <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Ingabo Syndicate Database</title>
       </Helmet>
-        
 
-        <div className="container">
-          <div className="table-header-container flex gap-x-2">
+      {/* EDIT MODAL */}
 
-            <div className="search-filter">
+      {modalDelete && (
+        <div className="modal">
+          <div className="overlay">
+            <div className="modal-content">
+              <h1 className="text-xl font-medium">
+                Are you sure you want to delete this record?
+              </h1>
+              <div className="modal-delete-cta">
+              <Button className="delete-confirmation"
+                onClick={async () => {
+                  let modelDelete = await DataStore.query(Ingabo, deleteId);
+                  await DataStore.delete(modelDelete);
+                  toggleDeleteModal();
+                }}
+              >
+                Delete
+              </Button>
+              <Button onClick={toggleDeleteModal}>Cancel</Button>
+              </div>
+            </div>
+            </div>
+        </div>
+      )}
 
+      {/* EDIT MODAL */}
+
+      {modalEdit && (
+        <div className="modal">
+          <div className="overlay">
+            <div className="modal-content">
+              <IngaboUpdateForm
+                Ingabo={editId}
+                onCancel={() => {
+                  toggleEditModal();
+                }
+                }
+              />
+
+              <Button
+                onClick={() => {
+                  console.log(Object.values(editId));
+              }}
+              >
+                Log
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="container">
+        <div className="table-header-container flex gap-x-2">
+          <div className="search-filter">
             <GlobalFilter
               preGlobalFilteredRows={preGlobalFilteredRows}
               globalFilter={state.globalFilter}
@@ -340,32 +524,28 @@ function Table() {
                 ) : null
               )
             )}
+          </div>
 
-            </div>
-
-            <div className="table-header-cta">
-
-               {/* BUTTON TO EXPORT EXCEL */}
+          <div className="table-header-cta">
+            {/* BUTTON TO EXPORT EXCEL */}
             <Button className="ml auto">
-                <CSVLink data={records}>
-                  Excel  
-                </CSVLink>
-                <span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-6 h-6"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0112 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
-                    />
-                  </svg>
-                </span>
+              <CSVLink data={records}>Excel</CSVLink>
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0112 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
+                  />
+                </svg>
+              </span>
             </Button>
 
             {/* BUTTON TO PRINT PDF */}
@@ -389,161 +569,154 @@ function Table() {
               </span>
             </Button>
           </div>
+        </div>
+        {/* global search and filter */}
+        {/* table */}
 
-            </div>
-          {/* global search and filter */}
-          {/* table */}
-
+        <div className="mt-2 flex flex-col">
           <div className="mt-2 flex flex-col">
-            <div className="mt-2 flex flex-col">
-              <div className="-my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
-                <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                  <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                    <table
-                      {...getTableProps()}
-                      border="1"
-                      className="min-w-full divide-y divide-gray-200"
+            <div className="-my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
+              <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                  <table
+                    {...getTableProps()}
+                    border="1"
+                    className="min-w-full divide-y divide-gray-200"
+                  >
+                    <thead className="bg-gray-50">
+                      {headerGroups.map((headerGroup) => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                          {headerGroup.headers.map((column) => (
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                              {...column.getHeaderProps(
+                                column.getSortByToggleProps()
+                              )}
+                            >
+                              {column.render("Header")}
+                              <span>
+                                {column.isSorted
+                                  ? column.isSortedDesc
+                                    ? " ▼"
+                                    : " ▲"
+                                  : ""}
+                              </span>
+                            </th>
+                          ))}
+                        </tr>
+                      ))}
+                    </thead>
+                    <tbody
+                      className="bg-white divide-y divide-gray-200"
+                      {...getTableBodyProps()}
                     >
-                      <thead className="bg-gray-50">
-                        {headerGroups.map((headerGroup) => (
-                          <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map((column) => (
-                              <th
-                                scope="col"
-                                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                {...column.getHeaderProps(
-                                  column.getSortByToggleProps()
-                                )}
-                              >
-                                {column.render("Header")}
-                                <span>
-                                  {column.isSorted
-                                    ? column.isSortedDesc
-                                      ? " ▼"
-                                      : " ▲"
-                                    : ""}
-                                </span>
-                              </th>
-                            ))}
+                      {page.map((row, i) => {
+                        prepareRow(row);
+                        return (
+                          <tr {...row.getRowProps()}>
+                            {row.cells.map((cell) => {
+                              return (
+                                <td
+                                  {...cell.getCellProps()}
+                                  className="px-6 py-4 whitespace-nowrap"
+                                >
+                                  {cell.render("Cell")}
+                                </td>
+                              );
+                            })}
                           </tr>
-                        ))}
-                      </thead>
-                      <tbody
-                        className="bg-white divide-y divide-gray-200"
-                        {...getTableBodyProps()}
-                      >
-                        {page.map((row, i) => {
-                          prepareRow(row);
-                          return (
-                            <tr {...row.getRowProps()}>
-                              {row.cells.map((cell) => {
-                                return (
-                                  <td
-                                    {...cell.getCellProps()}
-                                    className="px-6 py-4 whitespace-nowrap"
-                                  >
-                                    {cell.render("Cell")}
-                                  </td>
-                                );
-                              })}
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="pagination">
-          <div className="py-3 flex items-center justify-between">
-            <div className="flex-1 flex justify-between sm:hidden">
-              <Button
-                onClick={() => previousPage()}
-                disabled={!canPreviousPage}
-              >
-                Previous
-              </Button>
-              <Button onClick={() => nextPage()} disabled={!canNextPage}>
-                Next
-              </Button>
-            </div>
-            <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-              <div className="flex gap-x-2">
-                <span className="text-sm text-gray-700">
-                  {" "}
-                  <span className="font-medium">{state.pageIndex + 1}</span> of{" "}
-                  <span className="font-medium">{pageOptions.length}</span>
-                </span>
-                <label>
-                  <span className="sr-only">Items Per Page</span>
-                  <select
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                    value={state.pageSize}
-                    onChange={(e) => {
-                      setPageSize(Number(e.target.value));
-                    }}
-                  >
-                    {[5, 10, 20, 50].map((pageSize) => (
-                      <option key={pageSize} value={pageSize}>
-                        Show {pageSize}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              </div>
-              <div>
-                <nav
-                  className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
-                  aria-label="Pagination"
+      </div>
+      <div className="pagination">
+        <div className="py-3 flex items-center justify-between">
+          <div className="flex-1 flex justify-between sm:hidden">
+            <Button onClick={() => previousPage()} disabled={!canPreviousPage}>
+              Previous
+            </Button>
+            <Button onClick={() => nextPage()} disabled={!canNextPage}>
+              Next
+            </Button>
+          </div>
+          <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+            <div className="flex gap-x-2">
+              <span className="text-sm text-gray-700">
+                {" "}
+                <span className="font-medium">
+                  {state.pageIndex + 1}
+                </span> of{" "}
+                <span className="font-medium">{pageOptions.length}</span>
+              </span>
+              <label>
+                <span className="sr-only">Items Per Page</span>
+                <select
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  value={state.pageSize}
+                  onChange={(e) => {
+                    setPageSize(Number(e.target.value));
+                  }}
                 >
-                  <PageButton
-                    className="rounded-l-md"
-                    onClick={() => gotoPage(0)}
-                    disabled={!canPreviousPage}
-                  >
-                    <span className="sr-only">First</span>
-                    <ChevronDoubleLeftIcon
-                      className="h-5 w-5"
-                      aria-hidden="true"
-                    />
-                  </PageButton>
-                  <PageButton
-                    onClick={() => previousPage()}
-                    disabled={!canPreviousPage}
-                  >
-                    <span className="sr-only">Previous</span>
-                    <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-                  </PageButton>
-                  <PageButton
-                    onClick={() => nextPage()}
-                    disabled={!canNextPage}
-                  >
-                    <span className="sr-only">Next</span>
-                    <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-                  </PageButton>
-                  <PageButton
-                    className="rounded-r-md"
-                    onClick={() => gotoPage(pageCount - 1)}
-                    disabled={!canNextPage}
-                  >
-                    <span className="sr-only">Last</span>
-                    <ChevronDoubleRightIcon
-                      className="h-5 w-5"
-                      aria-hidden="true"
-                    />
-                  </PageButton>
-                </nav>
-              </div>
+                  {[5, 10, 20, 50].map((pageSize) => (
+                    <option key={pageSize} value={pageSize}>
+                      Show {pageSize}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <div>
+              <nav
+                className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
+                aria-label="Pagination"
+              >
+                <PageButton
+                  className="rounded-l-md"
+                  onClick={() => gotoPage(0)}
+                  disabled={!canPreviousPage}
+                >
+                  <span className="sr-only">First</span>
+                  <ChevronDoubleLeftIcon
+                    className="h-5 w-5"
+                    aria-hidden="true"
+                  />
+                </PageButton>
+                <PageButton
+                  onClick={() => previousPage()}
+                  disabled={!canPreviousPage}
+                >
+                  <span className="sr-only">Previous</span>
+                  <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+                </PageButton>
+                <PageButton onClick={() => nextPage()} disabled={!canNextPage}>
+                  <span className="sr-only">Next</span>
+                  <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+                </PageButton>
+                <PageButton
+                  className="rounded-r-md"
+                  onClick={() => gotoPage(pageCount - 1)}
+                  disabled={!canNextPage}
+                >
+                  <span className="sr-only">Last</span>
+                  <ChevronDoubleRightIcon
+                    className="h-5 w-5"
+                    aria-hidden="true"
+                  />
+                </PageButton>
+              </nav>
             </div>
           </div>
         </div>
-      </>
-    );
-
-                    
-  }
+      </div>
+    </>
+  );
+}
 
 export default Table;

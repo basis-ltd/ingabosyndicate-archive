@@ -13,7 +13,6 @@ export const createIngabo = /* GraphQL */ `
       nationalID
       cooperative
       telephone
-      gender
       activity1
       activity2
       activity3
@@ -23,6 +22,20 @@ export const createIngabo = /* GraphQL */ `
       activity7
       activity8
       no
+      cell
+      sector
+      district
+      gender
+      aroroye
+      arahinga
+      imyumbati
+      umuceri
+      ibigori
+      ibinyamisogwe
+      imboga_imbuto
+      inkoko
+      ingurube
+      inka
       createdAt
       updatedAt
       _version
@@ -43,7 +56,6 @@ export const updateIngabo = /* GraphQL */ `
       nationalID
       cooperative
       telephone
-      gender
       activity1
       activity2
       activity3
@@ -53,6 +65,20 @@ export const updateIngabo = /* GraphQL */ `
       activity7
       activity8
       no
+      cell
+      sector
+      district
+      gender
+      aroroye
+      arahinga
+      imyumbati
+      umuceri
+      ibigori
+      ibinyamisogwe
+      imboga_imbuto
+      inkoko
+      ingurube
+      inka
       createdAt
       updatedAt
       _version
@@ -73,7 +99,6 @@ export const deleteIngabo = /* GraphQL */ `
       nationalID
       cooperative
       telephone
-      gender
       activity1
       activity2
       activity3
@@ -83,6 +108,20 @@ export const deleteIngabo = /* GraphQL */ `
       activity7
       activity8
       no
+      cell
+      sector
+      district
+      gender
+      aroroye
+      arahinga
+      imyumbati
+      umuceri
+      ibigori
+      ibinyamisogwe
+      imboga_imbuto
+      inkoko
+      ingurube
+      inka
       createdAt
       updatedAt
       _version

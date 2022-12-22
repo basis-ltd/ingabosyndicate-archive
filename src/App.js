@@ -12,8 +12,9 @@ import IngaboUpdateForm from './ui-components/IngaboUpdateForm';
 import NavBar from './NavBar';
 import { Helmet } from "react-helmet";
 import Modal from './Update.js'
+import { Ingabo } from './models';
 
-
+Amplify.configure(awsconfig);;
 
 
 function App() {
@@ -45,16 +46,22 @@ function App() {
 
             <div className="input-container">
 
-            <Route path="/input">
+              <Route path="/input">
+              <Helmet>
+                <meta charSet="utf-8" />
+                <title>Ingabo Syndicate Database</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
               <IngaboCreateForm
                 onSuccess={() => {
                   console.log("Data saved successfully");
                 }}
-              />
+                />
               </Route>
               
               <Route path="/update">
-              <IngaboUpdateForm
+                <IngaboUpdateForm
+                  
                 onSuccess={() => {
                   console.log("Data saved successfully");
                 }}

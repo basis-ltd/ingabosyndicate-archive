@@ -10,7 +10,7 @@ function NavBar({signOut, user}) {
   return (
     <div className="nav-bar">
       <a href="https://www.ingabosyndicate.org/" className="nav-logo">
-        Ingabo Syndicate
+        <img src={require('./images/logo.png')} alt="logo" />
       </a>
       <ul className="nav-tabs">
         <a href="https://www.ingabosyndicate.org/" className="nav-btn">

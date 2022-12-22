@@ -95,15 +95,9 @@ export default function IngaboCreateForm(props) {
   };
   const validations = {
     fullName: [],
-    dateofbirth: [
-      {
-        type: "BeBefore",
-        strValues: ["01/01/2006"],
-        validationMessage: "The value must be before 01/01/2006",
-      },
-    ],
-    gender: [],
-    nationalID: [],
+    dateofbirth: [{ type: "Required" }],
+    gender: [{ type: "Required" }],
+    nationalID: [{ type: "Required" }],
     telephone: [],
     cooperative: [],
     cell: [],
@@ -244,7 +238,7 @@ export default function IngaboCreateForm(props) {
         ></TextField>
         <TextField
           label="Date of Birth"
-          isRequired={false}
+          isRequired={true}
           isReadOnly={false}
           type="date"
           onChange={(e) => {
@@ -284,7 +278,7 @@ export default function IngaboCreateForm(props) {
         ></TextField>
         <TextField
           label="Gender"
-          isRequired={false}
+          isRequired={true}
           isReadOnly={false}
           placeholder="M/F"
           onChange={(e) => {
@@ -331,7 +325,7 @@ export default function IngaboCreateForm(props) {
       >
         <TextField
           label="National ID"
-          isRequired={false}
+          isRequired={true}
           isReadOnly={false}
           onChange={(e) => {
             let { value } = e.target;

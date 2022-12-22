@@ -26,6 +26,16 @@ type EagerIngabo = {
   readonly sector?: string | null;
   readonly district?: string | null;
   readonly gender?: string | null;
+  readonly aroroye?: string | null;
+  readonly arahinga?: string | null;
+  readonly imyumbati?: string | null;
+  readonly umuceri?: string | null;
+  readonly ibigori?: string | null;
+  readonly ibinyamisogwe?: string | null;
+  readonly imboga_imbuto?: string | null;
+  readonly inkoko?: string | null;
+  readonly ingurube?: string | null;
+  readonly inka?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -50,6 +60,16 @@ type LazyIngabo = {
   readonly sector?: string | null;
   readonly district?: string | null;
   readonly gender?: string | null;
+  readonly aroroye?: string | null;
+  readonly arahinga?: string | null;
+  readonly imyumbati?: string | null;
+  readonly umuceri?: string | null;
+  readonly ibigori?: string | null;
+  readonly ibinyamisogwe?: string | null;
+  readonly imboga_imbuto?: string | null;
+  readonly inkoko?: string | null;
+  readonly ingurube?: string | null;
+  readonly inka?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

@@ -136,6 +136,76 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "aroroye": {
+                    "name": "aroroye",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "arahinga": {
+                    "name": "arahinga",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "imyumbati": {
+                    "name": "imyumbati",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "umuceri": {
+                    "name": "umuceri",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "ibigori": {
+                    "name": "ibigori",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "ibinyamisogwe": {
+                    "name": "ibinyamisogwe",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "imboga_imbuto": {
+                    "name": "imboga_imbuto",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "inkoko": {
+                    "name": "inkoko",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "ingurube": {
+                    "name": "ingurube",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "inka": {
+                    "name": "inka",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -182,5 +252,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.2",
-    "version": "9837dc8ae66f8c74e3449c5900c82ce8"
+    "version": "d8a3fa7461a33f7a0e04d4bee6691699"
 };

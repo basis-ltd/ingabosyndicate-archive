@@ -10,7 +10,6 @@ export const getIngabo = /* GraphQL */ `
       nationalID
       cooperative
       telephone
-      gender
       activity1
       activity2
       activity3
@@ -20,6 +19,20 @@ export const getIngabo = /* GraphQL */ `
       activity7
       activity8
       no
+      cell
+      sector
+      district
+      gender
+      aroroye
+      arahinga
+      imyumbati
+      umuceri
+      ibigori
+      ibinyamisogwe
+      imboga_imbuto
+      inkoko
+      ingurube
+      inka
       createdAt
       updatedAt
       _version
@@ -42,7 +55,6 @@ export const listIngabos = /* GraphQL */ `
         nationalID
         cooperative
         telephone
-        gender
         activity1
         activity2
         activity3
@@ -52,6 +64,20 @@ export const listIngabos = /* GraphQL */ `
         activity7
         activity8
         no
+        cell
+        sector
+        district
+        gender
+        aroroye
+        arahinga
+        imyumbati
+        umuceri
+        ibigori
+        ibinyamisogwe
+        imboga_imbuto
+        inkoko
+        ingurube
+        inka
         createdAt
         updatedAt
         _version
@@ -83,7 +109,6 @@ export const syncIngabos = /* GraphQL */ `
         nationalID
         cooperative
         telephone
-        gender
         activity1
         activity2
         activity3
@@ -93,6 +118,20 @@ export const syncIngabos = /* GraphQL */ `
         activity7
         activity8
         no
+        cell
+        sector
+        district
+        gender
+        aroroye
+        arahinga
+        imyumbati
+        umuceri
+        ibigori
+        ibinyamisogwe
+        imboga_imbuto
+        inkoko
+        ingurube
+        inka
         createdAt
         updatedAt
         _version
