@@ -5,21 +5,35 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Amplify} from 'aws-amplify'
 import config from './aws-exports'
-import { ThemeProvider, Button, Card } from "@aws-amplify/ui-react";
+import { ThemeProvider, Button, Card, createTheme } from "@aws-amplify/ui-react";
 
 import awsconfig from './aws-exports';
 
 import "@aws-amplify/ui-react/styles.css";
 import { studioTheme } from "./ui-components";
 
+const theme = createTheme({
+  name: 'ingabosyndicate',
+  tokens: {
+    components: {
+      button: {
+        primary: {
+          backgroundColor: {
+            value: "#006400"
+          }
+        }
+      }
+    }
+  }
+})
+
 Amplify.configure(awsconfig);
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-
 root.render(
-      <ThemeProvider theme={studioTheme} >
+      <ThemeProvider theme={theme} >
     <App />
   </ThemeProvider>
 
