@@ -1,0 +1,32 @@
+type Ingabo @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  fullName: String
+  dateofbirth: AWSDate
+  nationalID: String
+  cooperative: String
+  telephone: String
+  activity1: Boolean
+  activity2: Boolean
+  activity3: Boolean
+  activity4: Boolean
+  activity5: Boolean
+  activity6: Boolean
+  activity7: Boolean
+  activity8: Boolean
+  no: Int
+  cell: String
+  sector: String
+  district: String
+  gender: String
+  aroroye: String
+  arahinga: String
+  imyumbati: String
+  umuceri: String
+  ibigori: String
+  ibinyamisogwe: String
+  imboga_imbuto: String
+  inkoko: String
+  ingurube: String
+  inka: String
+}
+ 
