@@ -1,0 +1,386 @@
+
+type Ingabo @aws_iam @aws_api_key {
+  id: ID!
+  fullName: String
+  dateofbirth: AWSDate
+  nationalID: String
+  cooperative: String
+  telephone: String
+  activity1: Boolean
+  activity2: Boolean
+  activity3: Boolean
+  activity4: Boolean
+  activity5: Boolean
+  activity6: Boolean
+  activity7: Boolean
+  activity8: Boolean
+  no: Int
+  cell: String
+  sector: String
+  district: String
+  gender: String
+  aroroye: String
+  arahinga: String
+  imyumbati: String
+  umuceri: String
+  ibigori: String
+  ibinyamisogwe: String
+  imboga_imbuto: String
+  inkoko: String
+  ingurube: String
+  inka: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelSubscriptionStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  in: [String]
+  notIn: [String]
+}
+
+input ModelSubscriptionIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  in: [Int]
+  notIn: [Int]
+}
+
+input ModelSubscriptionFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  in: [Float]
+  notIn: [Float]
+}
+
+input ModelSubscriptionBooleanInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelSubscriptionIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  in: [ID]
+  notIn: [ID]
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelIngaboConnection @aws_api_key @aws_iam {
+  items: [Ingabo]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelIngaboFilterInput {
+  id: ModelIDInput
+  fullName: ModelStringInput
+  dateofbirth: ModelStringInput
+  nationalID: ModelStringInput
+  cooperative: ModelStringInput
+  telephone: ModelStringInput
+  activity1: ModelBooleanInput
+  activity2: ModelBooleanInput
+  activity3: ModelBooleanInput
+  activity4: ModelBooleanInput
+  activity5: ModelBooleanInput
+  activity6: ModelBooleanInput
+  activity7: ModelBooleanInput
+  activity8: ModelBooleanInput
+  no: ModelIntInput
+  cell: ModelStringInput
+  sector: ModelStringInput
+  district: ModelStringInput
+  gender: ModelStringInput
+  aroroye: ModelStringInput
+  arahinga: ModelStringInput
+  imyumbati: ModelStringInput
+  umuceri: ModelStringInput
+  ibigori: ModelStringInput
+  ibinyamisogwe: ModelStringInput
+  imboga_imbuto: ModelStringInput
+  inkoko: ModelStringInput
+  ingurube: ModelStringInput
+  inka: ModelStringInput
+  and: [ModelIngaboFilterInput]
+  or: [ModelIngaboFilterInput]
+  not: ModelIngaboFilterInput
+}
+
+type Query {
+  getIngabo(id: ID!): Ingabo @aws_api_key @aws_iam
+  listIngabos(filter: ModelIngaboFilterInput, limit: Int, nextToken: String): ModelIngaboConnection @aws_api_key @aws_iam
+  syncIngabos(filter: ModelIngaboFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelIngaboConnection @aws_api_key @aws_iam
+}
+
+input ModelIngaboConditionInput {
+  fullName: ModelStringInput
+  dateofbirth: ModelStringInput
+  nationalID: ModelStringInput
+  cooperative: ModelStringInput
+  telephone: ModelStringInput
+  activity1: ModelBooleanInput
+  activity2: ModelBooleanInput
+  activity3: ModelBooleanInput
+  activity4: ModelBooleanInput
+  activity5: ModelBooleanInput
+  activity6: ModelBooleanInput
+  activity7: ModelBooleanInput
+  activity8: ModelBooleanInput
+  no: ModelIntInput
+  cell: ModelStringInput
+  sector: ModelStringInput
+  district: ModelStringInput
+  gender: ModelStringInput
+  aroroye: ModelStringInput
+  arahinga: ModelStringInput
+  imyumbati: ModelStringInput
+  umuceri: ModelStringInput
+  ibigori: ModelStringInput
+  ibinyamisogwe: ModelStringInput
+  imboga_imbuto: ModelStringInput
+  inkoko: ModelStringInput
+  ingurube: ModelStringInput
+  inka: ModelStringInput
+  and: [ModelIngaboConditionInput]
+  or: [ModelIngaboConditionInput]
+  not: ModelIngaboConditionInput
+}
+
+input CreateIngaboInput {
+  id: ID
+  fullName: String
+  dateofbirth: AWSDate
+  nationalID: String
+  cooperative: String
+  telephone: String
+  activity1: Boolean
+  activity2: Boolean
+  activity3: Boolean
+  activity4: Boolean
+  activity5: Boolean
+  activity6: Boolean
+  activity7: Boolean
+  activity8: Boolean
+  no: Int
+  cell: String
+  sector: String
+  district: String
+  gender: String
+  aroroye: String
+  arahinga: String
+  imyumbati: String
+  umuceri: String
+  ibigori: String
+  ibinyamisogwe: String
+  imboga_imbuto: String
+  inkoko: String
+  ingurube: String
+  inka: String
+  _version: Int
+}
+
+input UpdateIngaboInput {
+  id: ID!
+  fullName: String
+  dateofbirth: AWSDate
+  nationalID: String
+  cooperative: String
+  telephone: String
+  activity1: Boolean
+  activity2: Boolean
+  activity3: Boolean
+  activity4: Boolean
+  activity5: Boolean
+  activity6: Boolean
+  activity7: Boolean
+  activity8: Boolean
+  no: Int
+  cell: String
+  sector: String
+  district: String
+  gender: String
+  aroroye: String
+  arahinga: String
+  imyumbati: String
+  umuceri: String
+  ibigori: String
+  ibinyamisogwe: String
+  imboga_imbuto: String
+  inkoko: String
+  ingurube: String
+  inka: String
+  _version: Int
+}
+
+input DeleteIngaboInput {
+  id: ID!
+  _version: Int
+}
+
+type Mutation {
+  createIngabo(input: CreateIngaboInput!, condition: ModelIngaboConditionInput): Ingabo @aws_api_key @aws_iam
+  updateIngabo(input: UpdateIngaboInput!, condition: ModelIngaboConditionInput): Ingabo @aws_api_key @aws_iam
+  deleteIngabo(input: DeleteIngaboInput!, condition: ModelIngaboConditionInput): Ingabo @aws_api_key @aws_iam
+}
+
+input ModelSubscriptionIngaboFilterInput {
+  id: ModelSubscriptionIDInput
+  fullName: ModelSubscriptionStringInput
+  dateofbirth: ModelSubscriptionStringInput
+  nationalID: ModelSubscriptionStringInput
+  cooperative: ModelSubscriptionStringInput
+  telephone: ModelSubscriptionStringInput
+  activity1: ModelSubscriptionBooleanInput
+  activity2: ModelSubscriptionBooleanInput
+  activity3: ModelSubscriptionBooleanInput
+  activity4: ModelSubscriptionBooleanInput
+  activity5: ModelSubscriptionBooleanInput
+  activity6: ModelSubscriptionBooleanInput
+  activity7: ModelSubscriptionBooleanInput
+  activity8: ModelSubscriptionBooleanInput
+  no: ModelSubscriptionIntInput
+  cell: ModelSubscriptionStringInput
+  sector: ModelSubscriptionStringInput
+  district: ModelSubscriptionStringInput
+  gender: ModelSubscriptionStringInput
+  aroroye: ModelSubscriptionStringInput
+  arahinga: ModelSubscriptionStringInput
+  imyumbati: ModelSubscriptionStringInput
+  umuceri: ModelSubscriptionStringInput
+  ibigori: ModelSubscriptionStringInput
+  ibinyamisogwe: ModelSubscriptionStringInput
+  imboga_imbuto: ModelSubscriptionStringInput
+  inkoko: ModelSubscriptionStringInput
+  ingurube: ModelSubscriptionStringInput
+  inka: ModelSubscriptionStringInput
+  and: [ModelSubscriptionIngaboFilterInput]
+  or: [ModelSubscriptionIngaboFilterInput]
+}
+
+type Subscription {
+  onCreateIngabo(filter: ModelSubscriptionIngaboFilterInput): Ingabo @aws_subscribe(mutations: ["createIngabo"]) @aws_api_key @aws_iam
+  onUpdateIngabo(filter: ModelSubscriptionIngaboFilterInput): Ingabo @aws_subscribe(mutations: ["updateIngabo"]) @aws_api_key @aws_iam
+  onDeleteIngabo(filter: ModelSubscriptionIngaboFilterInput): Ingabo @aws_subscribe(mutations: ["deleteIngabo"]) @aws_api_key @aws_iam
+}
+
