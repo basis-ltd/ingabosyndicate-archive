@@ -18,4 +18,4 @@ jobs:
     - name: Build and deploy to Firebase
       env:
         CI: false
-      run: npm run build && firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
+      run: CI=false npm run build && firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
