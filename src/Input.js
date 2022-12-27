@@ -12,7 +12,7 @@ Amplify.configure(awsconfig);
 
 function Input() {
 
-    const history = useHistory();
+    let history = useHistory();
 
     const [sucess, setSucess] = useState(false);
 
@@ -22,7 +22,6 @@ function Input() {
 
     const handleCancel= (e) => {
         e.preventDefault();
-
         history.push('/');
     }
     
@@ -68,12 +67,7 @@ function Input() {
                         console.log("Data saved successfully");
                         toggleModal();
                     }}
-                    onCancel={() => {
-
-                        <Redirect to="/" />
-                        console.log("Data save cancelled");
-
-                    }}
+                    onCancel={handleCancel}
                 />
             </div>
         </>

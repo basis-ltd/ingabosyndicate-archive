@@ -280,6 +280,10 @@ function Table() {
   const [modalDelete, setModalDelete] = useState(false);
   const [deleteId, setDeleteId] = useState("");
 
+  // MESSAGE POP-UP
+
+  const [modalMessage, setModalMessage] = useState(false);
+
   const toggleDeleteModal = async (id) => {
     setDeleteId(id);
     setModalDelete(!modalDelete);
@@ -468,7 +472,7 @@ function Table() {
         <title>Ingabo Syndicate Database</title>
       </Helmet>
 
-      {/* EDIT MODAL */}
+      {/* DELETE MODAL */}
 
       {modalDelete && (
         <div className="modal">
@@ -518,6 +522,32 @@ function Table() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* MESSAGE MODAL */}
+
+      {modalMessage && (
+        <div className="modal">
+          <div className="overlay">
+            <div className="modal-content">
+
+              <div className="message-container">
+
+                <form action="" class="message-form">
+                <div class="address-name">
+                    <input type="text" name="name" placeholder="Full Name" id="fullname" required />
+                </div>
+
+                  <div class="message">
+                    <textarea name="message" id="message" cols="30" rows="5" placeholder="Message" required></textarea>
+                </div>
+
+                </form>
+
+            </div>
+          </div>
+          </div>
+          </div>
       )}
 
       <div className="container">
