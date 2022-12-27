@@ -17,7 +17,7 @@ import {
   useSortBy,
   usePagination,
 } from "react-table";
-import { Amplify, API, graphqlOperation } from "aws-amplify";
+import { Amplify } from "aws-amplify";
 import awsconfig from "./aws-exports";
 import { CSVLink } from "react-csv";
 import jsPDF from "jspdf";
@@ -341,6 +341,7 @@ function Table() {
             </Button>
             <Button
               id="message-btn"
+              className="relative inline-flex items-center px-2 py-1.5 border border-gray-100 rounded-full"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -417,7 +418,7 @@ function Table() {
         element.gender,
         element.cooperative,
         element.telephone,
-        element.ndationalID,
+        element.nationalID,
         element.imyumbati,
         element.umuceri,
         element.ibigori,
@@ -442,14 +443,14 @@ function Table() {
           "Koperative",
           "Telephone",
           "Indangamuntu",
-          "1",
-          "2",
-          "3",
-          "4",
-          "5",
-          "6",
-          "7",
-          "8",
+          "Imyumbati",
+          "Umuceri",
+          "Ibigori",
+          "Ibinyamisogwe",
+          "Imboga n' Imbuto",
+          "Inkoko",
+          "Ingurube",
+          "Inka",
           "Signature",
         ],
       ],
