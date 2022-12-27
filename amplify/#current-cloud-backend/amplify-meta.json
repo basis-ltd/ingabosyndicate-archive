@@ -36,7 +36,7 @@
         "GraphQLAPIEndpointOutput": "https://i6qxyj33ebeudd7qfdcczr7gou.appsync-api.us-east-1.amazonaws.com/graphql",
         "GraphQLAPIKeyOutput": "da2-ezan3l2z75dmdk6zndjzialrja"
       },
-      "lastPushTimeStamp": "2022-12-21T14:52:29.091Z",
+      "lastPushTimeStamp": "2022-12-25T16:30:40.344Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiingabofinal"
@@ -79,7 +79,7 @@
         "IdentityPoolName": "ingabofinal9ebd1c16_identitypool_9ebd1c16__dev",
         "UserPoolName": "ingabofinal9ebd1c16_userpool_9ebd1c16"
       },
-      "lastPushTimeStamp": "2022-12-21T14:52:24.953Z",
+      "lastPushTimeStamp": "2022-12-25T16:30:40.344Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/auth/ingabofinal9ebd1c16-cloudformation-template.json",
         "logicalId": "authingabofinal9ebd1c16"

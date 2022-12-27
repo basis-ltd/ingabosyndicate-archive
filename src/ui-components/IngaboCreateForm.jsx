@@ -95,9 +95,9 @@ export default function IngaboCreateForm(props) {
   };
   const validations = {
     fullName: [],
-    dateofbirth: [{ type: "Required" }],
-    gender: [{ type: "Required" }],
-    nationalID: [{ type: "Required" }],
+    dateofbirth: [],
+    gender: [],
+    nationalID: [],
     telephone: [],
     cooperative: [],
     cell: [],
@@ -238,7 +238,7 @@ export default function IngaboCreateForm(props) {
         ></TextField>
         <TextField
           label="Date of Birth"
-          isRequired={true}
+          isRequired={false}
           isReadOnly={false}
           type="date"
           onChange={(e) => {
@@ -278,7 +278,7 @@ export default function IngaboCreateForm(props) {
         ></TextField>
         <TextField
           label="Gender"
-          isRequired={true}
+          isRequired={false}
           isReadOnly={false}
           placeholder="M/F"
           onChange={(e) => {
@@ -325,7 +325,7 @@ export default function IngaboCreateForm(props) {
       >
         <TextField
           label="National ID"
-          isRequired={true}
+          isRequired={false}
           isReadOnly={false}
           onChange={(e) => {
             let { value } = e.target;
