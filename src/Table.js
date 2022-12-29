@@ -642,7 +642,10 @@ function Table() {
           <div className="table-header-cta">
             {/* BUTTON TO EXPORT EXCEL */}
             <Button className="ml auto">
-              <CSVLink data={records}>Excel</CSVLink>
+              <CSVLink
+                data={records}
+              filename ={"Ingabo Syndicate Database.csv"}
+              >Excel</CSVLink>
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
