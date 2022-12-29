@@ -34,7 +34,7 @@ function Input() {
                 <div className="modal-content">
 
                 <h1 className="text-xl font-medium">
-                Are you sure you want to delete this record?
+                Your input has been recorded successfully
                         </h1>
                         
                         <div className="modal-delete-cta">
