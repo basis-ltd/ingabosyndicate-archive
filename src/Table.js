@@ -280,14 +280,21 @@ function Table() {
   const [modalDelete, setModalDelete] = useState(false);
   const [deleteId, setDeleteId] = useState("");
 
-  // MESSAGE POP-UP
-
-  const [modalMessage, setModalMessage] = useState(false);
-
   const toggleDeleteModal = async (id) => {
     setDeleteId(id);
     setModalDelete(!modalDelete);
   };
+
+    // MESSAGE POP-UP
+
+  const [modalMessage, setModalMessage] = useState(false);
+  const [messageID, setMessageID] = useState("");
+  
+  const toggleMessageModal = async (id) => {
+    let nameModel = await DataStore.query(Ingabo, id);
+    setMessageID(nameModel);
+    setModalMessage(!modalMessage);
+  }
 
   const tableHooks = (hooks) => {
     hooks.visibleColumns.push((columns) => [
@@ -346,6 +353,9 @@ function Table() {
             <Button
               id="message-btn"
               className="relative inline-flex items-center px-2 py-1.5 border border-gray-100 rounded-full"
+              onClick={async () => {
+                toggleMessageModal(row.original.id);
+              }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -472,6 +482,9 @@ function Table() {
         <title>Ingabo Syndicate Database</title>
       </Helmet>
 
+
+      {/*<------- POP-UP MODALS -------->*/}
+
       {/* DELETE MODAL */}
 
       {modalDelete && (
@@ -479,7 +492,7 @@ function Table() {
           <div className="overlay">
             <div className="modal-content">
               <h1 className="text-xl font-medium">
-                Are you sure you want to delete this record?
+                Please confirm deletion of this record
               </h1>
               <div className="modal-delete-cta">
                 <Button
@@ -535,14 +548,29 @@ function Table() {
 
                 <form action="" class="message-form">
                 <div class="address-name">
-                    <input type="text" name="name" placeholder="Full Name" id="fullname" required />
+                    <input type="text" name="name" placeholder="Full Name" id="fullname" required value={messageID.fullName}/>
                 </div>
 
                   <div class="message">
-                    <textarea name="message" id="message" cols="30" rows="5" placeholder="Message" required></textarea>
+                    <textarea name="message" id="message" cols="50" rows="8" placeholder="Message" required></textarea>
                 </div>
 
                 </form>
+
+                <div className="message-cta">
+
+                  <Button className="message-btn-cancel"
+                    onClick={() => {
+                      toggleMessageModal();
+                    }}>
+                    Cancel
+                  </Button>
+
+                  <Button className="message-btn-send"
+                    >
+                    Send Message
+                  </Button>
+                </div>
 
             </div>
           </div>
