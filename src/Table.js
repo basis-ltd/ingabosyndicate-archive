@@ -144,6 +144,8 @@ function Table() {
       record.activity8 == true
         ? (updatedActivity8 = "Yego")
         : (updatedActivity8 = "Oya");
+      
+      
 
       await DataStore.save(
         Ingabo.copyOf(original, (updated) => {
@@ -158,7 +160,45 @@ function Table() {
           updated.inka = updatedActivity8;
         })
       );
+    
+      if ((updatedActivity1 || updatedActivity2 || updatedActivity3 || updatedActivity4 || updatedActivity5) == "Yego") { 
+        await DataStore.save(
+          Ingabo.copyOf(original, (updated) => { 
+            updated.arahinga = "Yego";
+          }
+          )
+        );
+      }
+
+      else {
+        await DataStore.save(
+          Ingabo.copyOf(original, (updated) => { 
+            updated.arahinga = "Oya";
+          }
+          )
+        );
+      }
+  
+      if ((updatedActivity6 || updatedActivity7 || updatedActivity8) == "Yego") { 
+        await DataStore.save(
+          Ingabo.copyOf(original, (updated) => { 
+            updated.aroroye = "Yego";
+          }
+          )
+        );
+      }
+
+      else {
+        await DataStore.save(
+          Ingabo.copyOf(original, (updated) => { 
+            updated.aroroye = "Oya";
+          }
+          )
+        );
+      }
+    
     });
+    
 
     console.log(records);
     setRecords(records);
@@ -212,25 +252,25 @@ function Table() {
         Header: "Aho Atuye",
         accessor: "district",
       },
-      // {
-      //   Header: "Aroroye",
-      //   accessor: "aroroye",
-      // },
-      // {
-      //   Header: "Arahinga",
-      //   accessor: "arahinga",
-      // },
       {
-        Header: "Imyumbati",
-        accessor: "imyumbati",
+        Header: "Aroroye",
+        accessor: "aroroye",
         Filter: SelectColumnFilter,
         filter: "includes",
       },
       {
-        Header: "Umuceri",
-        accessor: "umuceri",
+        Header: "Arahinga",
+        accessor: "arahinga",
         Filter: SelectColumnFilter,
         filter: "includes",
+      },
+      {
+        Header: "Imyumbati",
+        accessor: "imyumbati",
+      },
+      {
+        Header: "Umuceri",
+        accessor: "umuceri",
       },
       {
         Header: "Ibigori",
