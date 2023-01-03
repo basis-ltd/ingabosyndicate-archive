@@ -6,13 +6,13 @@ import IngaboCreateForm from './ui-components/IngaboCreateForm';
 import { Helmet } from "react-helmet";
 import { Button } from './Button';
 import { Amplify } from 'aws-amplify/';
-import { useHistory, Redirect, Link } from 'react-router-dom';
+import { Redirect, Link, useNavigate } from 'react-router-dom';
 
 Amplify.configure(awsconfig);
 
 function Input() {
 
-    let history = useHistory();
+    let navigate = useNavigate();
 
     const [sucess, setSucess] = useState(false);
 
@@ -22,7 +22,8 @@ function Input() {
 
     const handleCancel= (e) => {
         e.preventDefault();
-        history.push('/');
+        
+        navigate('/');
     }
     
     return (

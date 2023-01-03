@@ -237,7 +237,7 @@ function Table() {
         accessor: "igitsina",
       },
       {
-        Header: "Ingandamuntu",
+        Header: "Indangamuntu",
         accessor: "nationalID",
       },
       {

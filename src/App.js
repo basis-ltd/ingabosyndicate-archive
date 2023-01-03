@@ -6,7 +6,7 @@ import { Amplify } from 'aws-amplify/';
 import awsconfig from './aws-exports';
 import { withAuthenticator } from '@aws-amplify/ui-react'
 import { Button } from './Button'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import IngaboCreateForm from './ui-components/IngaboCreateForm';
 import IngaboUpdateForm from './ui-components/IngaboUpdateForm';
 import NavBar from './NavBar';
@@ -32,7 +32,7 @@ function App() {
           <NavBar />
 
 
-          <Switch>
+          <Routes>
             <Route exact path="/">
               <div className="min-h-screen bg-gray-100 text-gray-900">
                 <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
@@ -60,7 +60,7 @@ function App() {
             </Route>
 
             </div>
-          </Switch>
+          </Routes>
         </div>
       </div>
     </Router>
