@@ -19,60 +19,51 @@ function Input() {
     const toggleModal = async () => { 
         setSucess(!sucess);
     }
-
-    const handleCancel= (e) => {
-        e.preventDefault();
-        
-        navigate('/');
-    }
     
     return (
-
-        <>
-            {sucess && (
-            <div className="modal">
+      <>
+        {sucess && (
+          <div className="modal">
             <div className="overlay">
-                <div className="modal-content">
-
+              <div className="modal-content">
                 <h1 className="text-xl font-medium">
-                Your input has been recorded successfully
-                        </h1>
-                        
-                        <div className="modal-delete-cta">
-                <Button
-                  className="insert-confirmation-continue"
-                  onClick={toggleModal}
-                >
-                  Continue
-                </Button>
-                                <Button
-                                    className="insert-confirmation-reset"
-                                >
-                <Link to='/'>Return to Dashboard</Link>
-                </Button>
-              </div>
-                        
+                  Your input has been recorded successfully
+                </h1>
+
+                <div className="modal-delete-cta">
+                  <Button
+                    className="insert-confirmation-continue"
+                    onClick={toggleModal}
+                  >
+                    Continue
+                  </Button>
+                  <Button className="insert-confirmation-reset">
+                    <Link to="/">Return to Dashboard</Link>
+                  </Button>
                 </div>
-                    </div> 
-                    </div>
-            )        
-            }
-                <div className="input-container">
-                <Helmet>
-                    <meta charSet="utf-8" />
-                    <title>Ingabo Syndicate Database</title>
-                    <link rel="canonical" href="http://mysite.com/example" />
-                </Helmet>
-                <IngaboCreateForm
-                    onSuccess={() => {
-                        console.log("Data saved successfully");
-                        toggleModal();
-                    }}
-                    onCancel={handleCancel}
-                />
+              </div>
             </div>
-        </>
-    )
+          </div>
+        )}
+        <div className="input-container">
+          <Helmet>
+            <meta charSet="utf-8" />
+            <title>Ingabo Syndicate Database</title>
+            <link rel="canonical" href="http://mysite.com/example" />
+          </Helmet>
+          <IngaboCreateForm
+            onSuccess={() => {
+              console.log("Data saved successfully");
+              toggleModal();
+            }}
+            onCancel={() => {
+              console.log("Data save cancelled");
+              navigate("/");
+            }}
+          />
+        </div>
+      </>
+    );
 
 }
 

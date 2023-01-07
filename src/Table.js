@@ -30,9 +30,21 @@ import IngaboUpdateForm from "./ui-components/IngaboUpdateForm";
 import "./Update.css";
 import { Link } from "react-router-dom";
 import "./Update.css";
-import Modal from "./Update.js";
+
+import {twilio} from "twilio";
 
 Amplify.configure(awsconfig);
+
+function Twilio(receiver, message) {
+  const accountSid = process.env.TWILIO_ACCOUNT_SID;
+  const authToken = process.env.TWILIO_AUTH_TOKEN;
+  const client = require("twilio")(accountSid, authToken);
+  const from = process.env.TWILIO_PHONE_NUMBER;
+
+  client.messages
+    .create({ body: message, from: from, to: receiver })
+    .then((message) => console.log(message.sid));
+}
 
 // This is a custom filter UI for selecting
 // a unique option from a list
@@ -562,16 +574,9 @@ function Table() {
                 Ingabo={editId}
                 onCancel={() => {
                   toggleEditModal();
+                  console.log("Cancel is working!")
                 }}
               />
-
-              <Button
-                onClick={() => {
-                  console.log(Object.values(editId));
-                }}
-              >
-                Log
-              </Button>
             </div>
           </div>
         </div>
