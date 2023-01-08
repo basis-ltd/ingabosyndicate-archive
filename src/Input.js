@@ -5,8 +5,9 @@ import { withAuthenticator } from '@aws-amplify/ui-react'
 import IngaboCreateForm from './ui-components/IngaboCreateForm';
 import { Helmet } from "react-helmet";
 import { Button } from './Button';
-import { Amplify } from 'aws-amplify/';
+import { Amplify, DataStore } from 'aws-amplify/';
 import { Redirect, Link, useNavigate } from 'react-router-dom';
+import { Ingabo } from './models';
 
 Amplify.configure(awsconfig);
 
@@ -31,15 +32,26 @@ function Input() {
                 </h1>
 
                 <div className="modal-delete-cta">
+                  <div>
                   <Button
                     className="insert-confirmation-continue"
                     onClick={toggleModal}
                   >
-                    Continue
+                    Close
                   </Button>
                   <Button className="insert-confirmation-reset">
                     <Link to="/">Return to Dashboard</Link>
                   </Button>
+                  </div>
+                  <div>
+                    <Button
+                    onClick={() => {
+                      console.log("Send email to user");
+                    }}
+                    >
+                      Notify user
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -52,7 +64,7 @@ function Input() {
             <link rel="canonical" href="http://mysite.com/example" />
           </Helmet>
           <IngaboCreateForm
-            onSuccess={() => {
+            onSuccess={ async () => {
               console.log("Data saved successfully");
               toggleModal();
             }}

@@ -30,21 +30,37 @@ import IngaboUpdateForm from "./ui-components/IngaboUpdateForm";
 import "./Update.css";
 import { Link } from "react-router-dom";
 import "./Update.css";
-
-import {twilio} from "twilio";
+import Sms77Client from "sms77-client";
 
 Amplify.configure(awsconfig);
 
-function Twilio(receiver, message) {
-  const accountSid = process.env.TWILIO_ACCOUNT_SID;
-  const authToken = process.env.TWILIO_AUTH_TOKEN;
-  const client = require("twilio")(accountSid, authToken);
-  const from = process.env.TWILIO_PHONE_NUMBER;
+// SMS77 API
 
-  client.messages
-    .create({ body: message, from: from, to: receiver })
-    .then((message) => console.log(message.sid));
+let sendText = async (message, to) => {
+const encodedParams = new URLSearchParams();
+let receipient = '+250' + to.slice(-9);
+encodedParams.append("to", receipient);
+encodedParams.append("p", "SqvVNLOHAkZTwsQRgaWG0CDHtdLIkCuTzJyflINHcvqvAl4ZHHkR2RkRev82hjvA");
+encodedParams.append("text", message);
+
+const options = {
+  method: 'POST',
+  url: 'https://sms77io.p.rapidapi.com/sms',
+  headers: {
+    'content-type': 'application/x-www-form-urlencoded',
+    'X-RapidAPI-Key': '4c2f584f62msh583c2650cad43bdp130dbfjsn6ce4e4c945a7',
+    'X-RapidAPI-Host': 'sms77io.p.rapidapi.com'
+  },
+  data: encodedParams
+};
+
+axios.request(options).then(function (response) {
+	console.log(response.data, receipient);
+}).catch(function (error) {
+	console.error(error);
+});
 }
+
 
 // This is a custom filter UI for selecting
 // a unique option from a list
@@ -402,6 +418,8 @@ function Table() {
                 />
               </svg>
             </Button>
+
+              {/* MESSAGE BUTTON */}
             <Button
               id="message-btn"
               className="relative inline-flex items-center px-2 py-1.5 border border-gray-100 rounded-full"
@@ -534,7 +552,6 @@ function Table() {
         <title>Ingabo Syndicate Database</title>
       </Helmet>
 
-
       {/*<------- POP-UP MODALS -------->*/}
 
       {/* DELETE MODAL */}
@@ -571,10 +588,10 @@ function Table() {
           <div className="overlay">
             <div className="modal-content">
               <IngaboUpdateForm
-                Ingabo={editId}
+                id={editId}
                 onCancel={() => {
                   toggleEditModal();
-                  console.log("Cancel is working!")
+                  console.log("Cancel is working!");
                 }}
               />
             </div>
@@ -588,39 +605,52 @@ function Table() {
         <div className="modal">
           <div className="overlay">
             <div className="modal-content">
-
               <div className="message-container">
-
                 <form action="" class="message-form">
-                <div class="address-name">
-                    <input type="text" name="name" placeholder="Full Name" id="fullname" required value={messageID.fullName}/>
-                </div>
+                  <div class="address-name">
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Full Name"
+                      id="fullname"
+                      required
+                      value={messageID.fullName}
+                    />
+                  </div>
 
                   <div class="message">
-                    <textarea name="message" id="message" cols="50" rows="8" placeholder="Message" required></textarea>
-                </div>
-
+                    <textarea
+                      name="message"
+                      id="message"
+                      cols="50"
+                      rows="8"
+                      placeholder="Message"
+                      required
+                    ></textarea>
+                  </div>
                 </form>
 
                 <div className="message-cta">
-
-                  <Button className="message-btn-cancel"
+                  <Button
+                    className="message-btn-cancel"
                     onClick={() => {
                       toggleMessageModal();
-                    }}>
+                    }}
+                  >
                     Cancel
                   </Button>
 
                   <Button className="message-btn-send"
-                    >
-                    Send Message
-                  </Button>
+                  onClick={() => {
+                    let message = document.getElementById("message").value;
+                    sendText(message, messageID.telephone);
+                  }}
+                  >Send Message</Button>
                 </div>
-
+              </div>
             </div>
           </div>
-          </div>
-          </div>
+        </div>
       )}
 
       <div className="container">
@@ -645,12 +675,25 @@ function Table() {
           </div>
 
           <div className="table-header-cta">
+
+            {/* BUTTON TO SEND MESSAGE */}
+
+            <Button
+            onClick={ async () => {
+              await sendText('Yolla', '+250788478652');
+            }}
+            >
+              Send Text
+            </Button>
+
             {/* BUTTON TO EXPORT EXCEL */}
             <Button className="ml auto">
               <CSVLink
                 data={records}
-              filename ={"Ingabo Syndicate Database.csv"}
-              >Excel</CSVLink>
+                filename={"Ingabo Syndicate Database.csv"}
+              >
+                Excel
+              </CSVLink>
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
