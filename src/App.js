@@ -38,7 +38,7 @@ function App() {
           path="/input"
           element={
             <div className="input-container">
-              <IngaboCreateForm />
+              <Input />
             </div>
           }
         />
