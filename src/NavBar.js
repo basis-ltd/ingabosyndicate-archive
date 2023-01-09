@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import awsconfig from "./aws-exports";
 import { withAuthenticator } from "@aws-amplify/ui-react";
@@ -6,16 +6,16 @@ import "@aws-amplify/ui-react/styles.css";
 import "./Navbar.css";
 import { Button, PageButton } from "./Button";
 
-function NavBar({signOut, user}) {
+function NavBar({ signOut, user }) {
   return (
     <div className="nav-bar">
-      <a href="https://www.ingabosyndicate.org/" className="nav-logo">
-        <img src={require('./images/logo.png')} alt="logo" />
+      <a target="_blank" href="https://www.ingabosyndicate.org/" className="nav-logo">
+        <img src={require("./images/logo.png")} alt="logo" />
       </a>
       <ul className="nav-tabs">
         <a href="https://www.ingabosyndicate.org/" className="nav-btn">
-                  <li>
-                  <Link to="/">Dashboard</Link>
+          <li>
+            <Link to="/">Dashboard</Link>
           </li>
         </a>
         <a href="" className="nav-btn">
