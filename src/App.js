@@ -6,7 +6,7 @@ import { Amplify } from "aws-amplify/";
 import awsconfig from "./aws-exports";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Button } from "./Button";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import IngaboCreateForm from "./ui-components/IngaboCreateForm";
 import IngaboUpdateForm from "./ui-components/IngaboUpdateForm";
 import NavBar from "./NavBar";
@@ -17,6 +17,9 @@ import { Ingabo } from "./models";
 Amplify.configure(awsconfig);
 
 function App() {
+
+  let navigate = useNavigate();
+
   return (
     <>
       <NavBar />
@@ -47,7 +50,7 @@ function App() {
           element={
             <IngaboUpdateForm
               onSuccess={() => {
-                console.log("success");
+                navigate("/");
               }}
             />
           }

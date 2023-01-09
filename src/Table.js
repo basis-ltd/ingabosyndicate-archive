@@ -37,30 +37,35 @@ Amplify.configure(awsconfig);
 // SMS77 API
 
 let sendText = async (message, to) => {
-const encodedParams = new URLSearchParams();
-let receipient = '+250' + to.slice(-9);
-encodedParams.append("to", receipient);
-encodedParams.append("p", "SqvVNLOHAkZTwsQRgaWG0CDHtdLIkCuTzJyflINHcvqvAl4ZHHkR2RkRev82hjvA");
-encodedParams.append("text", message);
+  const encodedParams = new URLSearchParams();
+  let receipient = "+250" + to.slice(-9);
+  encodedParams.append("to", receipient);
+  encodedParams.append(
+    "p",
+    "SqvVNLOHAkZTwsQRgaWG0CDHtdLIkCuTzJyflINHcvqvAl4ZHHkR2RkRev82hjvA"
+  );
+  encodedParams.append("text", message);
 
-const options = {
-  method: 'POST',
-  url: 'https://sms77io.p.rapidapi.com/sms',
-  headers: {
-    'content-type': 'application/x-www-form-urlencoded',
-    'X-RapidAPI-Key': '4c2f584f62msh583c2650cad43bdp130dbfjsn6ce4e4c945a7',
-    'X-RapidAPI-Host': 'sms77io.p.rapidapi.com'
-  },
-  data: encodedParams
+  const options = {
+    method: "POST",
+    url: "https://sms77io.p.rapidapi.com/sms",
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+      "X-RapidAPI-Key": "4c2f584f62msh583c2650cad43bdp130dbfjsn6ce4e4c945a7",
+      "X-RapidAPI-Host": "sms77io.p.rapidapi.com",
+    },
+    data: encodedParams,
+  };
+
+  axios
+    .request(options)
+    .then(function (response) {
+      console.log(response.data, receipient);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
 };
-
-axios.request(options).then(function (response) {
-	console.log(response.data, receipient);
-}).catch(function (error) {
-	console.error(error);
-});
-}
-
 
 // This is a custom filter UI for selecting
 // a unique option from a list
@@ -138,7 +143,7 @@ function Table() {
 
     records.forEach(async (record, index) => {
       let original = await DataStore.query(Ingabo, record.id);
-
+      console.log(original);
       let updatedActivity1;
       let updatedActivity2;
       let updatedActivity3;
@@ -172,8 +177,6 @@ function Table() {
       record.activity8 == true
         ? (updatedActivity8 = "Yego")
         : (updatedActivity8 = "Oya");
-      
-      
 
       await DataStore.save(
         Ingabo.copyOf(original, (updated) => {
@@ -188,45 +191,43 @@ function Table() {
           updated.inka = updatedActivity8;
         })
       );
-    
-      if ((updatedActivity1 || updatedActivity2 || updatedActivity3 || updatedActivity4 || updatedActivity5) == "Yego") { 
+
+      if (
+        (updatedActivity1 ||
+          updatedActivity2 ||
+          updatedActivity3 ||
+          updatedActivity4 ||
+          updatedActivity5) == "Yego"
+      ) {
         await DataStore.save(
-          Ingabo.copyOf(original, (updated) => { 
+          Ingabo.copyOf(original, (updated) => {
             updated.arahinga = "Yego";
-          }
-          )
+          })
         );
-      }
-
-      else {
+      } else {
         await DataStore.save(
-          Ingabo.copyOf(original, (updated) => { 
+          Ingabo.copyOf(original, (updated) => {
             updated.arahinga = "Oya";
-          }
-          )
-        );
-      }
-  
-      if ((updatedActivity6 || updatedActivity7 || updatedActivity8) == "Yego") { 
-        await DataStore.save(
-          Ingabo.copyOf(original, (updated) => { 
-            updated.aroroye = "Yego";
-          }
-          )
+          })
         );
       }
 
-      else {
+      if (
+        (updatedActivity6 || updatedActivity7 || updatedActivity8) == "Yego"
+      ) {
         await DataStore.save(
-          Ingabo.copyOf(original, (updated) => { 
+          Ingabo.copyOf(original, (updated) => {
+            updated.aroroye = "Yego";
+          })
+        );
+      } else {
+        await DataStore.save(
+          Ingabo.copyOf(original, (updated) => {
             updated.aroroye = "Oya";
-          }
-          )
+          })
         );
       }
-    
     });
-    
 
     console.log(records);
     setRecords(records);
@@ -234,14 +235,12 @@ function Table() {
 
   useEffect(() => {
     pullData();
-
     // Data changes
+    // const resp = DataStore.observe(Ingabo).subscribe(() => {
+    //   pullData();
+    // });
 
-    const resp = DataStore.observe(Ingabo).subscribe(() => {
-      pullData();
-    });
-
-    return () => resp.unsubscribe();
+    // return () => resp.unsubscribe();
   }, []);
 
   const data = records;
@@ -353,16 +352,16 @@ function Table() {
     setModalDelete(!modalDelete);
   };
 
-    // MESSAGE POP-UP
+  // MESSAGE POP-UP
 
   const [modalMessage, setModalMessage] = useState(false);
   const [messageID, setMessageID] = useState("");
-  
+
   const toggleMessageModal = async (id) => {
     let nameModel = await DataStore.query(Ingabo, id);
     setMessageID(nameModel);
     setModalMessage(!modalMessage);
-  }
+  };
 
   const tableHooks = (hooks) => {
     hooks.visibleColumns.push((columns) => [
@@ -419,7 +418,7 @@ function Table() {
               </svg>
             </Button>
 
-              {/* MESSAGE BUTTON */}
+            {/* MESSAGE BUTTON */}
             <Button
               id="message-btn"
               className="relative inline-flex items-center px-2 py-1.5 border border-gray-100 rounded-full"
@@ -568,13 +567,21 @@ function Table() {
                   className="delete-confirmation"
                   onClick={async () => {
                     let modelDelete = await DataStore.query(Ingabo, deleteId);
+                    console.log(modelDelete.fullName);
                     await DataStore.delete(modelDelete);
                     toggleDeleteModal();
                   }}
                 >
                   Delete
                 </Button>
-                <Button onClick={toggleDeleteModal}>Cancel</Button>
+                <Button
+                  onClick={async () => {
+                    toggleDeleteModal();
+                    window.location.reload(false);
+                  }}
+                >
+                  Cancel
+                </Button>
               </div>
             </div>
           </div>
@@ -588,6 +595,10 @@ function Table() {
           <div className="overlay">
             <div className="modal-content">
               <IngaboUpdateForm
+              onSuccess={async () => {
+                toggleEditModal();
+                window.location.reload(false);
+              }}
                 id={editId}
                 onCancel={() => {
                   toggleEditModal();
@@ -640,12 +651,15 @@ function Table() {
                     Cancel
                   </Button>
 
-                  <Button className="message-btn-send"
-                  onClick={() => {
-                    let message = document.getElementById("message").value;
-                    sendText(message, messageID.telephone);
-                  }}
-                  >Send Message</Button>
+                  <Button
+                    className="message-btn-send"
+                    onClick={() => {
+                      let message = document.getElementById("message").value;
+                      sendText(message, messageID.telephone);
+                    }}
+                  >
+                    Send Message
+                  </Button>
                 </div>
               </div>
             </div>
@@ -675,13 +689,12 @@ function Table() {
           </div>
 
           <div className="table-header-cta">
-
             {/* BUTTON TO SEND MESSAGE */}
 
             <Button
-            onClick={ async () => {
-              await sendText('Yolla', '+250788478652');
-            }}
+              onClick={async () => {
+                await sendText("Yolla", "+250788478652");
+              }}
             >
               Send Text
             </Button>
