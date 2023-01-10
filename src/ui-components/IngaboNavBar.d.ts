@@ -6,8 +6,16 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { ViewProps } from "@aws-amplify/ui-react";
+import { ButtonProps, ViewProps } from "@aws-amplify/ui-react";
+export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
+export declare type IngaboNavBarOverridesProps = {
+    IngaboNavBar?: PrimitiveOverrideProps<ViewProps>;
+    Button35142888?: PrimitiveOverrideProps<ButtonProps>;
+    Button35142892?: PrimitiveOverrideProps<ButtonProps>;
+    Button35142901?: PrimitiveOverrideProps<ButtonProps>;
+    Button35142917?: PrimitiveOverrideProps<ButtonProps>;
+} & EscapeHatchProps;
 export declare type IngaboNavBarProps = React.PropsWithChildren<Partial<ViewProps> & {
-    overrides?: EscapeHatchProps | undefined | null;
+    overrides?: IngaboNavBarOverridesProps | undefined | null;
 }>;
 export default function IngaboNavBar(props: IngaboNavBarProps): React.ReactElement;

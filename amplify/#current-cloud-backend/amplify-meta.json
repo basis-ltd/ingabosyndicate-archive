@@ -14,62 +14,63 @@
   },
   "api": {
     "ingabofinal": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "output": {
         "authConfig": {
-          "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 30,
-              "description": "api key description"
-            }
-          },
           "additionalAuthenticationProviders": [
             {
               "authenticationType": "AWS_IAM"
             }
-          ]
+          ],
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 365,
+              "apiKeyExpirationDate": "2024-01-10T11:36:10.116Z",
+              "description": "ingabofinal-prod"
+            }
+          }
         },
         "GraphQLAPIIdOutput": "te2zbukrnbd4toozd6bloqg2py",
         "GraphQLAPIEndpointOutput": "https://i6qxyj33ebeudd7qfdcczr7gou.appsync-api.us-east-1.amazonaws.com/graphql",
         "GraphQLAPIKeyOutput": "da2-ezan3l2z75dmdk6zndjzialrja"
       },
-      "lastPushTimeStamp": "2022-12-25T16:30:40.344Z",
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync",
+      "lastPushTimeStamp": "2023-01-10T11:40:00.928Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiingabofinal"
       },
-      "lastPushDirHash": "c9nTd4KOOb7ib5LB9mID6CA4yD8="
+      "lastPushDirHash": "wKKxic6tcfwnMtecF67+u96Y8h8="
     }
   },
   "auth": {
     "ingabofinal9ebd1c16": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
       "customAuth": false,
+      "dependsOn": [],
       "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
-        "signupAttributes": [
-          "EMAIL"
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
           "passwordPolicyCharacters": []
         },
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
         ],
         "verificationMechanisms": [
           "EMAIL"
         ]
       },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
       "output": {
         "UserPoolId": "us-east-1_h0YyGRhNE",
         "AppClientIDWeb": "5v7q1rpbg3cvj5cijkglanq7eg",
@@ -79,12 +80,27 @@
         "IdentityPoolName": "ingabofinal9ebd1c16_identitypool_9ebd1c16__dev",
         "UserPoolName": "ingabofinal9ebd1c16_userpool_9ebd1c16"
       },
-      "lastPushTimeStamp": "2022-12-25T16:30:40.344Z",
+      "lastPushTimeStamp": "2023-01-10T11:39:59.539Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/auth/ingabofinal9ebd1c16-cloudformation-template.json",
         "logicalId": "authingabofinal9ebd1c16"
+      }
+    }
+  },
+  "storage": {
+    "s3ingabofinalstoragebbf78c19": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3",
+      "output": {
+        "BucketName": "ingabofinal-storage-bbf78c19204948-dev",
+        "Region": "us-east-1"
       },
-      "lastPushDirHash": "Bga8Vq6XzOZqZB1Y8bsLE+zBnWs="
+      "lastPushTimeStamp": "2023-01-10T11:39:59.541Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
+        "logicalId": "storages3ingabofinalstoragebbf78c19"
+      }
     }
   }
 }

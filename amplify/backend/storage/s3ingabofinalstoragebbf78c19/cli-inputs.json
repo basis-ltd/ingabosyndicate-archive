@@ -1,0 +1,11 @@
+{
+  "resourceName": "s3ingabofinalstoragebbf78c19",
+  "bucketName": "ingabofinal-storage-bbf78c19",
+  "policyUUID": "b439ac44",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ]
+}

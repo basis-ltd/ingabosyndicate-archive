@@ -4,5 +4,5 @@
   "DynamoDBEnableServerSideEncryption": false,
   "CreateApiKey": 1,
   "APIKeyExpirationEpoch": 31536000,
-  "AuthModeLastUpdated": "2022-12-15T22:57:27.445Z"
+  "AuthModeLastUpdated": "2023-01-10T11:36:14.971Z"
 }

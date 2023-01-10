@@ -6,9 +6,6 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { fetchByPath, validateField } from "./utils";
-import { Ingabo } from "../models";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import {
   Button,
   CheckboxField,
@@ -18,6 +15,9 @@ import {
   TextField,
   useTheme,
 } from "@aws-amplify/ui-react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import { Ingabo } from "../models";
+import { fetchByPath, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
 export default function IngaboCreateForm(props) {
   const {
@@ -33,15 +33,15 @@ export default function IngaboCreateForm(props) {
   } = props;
   const { tokens } = useTheme();
   const initialValues = {
-    fullName: undefined,
-    dateofbirth: undefined,
-    gender: undefined,
-    nationalID: undefined,
-    telephone: undefined,
-    cooperative: undefined,
-    cell: undefined,
-    sector: undefined,
-    district: undefined,
+    fullName: "",
+    dateofbirth: "",
+    gender: "",
+    nationalID: "",
+    telephone: "",
+    cooperative: "",
+    cell: "",
+    sector: "",
+    district: "",
     activity1: false,
     activity2: false,
     activity3: false,
@@ -112,7 +112,14 @@ export default function IngaboCreateForm(props) {
     activity7: [],
     activity8: [],
   };
-  const runValidationTasks = async (fieldName, value) => {
+  const runValidationTasks = async (
+    fieldName,
+    currentValue,
+    getDisplayValue
+  ) => {
+    const value = getDisplayValue
+      ? getDisplayValue(currentValue)
+      : currentValue;
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
@@ -171,6 +178,11 @@ export default function IngaboCreateForm(props) {
           modelFields = onSubmit(modelFields);
         }
         try {
+          Object.entries(modelFields).forEach(([key, value]) => {
+            if (typeof value === "string" && value.trim() === "") {
+              modelFields[key] = undefined;
+            }
+          });
           await DataStore.save(new Ingabo(modelFields));
           if (onSuccess) {
             onSuccess(modelFields);
@@ -184,8 +196,8 @@ export default function IngaboCreateForm(props) {
           }
         }
       }}
-      {...rest}
       {...getOverrideProps(overrides, "IngaboCreateForm")}
+      {...rest}
     >
       <Heading
         children="IDENTIFICATION"
@@ -201,6 +213,7 @@ export default function IngaboCreateForm(props) {
           label="Full Name"
           isRequired={false}
           isReadOnly={false}
+          value={fullName}
           onChange={(e) => {
             let { value } = e.target;
             if (onChange) {
@@ -241,6 +254,7 @@ export default function IngaboCreateForm(props) {
           isRequired={false}
           isReadOnly={false}
           type="date"
+          value={dateofbirth}
           onChange={(e) => {
             let { value } = e.target;
             if (onChange) {
@@ -281,6 +295,7 @@ export default function IngaboCreateForm(props) {
           isRequired={false}
           isReadOnly={false}
           placeholder="M/F"
+          value={gender}
           onChange={(e) => {
             let { value } = e.target;
             if (onChange) {
@@ -327,6 +342,7 @@ export default function IngaboCreateForm(props) {
           label="National ID"
           isRequired={false}
           isReadOnly={false}
+          value={nationalID}
           onChange={(e) => {
             let { value } = e.target;
             if (onChange) {
@@ -366,6 +382,7 @@ export default function IngaboCreateForm(props) {
           label="Telephone"
           isRequired={false}
           isReadOnly={false}
+          value={telephone}
           onChange={(e) => {
             let { value } = e.target;
             if (onChange) {
@@ -405,6 +422,7 @@ export default function IngaboCreateForm(props) {
           label="Cooperative"
           isRequired={false}
           isReadOnly={false}
+          value={cooperative}
           onChange={(e) => {
             let { value } = e.target;
             if (onChange) {
@@ -455,6 +473,7 @@ export default function IngaboCreateForm(props) {
           label="Cell"
           isRequired={false}
           isReadOnly={false}
+          value={cell}
           onChange={(e) => {
             let { value } = e.target;
             if (onChange) {
@@ -494,6 +513,7 @@ export default function IngaboCreateForm(props) {
           label="Sector"
           isRequired={false}
           isReadOnly={false}
+          value={sector}
           onChange={(e) => {
             let { value } = e.target;
             if (onChange) {
@@ -533,6 +553,7 @@ export default function IngaboCreateForm(props) {
           label="District"
           isRequired={false}
           isReadOnly={false}
+          value={district}
           onChange={(e) => {
             let { value } = e.target;
             if (onChange) {
@@ -918,7 +939,10 @@ export default function IngaboCreateForm(props) {
         <Button
           children="Clear"
           type="reset"
-          onClick={resetStateValues}
+          onClick={(event) => {
+            event.preventDefault();
+            resetStateValues();
+          }}
           {...getOverrideProps(overrides, "ClearButton")}
         ></Button>
         <Flex
@@ -934,7 +958,7 @@ export default function IngaboCreateForm(props) {
             {...getOverrideProps(overrides, "CancelButton")}
           ></Button>
           <Button
-            children="Submit"
+            children="Save"
             type="submit"
             variation="primary"
             isDisabled={Object.values(errors).some((e) => e?.hasError)}

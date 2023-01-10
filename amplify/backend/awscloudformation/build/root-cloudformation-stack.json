@@ -167,7 +167,7 @@
             "Ref": "UnauthRoleName"
           },
           "S3DeploymentBucket": "amplify-ingabofinal-dev-204948-deployment",
-          "S3DeploymentRootKey": "amplify-appsync-files/573f53e67fb3ff69417c01836ce1f7906c18c19b",
+          "S3DeploymentRootKey": "amplify-appsync-files/4f6f4c1eef8566294e7b801f2b7d3f04fa50f216",
           "env": "dev"
         }
       }
@@ -227,6 +227,39 @@
           "thirdPartyAuth": false,
           "authProviders": "",
           "hostedUI": false,
+          "env": "dev"
+        }
+      }
+    },
+    "storages3ingabofinalstoragebbf78c19": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
+        "Parameters": {
+          "bucketName": "ingabofinal-storage-bbf78c19",
+          "selectedGuestPermissions": "",
+          "selectedAuthenticatedPermissions": "s3:PutObject,s3:GetObject,s3:ListBucket",
+          "unauthRoleName": {
+            "Ref": "UnauthRoleName"
+          },
+          "authRoleName": {
+            "Ref": "AuthRoleName"
+          },
+          "s3PrivatePolicy": "Private_policy_b439ac44",
+          "s3ProtectedPolicy": "Protected_policy_b439ac44",
+          "s3PublicPolicy": "Public_policy_b439ac44",
+          "s3ReadPolicy": "read_policy_b439ac44",
+          "s3UploadsPolicy": "Uploads_policy_b439ac44",
+          "authPolicyName": "s3_amplify_b439ac44",
+          "unauthPolicyName": "s3_amplify_b439ac44",
+          "AuthenticatedAllowList": "ALLOW",
+          "GuestAllowList": "DISALLOW",
+          "s3PermissionsAuthenticatedPrivate": "s3:PutObject,s3:GetObject",
+          "s3PermissionsAuthenticatedProtected": "s3:PutObject,s3:GetObject",
+          "s3PermissionsAuthenticatedPublic": "s3:PutObject,s3:GetObject",
+          "s3PermissionsAuthenticatedUploads": "s3:PutObject",
+          "s3PermissionsGuestPublic": "DISALLOW",
+          "s3PermissionsGuestUploads": "DISALLOW",
           "env": "dev"
         }
       }

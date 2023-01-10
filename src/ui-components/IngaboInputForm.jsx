@@ -29,8 +29,8 @@ export default function IngaboInputForm(props) {
       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
       padding="0px 0px 0px 0px"
       backgroundColor="rgba(255,255,255,1)"
-      {...rest}
       {...getOverrideProps(overrides, "IngaboInputForm")}
+      {...rest}
     >
       <TextField
         label="Full Name"

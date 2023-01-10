@@ -60,14 +60,10 @@ function Input() {
   // USER NAME
   const [name, setName] = useState("");
 
-  const toggleModal = async (to, username) => {
+  const toggleInputModal = async (to, username) => {
     setTelephone(to);
     setName(username);
     setSucess(!sucess);
-  };
-
-  let getModal = async () => {
-
   };
 
   return (
@@ -85,7 +81,7 @@ function Input() {
                   <Button
                     onClick={() => {
                       console.log(telephone, name);
-                      sendNotificationMessage(telephone, name);
+                      // sendNotificationMessage(telephone, name);
                     }}
                     className="notify-user"
                   >
@@ -114,7 +110,7 @@ function Input() {
                 <div className="close-btn">
                   <Button
                     className="insert-confirmation-continue"
-                    onClick={toggleModal}
+                    onClick={toggleInputModal}
                   >
                     Close
                   </Button>
@@ -131,21 +127,23 @@ function Input() {
           <link rel="canonical" href="http://mysite.com/example" />
         </Helmet>
         <IngaboCreateForm
-
-          onSuccess={async (fields) => {
+          onSuccess={(fields) => {
             let number = fields.telephone;
             let fullName = fields.fullName;
             let imyumbati = fields.activity1;
 
-            console.log("Data saved successfully", Ingabo);
-            toggleModal(number, fullName);
+            console.log("Data saved successfully", fields.activity1);
+            toggleInputModal(number, fullName);
           }}
-          onSubmit={async (fields) => {
-            console.log(fields.activity1);
+          onSubmit={(fields) => {
+            console.log(fields);
           }}
           onCancel={() => {
             console.log("Data save cancelled");
             navigate("/");
+          }}
+          onError={(error) => {
+            console.log("Data save failed", error);
           }}
         />
       </div>
