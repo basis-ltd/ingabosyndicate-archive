@@ -20,6 +20,9 @@
       },
       "api": {
         "ingabofinal": {}
+      },
+      "analytics": {
+        "ingabofinal": {}
       }
     }
   }

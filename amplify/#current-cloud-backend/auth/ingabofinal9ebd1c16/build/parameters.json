@@ -1,6 +1,6 @@
 {
   "identityPoolName": "ingabofinal9ebd1c16_identitypool_9ebd1c16",
-  "allowUnauthenticatedIdentities": false,
+  "allowUnauthenticatedIdentities": true,
   "resourceNameTruncated": "ingabo9ebd1c16",
   "userPoolName": "ingabofinal9ebd1c16_userpool_9ebd1c16",
   "autoVerifiedAttributes": [

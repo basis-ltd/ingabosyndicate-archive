@@ -139,11 +139,9 @@ function Table() {
   let [records, setRecords] = useState([]);
 
   const pullData = async () => {
-    let records = await DataStore.query(Ingabo);
+    records = await DataStore.query(Ingabo);
 
     records.forEach(async (record, index) => {
-      let original = await DataStore.query(Ingabo, record.id);
-      console.log(original);
       let updatedActivity1;
       let updatedActivity2;
       let updatedActivity3;
@@ -179,7 +177,7 @@ function Table() {
         : (updatedActivity8 = "Oya");
 
       await DataStore.save(
-        Ingabo.copyOf(original, (updated) => {
+        Ingabo.copyOf(record, (updated) => {
           updated.no = index + 1;
           updated.imyumbati = updatedActivity1;
           updated.umuceri = updatedActivity2;
@@ -200,13 +198,13 @@ function Table() {
           updatedActivity5) == "Yego"
       ) {
         await DataStore.save(
-          Ingabo.copyOf(original, (updated) => {
+          Ingabo.copyOf(record, (updated) => {
             updated.arahinga = "Yego";
           })
         );
       } else {
         await DataStore.save(
-          Ingabo.copyOf(original, (updated) => {
+          Ingabo.copyOf(record, (updated) => {
             updated.arahinga = "Oya";
           })
         );
@@ -216,31 +214,28 @@ function Table() {
         (updatedActivity6 || updatedActivity7 || updatedActivity8) == "Yego"
       ) {
         await DataStore.save(
-          Ingabo.copyOf(original, (updated) => {
+          Ingabo.copyOf(record, (updated) => {
             updated.aroroye = "Yego";
           })
         );
       } else {
         await DataStore.save(
-          Ingabo.copyOf(original, (updated) => {
+          Ingabo.copyOf(record, (updated) => {
             updated.aroroye = "Oya";
           })
         );
       }
     });
 
-    console.log(records);
     setRecords(records);
+    console.log(records);
   };
 
   useEffect(() => {
-    pullData();
-    // Data changes
-    // const resp = DataStore.observe(Ingabo).subscribe(() => {
-    //   pullData();
-    // });
-
-    // return () => resp.unsubscribe();
+    const resp = DataStore.observe(Ingabo).subscribe(() => {
+      pullData();
+    });
+    return () => resp.unsubscribe();
   }, []);
 
   const data = records;
@@ -570,6 +565,7 @@ function Table() {
                     console.log(modelDelete.fullName);
                     await DataStore.delete(modelDelete);
                     toggleDeleteModal();
+                    window.location.reload(false);
                   }}
                 >
                   Delete
@@ -577,7 +573,7 @@ function Table() {
                 <Button
                   onClick={async () => {
                     toggleDeleteModal();
-                    window.location.reload(false);
+                    // window.location.reload(false);
                   }}
                 >
                   Cancel
@@ -625,7 +621,7 @@ function Table() {
                       placeholder="Full Name"
                       id="fullname"
                       required
-                      value={messageID.fullName}
+                      value='${messageID.fullName}'
                     />
                   </div>
 

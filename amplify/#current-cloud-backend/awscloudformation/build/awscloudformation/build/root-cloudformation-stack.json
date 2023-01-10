@@ -178,7 +178,7 @@
         "TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/auth/ingabofinal9ebd1c16-cloudformation-template.json",
         "Parameters": {
           "identityPoolName": "ingabofinal9ebd1c16_identitypool_9ebd1c16",
-          "allowUnauthenticatedIdentities": false,
+          "allowUnauthenticatedIdentities": true,
           "resourceNameTruncated": "ingabo9ebd1c16",
           "userPoolName": "ingabofinal9ebd1c16_userpool_9ebd1c16",
           "autoVerifiedAttributes": "email",
@@ -260,6 +260,34 @@
           "s3PermissionsAuthenticatedUploads": "s3:PutObject",
           "s3PermissionsGuestPublic": "DISALLOW",
           "s3PermissionsGuestUploads": "DISALLOW",
+          "env": "dev"
+        }
+      }
+    },
+    "analyticsingabofinal": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/analytics/pinpoint-cloudformation-template.json",
+        "Parameters": {
+          "appName": "ingabofinal",
+          "roleName": "pinpointLambdaRole9c298278",
+          "cloudformationPolicyName": "cloudformationPolicy9c298278",
+          "cloudWatchPolicyName": "cloudWatchPolicy9c298278",
+          "pinpointPolicyName": "pinpointPolicy9c298278",
+          "authPolicyName": "pinpoint_amplify_9c298278",
+          "unauthPolicyName": "pinpoint_amplify_9c298278",
+          "authRoleName": {
+            "Ref": "AuthRoleName"
+          },
+          "unauthRoleName": {
+            "Ref": "UnauthRoleName"
+          },
+          "authRoleArn": {
+            "Fn::GetAtt": [
+              "AuthRole",
+              "Arn"
+            ]
+          },
           "env": "dev"
         }
       }

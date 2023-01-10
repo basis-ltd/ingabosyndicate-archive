@@ -31,7 +31,9 @@ const awsmobile = {
         "EMAIL"
     ],
     "aws_user_files_s3_bucket": "ingabofinal-storage-bbf78c19204948-dev",
-    "aws_user_files_s3_bucket_region": "us-east-1"
+    "aws_user_files_s3_bucket_region": "us-east-1",
+    "aws_mobile_analytics_app_id": "7b04110798ae4050a85e4412f1ec207c",
+    "aws_mobile_analytics_app_region": "us-east-1"
 };
 
 
