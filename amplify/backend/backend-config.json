@@ -1,4 +1,10 @@
 {
+  "analytics": {
+    "ingabofinal": {
+      "providerPlugin": "awscloudformation",
+      "service": "Pinpoint"
+    }
+  },
   "api": {
     "ingabofinal": {
       "dependsOn": [],

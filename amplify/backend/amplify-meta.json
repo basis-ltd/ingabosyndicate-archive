@@ -37,7 +37,7 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync",
-      "lastPushTimeStamp": "2023-01-10T11:40:00.928Z",
+      "lastPushTimeStamp": "2023-01-10T18:44:33.099Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiingabofinal"
@@ -80,11 +80,12 @@
         "IdentityPoolName": "ingabofinal9ebd1c16_identitypool_9ebd1c16__dev",
         "UserPoolName": "ingabofinal9ebd1c16_userpool_9ebd1c16"
       },
-      "lastPushTimeStamp": "2023-01-10T11:39:59.539Z",
+      "lastPushTimeStamp": "2023-01-10T18:44:33.488Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/auth/ingabofinal9ebd1c16-cloudformation-template.json",
         "logicalId": "authingabofinal9ebd1c16"
-      }
+      },
+      "lastPushDirHash": "/jYWU/e8hdyDQk5Rxom6KMYs1EM="
     }
   },
   "storage": {
@@ -96,11 +97,28 @@
         "BucketName": "ingabofinal-storage-bbf78c19204948-dev",
         "Region": "us-east-1"
       },
-      "lastPushTimeStamp": "2023-01-10T11:39:59.541Z",
+      "lastPushTimeStamp": "2023-01-10T18:44:33.104Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
         "logicalId": "storages3ingabofinalstoragebbf78c19"
       }
+    }
+  },
+  "analytics": {
+    "ingabofinal": {
+      "service": "Pinpoint",
+      "providerPlugin": "awscloudformation",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/analytics/pinpoint-cloudformation-template.json",
+        "logicalId": "analyticsingabofinal"
+      },
+      "lastPushTimeStamp": "2023-01-10T18:44:37.095Z",
+      "output": {
+        "appName": "ingabofinal-dev",
+        "Region": "us-east-1",
+        "Id": "7b04110798ae4050a85e4412f1ec207c"
+      },
+      "lastPushDirHash": "1arSP/2ZS7/Qw3hIm2LW03iZ1Z8="
     }
   }
 }

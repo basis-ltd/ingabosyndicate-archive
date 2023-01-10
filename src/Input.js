@@ -11,8 +11,6 @@ import { Ingabo } from "./models";
 import Sms77Client from "sms77-client";
 import axios from "axios";
 
-let inputName = "";
-let inputReceipient = "";
 
 let sendNotificationMessage = async (to, username) => {
   const encodedParams = new URLSearchParams();
@@ -127,23 +125,15 @@ function Input() {
           <link rel="canonical" href="http://mysite.com/example" />
         </Helmet>
         <IngaboCreateForm
-          onSuccess={(fields) => {
-            let number = fields.telephone;
-            let fullName = fields.fullName;
-            let imyumbati = fields.activity1;
-
-            console.log("Data saved successfully", fields.activity1);
-            toggleInputModal(number, fullName);
-          }}
-          onSubmit={(fields) => {
-            console.log(fields);
+          onSuccess={() => {
+            toggleInputModal();
           }}
           onCancel={() => {
             console.log("Data save cancelled");
             navigate("/");
           }}
           onError={(error) => {
-            console.log("Data save failed", error);
+           console.log(error);
           }}
         />
       </div>
