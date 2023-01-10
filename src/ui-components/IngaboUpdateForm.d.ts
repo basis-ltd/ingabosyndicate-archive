@@ -5,9 +5,9 @@
  **************************************************************************/
 
 import * as React from "react";
-import { Ingabo } from "../models";
-import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { CheckboxFieldProps, GridProps, HeadingProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
+import { Ingabo } from "../models";
 export declare type ValidationResponse = {
     hasError: boolean;
     errorMessage?: string;
@@ -51,33 +51,33 @@ export declare type IngaboUpdateFormValidationValues = {
     activity7?: ValidationFunction<boolean>;
     activity8?: ValidationFunction<boolean>;
 };
-export declare type FormProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
+export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type IngaboUpdateFormOverridesProps = {
-    IngaboUpdateFormGrid?: FormProps<GridProps>;
-    SectionalElement0?: FormProps<HeadingProps>;
-    RowGrid1?: FormProps<GridProps>;
-    fullName?: FormProps<TextFieldProps>;
-    dateofbirth?: FormProps<TextFieldProps>;
-    gender?: FormProps<TextFieldProps>;
-    RowGrid2?: FormProps<GridProps>;
-    telephone?: FormProps<TextFieldProps>;
-    nationalID?: FormProps<TextFieldProps>;
-    cooperative?: FormProps<TextFieldProps>;
-    SectionalElement1?: FormProps<HeadingProps>;
-    RowGrid4?: FormProps<GridProps>;
-    cell?: FormProps<TextFieldProps>;
-    sector?: FormProps<TextFieldProps>;
-    district?: FormProps<TextFieldProps>;
-    RowGrid5?: FormProps<GridProps>;
-    activity1?: FormProps<CheckboxFieldProps>;
-    activity2?: FormProps<CheckboxFieldProps>;
-    activity3?: FormProps<CheckboxFieldProps>;
-    activity4?: FormProps<CheckboxFieldProps>;
-    RowGrid6?: FormProps<GridProps>;
-    activity5?: FormProps<CheckboxFieldProps>;
-    activity6?: FormProps<CheckboxFieldProps>;
-    activity7?: FormProps<CheckboxFieldProps>;
-    activity8?: FormProps<CheckboxFieldProps>;
+    IngaboUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
+    SectionalElement0?: PrimitiveOverrideProps<HeadingProps>;
+    RowGrid1?: PrimitiveOverrideProps<GridProps>;
+    fullName?: PrimitiveOverrideProps<TextFieldProps>;
+    dateofbirth?: PrimitiveOverrideProps<TextFieldProps>;
+    gender?: PrimitiveOverrideProps<TextFieldProps>;
+    RowGrid2?: PrimitiveOverrideProps<GridProps>;
+    telephone?: PrimitiveOverrideProps<TextFieldProps>;
+    nationalID?: PrimitiveOverrideProps<TextFieldProps>;
+    cooperative?: PrimitiveOverrideProps<TextFieldProps>;
+    SectionalElement1?: PrimitiveOverrideProps<HeadingProps>;
+    RowGrid4?: PrimitiveOverrideProps<GridProps>;
+    cell?: PrimitiveOverrideProps<TextFieldProps>;
+    sector?: PrimitiveOverrideProps<TextFieldProps>;
+    district?: PrimitiveOverrideProps<TextFieldProps>;
+    RowGrid5?: PrimitiveOverrideProps<GridProps>;
+    activity1?: PrimitiveOverrideProps<CheckboxFieldProps>;
+    activity2?: PrimitiveOverrideProps<CheckboxFieldProps>;
+    activity3?: PrimitiveOverrideProps<CheckboxFieldProps>;
+    activity4?: PrimitiveOverrideProps<CheckboxFieldProps>;
+    RowGrid6?: PrimitiveOverrideProps<GridProps>;
+    activity5?: PrimitiveOverrideProps<CheckboxFieldProps>;
+    activity6?: PrimitiveOverrideProps<CheckboxFieldProps>;
+    activity7?: PrimitiveOverrideProps<CheckboxFieldProps>;
+    activity8?: PrimitiveOverrideProps<CheckboxFieldProps>;
 } & EscapeHatchProps;
 export declare type IngaboUpdateFormProps = React.PropsWithChildren<{
     overrides?: IngaboUpdateFormOverridesProps | undefined | null;

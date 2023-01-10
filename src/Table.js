@@ -689,15 +689,6 @@ function Table() {
           </div>
 
           <div className="table-header-cta">
-            {/* BUTTON TO SEND MESSAGE */}
-
-            <Button
-              onClick={async () => {
-                await sendText("Yolla", "+250788478652");
-              }}
-            >
-              Send Text
-            </Button>
 
             {/* BUTTON TO EXPORT EXCEL */}
             <Button className="ml auto">

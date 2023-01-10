@@ -13,9 +13,10 @@
     },
     "categories": {
       "auth": {
-        "ingabofinal": {},
-        "userPoolGroups": {},
         "ingabofinal9ebd1c16": {}
+      },
+      "storage": {
+        "s3ingabofinalstoragebbf78c19": {}
       },
       "api": {
         "ingabofinal": {}
