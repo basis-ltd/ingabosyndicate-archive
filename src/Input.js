@@ -102,7 +102,7 @@ function Input() {
                     Notify {name} via SMS
                   </Button>
                   <Button className="insert-confirmation-reset">
-                    <Link to="/">Return to Dashboard</Link>
+                    <Link to="/home">Return to Dashboard</Link>
                   </Button>
                 </div>
                 <div className="close-btn">
