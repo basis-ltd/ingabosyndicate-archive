@@ -31,6 +31,7 @@ import "./Update.css";
 import { Link } from "react-router-dom";
 import "./Update.css";
 import Sms77Client from "sms77-client";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 
 Amplify.configure(awsconfig);
 
@@ -228,12 +229,12 @@ function Table() {
     });
 
     setRecords(records);
-    console.log(records);
   };
 
   useEffect(() => {
     const resp = DataStore.observe(Ingabo).subscribe(() => {
       pullData();
+      console.log(records);
     });
     return () => resp.unsubscribe();
   }, []);
@@ -565,7 +566,7 @@ function Table() {
                     console.log(modelDelete.fullName);
                     await DataStore.delete(modelDelete);
                     toggleDeleteModal();
-                    window.location.reload(false);
+                    // window.location.reload(false);
                   }}
                 >
                   Delete
@@ -883,4 +884,4 @@ function Table() {
   );
 }
 
-export default Table;
+export default withAuthenticator(Table);
