@@ -32,6 +32,10 @@ import { Link } from "react-router-dom";
 import "./Update.css";
 import Sms77Client from "sms77-client";
 import { withAuthenticator } from "@aws-amplify/ui-react";
+import NavBar from "./NavBar";
+import CsvDownloader from 'react-csv-downloader';
+import * as ExcelJS from 'exceljs';
+import * as FileSaver from 'file-saver';
 
 Amplify.configure(awsconfig);
 
@@ -226,6 +230,10 @@ function Table() {
           })
         );
       }
+
+      await DataStore.save(Ingabo.copyOf(record, (updated) => {
+        updated.signature = record.fullName;
+      }))
     });
 
     setRecords(records);
@@ -257,7 +265,7 @@ function Table() {
       },
       {
         Header: "Igitsina",
-        accessor: "igitsina",
+        accessor: "gender",
       },
       {
         Header: "Indangamuntu",
@@ -321,11 +329,76 @@ function Table() {
       },
       {
         Header: "Signature",
-        accessor: "",
+        accessor: "signature",
       },
     ],
     []
   );
+
+  const headers = [
+    {key: "no", header: "No", width: 40},
+    {key: "fullName", header: "Amazina Yombi", width: 40},
+    {key: "dateofbirth", header: "Igihe Yavukiye", width: 40},
+    {key: "gender", header: "Igitsina", width: 40},
+    {key: "nationalID", header: "Indangamuntu", width: 40},
+    {key: "telephone", header: "Telephone", width: 40},
+    {key: "cooperative", header: "Cooperative", width: 40},
+    {key: "district", header: "Aho Atuye", width: 40},
+    {key: "aroroye", header: "Aroroye", width: 40},
+    {key: "arahinga", header: "Arahinga", width: 40},
+    {key: "imyumbati", header: "Imyumbati", width: 40},
+    {key: "umuceri", header: "Umuceri", width: 40},
+    {key: "ibigori", header: "Ibigori", width: 40},
+    {key: "ibinyamisogwe", header: "Ibinyamisogwe", width: 40},
+    {key: "imboga_imbuto", header: "Imboga n' Imbuto", width: 40},
+    {key: "inkoko", header: "Inkoko", width: 40},
+    {key: "ingurube", header: "Ingurube", width: 40},
+    {key: "inka", header: "Inka", width: 40},
+    {key: "signature", header: "Signature", width: 40},
+  ]
+
+  let exportExcel = (data) => {
+
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet("Ingabo Online Database");
+    worksheet.addRows(data);
+
+    worksheet.headers = [
+      {key: "no", header: "No", width: 40},
+      {key: "fullName", header: "Amazina Yombi", width: 40},
+      {key: "dateofbirth", header: "Igihe Yavukiye", width: 40},
+      {key: "gender", header: "Igitsina", width: 40},
+      {key: "nationalID", header: "Indangamuntu", width: 40},
+      {key: "telephone", header: "Telephone", width: 40},
+      {key: "cooperative", header: "Cooperative", width: 40},
+      {key: "district", header: "Aho Atuye", width: 40},
+      {key: "aroroye", header: "Aroroye", width: 40},
+      {key: "arahinga", header: "Arahinga", width: 40},
+      {key: "imyumbati", header: "Imyumbati", width: 40},
+      {key: "umuceri", header: "Umuceri", width: 40},
+      {key: "ibigori", header: "Ibigori", width: 40},
+      {key: "ibinyamisogwe", header: "Ibinyamisogwe", width: 40},
+      {key: "imboga_imbuto", header: "Imboga n' Imbuto", width: 40},
+      {key: "inkoko", header: "Inkoko", width: 40},
+      {key: "ingurube", header: "Ingurube", width: 40},
+      {key: "inka", header: "Inka", width: 40},
+      {key: "signature", header: "Signature", width: 40}
+    ]
+
+
+    headers.forEach((column) => {
+    worksheet.getColumn(column.key).width = column.width;
+    console.log(column);
+    });
+
+    const fileType =
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+    const fileExtension = ".xlsx";
+    const fileName = "Ingabo Syndicate Database";
+    const file = new Blob([workbook.xlsx.writeBuffer()], { type: fileType });
+
+    FileSaver.saveAs(file, `${fileName}${fileExtension}`);
+  };
 
   // EDIT MODAL
 
@@ -334,7 +407,7 @@ function Table() {
 
   const toggleEditModal = async (id) => {
     let modelEdit = await DataStore.query(Ingabo, id);
-    setEditId(modelEdit);
+    setEditId(id);
     setModalEdit(!modalEdit);
   };
 
@@ -506,6 +579,7 @@ function Table() {
         element.inkoko,
         element.ingurube,
         element.inka,
+        element.signature
       ]);
     });
 
@@ -688,14 +762,18 @@ function Table() {
           <div className="table-header-cta">
 
             {/* BUTTON TO EXPORT EXCEL */}
-            <Button className="ml auto">
-              <CSVLink
-                data={records}
-                filename={"Ingabo Syndicate Database.csv"}
-              >
+              {/* <CsvDownloader
+                datas={records}
+                columns={headers}
+                filename="Ingabo Syndicate Database.csv"
+              > */}
+                <Button 
+                onClick={() => {
+                  exportExcel(data,);
+                }}
+                className="ml auto">
                 Excel
-              </CSVLink>
-              <span>
+                <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -711,7 +789,8 @@ function Table() {
                   />
                 </svg>
               </span>
-            </Button>
+                </Button>
+              {/* </CsvDownloader> */}
 
             {/* BUTTON TO PRINT PDF */}
             <Button onClick={exportPDF}>

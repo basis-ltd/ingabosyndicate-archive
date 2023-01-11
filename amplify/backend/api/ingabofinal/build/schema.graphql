@@ -29,6 +29,7 @@ type Ingabo @aws_iam @aws_api_key {
   inkoko: String
   ingurube: String
   inka: String
+  signature: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   _version: Int!
@@ -222,6 +223,7 @@ input ModelIngaboFilterInput {
   inkoko: ModelStringInput
   ingurube: ModelStringInput
   inka: ModelStringInput
+  signature: ModelStringInput
   and: [ModelIngaboFilterInput]
   or: [ModelIngaboFilterInput]
   not: ModelIngaboFilterInput
@@ -262,6 +264,7 @@ input ModelIngaboConditionInput {
   inkoko: ModelStringInput
   ingurube: ModelStringInput
   inka: ModelStringInput
+  signature: ModelStringInput
   and: [ModelIngaboConditionInput]
   or: [ModelIngaboConditionInput]
   not: ModelIngaboConditionInput
@@ -297,6 +300,7 @@ input CreateIngaboInput {
   inkoko: String
   ingurube: String
   inka: String
+  signature: String
   _version: Int
 }
 
@@ -330,6 +334,7 @@ input UpdateIngaboInput {
   inkoko: String
   ingurube: String
   inka: String
+  signature: String
   _version: Int
 }
 
@@ -374,6 +379,7 @@ input ModelSubscriptionIngaboFilterInput {
   inkoko: ModelSubscriptionStringInput
   ingurube: ModelSubscriptionStringInput
   inka: ModelSubscriptionStringInput
+  signature: ModelSubscriptionStringInput
   and: [ModelSubscriptionIngaboFilterInput]
   or: [ModelSubscriptionIngaboFilterInput]
 }

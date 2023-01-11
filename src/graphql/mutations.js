@@ -36,6 +36,7 @@ export const createIngabo = /* GraphQL */ `
       inkoko
       ingurube
       inka
+      signature
       createdAt
       updatedAt
       _version
@@ -79,6 +80,7 @@ export const updateIngabo = /* GraphQL */ `
       inkoko
       ingurube
       inka
+      signature
       createdAt
       updatedAt
       _version
@@ -122,6 +124,7 @@ export const deleteIngabo = /* GraphQL */ `
       inkoko
       ingurube
       inka
+      signature
       createdAt
       updatedAt
       _version
