@@ -13,6 +13,7 @@ import NavBar from "./NavBar";
 import { Helmet } from "react-helmet";
 import Input from "./Input.js";
 import { Ingabo } from "./models";
+import LandingPage from './Landing-Page'
 
 Amplify.configure(awsconfig);
 
@@ -26,7 +27,7 @@ function App() {
 
       <Routes>
         <Route
-          path="/"
+          path="/home"
           element={
             <div className="min-h-screen bg-gray-100 text-gray-900">
               <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
@@ -45,6 +46,10 @@ function App() {
             </div>
           }
         />
+        <Route path="/" element={
+          <LandingPage />
+        } />
+
         <Route
           path="/update"
           element={
