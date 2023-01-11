@@ -15,7 +15,7 @@ function NavBar({ signOut, user }) {
       <ul className="nav-tabs">
         <a href="https://www.ingabosyndicate.org/" className="nav-btn">
           <li>
-            <Link to="/">Dashboard</Link>
+            <Link to="/home">Dashboard</Link>
           </li>
         </a>
         <a href="" className="nav-btn">
