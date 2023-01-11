@@ -206,6 +206,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "signature": {
+                    "name": "signature",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -252,5 +259,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.4",
-    "version": "d8a3fa7461a33f7a0e04d4bee6691699"
+    "version": "c5e3b4a5eed2ba8bda3f6684b1fb49c2"
 };

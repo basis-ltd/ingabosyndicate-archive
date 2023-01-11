@@ -36,6 +36,7 @@ type EagerIngabo = {
   readonly inkoko?: string | null;
   readonly ingurube?: string | null;
   readonly inka?: string | null;
+  readonly signature?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -70,6 +71,7 @@ type LazyIngabo = {
   readonly inkoko?: string | null;
   readonly ingurube?: string | null;
   readonly inka?: string | null;
+  readonly signature?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

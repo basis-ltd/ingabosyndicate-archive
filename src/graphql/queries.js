@@ -33,6 +33,7 @@ export const getIngabo = /* GraphQL */ `
       inkoko
       ingurube
       inka
+      signature
       createdAt
       updatedAt
       _version
@@ -78,6 +79,7 @@ export const listIngabos = /* GraphQL */ `
         inkoko
         ingurube
         inka
+        signature
         createdAt
         updatedAt
         _version
@@ -132,6 +134,7 @@ export const syncIngabos = /* GraphQL */ `
         inkoko
         ingurube
         inka
+        signature
         createdAt
         updatedAt
         _version

@@ -28,5 +28,6 @@ type Ingabo @model @auth(rules: [{allow: public}]) {
   inkoko: String
   ingurube: String
   inka: String
+  signature: String
 }
  

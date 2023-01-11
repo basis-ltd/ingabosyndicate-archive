@@ -28,11 +28,11 @@ function NavBar({ signOut, user }) {
         </a>
       </ul>
 
-      <div className="logout-btn-container">
+      {/* <div className="logout-btn-container">
         <Button onClick={signOut}>Logout</Button>
-      </div>
+      </div> */}
     </div>
   );
 }
 
-export default withAuthenticator(NavBar);
+export default NavBar;
