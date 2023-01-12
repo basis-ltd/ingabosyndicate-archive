@@ -41,35 +41,20 @@ Amplify.configure(awsconfig);
 
 // SMS77 API
 
-let sendText = async (message, to) => {
-  const encodedParams = new URLSearchParams();
-  let receipient = "+250" + to.slice(-9);
-  encodedParams.append("to", receipient);
-  encodedParams.append(
-    "p",
-    "SqvVNLOHAkZTwsQRgaWG0CDHtdLIkCuTzJyflINHcvqvAl4ZHHkR2RkRev82hjvA"
-  );
-  encodedParams.append("text", message);
+let sendMessage = (to, message) => {
 
-  const options = {
-    method: "POST",
-    url: "https://sms77io.p.rapidapi.com/sms",
-    headers: {
-      "content-type": "application/x-www-form-urlencoded",
-      "X-RapidAPI-Key": "4c2f584f62msh583c2650cad43bdp130dbfjsn6ce4e4c945a7",
-      "X-RapidAPI-Host": "sms77io.p.rapidapi.com",
-    },
-    data: encodedParams,
-  };
+  let receipient = '+250' + to.slice(-9);
+  axios.post("http://localhost:3001/send-message", {
+    receipient, message
+  })
 
-  axios
-    .request(options)
-    .then(function (response) {
-      console.log(response.data, receipient);
-    })
-    .catch(function (error) {
-      console.error(error);
-    });
+  .then(res => {
+    console.log(res.data.status);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
 };
 
 // This is a custom filter UI for selecting
@@ -358,44 +343,37 @@ function Table() {
   ]
 
   let exportExcel = (data) => {
-
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet("Ingabo Online Database");
     worksheet.addRows(data);
 
-    worksheet.headers = [
-      {key: "no", header: "No", width: 40},
-      {key: "fullName", header: "Amazina Yombi", width: 40},
-      {key: "dateofbirth", header: "Igihe Yavukiye", width: 40},
-      {key: "gender", header: "Igitsina", width: 40},
-      {key: "nationalID", header: "Indangamuntu", width: 40},
-      {key: "telephone", header: "Telephone", width: 40},
-      {key: "cooperative", header: "Cooperative", width: 40},
-      {key: "district", header: "Aho Atuye", width: 40},
-      {key: "aroroye", header: "Aroroye", width: 40},
-      {key: "arahinga", header: "Arahinga", width: 40},
-      {key: "imyumbati", header: "Imyumbati", width: 40},
-      {key: "umuceri", header: "Umuceri", width: 40},
-      {key: "ibigori", header: "Ibigori", width: 40},
-      {key: "ibinyamisogwe", header: "Ibinyamisogwe", width: 40},
-      {key: "imboga_imbuto", header: "Imboga n' Imbuto", width: 40},
-      {key: "inkoko", header: "Inkoko", width: 40},
-      {key: "ingurube", header: "Ingurube", width: 40},
-      {key: "inka", header: "Inka", width: 40},
-      {key: "signature", header: "Signature", width: 40}
-    ]
-
-
-    headers.forEach((column) => {
-    worksheet.getColumn(column.key).width = column.width;
-    console.log(column);
-    });
+    worksheet.columns = [
+      { key: "A", header: "No", width: 40 },
+      { key: "fullName", header: "Amazina Yombi", width: 40 },
+      { key: "dateofbirth", header: "Igihe Yavukiye", width: 40 },
+      { key: "gender", header: "Igitsina", width: 40 },
+      { key: "nationalID", header: "Indangamuntu", width: 40 },
+      { key: "telephone", header: "Telephone", width: 40 },
+      { key: "cooperative", header: "Cooperative", width: 40 },
+      { key: "district", header: "Aho Atuye", width: 40 },
+      { key: "aroroye", header: "Aroroye", width: 40 },
+      { key: "arahinga", header: "Arahinga", width: 40 },
+      { key: "imyumbati", header: "Imyumbati", width: 40 },
+      { key: "umuceri", header: "Umuceri", width: 40 },
+      { key: "ibigori", header: "Ibigori", width: 40 },
+      { key: "ibinyamisogwe", header: "Ibinyamisogwe", width: 40 },
+      { key: "imboga_imbuto", header: "Imboga n' Imbuto", width: 40 },
+      { key: "inkoko", header: "Inkoko", width: 40 },
+      { key: "ingurube", header: "Ingurube", width: 40 },
+      { key: "inka", header: "Inka", width: 40 },
+      { key: "signature", header: "Signature", width: 40 },
+    ];
 
     const fileType =
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-    const fileExtension = ".xlsx";
-    const fileName = "Ingabo Syndicate Database";
-    const file = new Blob([workbook.xlsx.writeBuffer()], { type: fileType });
+      "application/csv";
+    const fileExtension = ".csv";
+    const fileName = "Ingabo Syndicate Database"
+    const file = new Blob([workbook.csv.writeBuffer()], { type: fileType });
 
     FileSaver.saveAs(file, `${fileName}${fileExtension}`);
   };
@@ -726,7 +704,7 @@ function Table() {
                     className="message-btn-send"
                     onClick={() => {
                       let message = document.getElementById("message").value;
-                      sendText(message, messageID.telephone);
+                      sendMessage(messageID.telephone, message);
                     }}
                   >
                     Send Message
@@ -793,8 +771,10 @@ function Table() {
               {/* </CsvDownloader> */}
 
             {/* BUTTON TO PRINT PDF */}
-            <Button onClick={exportPDF}>
-              Print PDF{" "}
+            <Button onClick={() => {
+              sendMessage('+250788478652', 'Hello')
+            }}>
+              Print PDF
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

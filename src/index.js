@@ -7,9 +7,7 @@ import { Amplify } from 'aws-amplify'
 import config from './aws-exports'
 import { ThemeProvider, Button, Card, createTheme } from "@aws-amplify/ui-react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-
 import awsconfig from './aws-exports';
-
 import "@aws-amplify/ui-react/styles.css";
 import { studioTheme } from "./ui-components";
 
