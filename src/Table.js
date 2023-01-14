@@ -774,9 +774,7 @@ function Table() {
               {/* </CsvDownloader> */}
 
             {/* BUTTON TO PRINT PDF */}
-            <Button onClick={() => {
-              sendMessage('+250788478652', 'Hello')
-            }}>
+            <Button onClick={exportPDF}>
               Print PDF
               <span>
                 <svg
