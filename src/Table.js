@@ -33,30 +33,32 @@ import "./Update.css";
 import Sms77Client from "sms77-client";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import NavBar from "./NavBar";
-import CsvDownloader from 'react-csv-downloader';
-import * as ExcelJS from 'exceljs';
-import * as FileSaver from 'file-saver';
+import CsvDownloader from "react-csv-downloader";
+import * as ExcelJS from "exceljs";
+import * as FileSaver from "file-saver";
 
 Amplify.configure(awsconfig);
 
-// SMS77 API
+// TWILIO SMS
 
 let sendMessage = (to, message) => {
+  const recipient = "+250" + to.slice(-9);
+  axios
+    .post(
+      "http://localhost:5000/messages",
+      {
+        recipient,
+        message,
+      },
+      { headers: { "Content-Type": "application/json" } }
+    )
 
-  const recipient = '+250' + to.slice(-9);
-  axios.post("http://localhost:5000/messages", {
-    recipient, message
-  },
-  {headers: {'Content-Type': 'application/json'}}
-  )
-
-  .then(res => {
-    console.log(res.data.status);
-  })
-  .catch(err => {
-    console.log(err);
-  });
-
+    .then((res) => {
+      console.log(res.data.status);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 // This is a custom filter UI for selecting
@@ -128,113 +130,46 @@ function GlobalFilter({
 }
 
 function Table() {
+
+  // FETCH INGABO MODEL FROM DATASTORE
+
   let [records, setRecords] = useState([]);
 
   const pullData = async () => {
-    records = await DataStore.query(Ingabo);
+      let prevRecords = await DataStore.query(Ingabo);
+      
+      records = prevRecords.map((record, index) => {
+        const updatedRecord = {...record,
+          no: index + 1,
+          imyumbati: record.activity1 ? "Yego" : "Oya",
+          umuceri: record.activity2 ? "Yego" : "Oya",
+          ibigori: record.activity3 ? "Yego" : "Oya",
+          ibinyamisogwe: record.activity4 ? "Yego" : "Oya",
+          imboga_imbuto: record.activity5 ? "Yego" : "Oya",
+          inkoko: record.activity6 ? "Yego" : "Oya",
+          ingurube: record.activity7 ? "Yego" : "Oya",
+          inka: record.activity8 ? "Yego" : "Oya",
+          arahinga: (record.activity1 || record.activity2 || record.activity3 || record.activity4 || record.activity5) ? "Yego" : "Oya",
+          aroroye: (record.activity6 || record.activity7 || record.activity8) ? "Yego" : "Oya",
+          signature: record.fullName
+        };
+        return updatedRecord
+      })
 
-    records.forEach(async (record, index) => {
-      let updatedActivity1;
-      let updatedActivity2;
-      let updatedActivity3;
-      let updatedActivity4;
-      let updatedActivity5;
-      let updatedActivity6;
-      let updatedActivity7;
-      let updatedActivity8;
-
-      record.activity1 == true
-        ? (updatedActivity1 = "Yego")
-        : (updatedActivity1 = "Oya");
-      record.activity2 == true
-        ? (updatedActivity2 = "Yego")
-        : (updatedActivity2 = "Oya");
-      record.activity3 == true
-        ? (updatedActivity3 = "Yego")
-        : (updatedActivity3 = "Oya");
-      record.activity4 == true
-        ? (updatedActivity4 = "Yego")
-        : (updatedActivity4 = "Oya");
-      record.activity5 == true
-        ? (updatedActivity5 = "Yego")
-        : (updatedActivity5 = "Oya");
-      record.activity6 == true
-        ? (updatedActivity6 = "Yego")
-        : (updatedActivity6 = "Oya");
-      record.activity7 == true
-        ? (updatedActivity7 = "Yego")
-        : (updatedActivity7 = "Oya");
-      record.activity8 == true
-        ? (updatedActivity8 = "Yego")
-        : (updatedActivity8 = "Oya");
-
-      await DataStore.save(
-        Ingabo.copyOf(record, (updated) => {
-          updated.no = index + 1;
-          updated.imyumbati = updatedActivity1;
-          updated.umuceri = updatedActivity2;
-          updated.ibigori = updatedActivity3;
-          updated.ibinyamisogwe = updatedActivity4;
-          updated.imboga_imbuto = updatedActivity5;
-          updated.inkoko = updatedActivity6;
-          updated.ingurube = updatedActivity7;
-          updated.inka = updatedActivity8;
-        })
-      );
-
-      if (
-        (updatedActivity1 ||
-          updatedActivity2 ||
-          updatedActivity3 ||
-          updatedActivity4 ||
-          updatedActivity5) == "Yego"
-      ) {
-        await DataStore.save(
-          Ingabo.copyOf(record, (updated) => {
-            updated.arahinga = "Yego";
-          })
-        );
-      } else {
-        await DataStore.save(
-          Ingabo.copyOf(record, (updated) => {
-            updated.arahinga = "Oya";
-          })
-        );
-      }
-
-      if (
-        (updatedActivity6 || updatedActivity7 || updatedActivity8) == "Yego"
-      ) {
-        await DataStore.save(
-          Ingabo.copyOf(record, (updated) => {
-            updated.aroroye = "Yego";
-          })
-        );
-      } else {
-        await DataStore.save(
-          Ingabo.copyOf(record, (updated) => {
-            updated.aroroye = "Oya";
-          })
-        );
-      }
-
-      await DataStore.save(Ingabo.copyOf(record, (updated) => {
-        updated.signature = record.fullName;
-      }))
-    });
-
-    setRecords(records);
-  };
-
-  useEffect(() => {
-    const resp = DataStore.observe(Ingabo).subscribe(() => {
-      pullData();
       console.log(records);
-    });
-    return () => resp.unsubscribe();
+      setRecords(records);
+  };
+  
+  useEffect(() => {
+      pullData();
+      const resp = DataStore.observe(Ingabo).subscribe(() => {
+      pullData();
+      });
+      return () => resp.unsubscribe();
   }, []);
 
-  const data = records;
+
+  let data = records;
 
   const columns = React.useMemo(
     () => [
@@ -316,33 +251,33 @@ function Table() {
       },
       {
         Header: "Signature",
-        accessor: "signature",
+        accessor: "",
       },
     ],
     []
   );
 
   const headers = [
-    {key: "no", header: "No", width: 40},
-    {key: "fullName", header: "Amazina Yombi", width: 40},
-    {key: "dateofbirth", header: "Igihe Yavukiye", width: 40},
-    {key: "gender", header: "Igitsina", width: 40},
-    {key: "nationalID", header: "Indangamuntu", width: 40},
-    {key: "telephone", header: "Telephone", width: 40},
-    {key: "cooperative", header: "Cooperative", width: 40},
-    {key: "district", header: "Aho Atuye", width: 40},
-    {key: "aroroye", header: "Aroroye", width: 40},
-    {key: "arahinga", header: "Arahinga", width: 40},
-    {key: "imyumbati", header: "Imyumbati", width: 40},
-    {key: "umuceri", header: "Umuceri", width: 40},
-    {key: "ibigori", header: "Ibigori", width: 40},
-    {key: "ibinyamisogwe", header: "Ibinyamisogwe", width: 40},
-    {key: "imboga_imbuto", header: "Imboga n' Imbuto", width: 40},
-    {key: "inkoko", header: "Inkoko", width: 40},
-    {key: "ingurube", header: "Ingurube", width: 40},
-    {key: "inka", header: "Inka", width: 40},
-    {key: "signature", header: "Signature", width: 40},
-  ]
+    { key: "no", header: "No", width: 40 },
+    { key: "fullName", header: "Amazina Yombi", width: 40 },
+    { key: "dateofbirth", header: "Igihe Yavukiye", width: 40 },
+    { key: "gender", header: "Igitsina", width: 40 },
+    { key: "nationalID", header: "Indangamuntu", width: 40 },
+    { key: "telephone", header: "Telephone", width: 40 },
+    { key: "cooperative", header: "Cooperative", width: 40 },
+    { key: "district", header: "Aho Atuye", width: 40 },
+    { key: "aroroye", header: "Aroroye", width: 40 },
+    { key: "arahinga", header: "Arahinga", width: 40 },
+    { key: "imyumbati", header: "Imyumbati", width: 40 },
+    { key: "umuceri", header: "Umuceri", width: 40 },
+    { key: "ibigori", header: "Ibigori", width: 40 },
+    { key: "ibinyamisogwe", header: "Ibinyamisogwe", width: 40 },
+    { key: "imboga_imbuto", header: "Imboga n' Imbuto", width: 40 },
+    { key: "inkoko", header: "Inkoko", width: 40 },
+    { key: "ingurube", header: "Ingurube", width: 40 },
+    { key: "inka", header: "Inka", width: 40 },
+    { key: "signature", header: "Signature", width: 40 },
+  ];
 
   let exportExcel = (data) => {
     const workbook = new ExcelJS.Workbook();
@@ -371,10 +306,9 @@ function Table() {
       { key: "signature", header: "Signature", width: 40 },
     ];
 
-    const fileType =
-      "application/csv";
+    const fileType = "application/csv";
     const fileExtension = ".csv";
-    const fileName = "Ingabo Syndicate Database"
+    const fileName = "Ingabo Syndicate Database";
     const file = new Blob([workbook.csv.writeBuffer()], { type: fileType });
 
     FileSaver.saveAs(file, `${fileName}${fileExtension}`);
@@ -559,7 +493,7 @@ function Table() {
         element.inkoko,
         element.ingurube,
         element.inka,
-        element.signature
+        element.signature,
       ]);
     });
 
@@ -620,7 +554,6 @@ function Table() {
                     console.log(modelDelete.fullName);
                     await DataStore.delete(modelDelete);
                     toggleDeleteModal();
-                    // window.location.reload(false);
                   }}
                 >
                   Delete
@@ -628,7 +561,6 @@ function Table() {
                 <Button
                   onClick={async () => {
                     toggleDeleteModal();
-                    // window.location.reload(false);
                   }}
                 >
                   Cancel
@@ -646,10 +578,9 @@ function Table() {
           <div className="overlay">
             <div className="modal-content">
               <IngaboUpdateForm
-              onSuccess={async () => {
-                toggleEditModal();
-                window.location.reload(false);
-              }}
+                onSuccess={async () => {
+                  toggleEditModal();
+                }}
                 id={editId}
                 onCancel={() => {
                   toggleEditModal();
@@ -706,7 +637,7 @@ function Table() {
                     className="message-btn-send"
                     onClick={() => {
                       let message = document.getElementById("message").value;
-                      console.log(messageID.telephone)
+                      console.log(messageID.telephone);
                       sendMessage(messageID.telephone, message);
                     }}
                   >
@@ -741,20 +672,20 @@ function Table() {
           </div>
 
           <div className="table-header-cta">
-
             {/* BUTTON TO EXPORT EXCEL */}
-              {/* <CsvDownloader
+            {/* <CsvDownloader
                 datas={records}
                 columns={headers}
                 filename="Ingabo Syndicate Database.csv"
               > */}
-                <Button 
-                onClick={() => {
-                  exportExcel(data,);
-                }}
-                className="ml auto">
-                Excel
-                <span>
+            <Button
+              onClick={() => {
+                exportExcel(data);
+              }}
+              className="ml auto"
+            >
+              Excel
+              <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -770,8 +701,8 @@ function Table() {
                   />
                 </svg>
               </span>
-                </Button>
-              {/* </CsvDownloader> */}
+            </Button>
+            {/* </CsvDownloader> */}
 
             {/* BUTTON TO PRINT PDF */}
             <Button onClick={exportPDF}>
