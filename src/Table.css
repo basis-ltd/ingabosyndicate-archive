@@ -145,6 +145,7 @@ body.active-modal {
     padding: 10px 10px;
     border-radius: 3px;
     min-height: 50vh;
+    margin: 0 auto;
 }
 
 form {
@@ -152,6 +153,11 @@ form {
     flex-direction: column;
     gap: 15px;
     justify-content: flex-start;
+}
+
+.address-name {
+    margin: 0 auto;
+    border: none;
 }
 
 form textarea {
