@@ -41,7 +41,7 @@ Amplify.configure(awsconfig);
 
 // TWILIO SMS
 
-let sendMessage = (to, message) => {
+export function sendMessage(to, message){
   const recipient = "+250" + to.slice(-9);
   axios
     .post(

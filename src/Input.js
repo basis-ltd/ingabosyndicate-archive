@@ -10,41 +10,7 @@ import { Redirect, Link, useNavigate } from "react-router-dom";
 import { Ingabo } from "./models";
 import Sms77Client from "sms77-client";
 import axios from "axios";
-
-
-let sendNotificationMessage = async (to, username) => {
-  const encodedParams = new URLSearchParams();
-  let receipient = "+250" + to.slice(-9);
-  encodedParams.append("to", receipient);
-  encodedParams.append(
-    "p",
-    "SqvVNLOHAkZTwsQRgaWG0CDHtdLIkCuTzJyflINHcvqvAl4ZHHkR2RkRev82hjvA"
-  );
-  encodedParams.append(
-    "text",
-    `Hello ${username}, your registration in Ingabo Syndicate Database was successful!`
-  );
-
-  const options = {
-    method: "POST",
-    url: "https://sms77io.p.rapidapi.com/sms",
-    headers: {
-      "content-type": "application/x-www-form-urlencoded",
-      "X-RapidAPI-Key": "4c2f584f62msh583c2650cad43bdp130dbfjsn6ce4e4c945a7",
-      "X-RapidAPI-Host": "sms77io.p.rapidapi.com",
-    },
-    data: encodedParams,
-  };
-
-  axios
-    .request(options)
-    .then(function (response) {
-      console.log(response.data, receipient);
-    })
-    .catch(function (error) {
-      console.error(error);
-    });
-};
+import { sendMessage } from './Table'
 
 Amplify.configure(awsconfig);
 
@@ -61,6 +27,7 @@ function Input() {
   const toggleInputModal = async (to, username) => {
     setTelephone(to);
     setName(username);
+    console.log(to, username)
     setSucess(!sucess);
   };
 
@@ -78,8 +45,9 @@ function Input() {
                 <div className="modal-success-cta">
                   <Button
                     onClick={() => {
-                      console.log(telephone, name);
-                      // sendNotificationMessage(telephone, name);
+                      let message = `Dear ${name}, you have been registered successfully in Ingabo Syndicate Database`
+                      sendMessage(telephone, message)
+                      console.log(telephone, message)
                     }}
                     className="notify-user"
                   >
@@ -118,6 +86,7 @@ function Input() {
           </div>
         </div>
       )}
+
       <div className="input-container">
         <Helmet>
           <meta charSet="utf-8" />
@@ -125,8 +94,8 @@ function Input() {
           <link rel="canonical" href="http://mysite.com/example" />
         </Helmet>
         <IngaboCreateForm
-          onSuccess={() => {
-            toggleInputModal();
+          onSuccess={(fields) => {
+            toggleInputModal(fields.telephone, fields.fullName);
           }}
           onCancel={() => {
             console.log("Data save cancelled");
