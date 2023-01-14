@@ -43,10 +43,12 @@ Amplify.configure(awsconfig);
 
 let sendMessage = (to, message) => {
 
-  let receipient = '+250' + to.slice(-9);
-  axios.post("http://localhost:3001/send-message", {
-    receipient, message
-  })
+  const recipient = '+250' + to.slice(-9);
+  axios.post("http://localhost:5000/messages", {
+    recipient, message
+  },
+  {headers: {'Content-Type': 'application/json'}}
+  )
 
   .then(res => {
     console.log(res.data.status);
@@ -674,7 +676,7 @@ function Table() {
                       placeholder="Full Name"
                       id="fullname"
                       required
-                      value='${messageID.fullName}'
+                      value={messageID.fullName}
                     />
                   </div>
 
@@ -704,6 +706,7 @@ function Table() {
                     className="message-btn-send"
                     onClick={() => {
                       let message = document.getElementById("message").value;
+                      console.log(messageID.telephone)
                       sendMessage(messageID.telephone, message);
                     }}
                   >
