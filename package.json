@@ -62,7 +62,6 @@
     "react-app-polyfill": "^3.0.0",
     "react-csv": "^2.2.2",
     "react-csv-downloader": "^2.9.0",
-    "react-data-export": "^0.6.0",
     "react-dev-utils": "^12.0.1",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",

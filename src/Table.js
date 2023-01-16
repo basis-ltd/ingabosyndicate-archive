@@ -19,7 +19,6 @@ import {
 } from "react-table";
 import { Amplify } from "aws-amplify";
 import awsconfig from "./aws-exports";
-import { CSVLink } from "react-csv";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { DataStore } from "@aws-amplify/datastore";
@@ -28,25 +27,15 @@ import "./Table.css";
 import { Helmet } from "react-helmet";
 import IngaboUpdateForm from "./ui-components/IngaboUpdateForm";
 import "./Update.css";
-import { Link } from "react-router-dom";
 import "./Update.css";
-import Sms77Client from "sms77-client";
 import { withAuthenticator } from "@aws-amplify/ui-react";
-import NavBar from "./NavBar";
-import CsvDownloader from "react-csv-downloader";
-import * as ExcelJS from "exceljs";
-import * as FileSaver from "file-saver";
-import ReactExport from 'react-data-export';
+import CsvDownloader from 'react-csv-downloader';
+import * as XLSX from 'xlsx';
 
 Amplify.configure(awsconfig);
 
-// EXCEL EXPORT
-const ExcelFile = ReactExport.ExcelFile;
-const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
-
 
 // TWILIO SMS
-
 export function sendMessage(to, message){
   const recipient = "+250" + to.slice(-9);
   axios
@@ -137,31 +126,6 @@ function GlobalFilter({
 
 function Table() {
 
-  // EXCEL EXPORT
-  const dataSet = [
-
-    {
-      columns: [
-        { title: "No", width: { wpx: 50 } },
-        { title: "Amazina Yombi", width: {wpx: 100} },
-        { title: "Igihe Yavukiye", width: {wpx: 100} },
-        { title: "Igitsina", width: {wpx: 100} },
-        { title: "Indangamuntu", width: {wpx: 100} },
-        { title: "Telephone", width: {wpx: 100} },
-        { title: "Koperative", width: {wpx: 100} },
-        { title: "Aho Atuye", width: {wpx: 100} },
-        { title: "Aroroye", width: {wpx: 100} },
-        { title: "Arahinga", width: {wpx: 100} },
-        { title: "Imyumbati", width: {wpx: 100} },
-        { title: "Umuceri", width: {wpx: 100} },
-        { title: "Ibigori", width: {wpx: 100} },
-        { title: "Amazina Yombi", width: {wpx: 100} },
-        { title: "Amazina Yombi", width: {wpx: 100} },
-      ]
-    }
-
-  ]
-
   // FETCH INGABO MODEL FROM DATASTORE
 
   let [records, setRecords] = useState([]);
@@ -207,143 +171,151 @@ function Table() {
       {
         Header: "No",
         accessor: "no",
+        width: 7
       },
       {
         Header: "Amazina Yombi",
         accessor: "fullName",
+        width: 30
       },
       {
         Header: "Igihe Yavukiye",
         accessor: "dateofbirth",
+        width: 30
       },
       {
         Header: "Igitsina",
         accessor: "gender",
+        width: 20
       },
       {
         Header: "Indangamuntu",
         accessor: "nationalID",
+        width: 30
       },
       {
         Header: "Telephone",
         accessor: "telephone",
+        width: 30
       },
       {
         Header: "Cooperative",
         accessor: "cooperative",
+        width: 30
       },
       {
         Header: "Aho Atuye",
         accessor: "district",
+        width: 30
       },
       {
         Header: "Aroroye",
         accessor: "aroroye",
         Filter: SelectColumnFilter,
         filter: "includes",
+        width: 20
       },
       {
         Header: "Arahinga",
         accessor: "arahinga",
         Filter: SelectColumnFilter,
         filter: "includes",
+        width: 20
       },
       {
         Header: "Imyumbati",
         accessor: "imyumbati",
+        width: 20
       },
       {
         Header: "Umuceri",
         accessor: "umuceri",
+        width: 20
       },
       {
         Header: "Ibigori",
         accessor: "ibigori",
+        width: 20
       },
       {
         Header: "Ibinyamisogwe",
         accessor: "ibinyamisogwe",
+        width: 20
       },
       {
         Header: "Imboga n' Imbuto",
         accessor: "imboga_imbuto",
+        width: 20
       },
       {
         Header: "Inkoko",
         accessor: "inkoko",
+        width: 20
       },
       {
         Header: "Ingurube",
         accessor: "ingurube",
+        width: 20
       },
       {
         Header: "Inka",
         accessor: "inka",
+        width: 20
       },
       {
         Header: "Signature",
         accessor: "",
+        width: 20,
       },
     ],
     []
   );
 
-  const headers = [
-    { key: "no", header: "No", width: 40 },
-    { key: "fullName", header: "Amazina Yombi", width: 40 },
-    { key: "dateofbirth", header: "Igihe Yavukiye", width: 40 },
-    { key: "gender", header: "Igitsina", width: 40 },
-    { key: "nationalID", header: "Indangamuntu", width: 40 },
-    { key: "telephone", header: "Telephone", width: 40 },
-    { key: "cooperative", header: "Cooperative", width: 40 },
-    { key: "district", header: "Aho Atuye", width: 40 },
-    { key: "aroroye", header: "Aroroye", width: 40 },
-    { key: "arahinga", header: "Arahinga", width: 40 },
-    { key: "imyumbati", header: "Imyumbati", width: 40 },
-    { key: "umuceri", header: "Umuceri", width: 40 },
-    { key: "ibigori", header: "Ibigori", width: 40 },
-    { key: "ibinyamisogwe", header: "Ibinyamisogwe", width: 40 },
-    { key: "imboga_imbuto", header: "Imboga n' Imbuto", width: 40 },
-    { key: "inkoko", header: "Inkoko", width: 40 },
-    { key: "ingurube", header: "Ingurube", width: 40 },
-    { key: "inka", header: "Inka", width: 40 },
-    { key: "signature", header: "Signature", width: 40 },
-  ];
 
-  let exportExcel = (data) => {
-    const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet("Ingabo Online Database");
-    worksheet.addRows(data);
+  let exportExcel = () => {
 
-    worksheet.columns = [
-      { key: "A", header: "No", width: 40 },
-      { key: "fullName", header: "Amazina Yombi", width: 40 },
-      { key: "dateofbirth", header: "Igihe Yavukiye", width: 40 },
-      { key: "gender", header: "Igitsina", width: 40 },
-      { key: "nationalID", header: "Indangamuntu", width: 40 },
-      { key: "telephone", header: "Telephone", width: 40 },
-      { key: "cooperative", header: "Cooperative", width: 40 },
-      { key: "district", header: "Aho Atuye", width: 40 },
-      { key: "aroroye", header: "Aroroye", width: 40 },
-      { key: "arahinga", header: "Arahinga", width: 40 },
-      { key: "imyumbati", header: "Imyumbati", width: 40 },
-      { key: "umuceri", header: "Umuceri", width: 40 },
-      { key: "ibigori", header: "Ibigori", width: 40 },
-      { key: "ibinyamisogwe", header: "Ibinyamisogwe", width: 40 },
-      { key: "imboga_imbuto", header: "Imboga n' Imbuto", width: 40 },
-      { key: "inkoko", header: "Inkoko", width: 40 },
-      { key: "ingurube", header: "Ingurube", width: 40 },
-      { key: "inka", header: "Inka", width: 40 },
-      { key: "signature", header: "Signature", width: 40 },
-    ];
+    const ws = XLSX.utils.json_to_sheet(data);
+    const wb = XLSX.utils.book_new();
+    ws['!cols'] = [];
 
-    const fileType = "application/csv";
-    const fileExtension = ".csv";
-    const fileName = "Ingabo Syndicate Database";
-    const file = new Blob([workbook.csv.writeBuffer()], { type: fileType });
+    let headers = columns.map((column, index) => {
+      return {
+        ...column,
+        idx: index
+      }
+    })
 
-    FileSaver.saveAs(file, `${fileName}${fileExtension}`);
-  };
+    headers.forEach((column) => {
+      ws['!cols'][column.idx] = {width: column.width};
+      console.log(column.idx)
+    })
+
+    XLSX.utils.book_append_sheet(wb, ws, 'Page 1');
+    XLSX.writeFile(wb, 'Ingabo Syndicate Database.xlsx');
+  }
+
+  // let headers = [
+  //   { displayName: "No", id: "no" },
+  //   { displayName: "Amazina Yombi", id: "fullName" },
+  //   { displayName: "Igihe Yavukiye", id: "dateofbirth" },
+  //   { displayName: "Igitsina", id: "gender" },
+  //   { displayName: "Indangamuntu", id: "nationalID" },
+  //   { displayName: "Telephone", id: "telephone" },
+  //   { displayName: "Cooperative", id: "cooperative" },
+  //   { displayName: "Aho Atuye", id: "district" },
+  //   { displayName: "Aroroye", id: "aroroye" },
+  //   { displayName: "Arahinga", id: "arahinga" },
+  //   { displayName: "Imyumbati", id: "imyumbati" },
+  //   { displayName: "Umuceri", id: "umuceri" },
+  //   { displayName: "Ibigori", id: "ibigori" },
+  //   { displayName: "Ibinyamisogwe", id: "ibinyamisogwe" },
+  //   { displayName: "Imboga n' Imbuto", id: "imboga_imbuto" },
+  //   { displayName: "Inkoko", id: "inkoko" },
+  //   { displayName: "Ingurube", id: "ingurube" },
+  //   { displayName: "Inka", id: "inka" },
+
+  // ];
+
 
   // EDIT MODAL
 
@@ -705,15 +677,13 @@ function Table() {
           <div className="table-header-cta">
             {/* BUTTON TO EXPORT EXCEL */}
             {/* <CsvDownloader
-                datas={records}
-                columns={headers}
+                datas={data}
+                columns={columns}
                 filename="Ingabo Syndicate Database.csv"
               > */}
             <Button
-              onClick={() => {
-                exportExcel(data);
-              }}
               className="ml auto"
+              onClick={exportExcel}
             >
               Excel
               <span>
