@@ -274,10 +274,6 @@ function Table() {
 
   let exportExcel = () => {
 
-    const ws = XLSX.utils.json_to_sheet(data);
-    const wb = XLSX.utils.book_new();
-    ws['!cols'] = [];
-
     let headers = columns.map((column, index) => {
       return {
         ...column,
@@ -285,7 +281,42 @@ function Table() {
       }
     })
 
-    headers.forEach((column) => {
+    const columnsToInclude = [
+      "no",
+      "fullName",
+      "dateofbirth",
+      "gender",
+      "nationalID",
+      "telephone",
+      "cooperative",
+      "district",
+      "aroroye",
+      "arahinga",
+      "imyumbati",
+      "umuceri",
+      "ibigori",
+      "ibinyamisogwe",
+      "imboga_imbuto",
+      "inkoko",
+      "ingurube",
+      "inka",
+    ];
+
+    const filteredColumns = headers.filter(col => columnsToInclude.includes(col.accessor));
+    const filteredData = data.map(row => {
+      const filteredRow = {};
+      filteredColumns.forEach(col => {
+        filteredRow[col.accessor] = row[col.accessor];
+      });
+      return filteredRow;
+    })
+
+    const ws = XLSX.utils.json_to_sheet(filteredData);
+    const wb = XLSX.utils.book_new();
+
+    ws['!cols'] = [];
+
+    filteredColumns.forEach((column) => {
       ws['!cols'][column.idx] = {width: column.width};
       console.log(column.idx)
     })
