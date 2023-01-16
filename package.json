@@ -62,6 +62,7 @@
     "react-app-polyfill": "^3.0.0",
     "react-csv": "^2.2.2",
     "react-csv-downloader": "^2.9.0",
+    "react-data-export": "^0.6.0",
     "react-dev-utils": "^12.0.1",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
@@ -87,7 +88,8 @@
     "webpack": "^5.64.4",
     "webpack-dev-server": "^4.6.0",
     "webpack-manifest-plugin": "^4.0.2",
-    "workbox-webpack-plugin": "^6.4.1"
+    "workbox-webpack-plugin": "^6.4.1",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-scripts start",

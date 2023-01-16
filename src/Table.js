@@ -36,8 +36,14 @@ import NavBar from "./NavBar";
 import CsvDownloader from "react-csv-downloader";
 import * as ExcelJS from "exceljs";
 import * as FileSaver from "file-saver";
+import ReactExport from 'react-data-export';
 
 Amplify.configure(awsconfig);
+
+// EXCEL EXPORT
+const ExcelFile = ReactExport.ExcelFile;
+const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
+
 
 // TWILIO SMS
 
@@ -131,6 +137,31 @@ function GlobalFilter({
 
 function Table() {
 
+  // EXCEL EXPORT
+  const dataSet = [
+
+    {
+      columns: [
+        { title: "No", width: { wpx: 50 } },
+        { title: "Amazina Yombi", width: {wpx: 100} },
+        { title: "Igihe Yavukiye", width: {wpx: 100} },
+        { title: "Igitsina", width: {wpx: 100} },
+        { title: "Indangamuntu", width: {wpx: 100} },
+        { title: "Telephone", width: {wpx: 100} },
+        { title: "Koperative", width: {wpx: 100} },
+        { title: "Aho Atuye", width: {wpx: 100} },
+        { title: "Aroroye", width: {wpx: 100} },
+        { title: "Arahinga", width: {wpx: 100} },
+        { title: "Imyumbati", width: {wpx: 100} },
+        { title: "Umuceri", width: {wpx: 100} },
+        { title: "Ibigori", width: {wpx: 100} },
+        { title: "Amazina Yombi", width: {wpx: 100} },
+        { title: "Amazina Yombi", width: {wpx: 100} },
+      ]
+    }
+
+  ]
+
   // FETCH INGABO MODEL FROM DATASTORE
 
   let [records, setRecords] = useState([]);
@@ -151,7 +182,7 @@ function Table() {
           inka: record.activity8 ? "Yego" : "Oya",
           arahinga: (record.activity1 || record.activity2 || record.activity3 || record.activity4 || record.activity5) ? "Yego" : "Oya",
           aroroye: (record.activity6 || record.activity7 || record.activity8) ? "Yego" : "Oya",
-          signature: record.fullName
+          signature: ""
         };
         return updatedRecord
       })
@@ -427,18 +458,18 @@ function Table() {
           </div>
         ),
       },
-      {
-        id: "checkbox",
-        Header: "",
-        Cell: ({ row }) => (
-          <input
-            id="default-checkbox"
-            type="checkbox"
-            value=""
-            class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          />
-        ),
-      },
+      // {
+      //   id: "checkbox",
+      //   Header: "",
+      //   Cell: ({ row }) => (
+      //     <input
+      //       id="default-checkbox"
+      //       type="checkbox"
+      //       value=""
+      //       class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+      //     />
+      //   ),
+      // },
       ...columns,
     ]);
   };
