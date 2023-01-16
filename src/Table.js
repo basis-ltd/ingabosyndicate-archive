@@ -277,9 +277,9 @@ function Table() {
     let headers = columns.map((column, index) => {
       return {
         ...column,
-        idx: index
-      }
-    })
+        idx: index,
+      };
+    });
 
     const columnsToInclude = [
       "no",
@@ -302,30 +302,40 @@ function Table() {
       "inka",
     ];
 
-    const filteredColumns = headers.filter(col => columnsToInclude.includes(col.accessor));
-    const filteredData = data.map(row => {
+    const filteredData = data.map((row) => {
       const filteredRow = {};
-      filteredColumns.forEach(col => {
-        filteredRow[col.accessor] = row[col.accessor];
+      columnsToInclude.forEach((column) => {
+        filteredRow[column] = row[column];
       });
       return filteredRow;
-    })
+    });
 
-    const ws = XLSX.utils.json_to_sheet(filteredData);
+    //FILTERING COLUMNS TO APPEAR IN EXCEL EXPORT
+    const filteredColumns = columnsToInclude.map(
+      (col) => headers.find((h) => h.accessor === col).Header
+    );
+
     const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(filteredData);
 
     ws['!cols'] = [];
 
-    filteredColumns.forEach((column) => {
-      ws['!cols'][column.idx] = {width: column.width};
-      console.log(column.idx)
-    })
+    headers.forEach((column) => {
+      ws["!cols"][column.idx] = { width: column.width };
+      console.log(column.width);
+    });
 
-    XLSX.utils.book_append_sheet(wb, ws, 'Page 1');
-    XLSX.writeFile(wb, 'Ingabo Syndicate Database.xlsx');
+
+    // define the column headers
+    const titles = filteredColumns;
+    titles.forEach((header, i) => {
+      const cell = ws[`${String.fromCharCode(65 + i)}1`]; // e.g. A1, B1, C1, etc.
+      cell.v = header;
+    });
+
+    XLSX.utils.book_append_sheet(wb, ws, "Page 1");
+    XLSX.writeFile(wb, "Ingabo Syndicate Database.xlsx");
   }
-
-  // let headers = [
   //   { displayName: "No", id: "no" },
   //   { displayName: "Amazina Yombi", id: "fullName" },
   //   { displayName: "Igihe Yavukiye", id: "dateofbirth" },
