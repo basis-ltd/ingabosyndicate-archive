@@ -1,0 +1,265 @@
+[debug] [2023-01-15T12:12:32.578Z] ----------------------------------------------------------------------
+[debug] [2023-01-15T12:12:32.580Z] Command:       /usr/local/share/nvm/versions/node/v16.19.0/bin/node /home/codespace/nvm/current/bin/firebase serve
+[debug] [2023-01-15T12:12:32.580Z] CLI Version:   11.20.0
+[debug] [2023-01-15T12:12:32.581Z] Platform:      linux
+[debug] [2023-01-15T12:12:32.581Z] Node Version:  v16.19.0
+[debug] [2023-01-15T12:12:32.581Z] Time:          Sun Jan 15 2023 12:12:32 GMT+0000 (Coordinated Universal Time)
+[debug] [2023-01-15T12:12:32.581Z] Env Overrides: GITHUB_API_URL
+[debug] [2023-01-15T12:12:32.581Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-01-15T12:12:32.683Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-01-15T12:12:32.683Z] > authorizing via signed-in user (princeelysee@gmail.com)
+[debug] [2023-01-15T12:12:32.683Z] [iam] checking project ingabosyndicate for permissions ["firebase.projects.get"]
+[debug] [2023-01-15T12:12:32.685Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/ingabosyndicate:testIamPermissions [none]
+[debug] [2023-01-15T12:12:32.685Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/ingabosyndicate:testIamPermissions x-goog-quota-user=projects/ingabosyndicate
+[debug] [2023-01-15T12:12:32.685Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ingabosyndicate:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-01-15T12:12:33.331Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/ingabosyndicate:testIamPermissions 200
+[debug] [2023-01-15T12:12:33.331Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ingabosyndicate:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-01-15T12:12:33.332Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ingabosyndicate [none]
+[debug] [2023-01-15T12:12:33.565Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ingabosyndicate 200
+[debug] [2023-01-15T12:12:33.565Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ingabosyndicate {"projectId":"ingabosyndicate","projectNumber":"268231908942","displayName":"ingabo-syndicate","name":"projects/ingabosyndicate","resources":{"hostingSite":"ingabosyndicate"},"state":"ACTIVE","etag":"1_6fdfc92b-da89-4861-9dd2-5831b89104d6"}
+[info] 
+[info] === Serving from '/workspaces/ingabosyndicate'...
+[info] 
+[info] ✔  functions: Using node@16 from host. {"metadata":{"emulator":{"name":"functions"},"message":"Using node@16 from host."}}
+[debug] [2023-01-15T12:12:33.582Z] defaultcredentials: writing to file /home/codespace/.config/firebase/princeelysee_gmail_com_application_default_credentials.json
+[debug] [2023-01-15T12:12:33.582Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/ingabosyndicate/sites 
+[debug] [2023-01-15T12:12:33.585Z] Setting GAC to /home/codespace/.config/firebase/princeelysee_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /home/codespace/.config/firebase/princeelysee_gmail_com_application_default_credentials.json"}}
+[debug] [2023-01-15T12:12:33.586Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ingabosyndicate/adminSdkConfig [none]
+[debug] [2023-01-15T12:12:33.797Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ingabosyndicate/adminSdkConfig 200
+[debug] [2023-01-15T12:12:33.797Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ingabosyndicate/adminSdkConfig {"projectId":"ingabosyndicate","storageBucket":"ingabosyndicate.appspot.com"}
+[debug] [2023-01-15T12:12:34.426Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/ingabosyndicate/sites 200
+[debug] [2023-01-15T12:12:34.426Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/ingabosyndicate/sites {"sites":[{"name":"projects/ingabosyndicate/sites/ingabosyndicate","defaultUrl":"https://ingabosyndicate.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2023-01-15T12:12:34.426Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ingabosyndicate/webApps/-/config [none]
+[debug] [2023-01-15T12:12:34.897Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ingabosyndicate/webApps/-/config 200
+[debug] [2023-01-15T12:12:34.898Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ingabosyndicate/webApps/-/config {"projectId":"ingabosyndicate","storageBucket":"ingabosyndicate.appspot.com","apiKey":"AIzaSyD2UWF_4sEfaqtIoEVY6E8GX7WIdAqZONg","authDomain":"ingabosyndicate.firebaseapp.com","messagingSenderId":"268231908942"}
+[debug] [2023-01-15T12:12:34.917Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ingabosyndicate [none]
+[debug] [2023-01-15T12:12:35.153Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ingabosyndicate 200
+[debug] [2023-01-15T12:12:35.153Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ingabosyndicate {"projectId":"ingabosyndicate","projectNumber":"268231908942","displayName":"ingabo-syndicate","name":"projects/ingabosyndicate","resources":{"hostingSite":"ingabosyndicate"},"state":"ACTIVE","etag":"1_6fdfc92b-da89-4861-9dd2-5831b89104d6"}
+[info] i  functions: Watching "/workspaces/ingabosyndicate/functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/workspaces/ingabosyndicate/functions\" for Cloud Functions..."}}
+[info] i  hosting[ingabosyndicate]: Serving hosting files from: build {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mbuild\u001b[22m"}}
+[info] ✔  hosting[ingabosyndicate]: Local server: http://localhost:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:5000\u001b[22m\u001b[24m"}}
+[debug] [2023-01-15T12:12:35.167Z] Validating nodejs source
+[debug] [2023-01-15T12:12:35.561Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "firebase-admin": "^11.4.1",
+    "firebase-functions": "^4.1.1",
+    "nodemon": "^2.0.20"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-01-15T12:12:35.562Z] Building nodejs source
+[debug] [2023-01-15T12:12:35.564Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-01-15T12:12:35.733Z] Serving at port 9005
+
+[debug] [2023-01-15T12:12:35.792Z] undefined undefined undefined
+
+[debug] [2023-01-15T12:12:35.797Z] Got response from /__/functions.yaml Failed to generate manifest from function source: Error: username is required
+[debug] [2023-01-15T12:12:35.801Z] Failed to parse functions.yamlincomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line at line 1, column 56:
+     ... fest from function source: Error: username is required
+                                         ^ {"name":"YAMLException","reason":"incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line","mark":{"name":null,"buffer":"Failed to generate manifest from function source: Error: username is required\n\u0000","position":55,"line":0,"column":55},"message":"incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line at line 1, column 56:\n     ... fest from function source: Error: username is required\n                                         ^"}
+[debug] [2023-01-15T12:12:35.808Z] shutdown requested via /__/quitquitquit
+
+[error] ⬢  functions: Failed to load function definition from source: FirebaseError: Failed to load function definition from source: Failed to generate manifest from function source: Error: username is required {"metadata":{"emulator":{"name":"functions"},"message":"Failed to load function definition from source: FirebaseError: Failed to load function definition from source: Failed to generate manifest from function source: Error: username is required"}}
+[debug] [2023-01-15T12:16:50.054Z] File /workspaces/ingabosyndicate/functions/index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /workspaces/ingabosyndicate/functions/index.js changed, reloading triggers"}}
+[debug] [2023-01-15T12:16:51.055Z] Validating nodejs source
+[debug] [2023-01-15T12:16:51.488Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "firebase-admin": "^11.4.1",
+    "firebase-functions": "^4.1.1",
+    "nodemon": "^2.0.20"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-01-15T12:16:51.489Z] Building nodejs source
+[debug] [2023-01-15T12:16:51.490Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-01-15T12:16:51.622Z] Serving at port 9005
+
+[debug] [2023-01-15T12:16:51.683Z] undefined undefined undefined
+
+[debug] [2023-01-15T12:16:51.688Z] Got response from /__/functions.yaml Failed to generate manifest from function source: Error: username is required
+[debug] [2023-01-15T12:16:51.689Z] Failed to parse functions.yamlincomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line at line 1, column 56:
+     ... fest from function source: Error: username is required
+                                         ^ {"name":"YAMLException","reason":"incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line","mark":{"name":null,"buffer":"Failed to generate manifest from function source: Error: username is required\n\u0000","position":55,"line":0,"column":55},"message":"incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line at line 1, column 56:\n     ... fest from function source: Error: username is required\n                                         ^"}
+[debug] [2023-01-15T12:16:51.702Z] shutdown requested via /__/quitquitquit
+
+[error] ⬢  functions: Failed to load function definition from source: FirebaseError: Failed to load function definition from source: Failed to generate manifest from function source: Error: username is required {"metadata":{"emulator":{"name":"functions"},"message":"Failed to load function definition from source: FirebaseError: Failed to load function definition from source: Failed to generate manifest from function source: Error: username is required"}}
+[debug] [2023-01-15T12:17:05.396Z] File /workspaces/ingabosyndicate/functions/index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /workspaces/ingabosyndicate/functions/index.js changed, reloading triggers"}}
+[debug] [2023-01-15T12:17:06.397Z] Validating nodejs source
+[debug] [2023-01-15T12:17:06.787Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "firebase-admin": "^11.4.1",
+    "firebase-functions": "^4.1.1",
+    "nodemon": "^2.0.20"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-01-15T12:17:06.788Z] Building nodejs source
+[debug] [2023-01-15T12:17:06.788Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-01-15T12:17:06.914Z] Serving at port 9005
+
+[debug] [2023-01-15T12:17:06.972Z] undefined undefined undefined
+
+[debug] [2023-01-15T12:17:06.976Z] Got response from /__/functions.yaml Failed to generate manifest from function source: Error: username is required
+[debug] [2023-01-15T12:17:06.978Z] Failed to parse functions.yamlincomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line at line 1, column 56:
+     ... fest from function source: Error: username is required
+                                         ^ {"name":"YAMLException","reason":"incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line","mark":{"name":null,"buffer":"Failed to generate manifest from function source: Error: username is required\n\u0000","position":55,"line":0,"column":55},"message":"incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line at line 1, column 56:\n     ... fest from function source: Error: username is required\n                                         ^"}
+[debug] [2023-01-15T12:17:06.983Z] shutdown requested via /__/quitquitquit
+
+[error] ⬢  functions: Failed to load function definition from source: FirebaseError: Failed to load function definition from source: Failed to generate manifest from function source: Error: username is required {"metadata":{"emulator":{"name":"functions"},"message":"Failed to load function definition from source: FirebaseError: Failed to load function definition from source: Failed to generate manifest from function source: Error: username is required"}}
+[debug] [2023-01-15T12:20:45.504Z] File /workspaces/ingabosyndicate/functions/index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /workspaces/ingabosyndicate/functions/index.js changed, reloading triggers"}}
+[debug] [2023-01-15T12:20:46.505Z] Validating nodejs source
+[debug] [2023-01-15T12:20:46.931Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "firebase-admin": "^11.4.1",
+    "firebase-functions": "^4.1.1",
+    "nodemon": "^2.0.20"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-01-15T12:20:46.931Z] Building nodejs source
+[debug] [2023-01-15T12:20:46.932Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-01-15T12:20:47.091Z] Serving at port 9005
+
+[debug] [2023-01-15T12:20:47.152Z] undefined undefined undefined
+
+[debug] [2023-01-15T12:20:47.156Z] Got response from /__/functions.yaml Failed to generate manifest from function source: Error: username is required
+[debug] [2023-01-15T12:20:47.156Z] Failed to parse functions.yamlincomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line at line 1, column 56:
+     ... fest from function source: Error: username is required
+                                         ^ {"name":"YAMLException","reason":"incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line","mark":{"name":null,"buffer":"Failed to generate manifest from function source: Error: username is required\n\u0000","position":55,"line":0,"column":55},"message":"incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line at line 1, column 56:\n     ... fest from function source: Error: username is required\n                                         ^"}
+[debug] [2023-01-15T12:20:47.160Z] shutdown requested via /__/quitquitquit
+
+[error] ⬢  functions: Failed to load function definition from source: FirebaseError: Failed to load function definition from source: Failed to generate manifest from function source: Error: username is required {"metadata":{"emulator":{"name":"functions"},"message":"Failed to load function definition from source: FirebaseError: Failed to load function definition from source: Failed to generate manifest from function source: Error: username is required"}}
+[debug] [2023-01-15T12:21:59.907Z] File /workspaces/ingabosyndicate/functions/index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /workspaces/ingabosyndicate/functions/index.js changed, reloading triggers"}}
+[debug] [2023-01-15T12:22:00.908Z] Validating nodejs source
+[debug] [2023-01-15T12:22:01.315Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "firebase-admin": "^11.4.1",
+    "firebase-functions": "^4.1.1",
+    "nodemon": "^2.0.20"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-01-15T12:22:01.316Z] Building nodejs source
+[debug] [2023-01-15T12:22:01.316Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-01-15T12:22:01.456Z] Serving at port 9005
+
+[debug] [2023-01-15T12:22:01.547Z] undefined undefined undefined
+
+[debug] [2023-01-15T12:22:01.551Z] Got response from /__/functions.yaml Failed to generate manifest from function source: Error: username is required
+[debug] [2023-01-15T12:22:01.552Z] Failed to parse functions.yamlincomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line at line 1, column 56:
+     ... fest from function source: Error: username is required
+                                         ^ {"name":"YAMLException","reason":"incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line","mark":{"name":null,"buffer":"Failed to generate manifest from function source: Error: username is required\n\u0000","position":55,"line":0,"column":55},"message":"incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line at line 1, column 56:\n     ... fest from function source: Error: username is required\n                                         ^"}
+[debug] [2023-01-15T12:22:01.562Z] shutdown requested via /__/quitquitquit
+
+[error] ⬢  functions: Failed to load function definition from source: FirebaseError: Failed to load function definition from source: Failed to generate manifest from function source: Error: username is required {"metadata":{"emulator":{"name":"functions"},"message":"Failed to load function definition from source: FirebaseError: Failed to load function definition from source: Failed to generate manifest from function source: Error: username is required"}}
