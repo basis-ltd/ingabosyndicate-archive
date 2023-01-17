@@ -319,7 +319,7 @@
         "TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/function/ingabosyndicate-cloudformation-template.json",
         "Parameters": {
           "deploymentBucketName": "amplify-ingabofinal-dev-204948-deployment",
-          "s3Key": "amplify-builds/ingabosyndicate-71323061436666544354-build.zip",
+          "s3Key": "amplify-builds/ingabosyndicate-77395137713162396956-build.zip",
           "env": "dev"
         }
       }
