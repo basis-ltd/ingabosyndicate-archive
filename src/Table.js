@@ -27,9 +27,7 @@ import "./Table.css";
 import { Helmet } from "react-helmet";
 import IngaboUpdateForm from "./ui-components/IngaboUpdateForm";
 import "./Update.css";
-import "./Update.css";
 import { withAuthenticator } from "@aws-amplify/ui-react";
-import CsvDownloader from 'react-csv-downloader';
 import * as XLSX from 'xlsx';
 
 Amplify.configure(awsconfig);
@@ -37,13 +35,23 @@ Amplify.configure(awsconfig);
 
 // TWILIO SMS
 export function sendMessage(to, message){
+
+  const endpoint = process.env.REACT_APP_ENDPOINT_URL;
+  console.log(endpoint);
+
   const recipient = "+250" + to.slice(-9);
+
+
+  const event = {
+    "to": recipient,
+    "message": message
+  }
+
   axios
     .post(
-      "http://localhost:5000/messages",
+      `${endpoint}/messages`,
       {
-        recipient,
-        message,
+        event
       },
       { headers: { "Content-Type": "application/json" } }
     )
@@ -52,7 +60,7 @@ export function sendMessage(to, message){
       console.log(res.data.status);
     })
     .catch((err) => {
-      console.log(err);
+      console.log(err, event.to, event.message);
     });
 };
 
