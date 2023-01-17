@@ -27,6 +27,20 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync"
+    },
+    "ingabosyndicate": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "ingabosyndicate"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
     }
   },
   "auth": {
@@ -55,6 +69,31 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "ingabosyndicate": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_ingabosyndicate_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ingabosyndicate"
+        }
+      ]
+    },
+    "AMPLIFY_function_ingabosyndicate_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ingabosyndicate"
+        }
+      ]
     }
   },
   "storage": {

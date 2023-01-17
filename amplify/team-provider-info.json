@@ -19,10 +19,17 @@
         "s3ingabofinalstoragebbf78c19": {}
       },
       "api": {
-        "ingabofinal": {}
+        "ingabofinal": {},
+        "ingabosyndicate": {}
       },
       "analytics": {
         "ingabofinal": {}
+      },
+      "function": {
+        "ingabosyndicate": {
+          "deploymentBucketName": "amplify-ingabofinal-dev-204948-deployment",
+          "s3Key": "amplify-builds/ingabosyndicate-71323061436666544354-build.zip"
+        }
       }
     }
   }

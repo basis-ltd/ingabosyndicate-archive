@@ -2,9 +2,12 @@
     "AppSyncApiName": "ingabofinal",
     "DynamoDBBillingMode": "PAY_PER_REQUEST",
     "DynamoDBEnableServerSideEncryption": false,
-    "CreateApiKey": 1,
-    "APIKeyExpirationEpoch": 31536000,
-    "AuthModeLastUpdated": "2023-01-10T11:36:14.971Z",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
     "S3DeploymentBucket": "amplify-ingabofinal-dev-204948-deployment",
     "S3DeploymentRootKey": "amplify-appsync-files/aa6111a3aa2cb731eb9416222b8465aa1c9dc894"
 }
