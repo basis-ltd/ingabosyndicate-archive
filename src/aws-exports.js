@@ -10,7 +10,7 @@ const awsmobile = {
     "aws_cloud_logic_custom": [
         {
             "name": "ingabosyndicate",
-            "endpoint": "https://3z8xr0mt9g.execute-api.us-east-1.amazonaws.com/dev",
+            "endpoint": "https://1axdmzm2k4.execute-api.us-east-1.amazonaws.com/dev",
             "region": "us-east-1"
         }
     ],

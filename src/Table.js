@@ -17,7 +17,7 @@ import {
   useSortBy,
   usePagination,
 } from "react-table";
-import { Amplify } from "aws-amplify";
+import { Amplify, API } from "aws-amplify";
 import awsconfig from "./aws-exports";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
@@ -29,6 +29,7 @@ import IngaboUpdateForm from "./ui-components/IngaboUpdateForm";
 import "./Update.css";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import * as XLSX from 'xlsx';
+
 
 Amplify.configure(awsconfig);
 
@@ -51,7 +52,8 @@ export function sendMessage(to, message){
     .post(
       `${endpoint}/messages`,
       {
-        event
+        recipient,
+        message
       },
       { headers: { "Content-Type": "application/json" } }
     )
