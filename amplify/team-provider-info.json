@@ -31,6 +31,12 @@
           "s3Key": "amplify-builds/ingabosyndicate-77395137713162396956-build.zip"
         },
         "ingabosyndicatetwilio": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "dwc6m90ljxm0x",
+          "type": "manual"
+        }
       }
     }
   }
