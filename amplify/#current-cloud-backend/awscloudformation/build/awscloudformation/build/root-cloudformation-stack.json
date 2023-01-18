@@ -172,27 +172,6 @@
         }
       }
     },
-    "apiingabosyndicate": {
-      "Type": "AWS::CloudFormation::Stack",
-      "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/api/ingabosyndicate-cloudformation-template.json",
-        "Parameters": {
-          "functioningabosyndicateName": {
-            "Fn::GetAtt": [
-              "functioningabosyndicate",
-              "Outputs.Name"
-            ]
-          },
-          "functioningabosyndicateArn": {
-            "Fn::GetAtt": [
-              "functioningabosyndicate",
-              "Outputs.Arn"
-            ]
-          },
-          "env": "dev"
-        }
-      }
-    },
     "authingabofinal9ebd1c16": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
@@ -309,17 +288,6 @@
               "Arn"
             ]
           },
-          "env": "dev"
-        }
-      }
-    },
-    "functioningabosyndicate": {
-      "Type": "AWS::CloudFormation::Stack",
-      "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/function/ingabosyndicate-cloudformation-template.json",
-        "Parameters": {
-          "deploymentBucketName": "amplify-ingabofinal-dev-204948-deployment",
-          "s3Key": "amplify-builds/ingabosyndicate-77395137713162396956-build.zip",
           "env": "dev"
         }
       }
