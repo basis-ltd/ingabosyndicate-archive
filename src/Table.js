@@ -38,31 +38,31 @@ Amplify.configure(awsconfig);
 export function sendMessage(to, message){
 
   const endpoint = process.env.REACT_APP_ENDPOINT_URL;
-  console.log(endpoint);
+  const localhost = "http://localhost:5000";
+  console.log(localhost);
 
   const recipient = "+250" + to.slice(-9);
 
-
-  const event = {
-    "to": recipient,
-    "message": message
-  }
-
   axios
     .post(
-      `${endpoint}/messages`,
+      `${localhost}/messages`,
       {
         recipient,
-        message
+        message,
       },
-      { headers: { "Content-Type": "application/json" } }
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+        },
+      }
     )
 
     .then((res) => {
       console.log(res.data.status);
     })
     .catch((err) => {
-      console.log(err, event.to, event.message);
+      console.log(err);
     });
 };
 
