@@ -16,9 +16,6 @@ console.log(accountSid, authToken, accountTelephone);
 // Create a new Twilio client
 const client = new twilio(accountSid, authToken);
 
-const recipient = '+250788478652';
-const message = 'Hello from Twilio';
-
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -29,7 +26,7 @@ app.get("/", (req, res) => {
 app.post('/messages', (req, res) => {
 
     // Get the phone number and message text from the request body
-    // const { recipient, message } = req.body;
+    const { recipient, message } = req.body;
   
     // Send the message using the Twilio client
     client.messages
