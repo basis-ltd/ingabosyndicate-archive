@@ -40,7 +40,7 @@ export function sendMessage(to, message){
   const endpoint = process.env.REACT_APP_ENDPOINT_URL;
   const localhost = "http://localhost";
   const ec2 = "http://44.209.248.214";
-  const port = "5000";
+  const port = "5000" || process.env.PORT;
   console.log(endpoint);
 
   const recipient = "+250" + to.slice(-9);
