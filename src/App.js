@@ -14,6 +14,7 @@ import { Helmet } from "react-helmet";
 import Input from "./Input.js";
 import { Ingabo } from "./models";
 import LandingPage from './Landing-Page'
+import Footer from './Footer'
 
 Amplify.configure(awsconfig);
 
@@ -61,6 +62,8 @@ function App() {
           }
         />
       </Routes>
+
+      <Footer />
     </>
   );
 }
