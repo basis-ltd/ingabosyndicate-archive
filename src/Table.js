@@ -347,7 +347,6 @@ function Table() {
     XLSX.utils.book_append_sheet(wb, ws, "Page 1");
     XLSX.writeFile(wb, "Ingabo Syndicate Database.xlsx");
   }
-  //   { displayName: "No", id: "no" },
   //   { displayName: "Amazina Yombi", id: "fullName" },
   //   { displayName: "Igihe Yavukiye", id: "dateofbirth" },
   //   { displayName: "Igitsina", id: "gender" },
@@ -569,7 +568,7 @@ function Table() {
           "Umuceri",
           "Ibigori",
           "Ibinyamisogwe",
-          "Imboga n' Imbuto",
+          "Imboga n'Imbuto",
           "Inkoko",
           "Ingurube",
           "Inka",
@@ -577,6 +576,7 @@ function Table() {
         ],
       ],
       body: info,
+      columnWidth: [20, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 60, 40, 40, 40, 40],
     });
 
     doc.save("Ingabo Syndicate PDF Report.pdf");
