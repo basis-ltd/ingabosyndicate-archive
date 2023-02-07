@@ -347,26 +347,6 @@ function Table() {
     XLSX.utils.book_append_sheet(wb, ws, "Page 1");
     XLSX.writeFile(wb, "Ingabo Syndicate Database.xlsx");
   }
-  //   { displayName: "Amazina Yombi", id: "fullName" },
-  //   { displayName: "Igihe Yavukiye", id: "dateofbirth" },
-  //   { displayName: "Igitsina", id: "gender" },
-  //   { displayName: "Indangamuntu", id: "nationalID" },
-  //   { displayName: "Telephone", id: "telephone" },
-  //   { displayName: "Cooperative", id: "cooperative" },
-  //   { displayName: "Aho Atuye", id: "district" },
-  //   { displayName: "Aroroye", id: "aroroye" },
-  //   { displayName: "Arahinga", id: "arahinga" },
-  //   { displayName: "Imyumbati", id: "imyumbati" },
-  //   { displayName: "Umuceri", id: "umuceri" },
-  //   { displayName: "Ibigori", id: "ibigori" },
-  //   { displayName: "Ibinyamisogwe", id: "ibinyamisogwe" },
-  //   { displayName: "Imboga n' Imbuto", id: "imboga_imbuto" },
-  //   { displayName: "Inkoko", id: "inkoko" },
-  //   { displayName: "Ingurube", id: "ingurube" },
-  //   { displayName: "Inka", id: "inka" },
-
-  // ];
-
 
   // EDIT MODAL
 
@@ -576,7 +556,7 @@ function Table() {
         ],
       ],
       body: info,
-      columnWidth: [20, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 60, 40, 40, 40, 40],
+      columnWidth: [80, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 60, 40, 40, 40, 40],
     });
 
     doc.save("Ingabo Syndicate PDF Report.pdf");

@@ -48,7 +48,9 @@ function App() {
           }
         />
         <Route path="/" element={
-          <LandingPage />
+          <div className="landing-page">
+            <LandingPage />
+          </div>
         } />
 
         <Route
