@@ -8,8 +8,6 @@ Amplify.configure(awsconfig);
 
 function Footer () {
 
-    const navigate = useNavigate();
-
     return (
       <>
         <div class="footer">
@@ -73,9 +71,9 @@ function Footer () {
                   </a>
                 </li>
                 <li>
-                  <a href=""
-                  onClick={navigate('/input')}
-                  >Insert Record</a>
+                  <a href="">
+                    <Link to="/input">Insert record</Link>
+                  </a>
                 </li>
               </ul>
             </div>
