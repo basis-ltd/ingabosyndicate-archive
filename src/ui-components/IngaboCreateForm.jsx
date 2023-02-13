@@ -50,6 +50,9 @@ export default function IngaboCreateForm(props) {
     activity6: false,
     activity7: false,
     activity8: false,
+    activity11: false,
+    activity10: false,
+    activity9: false,
   };
   const [fullName, setFullName] = React.useState(initialValues.fullName);
   const [dateofbirth, setDateofbirth] = React.useState(
@@ -72,6 +75,9 @@ export default function IngaboCreateForm(props) {
   const [activity6, setActivity6] = React.useState(initialValues.activity6);
   const [activity7, setActivity7] = React.useState(initialValues.activity7);
   const [activity8, setActivity8] = React.useState(initialValues.activity8);
+  const [activity11, setActivity11] = React.useState(initialValues.activity11);
+  const [activity10, setActivity10] = React.useState(initialValues.activity10);
+  const [activity9, setActivity9] = React.useState(initialValues.activity9);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setFullName(initialValues.fullName);
@@ -91,6 +97,9 @@ export default function IngaboCreateForm(props) {
     setActivity6(initialValues.activity6);
     setActivity7(initialValues.activity7);
     setActivity8(initialValues.activity8);
+    setActivity11(initialValues.activity11);
+    setActivity10(initialValues.activity10);
+    setActivity9(initialValues.activity9);
     setErrors({});
   };
   const validations = {
@@ -111,6 +120,9 @@ export default function IngaboCreateForm(props) {
     activity6: [],
     activity7: [],
     activity8: [],
+    activity11: [],
+    activity10: [],
+    activity9: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -154,6 +166,9 @@ export default function IngaboCreateForm(props) {
           activity6,
           activity7,
           activity8,
+          activity11,
+          activity10,
+          activity9,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -235,6 +250,9 @@ export default function IngaboCreateForm(props) {
                 activity6,
                 activity7,
                 activity8,
+                activity11,
+                activity10,
+                activity9,
               };
               const result = onChange(modelFields);
               value = result?.fullName ?? value;
@@ -276,6 +294,9 @@ export default function IngaboCreateForm(props) {
                 activity6,
                 activity7,
                 activity8,
+                activity11,
+                activity10,
+                activity9,
               };
               const result = onChange(modelFields);
               value = result?.dateofbirth ?? value;
@@ -317,6 +338,9 @@ export default function IngaboCreateForm(props) {
                 activity6,
                 activity7,
                 activity8,
+                activity11,
+                activity10,
+                activity9,
               };
               const result = onChange(modelFields);
               value = result?.gender ?? value;
@@ -364,6 +388,9 @@ export default function IngaboCreateForm(props) {
                 activity6,
                 activity7,
                 activity8,
+                activity11,
+                activity10,
+                activity9,
               };
               const result = onChange(modelFields);
               value = result?.nationalID ?? value;
@@ -404,6 +431,9 @@ export default function IngaboCreateForm(props) {
                 activity6,
                 activity7,
                 activity8,
+                activity11,
+                activity10,
+                activity9,
               };
               const result = onChange(modelFields);
               value = result?.telephone ?? value;
@@ -444,6 +474,9 @@ export default function IngaboCreateForm(props) {
                 activity6,
                 activity7,
                 activity8,
+                activity11,
+                activity10,
+                activity9,
               };
               const result = onChange(modelFields);
               value = result?.cooperative ?? value;
@@ -495,6 +528,9 @@ export default function IngaboCreateForm(props) {
                 activity6,
                 activity7,
                 activity8,
+                activity11,
+                activity10,
+                activity9,
               };
               const result = onChange(modelFields);
               value = result?.cell ?? value;
@@ -535,6 +571,9 @@ export default function IngaboCreateForm(props) {
                 activity6,
                 activity7,
                 activity8,
+                activity11,
+                activity10,
+                activity9,
               };
               const result = onChange(modelFields);
               value = result?.sector ?? value;
@@ -575,6 +614,9 @@ export default function IngaboCreateForm(props) {
                 activity6,
                 activity7,
                 activity8,
+                activity11,
+                activity10,
+                activity9,
               };
               const result = onChange(modelFields);
               value = result?.district ?? value;
@@ -623,6 +665,9 @@ export default function IngaboCreateForm(props) {
                 activity6,
                 activity7,
                 activity8,
+                activity11,
+                activity10,
+                activity9,
               };
               const result = onChange(modelFields);
               value = result?.activity1 ?? value;
@@ -664,6 +709,9 @@ export default function IngaboCreateForm(props) {
                 activity6,
                 activity7,
                 activity8,
+                activity11,
+                activity10,
+                activity9,
               };
               const result = onChange(modelFields);
               value = result?.activity2 ?? value;
@@ -705,6 +753,9 @@ export default function IngaboCreateForm(props) {
                 activity6,
                 activity7,
                 activity8,
+                activity11,
+                activity10,
+                activity9,
               };
               const result = onChange(modelFields);
               value = result?.activity3 ?? value;
@@ -746,6 +797,9 @@ export default function IngaboCreateForm(props) {
                 activity6,
                 activity7,
                 activity8,
+                activity11,
+                activity10,
+                activity9,
               };
               const result = onChange(modelFields);
               value = result?.activity4 ?? value;
@@ -794,6 +848,9 @@ export default function IngaboCreateForm(props) {
                 activity6,
                 activity7,
                 activity8,
+                activity11,
+                activity10,
+                activity9,
               };
               const result = onChange(modelFields);
               value = result?.activity5 ?? value;
@@ -835,6 +892,9 @@ export default function IngaboCreateForm(props) {
                 activity6: value,
                 activity7,
                 activity8,
+                activity11,
+                activity10,
+                activity9,
               };
               const result = onChange(modelFields);
               value = result?.activity6 ?? value;
@@ -876,6 +936,9 @@ export default function IngaboCreateForm(props) {
                 activity6,
                 activity7: value,
                 activity8,
+                activity11,
+                activity10,
+                activity9,
               };
               const result = onChange(modelFields);
               value = result?.activity7 ?? value;
@@ -917,6 +980,9 @@ export default function IngaboCreateForm(props) {
                 activity6,
                 activity7,
                 activity8: value,
+                activity11,
+                activity10,
+                activity9,
               };
               const result = onChange(modelFields);
               value = result?.activity8 ?? value;
@@ -930,6 +996,145 @@ export default function IngaboCreateForm(props) {
           errorMessage={errors.activity8?.errorMessage}
           hasError={errors.activity8?.hasError}
           {...getOverrideProps(overrides, "activity8")}
+        ></CheckboxField>
+      </Grid>
+      <Grid
+        columnGap="inherit"
+        rowGap="inherit"
+        templateColumns="repeat(3, auto)"
+        {...getOverrideProps(overrides, "RowGrid7")}
+      >
+        <CheckboxField
+          label="Intama"
+          name="activity11"
+          value="activity11"
+          isDisabled={false}
+          checked={activity11}
+          onChange={(e) => {
+            let value = e.target.checked;
+            if (onChange) {
+              const modelFields = {
+                fullName,
+                dateofbirth,
+                gender,
+                nationalID,
+                telephone,
+                cooperative,
+                cell,
+                sector,
+                district,
+                activity1,
+                activity2,
+                activity3,
+                activity4,
+                activity5,
+                activity6,
+                activity7,
+                activity8,
+                activity11: value,
+                activity10,
+                activity9,
+              };
+              const result = onChange(modelFields);
+              value = result?.activity11 ?? value;
+            }
+            if (errors.activity11?.hasError) {
+              runValidationTasks("activity11", value);
+            }
+            setActivity11(value);
+          }}
+          onBlur={() => runValidationTasks("activity11", activity11)}
+          errorMessage={errors.activity11?.errorMessage}
+          hasError={errors.activity11?.hasError}
+          {...getOverrideProps(overrides, "activity11")}
+        ></CheckboxField>
+        <CheckboxField
+          label="Ihene"
+          name="activity10"
+          value="activity10"
+          isDisabled={false}
+          checked={activity10}
+          onChange={(e) => {
+            let value = e.target.checked;
+            if (onChange) {
+              const modelFields = {
+                fullName,
+                dateofbirth,
+                gender,
+                nationalID,
+                telephone,
+                cooperative,
+                cell,
+                sector,
+                district,
+                activity1,
+                activity2,
+                activity3,
+                activity4,
+                activity5,
+                activity6,
+                activity7,
+                activity8,
+                activity11,
+                activity10: value,
+                activity9,
+              };
+              const result = onChange(modelFields);
+              value = result?.activity10 ?? value;
+            }
+            if (errors.activity10?.hasError) {
+              runValidationTasks("activity10", value);
+            }
+            setActivity10(value);
+          }}
+          onBlur={() => runValidationTasks("activity10", activity10)}
+          errorMessage={errors.activity10?.errorMessage}
+          hasError={errors.activity10?.hasError}
+          {...getOverrideProps(overrides, "activity10")}
+        ></CheckboxField>
+        <CheckboxField
+          label="Ibirayi"
+          name="activity9"
+          value="activity9"
+          isDisabled={false}
+          checked={activity9}
+          onChange={(e) => {
+            let value = e.target.checked;
+            if (onChange) {
+              const modelFields = {
+                fullName,
+                dateofbirth,
+                gender,
+                nationalID,
+                telephone,
+                cooperative,
+                cell,
+                sector,
+                district,
+                activity1,
+                activity2,
+                activity3,
+                activity4,
+                activity5,
+                activity6,
+                activity7,
+                activity8,
+                activity11,
+                activity10,
+                activity9: value,
+              };
+              const result = onChange(modelFields);
+              value = result?.activity9 ?? value;
+            }
+            if (errors.activity9?.hasError) {
+              runValidationTasks("activity9", value);
+            }
+            setActivity9(value);
+          }}
+          onBlur={() => runValidationTasks("activity9", activity9)}
+          errorMessage={errors.activity9?.errorMessage}
+          hasError={errors.activity9?.hasError}
+          {...getOverrideProps(overrides, "activity9")}
         ></CheckboxField>
       </Grid>
       <Flex

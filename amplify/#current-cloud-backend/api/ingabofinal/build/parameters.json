@@ -9,5 +9,5 @@
         "Ref": "UnauthRoleName"
     },
     "S3DeploymentBucket": "amplify-ingabofinal-dev-204948-deployment",
-    "S3DeploymentRootKey": "amplify-appsync-files/aa6111a3aa2cb731eb9416222b8465aa1c9dc894"
+    "S3DeploymentRootKey": "amplify-appsync-files/30bcc59017f45ea69a2f64bacac1f04af6b2dc36"
 }

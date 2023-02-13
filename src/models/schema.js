@@ -101,6 +101,27 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "activity9": {
+                    "name": "activity9",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "activity10": {
+                    "name": "activity10",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "activity11": {
+                    "name": "activity11",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "no": {
                     "name": "no",
                     "isArray": false,
@@ -206,6 +227,27 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "ibirayi": {
+                    "name": "ibirayi",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "ihene": {
+                    "name": "ihene",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "intama": {
+                    "name": "intama",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "signature": {
                     "name": "signature",
                     "isArray": false,
@@ -258,6 +300,6 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "codegenVersion": "3.3.4",
-    "version": "c5e3b4a5eed2ba8bda3f6684b1fb49c2"
+    "codegenVersion": "3.3.5",
+    "version": "32d36ccfc223ae5096a25e4b3e19c7c6"
 };

@@ -28,15 +28,12 @@ import { Helmet } from "react-helmet";
 import IngaboUpdateForm from "./ui-components/IngaboUpdateForm";
 import "./Update.css";
 import { withAuthenticator } from "@aws-amplify/ui-react";
-import * as XLSX from 'xlsx';
-
+import * as XLSX from "xlsx";
 
 Amplify.configure(awsconfig);
 
-
 // TWILIO SMS
-export function sendMessage(to, message){
-
+export function sendMessage(to, message) {
   const endpoint = process.env.REACT_APP_ENDPOINT_URL;
   const ec2 = "http://44.209.248.214";
   const port = "5000" || process.env.PORT;
@@ -65,7 +62,7 @@ export function sendMessage(to, message){
     .catch((err) => {
       console.log(err);
     });
-};
+}
 
 // This is a custom filter UI for selecting
 // a unique option from a list
@@ -136,44 +133,57 @@ function GlobalFilter({
 }
 
 function Table() {
-
   // FETCH INGABO MODEL FROM DATASTORE
 
   let [records, setRecords] = useState([]);
 
   const pullData = async () => {
-      let prevRecords = await DataStore.query(Ingabo);
-      
-      records = prevRecords.map((record, index) => {
-        const updatedRecord = {...record,
-          no: index + 1,
-          imyumbati: record.activity1 ? "Yego" : "Oya",
-          umuceri: record.activity2 ? "Yego" : "Oya",
-          ibigori: record.activity3 ? "Yego" : "Oya",
-          ibinyamisogwe: record.activity4 ? "Yego" : "Oya",
-          imboga_imbuto: record.activity5 ? "Yego" : "Oya",
-          inkoko: record.activity6 ? "Yego" : "Oya",
-          ingurube: record.activity7 ? "Yego" : "Oya",
-          inka: record.activity8 ? "Yego" : "Oya",
-          arahinga: (record.activity1 || record.activity2 || record.activity3 || record.activity4 || record.activity5) ? "Yego" : "Oya",
-          aroroye: (record.activity6 || record.activity7 || record.activity8) ? "Yego" : "Oya",
-          signature: ""
-        };
-        return updatedRecord
-      })
+    let prevRecords = await DataStore.query(Ingabo);
 
-      console.log(records);
-      setRecords(records);
+    records = prevRecords.map((record, index) => {
+      const updatedRecord = {
+        ...record,
+        no: index + 1,
+        imyumbati: record.activity1 ? "Yego" : "Oya",
+        umuceri: record.activity2 ? "Yego" : "Oya",
+        ibigori: record.activity3 ? "Yego" : "Oya",
+        ibinyamisogwe: record.activity4 ? "Yego" : "Oya",
+        imboga_imbuto: record.activity5 ? "Yego" : "Oya",
+        inkoko: record.activity6 ? "Yego" : "Oya",
+        ingurube: record.activity7 ? "Yego" : "Oya",
+        inka: record.activity8 ? "Yego" : "Oya",
+        ibirayi: record.activity9 ? "Yego" : "Oya",
+        ihene: record.activity10 ? "Yego" : "Oya",
+        intama: record.activity11 ? "Yego" : "Oya",
+        arahinga:
+          record.activity1 ||
+          record.activity2 ||
+          record.activity3 ||
+          record.activity4 ||
+          record.activity5 ||
+          record.activity9
+            ? "Yego"
+            : "Oya",
+        aroroye:
+          record.activity6 || record.activity7 || record.activity8 || record.activity10 || record.activity11
+            ? "Yego"
+            : "Oya",
+        signature: "",
+      };
+      return updatedRecord;
+    });
+
+    setRecords(records);
+    console.log(records);
   };
-  
-  useEffect(() => {
-      pullData();
-      const resp = DataStore.observe(Ingabo).subscribe(() => {
-      pullData();
-      });
-      return () => resp.unsubscribe();
-  }, []);
 
+  useEffect(() => {
+    pullData();
+    const resp = DataStore.observe(Ingabo).subscribe(() => {
+      pullData();
+    });
+    return () => resp.unsubscribe();
+  }, []);
 
   let data = records;
 
@@ -182,96 +192,111 @@ function Table() {
       {
         Header: "No",
         accessor: "no",
-        width: 7
+        width: 7,
       },
       {
         Header: "Amazina Yombi",
         accessor: "fullName",
-        width: 30
+        width: 30,
       },
       {
         Header: "Igihe Yavukiye",
         accessor: "dateofbirth",
-        width: 30
+        width: 30,
       },
       {
         Header: "Igitsina",
         accessor: "gender",
-        width: 20
+        width: 20,
       },
       {
         Header: "Indangamuntu",
         accessor: "nationalID",
-        width: 30
+        width: 30,
       },
       {
         Header: "Telephone",
         accessor: "telephone",
-        width: 30
+        width: 30,
       },
       {
         Header: "Cooperative",
         accessor: "cooperative",
-        width: 30
+        width: 30,
       },
       {
         Header: "Aho Atuye",
         accessor: "district",
-        width: 30
+        width: 30,
       },
       {
         Header: "Aroroye",
         accessor: "aroroye",
         Filter: SelectColumnFilter,
         filter: "includes",
-        width: 20
+        width: 20,
       },
       {
         Header: "Arahinga",
         accessor: "arahinga",
         Filter: SelectColumnFilter,
         filter: "includes",
-        width: 20
+        width: 20,
       },
       {
         Header: "Imyumbati",
         accessor: "imyumbati",
-        width: 20
+        width: 20,
       },
       {
         Header: "Umuceri",
         accessor: "umuceri",
-        width: 20
+        width: 20,
       },
       {
         Header: "Ibigori",
         accessor: "ibigori",
-        width: 20
+        width: 20,
       },
       {
         Header: "Ibinyamisogwe",
         accessor: "ibinyamisogwe",
-        width: 20
+        width: 20,
       },
       {
         Header: "Imboga n' Imbuto",
         accessor: "imboga_imbuto",
-        width: 20
+        width: 20,
+      },
+      {
+        Header: "Ibirayi",
+        accessor: "ibirayi",
+        width: 20,
+      },
+      {
+        Header: "Ihene",
+        accessor: "ihene",
+        width: 20,
+      },
+      {
+        Header: "Intama",
+        accessor: "intama",
+        width: 20,
       },
       {
         Header: "Inkoko",
         accessor: "inkoko",
-        width: 20
+        width: 20,
       },
       {
         Header: "Ingurube",
         accessor: "ingurube",
-        width: 20
+        width: 20,
       },
       {
         Header: "Inka",
         accessor: "inka",
-        width: 20
+        width: 20,
       },
       {
         Header: "Signature",
@@ -282,9 +307,7 @@ function Table() {
     []
   );
 
-
   let exportExcel = () => {
-
     let headers = columns.map((column, index) => {
       return {
         ...column,
@@ -308,6 +331,9 @@ function Table() {
       "ibigori",
       "ibinyamisogwe",
       "imboga_imbuto",
+      "ibirayi",
+      "ihene",
+      "intama",
       "inkoko",
       "ingurube",
       "inka",
@@ -329,13 +355,12 @@ function Table() {
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(filteredData);
 
-    ws['!cols'] = [];
+    ws["!cols"] = [];
 
     headers.forEach((column) => {
       ws["!cols"][column.idx] = { width: column.width };
       console.log(column.width);
     });
-
 
     // define the column headers
     const titles = filteredColumns;
@@ -346,7 +371,7 @@ function Table() {
 
     XLSX.utils.book_append_sheet(wb, ws, "Page 1");
     XLSX.writeFile(wb, "Ingabo Syndicate Database.xlsx");
-  }
+  };
 
   // EDIT MODAL
 
@@ -550,13 +575,18 @@ function Table() {
           "Ibinyamisogwe",
           "Imboga n'Imbuto",
           "Inkoko",
+          "Ibirayi",
+          "Ihene",
+          "Intama",
           "Ingurube",
           "Inka",
           "Signature",
         ],
       ],
       body: info,
-      columnWidth: [80, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 60, 40, 40, 40, 40],
+      columnWidth: [
+        80, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 60, 40, 40, 40, 40, 40, 40, 40
+      ],
     });
 
     doc.save("Ingabo Syndicate PDF Report.pdf");
@@ -713,10 +743,7 @@ function Table() {
                 columns={columns}
                 filename="Ingabo Syndicate Database.csv"
               > */}
-            <Button
-              className="ml auto"
-              onClick={exportExcel}
-            >
+            <Button className="ml auto" onClick={exportExcel}>
               Excel
               <span>
                 <svg

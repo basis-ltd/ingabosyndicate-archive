@@ -13,6 +13,9 @@ type Ingabo @model @auth(rules: [{allow: public}]) {
   activity6: Boolean
   activity7: Boolean
   activity8: Boolean
+  activity9: Boolean
+  activity10: Boolean
+  activity11: Boolean
   no: Int
   cell: String
   sector: String
@@ -28,6 +31,9 @@ type Ingabo @model @auth(rules: [{allow: public}]) {
   inkoko: String
   ingurube: String
   inka: String
+  ibirayi: String
+  ihene: String
+  intama: String
   signature: String
 }
  
