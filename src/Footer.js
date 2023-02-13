@@ -72,7 +72,7 @@ function Footer () {
                 </li>
                 <li>
                   <a href="">
-                    <Link to="/input">Insert record</Link>
+                    <Link to="/input">Add member</Link>
                   </a>
                 </li>
               </ul>

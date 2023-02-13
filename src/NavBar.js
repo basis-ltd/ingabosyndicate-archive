@@ -1,3 +1,4 @@
+import { Auth } from "aws-amplify";
 import React, { Component, useState, useMemo, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import awsconfig from "./aws-exports";
@@ -5,7 +6,6 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import "./Navbar.css";
 import { Button, PageButton } from "./Button";
-import { Auth } from "aws-amplify";
 
 const logOut = async () => {
   try {
@@ -35,19 +35,21 @@ function NavBar() {
         <img src={require("./images/logo.png")} alt="logo" />
       </a>
       <ul className="nav-tabs">
-        <a href="https://www.ingabosyndicate.org/" className="nav-btn">
-          <li>
+        <li>
+          <a className="nav-btn">
             <Link to="/home">Dashboard</Link>
-          </li>
-        </a>
-        <a href="" className="nav-btn">
-          <li>
-            <Link to="/input">Insert record</Link>
-          </li>
-        </a>
+          </a>
+        </li>
+        <li>
+          <a className="nav-btn">
+            <Link to="/input">Add member</Link>
+          </a>
+        </li>
+        <li>
         <a target="_blank" href="https://www.shop.ingabosyndicate.org/" className="nav-btn">
-          <li>Shop</li>
+          Shop
         </a>
+        </li>
       </ul>
 
       {user ? (
