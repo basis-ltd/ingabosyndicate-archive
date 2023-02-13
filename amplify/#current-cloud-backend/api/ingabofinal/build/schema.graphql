@@ -14,6 +14,9 @@ type Ingabo @aws_iam @aws_api_key {
   activity6: Boolean
   activity7: Boolean
   activity8: Boolean
+  activity9: Boolean
+  activity10: Boolean
+  activity11: Boolean
   no: Int
   cell: String
   sector: String
@@ -29,6 +32,9 @@ type Ingabo @aws_iam @aws_api_key {
   inkoko: String
   ingurube: String
   inka: String
+  ibirayi: String
+  ihene: String
+  intama: String
   signature: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
@@ -208,6 +214,9 @@ input ModelIngaboFilterInput {
   activity6: ModelBooleanInput
   activity7: ModelBooleanInput
   activity8: ModelBooleanInput
+  activity9: ModelBooleanInput
+  activity10: ModelBooleanInput
+  activity11: ModelBooleanInput
   no: ModelIntInput
   cell: ModelStringInput
   sector: ModelStringInput
@@ -223,6 +232,9 @@ input ModelIngaboFilterInput {
   inkoko: ModelStringInput
   ingurube: ModelStringInput
   inka: ModelStringInput
+  ibirayi: ModelStringInput
+  ihene: ModelStringInput
+  intama: ModelStringInput
   signature: ModelStringInput
   and: [ModelIngaboFilterInput]
   or: [ModelIngaboFilterInput]
@@ -249,6 +261,9 @@ input ModelIngaboConditionInput {
   activity6: ModelBooleanInput
   activity7: ModelBooleanInput
   activity8: ModelBooleanInput
+  activity9: ModelBooleanInput
+  activity10: ModelBooleanInput
+  activity11: ModelBooleanInput
   no: ModelIntInput
   cell: ModelStringInput
   sector: ModelStringInput
@@ -264,6 +279,9 @@ input ModelIngaboConditionInput {
   inkoko: ModelStringInput
   ingurube: ModelStringInput
   inka: ModelStringInput
+  ibirayi: ModelStringInput
+  ihene: ModelStringInput
+  intama: ModelStringInput
   signature: ModelStringInput
   and: [ModelIngaboConditionInput]
   or: [ModelIngaboConditionInput]
@@ -285,6 +303,9 @@ input CreateIngaboInput {
   activity6: Boolean
   activity7: Boolean
   activity8: Boolean
+  activity9: Boolean
+  activity10: Boolean
+  activity11: Boolean
   no: Int
   cell: String
   sector: String
@@ -300,6 +321,9 @@ input CreateIngaboInput {
   inkoko: String
   ingurube: String
   inka: String
+  ibirayi: String
+  ihene: String
+  intama: String
   signature: String
   _version: Int
 }
@@ -319,6 +343,9 @@ input UpdateIngaboInput {
   activity6: Boolean
   activity7: Boolean
   activity8: Boolean
+  activity9: Boolean
+  activity10: Boolean
+  activity11: Boolean
   no: Int
   cell: String
   sector: String
@@ -334,6 +361,9 @@ input UpdateIngaboInput {
   inkoko: String
   ingurube: String
   inka: String
+  ibirayi: String
+  ihene: String
+  intama: String
   signature: String
   _version: Int
 }
@@ -364,6 +394,9 @@ input ModelSubscriptionIngaboFilterInput {
   activity6: ModelSubscriptionBooleanInput
   activity7: ModelSubscriptionBooleanInput
   activity8: ModelSubscriptionBooleanInput
+  activity9: ModelSubscriptionBooleanInput
+  activity10: ModelSubscriptionBooleanInput
+  activity11: ModelSubscriptionBooleanInput
   no: ModelSubscriptionIntInput
   cell: ModelSubscriptionStringInput
   sector: ModelSubscriptionStringInput
@@ -379,6 +412,9 @@ input ModelSubscriptionIngaboFilterInput {
   inkoko: ModelSubscriptionStringInput
   ingurube: ModelSubscriptionStringInput
   inka: ModelSubscriptionStringInput
+  ibirayi: ModelSubscriptionStringInput
+  ihene: ModelSubscriptionStringInput
+  intama: ModelSubscriptionStringInput
   signature: ModelSubscriptionStringInput
   and: [ModelSubscriptionIngaboFilterInput]
   or: [ModelSubscriptionIngaboFilterInput]

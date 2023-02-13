@@ -37,12 +37,12 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync",
-      "lastPushTimeStamp": "2023-01-18T11:36:42.076Z",
+      "lastPushTimeStamp": "2023-02-13T21:55:03.884Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiingabofinal"
       },
-      "lastPushDirHash": "ApE60DCOwh9G38sZYCy8Ftm9z4g="
+      "lastPushDirHash": "fegXSlQodrhgwJWfivjEzoSLURM="
     }
   },
   "auth": {
@@ -80,7 +80,7 @@
         "IdentityPoolName": "ingabofinal9ebd1c16_identitypool_9ebd1c16__dev",
         "UserPoolName": "ingabofinal9ebd1c16_userpool_9ebd1c16"
       },
-      "lastPushTimeStamp": "2023-01-18T11:36:42.096Z",
+      "lastPushTimeStamp": "2023-02-13T21:55:02.431Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/auth/ingabofinal9ebd1c16-cloudformation-template.json",
         "logicalId": "authingabofinal9ebd1c16"
@@ -97,7 +97,7 @@
         "BucketName": "ingabofinal-storage-bbf78c19204948-dev",
         "Region": "us-east-1"
       },
-      "lastPushTimeStamp": "2023-01-18T11:36:42.114Z",
+      "lastPushTimeStamp": "2023-02-13T21:55:02.432Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
         "logicalId": "storages3ingabofinalstoragebbf78c19"
@@ -112,7 +112,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/analytics/pinpoint-cloudformation-template.json",
         "logicalId": "analyticsingabofinal"
       },
-      "lastPushTimeStamp": "2023-01-18T11:36:42.137Z",
+      "lastPushTimeStamp": "2023-02-13T21:55:02.435Z",
       "output": {
         "appName": "ingabofinal-dev",
         "Region": "us-east-1",
@@ -131,7 +131,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/hosting/amplifyhosting-template.json",
         "logicalId": "hostingamplifyhosting"
       },
-      "lastPushTimeStamp": "2023-01-18T11:36:42.156Z",
+      "lastPushTimeStamp": "2023-02-13T21:55:02.436Z",
       "output": {},
       "lastPushDirHash": "FY+oE7WPDCh5ec81MSSiGSzIweQ="
     }

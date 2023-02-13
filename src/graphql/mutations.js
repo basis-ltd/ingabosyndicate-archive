@@ -21,6 +21,9 @@ export const createIngabo = /* GraphQL */ `
       activity6
       activity7
       activity8
+      activity9
+      activity10
+      activity11
       no
       cell
       sector
@@ -36,6 +39,9 @@ export const createIngabo = /* GraphQL */ `
       inkoko
       ingurube
       inka
+      ibirayi
+      ihene
+      intama
       signature
       createdAt
       updatedAt
@@ -65,6 +71,9 @@ export const updateIngabo = /* GraphQL */ `
       activity6
       activity7
       activity8
+      activity9
+      activity10
+      activity11
       no
       cell
       sector
@@ -80,6 +89,9 @@ export const updateIngabo = /* GraphQL */ `
       inkoko
       ingurube
       inka
+      ibirayi
+      ihene
+      intama
       signature
       createdAt
       updatedAt
@@ -109,6 +121,9 @@ export const deleteIngabo = /* GraphQL */ `
       activity6
       activity7
       activity8
+      activity9
+      activity10
+      activity11
       no
       cell
       sector
@@ -124,6 +139,9 @@ export const deleteIngabo = /* GraphQL */ `
       inkoko
       ingurube
       inka
+      ibirayi
+      ihene
+      intama
       signature
       createdAt
       updatedAt

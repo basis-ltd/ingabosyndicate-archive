@@ -21,6 +21,9 @@ type EagerIngabo = {
   readonly activity6?: boolean | null;
   readonly activity7?: boolean | null;
   readonly activity8?: boolean | null;
+  readonly activity9?: boolean | null;
+  readonly activity10?: boolean | null;
+  readonly activity11?: boolean | null;
   readonly no?: number | null;
   readonly cell?: string | null;
   readonly sector?: string | null;
@@ -36,6 +39,9 @@ type EagerIngabo = {
   readonly inkoko?: string | null;
   readonly ingurube?: string | null;
   readonly inka?: string | null;
+  readonly ibirayi?: string | null;
+  readonly ihene?: string | null;
+  readonly intama?: string | null;
   readonly signature?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -56,6 +62,9 @@ type LazyIngabo = {
   readonly activity6?: boolean | null;
   readonly activity7?: boolean | null;
   readonly activity8?: boolean | null;
+  readonly activity9?: boolean | null;
+  readonly activity10?: boolean | null;
+  readonly activity11?: boolean | null;
   readonly no?: number | null;
   readonly cell?: string | null;
   readonly sector?: string | null;
@@ -71,6 +80,9 @@ type LazyIngabo = {
   readonly inkoko?: string | null;
   readonly ingurube?: string | null;
   readonly inka?: string | null;
+  readonly ibirayi?: string | null;
+  readonly ihene?: string | null;
+  readonly intama?: string | null;
   readonly signature?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

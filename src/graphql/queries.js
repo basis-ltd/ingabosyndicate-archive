@@ -18,6 +18,9 @@ export const getIngabo = /* GraphQL */ `
       activity6
       activity7
       activity8
+      activity9
+      activity10
+      activity11
       no
       cell
       sector
@@ -33,6 +36,9 @@ export const getIngabo = /* GraphQL */ `
       inkoko
       ingurube
       inka
+      ibirayi
+      ihene
+      intama
       signature
       createdAt
       updatedAt
@@ -64,6 +70,9 @@ export const listIngabos = /* GraphQL */ `
         activity6
         activity7
         activity8
+        activity9
+        activity10
+        activity11
         no
         cell
         sector
@@ -79,6 +88,9 @@ export const listIngabos = /* GraphQL */ `
         inkoko
         ingurube
         inka
+        ibirayi
+        ihene
+        intama
         signature
         createdAt
         updatedAt
@@ -119,6 +131,9 @@ export const syncIngabos = /* GraphQL */ `
         activity6
         activity7
         activity8
+        activity9
+        activity10
+        activity11
         no
         cell
         sector
@@ -134,6 +149,9 @@ export const syncIngabos = /* GraphQL */ `
         inkoko
         ingurube
         inka
+        ibirayi
+        ihene
+        intama
         signature
         createdAt
         updatedAt

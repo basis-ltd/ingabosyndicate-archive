@@ -31,6 +31,9 @@ export declare type IngaboUpdateFormInputValues = {
     activity6?: boolean;
     activity7?: boolean;
     activity8?: boolean;
+    activity9?: boolean;
+    activity10?: boolean;
+    activity11?: boolean;
 };
 export declare type IngaboUpdateFormValidationValues = {
     fullName?: ValidationFunction<string>;
@@ -50,6 +53,9 @@ export declare type IngaboUpdateFormValidationValues = {
     activity6?: ValidationFunction<boolean>;
     activity7?: ValidationFunction<boolean>;
     activity8?: ValidationFunction<boolean>;
+    activity9?: ValidationFunction<boolean>;
+    activity10?: ValidationFunction<boolean>;
+    activity11?: ValidationFunction<boolean>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type IngaboUpdateFormOverridesProps = {
@@ -78,6 +84,10 @@ export declare type IngaboUpdateFormOverridesProps = {
     activity6?: PrimitiveOverrideProps<CheckboxFieldProps>;
     activity7?: PrimitiveOverrideProps<CheckboxFieldProps>;
     activity8?: PrimitiveOverrideProps<CheckboxFieldProps>;
+    RowGrid7?: PrimitiveOverrideProps<GridProps>;
+    activity9?: PrimitiveOverrideProps<CheckboxFieldProps>;
+    activity10?: PrimitiveOverrideProps<CheckboxFieldProps>;
+    activity11?: PrimitiveOverrideProps<CheckboxFieldProps>;
 } & EscapeHatchProps;
 export declare type IngaboUpdateFormProps = React.PropsWithChildren<{
     overrides?: IngaboUpdateFormOverridesProps | undefined | null;
