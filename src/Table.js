@@ -139,8 +139,9 @@ function Table() {
 
   const pullData = async () => {
     let prevRecords = await DataStore.query(Ingabo);
+    let filteredRecords = [];
 
-    records = prevRecords.map((record, index) => {
+    records = prevRecords.filter((record) => record.fullName !== null).map((record, index) => {
       const updatedRecord = {
         ...record,
         no: index + 1,
@@ -170,11 +171,11 @@ function Table() {
             : "Oya",
         signature: "",
       };
+
       return updatedRecord;
     });
 
     setRecords(records);
-    console.log(records);
   };
 
   useEffect(() => {
