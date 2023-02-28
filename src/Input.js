@@ -5,7 +5,7 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import IngaboCreateForm from "./ui-components/IngaboCreateForm";
 import { Helmet } from "react-helmet";
 import { Button } from "./Button";
-import { Amplify, DataStore } from "aws-amplify/";
+import { Amplify, DataStore, API } from "aws-amplify/";
 import { Redirect, Link, useNavigate } from "react-router-dom";
 import { Ingabo } from "./models";
 import Sms77Client from "sms77-client";
@@ -30,6 +30,8 @@ function Input() {
     console.log(to, username)
     setSucess(!sucess);
   };
+
+  
 
   return (
     <>
