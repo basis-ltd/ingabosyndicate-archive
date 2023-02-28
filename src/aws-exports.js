@@ -7,6 +7,13 @@ const awsmobile = {
     "aws_appsync_region": "us-east-1",
     "aws_appsync_authenticationType": "API_KEY",
     "aws_appsync_apiKey": "da2-ezan3l2z75dmdk6zndjzialrja",
+    "aws_cloud_logic_custom": [
+        {
+            "name": "ingabosyndicate",
+            "endpoint": "https://t6mpyelpbb.execute-api.us-east-1.amazonaws.com/dev",
+            "region": "us-east-1"
+        }
+    ],
     "aws_cognito_identity_pool_id": "us-east-1:8898a53d-d67e-403d-81d6-b0c40cdc7c27",
     "aws_cognito_region": "us-east-1",
     "aws_user_pools_id": "us-east-1_h0YyGRhNE",
@@ -33,7 +40,13 @@ const awsmobile = {
     "aws_user_files_s3_bucket": "ingabofinal-storage-bbf78c19204948-dev",
     "aws_user_files_s3_bucket_region": "us-east-1",
     "aws_mobile_analytics_app_id": "7b04110798ae4050a85e4412f1ec207c",
-    "aws_mobile_analytics_app_region": "us-east-1"
+    "aws_mobile_analytics_app_region": "us-east-1",
+    "Analytics": {
+        "AWSPinpoint": {
+            "appId": "7b04110798ae4050a85e4412f1ec207c",
+            "region": "us-east-1"
+        }
+    }
 };
 
 

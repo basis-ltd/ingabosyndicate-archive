@@ -172,6 +172,27 @@
         }
       }
     },
+    "apiingabosyndicate": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/api/ingabosyndicate-cloudformation-template.json",
+        "Parameters": {
+          "functioningabosyndicateinputName": {
+            "Fn::GetAtt": [
+              "functioningabosyndicateinput",
+              "Outputs.Name"
+            ]
+          },
+          "functioningabosyndicateinputArn": {
+            "Fn::GetAtt": [
+              "functioningabosyndicateinput",
+              "Outputs.Arn"
+            ]
+          },
+          "env": "dev"
+        }
+      }
+    },
     "authingabofinal9ebd1c16": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
@@ -286,6 +307,35 @@
             "Fn::GetAtt": [
               "AuthRole",
               "Arn"
+            ]
+          },
+          "env": "dev"
+        }
+      }
+    },
+    "functioningabosyndicateinput": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabofinal-dev-204948-deployment/amplify-cfn-templates/function/ingabosyndicateinput-cloudformation-template.json",
+        "Parameters": {
+          "deploymentBucketName": "amplify-ingabofinal-dev-204948-deployment",
+          "s3Key": "amplify-builds/ingabosyndicateinput-6741474c52644b544f34-build.zip",
+          "apiingabofinalGraphQLAPIIdOutput": {
+            "Fn::GetAtt": [
+              "apiingabofinal",
+              "Outputs.GraphQLAPIIdOutput"
+            ]
+          },
+          "apiingabofinalGraphQLAPIEndpointOutput": {
+            "Fn::GetAtt": [
+              "apiingabofinal",
+              "Outputs.GraphQLAPIEndpointOutput"
+            ]
+          },
+          "apiingabofinalGraphQLAPIKeyOutput": {
+            "Fn::GetAtt": [
+              "apiingabofinal",
+              "Outputs.GraphQLAPIKeyOutput"
             ]
           },
           "env": "dev"

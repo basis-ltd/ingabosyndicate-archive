@@ -95,6 +95,7 @@ function Input() {
         </Helmet>
         <IngaboCreateForm
           onSuccess={(fields) => {
+            console.log(fields.fullName);
             toggleInputModal(fields.telephone, fields.fullName);
           }}
           onCancel={() => {

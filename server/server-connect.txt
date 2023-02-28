@@ -1,8 +1,0 @@
-// CONNECT TO EC2 SSH
-ssh -i "ingabosyndicate.pem" ubuntu@ec2-44-209-248-214.compute-1.amazonaws.com
-
-//ELASTIC IP
-44.209.248.214
-
-//HEROKU INSTALL
-curl https://cli-assets.heroku.com/install.sh | sh
