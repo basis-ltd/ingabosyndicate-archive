@@ -27,6 +27,20 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync"
+    },
+    "ingabosyndicate": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "ingabosyndicateinput"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
     }
   },
   "auth": {
@@ -57,7 +71,24 @@
       "service": "Cognito"
     }
   },
-  "function": {},
+  "function": {
+    "ingabosyndicateinput": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "ingabofinal"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
   "hosting": {
     "amplifyhosting": {
       "providerPlugin": "awscloudformation",
@@ -66,6 +97,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_ingabosyndicateinput_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ingabosyndicateinput"
+        }
+      ]
+    },
+    "AMPLIFY_function_ingabosyndicateinput_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ingabosyndicateinput"
+        }
+      ]
+    },
     "AMPLIFY_hosting_amplifyhosting_appId": {
       "usedBy": [
         {

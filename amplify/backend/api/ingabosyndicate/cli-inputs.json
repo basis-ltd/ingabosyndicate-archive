@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/input": {
+      "name": "/input",
+      "lambdaFunction": "ingabosyndicateinput",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
