@@ -38,6 +38,7 @@ app.use(function(req, res, next) {
 
 app.get('/input', function(req, res) {
   // Add your code here
+  console.log(req.url)
   res.json({success: 'get call succeed!', url: req.url});
 });
 
@@ -67,6 +68,7 @@ app.post('/input/*', function(req, res) {
 app.put('/input', function(req, res) {
   // Add your code here
   res.json({success: 'put call succeed!', url: req.url, body: req.body})
+
 });
 
 app.put('/input/*', function(req, res) {
@@ -89,7 +91,7 @@ app.delete('/input/*', function(req, res) {
 });
 
 app.listen(3000, function() {
-    console.log("App started")
+    console.log("App started!")
 });
 
 // Export the app object. When executing the application local this does nothing. However,
