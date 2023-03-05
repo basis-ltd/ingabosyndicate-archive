@@ -1,8 +1,0 @@
-{
-  "AppSyncApiName": "ingabofinal",
-  "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false,
-  "CreateApiKey": 1,
-  "APIKeyExpirationEpoch": 31536000,
-  "AuthModeLastUpdated": "2023-01-10T11:36:14.971Z"
-}

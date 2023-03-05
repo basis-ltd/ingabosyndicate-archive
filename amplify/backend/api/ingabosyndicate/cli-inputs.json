@@ -1,11 +1,17 @@
 {
   "version": 1,
-  "paths": {
-    "/input": {
-      "name": "/input",
-      "lambdaFunction": "ingabosyndicateinput",
-      "permissions": {
-        "setting": "open"
+  "serviceConfiguration": {
+    "apiName": "ingabosyndicate",
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 365,
+      "apiKeyExpirationDate": "2024-03-04T19:35:10.977Z",
+      "keyDescription": "API Key to authorize ingabosyndicate application hosted on lens"
+    },
+    "conflictResolution": {
+      "defaultResolutionStrategy": {
+        "type": "OPTIMISTIC_CONCURRENCY"
       }
     }
   }

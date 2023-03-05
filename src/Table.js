@@ -187,6 +187,7 @@ function Table() {
   }, []);
 
   let data = records;
+  console.log(data);
 
   const columns = React.useMemo(
     () => [

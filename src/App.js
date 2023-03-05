@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import React, { useRef } from "react";
 import "./App.css";
 import Table from "./Table";
@@ -6,20 +5,25 @@ import { Amplify } from "aws-amplify/";
 import awsconfig from "./aws-exports";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Button } from "./Button";
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import IngaboCreateForm from "./ui-components/IngaboCreateForm";
 import IngaboUpdateForm from "./ui-components/IngaboUpdateForm";
 import NavBar from "./NavBar";
 import { Helmet } from "react-helmet";
 import Input from "./Input.js";
 import { Ingabo } from "./models";
-import LandingPage from './Landing-Page'
-import Footer from './Footer'
+import LandingPage from "./Landing-Page";
+import Footer from "./Footer";
+import Import from "./Import.js";
 
 Amplify.configure(awsconfig);
 
 function App() {
-
   let navigate = useNavigate();
 
   return (
@@ -47,11 +51,14 @@ function App() {
             </div>
           }
         />
-        <Route path="/" element={
-          <div className="landing-page">
-            <LandingPage />
-          </div>
-        } />
+        <Route
+          path="/"
+          element={
+            <div className="landing-page">
+              <LandingPage />
+            </div>
+          }
+        />
 
         <Route
           path="/update"
@@ -63,6 +70,7 @@ function App() {
             />
           }
         />
+        <Route path="/import" element={<Import />} />
       </Routes>
 
       <Footer />
