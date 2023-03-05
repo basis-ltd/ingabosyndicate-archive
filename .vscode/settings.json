@@ -8,11 +8,8 @@
     "amplify/backend/amplify-meta.json": true,
     "amplify/backend/awscloudformation": true
   },
-  "github.copilot.advanced": {
-  
-  },
+  "github.copilot.advanced": {},
   "github.copilot.enable": {
-  
     "*": true,
     "yaml": false,
     "plaintext": false,

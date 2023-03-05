@@ -1,42 +1,19 @@
 {
-  "dev": {
+  "prod": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-ingabofinal-dev-204948-authRole",
-      "UnauthRoleArn": "arn:aws:iam::575463654172:role/amplify-ingabofinal-dev-204948-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::575463654172:role/amplify-ingabofinal-dev-204948-authRole",
+      "AuthRoleName": "amplify-ingabosyndicate-prod-210939-authRole",
+      "UnauthRoleArn": "arn:aws:iam::049778465641:role/amplify-ingabosyndicate-prod-210939-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::049778465641:role/amplify-ingabosyndicate-prod-210939-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-ingabofinal-dev-204948-deployment",
-      "UnauthRoleName": "amplify-ingabofinal-dev-204948-unauthRole",
-      "StackName": "amplify-ingabofinal-dev-204948",
-      "StackId": "arn:aws:cloudformation:us-east-1:575463654172:stack/amplify-ingabofinal-dev-204948/43d25b10-7ca9-11ed-bc0f-0e9b72f9288b",
-      "AmplifyAppId": "dwc6m90ljxm0x"
+      "DeploymentBucketName": "amplify-ingabosyndicate-prod-210939-deployment",
+      "UnauthRoleName": "amplify-ingabosyndicate-prod-210939-unauthRole",
+      "StackName": "amplify-ingabosyndicate-prod-210939",
+      "StackId": "arn:aws:cloudformation:us-east-1:049778465641:stack/amplify-ingabosyndicate-prod-210939/4ac520a0-bb89-11ed-92a2-1236ffa096a1",
+      "AmplifyAppId": "d3s8epufdgyi04"
     },
     "categories": {
       "auth": {
-        "ingabofinal9ebd1c16": {}
-      },
-      "storage": {
-        "s3ingabofinalstoragebbf78c19": {}
-      },
-      "api": {
-        "ingabofinal": {},
-        "ingabosyndicate": {}
-      },
-      "analytics": {
-        "ingabofinal": {}
-      },
-      "function": {
-        "ingabosyndicatetwilio": {},
-        "ingabosyndicateinput": {
-          "deploymentBucketName": "amplify-ingabofinal-dev-204948-deployment",
-          "s3Key": "amplify-builds/ingabosyndicateinput-6741474c52644b544f34-build.zip"
-        }
-      },
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "dwc6m90ljxm0x",
-          "type": "manual"
-        }
+        "ingabosyndicatec080bdfb": {}
       }
     }
   }

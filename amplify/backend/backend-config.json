@@ -1,25 +1,15 @@
 {
-  "analytics": {
-    "ingabofinal": {
-      "providerPlugin": "awscloudformation",
-      "service": "Pinpoint"
-    }
-  },
   "api": {
-    "ingabofinal": {
+    "ingabosyndicate": {
       "dependsOn": [],
       "output": {
         "authConfig": {
-          "additionalAuthenticationProviders": [
-            {
-              "authenticationType": "AWS_IAM"
-            }
-          ],
+          "additionalAuthenticationProviders": [],
           "defaultAuthentication": {
             "apiKeyConfig": {
-              "apiKeyExpirationDate": "2024-01-10T11:36:10.116Z",
+              "apiKeyExpirationDate": "2024-03-04T19:35:10.977Z",
               "apiKeyExpirationDays": 365,
-              "description": "ingabofinal-prod"
+              "description": "API Key to authorize ingabosyndicate application hosted on lens"
             },
             "authenticationType": "API_KEY"
           }
@@ -27,24 +17,10 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync"
-    },
-    "ingabosyndicate": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "ingabosyndicateinput"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
     }
   },
   "auth": {
-    "ingabofinal9ebd1c16": {
+    "ingabosyndicatec080bdfb": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -57,7 +33,8 @@
           "passwordPolicyMinLength": 8
         },
         "signupAttributes": [
-          "EMAIL"
+          "EMAIL",
+          "NAME"
         ],
         "socialProviders": [],
         "usernameAttributes": [
@@ -69,72 +46,6 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
-    }
-  },
-  "function": {
-    "ingabosyndicateinput": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ],
-          "category": "api",
-          "resourceName": "ingabofinal"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
-  "hosting": {
-    "amplifyhosting": {
-      "providerPlugin": "awscloudformation",
-      "service": "amplifyhosting",
-      "type": "manual"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_function_ingabosyndicateinput_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "ingabosyndicateinput"
-        }
-      ]
-    },
-    "AMPLIFY_function_ingabosyndicateinput_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "ingabosyndicateinput"
-        }
-      ]
-    },
-    "AMPLIFY_hosting_amplifyhosting_appId": {
-      "usedBy": [
-        {
-          "category": "hosting",
-          "resourceName": "amplifyhosting"
-        }
-      ]
-    },
-    "AMPLIFY_hosting_amplifyhosting_type": {
-      "usedBy": [
-        {
-          "category": "hosting",
-          "resourceName": "amplifyhosting"
-        }
-      ]
-    }
-  },
-  "storage": {
-    "s3ingabofinalstoragebbf78c19": {
-      "dependsOn": [],
-      "providerPlugin": "awscloudformation",
-      "service": "S3"
     }
   }
 }
