@@ -198,13 +198,8 @@ function Table() {
   const columns = React.useMemo(
     () => [
       {
-        Header: "No",
-        accessor: "no",
-        width: 7,
-      },
-      {
         Header: "Amazina Yombi",
-        accessor: "fullName",
+        accessor: "fullname",
         width: 30,
       },
       {

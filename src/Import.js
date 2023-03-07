@@ -12,10 +12,57 @@ function Import() {
        return date.split("/").reverse().join("-")
     }
 
-  const transformer = (row) => {
+    const formatObject = (obj) => {
+
+        let updatedObj = {}
+
+        for (let [key, value] of Object.entries(obj)) {
+          if (value === "null") value = "";
+          if ((key == "telephone") && value.length > 5) value = '0' + value;
+            updatedObj[key] = value
+        }
+
+        return updatedObj
+
+    }
+
+    const transformerDatabase = (row) => {
+
+      const updatedRecord = {
+        // fullname: row["Amazina Yombi"],
+        // dateofbirth: row["Igihe Yavukiye"],
+        nationalID: String(row["Indangamuntu"]),
+        // cooperative: row["Cooperative"],
+        // telephone: String(row["Telephone"]),
+        // gender: row["Igitsina"],
+        // district: row["Aho Atuye"],
+        // imyumbati: row["Imyumbati"],
+        // umuceri: row["Umuceri"],
+        // ibigori: row["Ibigori"],
+        // ibinyamisogwe: row["Ibinyamisogwe"],
+        // imboga_imbuto: row["Imboga n' Imbuto"],
+        // inkoko: row["Inkoko"],
+        // ingurube: row["Ingurube"],
+        // inka: row["Inka"],
+        // ibirayi: row["Ibirayi"],
+        // ihene: row["Ihene"],
+        // intama: row["Intama"],
+        // arahinga: row["Arahinga"],
+        // aroroye: row["Aroroye"],
+        // signature: row["Signature"],
+      }
+
+      let modifiedRecord = formatObject(updatedRecord)
+
+      return modifiedRecord;
+
+    }
+
+  const transformerCSV = (row) => {
+
     const updatedRecord = {
       fullname: row.fullName,
-      dateofbirth: formatDate(row.dateofbirth),
+      dateofbirth: row.dateOfBirth,
       nationalID: String(row.nationalID),
       cooperative: row.cooperative,
       telephone: String(row.telephone),
@@ -54,50 +101,132 @@ function Import() {
           signature: row.signature,
     };
 
-    return updatedRecord;
+    let modifiedRecord = formatObject(updatedRecord);
+
+    return modifiedRecord;
   };
 
   let transformedData = [];
 
   const handleUpload = (e) => {
-    const file = e.target.files[0];
+    const backup = e.target.files[0];
+    const downloads = e.target.files[1];
 
-    Papa.parse(file, {
+    console.log(backup, downloads);
+
+    Papa.parse(downloads, {
+      header: true,
+      complete: async(results, parser) => {
+        let transformedDatabase = [];
+        let filteredRecords = results.data.filter((record) => record.fullName !== "null");
+        transformedDatabase = filteredRecords.map(transformerDatabase);
+        console.log(results.data);
+      },
+    });
+
+    Papa.parse(backup, {
       header: true,
       dynamicTyping: true,
       complete: async(results, parser) => {
-        transformedData = results.data.map(transformer);
-        await DataStore.save(
-            new Ingabo({
-                fullname: transformedData[0].fullname,
-                dateofbirth: transformedData[0].dateofbirth,
-                nationalID: transformedData[0].nationalID,
-                cooperative: transformedData[0].cooperative,
-                telephone: transformedData[0].telephone,
-                cell: transformedData[0].cell,
-                sector: transformedData[0].sector,
-                district: transformedData[0].district,
-                gender: transformedData[0].gender,
-                signature: transformedData[0].signature,
-                aroroye: transformedData[0].aroroye,
-                arahinga: transformedData[0].arahinga,
-                imyumbati: transformedData[0].imyumbati,
-                umuceri: transformedData[0].umuceri,
-                ibigori: transformedData[0].ibigori,
-                ibinyamisogwe: transformedData[0].ibinyamisogwe,
-                imboga_imbuto: transformedData[0].imboga_imbuto,
-                inkoko: transformedData[0].inkoko,
-                ingurube: transformedData[0].ingurube,
-                inka: transformedData[0].inka,
-                ibirayi: transformedData[0].ibirayi,
-                ihene: transformedData[0].ihene,
-                intama: transformedData[0].intama,
-            })
-        )
-        console.log(transformedData[0]);
+        let filteredRecords = results.data.filter((record) => record.fullName !== "null");
+        transformedData = filteredRecords.map(transformerCSV);
+        console.log(transformedData)
       },
     });
   };
+
+  function transformer(arr1, arr2) {
+
+    let transformedArray = [];
+
+    let updatedObj = {};
+
+    arr1.forEach((record, index) => {
+
+      updatedObj = {
+        fullname: record.fullName,
+        dateofbirth: record.dateOfBirth,
+        nationalID: String(arr2[index].Indangamuntu),
+        cooperative: record.cooperative,
+        telephone: String(record.telephone),
+        gender: record.gender,
+        cell: record.cell,
+        sector: record.sector,
+        district: record.district,
+        imyumbati: record.activity1 ? "Yego" : "Oya",
+        umuceri: record.activity2 ? "Yego" : "Oya",
+        ibigori: record.activity3 ? "Yego" : "Oya",
+        ibinyamisogwe: record.activity4 ? "Yego" : "Oya",
+        imboga_imbuto: record.activity5 ? "Yego" : "Oya",
+        inkoko: record.activity6 ? "Yego" : "Oya",
+        ingurube: record.activity7 ? "Yego" : "Oya",
+        inka: record.activity8 ? "Yego" : "Oya",
+        ibirayi: record.activity9 ? "Yego" : "Oya",
+        ihene: record.activity10 ? "Yego" : "Oya",
+        intama: record.activity11 ? "Yego" : "Oya",
+        arahinga:
+          record.activity1 ||
+          record.activity2 ||
+          record.activity3 ||
+          record.activity4 ||
+          record.activity5 ||
+          record.activity9
+            ? "Yego"
+            : "Oya",
+        aroroye:
+          record.activity6 ||
+          record.activity7 ||
+          record.activity8 ||
+          record.activity10 ||
+          record.activity11
+            ? "Yego"
+            : "Oya",
+            signature: record.signature,
+      };
+
+      transformedArray.push(updatedObj);
+
+    });
+
+    console.log(transformedArray);
+    return transformedArray;
+    
+  }
+
+  const saveData = async () => {
+    
+    transformedData.forEach(async (record, index) => {
+    //   await DataStore.save(
+    //     new Ingabo({
+    //         fullname: record.fullname,
+    //         dateofbirth: record.dateofbirth,
+    //         nationalID: record.nationalID,
+    //         cooperative: record.cooperative,
+    //         telephone: record.telephone,
+    //         cell: record.cell,
+    //         sector: record.sector,
+    //         district: record.district,
+    //         gender: record.gender,
+    //         signature: record.signature,
+    //         aroroye: record.aroroye,
+    //         arahinga: record.arahinga,
+    //         imyumbati: record.imyumbati,
+    //         umuceri: record.umuceri,
+    //         ibigori: record.ibigori,
+    //         ibinyamisogwe: record.ibinyamisogwe,
+    //         imboga_imbuto: record.imboga_imbuto,
+    //         inkoko: record.inkoko,
+    //         ingurube: record.ingurube,
+    //         inka: record.inka,
+    //         ibirayi: record.ibirayi,
+    //         ihene: record.ihene,
+    //         intama: record.intama,
+    //     })
+    // )
+    console.log(record);
+    });
+
+  }
 
 
 
@@ -108,9 +237,10 @@ function Import() {
         accept=".csv"
         name="file"
         onChange={handleUpload}
+        multiple={true}
       ></input>
 
-      <input type="submit" value="Parse"></input>
+      <input type="submit" value="Parse" onClick={() => saveData()}></input>
     </div>
   );
 }
