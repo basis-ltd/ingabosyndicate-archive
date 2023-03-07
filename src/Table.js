@@ -141,39 +141,45 @@ function Table() {
     let prevRecords = await DataStore.query(Ingabo);
     let filteredRecords = [];
 
-    records = prevRecords.filter((record) => record.fullName !== null).map((record, index) => {
-      const updatedRecord = {
-        ...record,
-        no: index + 1,
-        imyumbati: record.activity1 ? "Yego" : "Oya",
-        umuceri: record.activity2 ? "Yego" : "Oya",
-        ibigori: record.activity3 ? "Yego" : "Oya",
-        ibinyamisogwe: record.activity4 ? "Yego" : "Oya",
-        imboga_imbuto: record.activity5 ? "Yego" : "Oya",
-        inkoko: record.activity6 ? "Yego" : "Oya",
-        ingurube: record.activity7 ? "Yego" : "Oya",
-        inka: record.activity8 ? "Yego" : "Oya",
-        ibirayi: record.activity9 ? "Yego" : "Oya",
-        ihene: record.activity10 ? "Yego" : "Oya",
-        intama: record.activity11 ? "Yego" : "Oya",
-        arahinga:
-          record.activity1 ||
-          record.activity2 ||
-          record.activity3 ||
-          record.activity4 ||
-          record.activity5 ||
-          record.activity9
-            ? "Yego"
-            : "Oya",
-        aroroye:
-          record.activity6 || record.activity7 || record.activity8 || record.activity10 || record.activity11
-            ? "Yego"
-            : "Oya",
-        signature: "",
-      };
+    records = prevRecords
+      .filter((record) => record.fullName !== null)
+      .map((record, index) => {
+        const updatedRecord = {
+          ...record,
+          no: index + 1,
+          imyumbati: record.activity1 ? "Yego" : "Oya",
+          umuceri: record.activity2 ? "Yego" : "Oya",
+          ibigori: record.activity3 ? "Yego" : "Oya",
+          ibinyamisogwe: record.activity4 ? "Yego" : "Oya",
+          imboga_imbuto: record.activity5 ? "Yego" : "Oya",
+          inkoko: record.activity6 ? "Yego" : "Oya",
+          ingurube: record.activity7 ? "Yego" : "Oya",
+          inka: record.activity8 ? "Yego" : "Oya",
+          ibirayi: record.activity9 ? "Yego" : "Oya",
+          ihene: record.activity10 ? "Yego" : "Oya",
+          intama: record.activity11 ? "Yego" : "Oya",
+          arahinga:
+            record.activity1 ||
+            record.activity2 ||
+            record.activity3 ||
+            record.activity4 ||
+            record.activity5 ||
+            record.activity9
+              ? "Yego"
+              : "Oya",
+          aroroye:
+            record.activity6 ||
+            record.activity7 ||
+            record.activity8 ||
+            record.activity10 ||
+            record.activity11
+              ? "Yego"
+              : "Oya",
+          signature: "",
+        };
 
-      return updatedRecord;
-    });
+        return updatedRecord;
+      });
 
     setRecords(records);
   };
@@ -587,7 +593,8 @@ function Table() {
       ],
       body: info,
       columnWidth: [
-        80, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 60, 40, 40, 40, 40, 40, 40, 40
+        80, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 60, 40, 40, 40, 40, 40,
+        40, 40,
       ],
     });
 
