@@ -321,13 +321,9 @@ export default function IngaboCreateForm(props) {
         label="National id"
         isRequired={false}
         isReadOnly={false}
-        type="number"
-        step="any"
         value={nationalID}
         onChange={(e) => {
-          let value = isNaN(parseInt(e.target.value))
-            ? e.target.value
-            : parseInt(e.target.value);
+          let { value } = e.target;
           if (onChange) {
             const modelFields = {
               fullname,

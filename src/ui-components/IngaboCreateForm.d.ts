@@ -15,7 +15,7 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type IngaboCreateFormInputValues = {
     fullname?: string;
     dateofbirth?: string;
-    nationalID?: number;
+    nationalID?: string;
     cooperative?: string;
     telephone?: string;
     cell?: string;
@@ -40,7 +40,7 @@ export declare type IngaboCreateFormInputValues = {
 export declare type IngaboCreateFormValidationValues = {
     fullname?: ValidationFunction<string>;
     dateofbirth?: ValidationFunction<string>;
-    nationalID?: ValidationFunction<number>;
+    nationalID?: ValidationFunction<string>;
     cooperative?: ValidationFunction<string>;
     telephone?: ValidationFunction<string>;
     cell?: ValidationFunction<string>;

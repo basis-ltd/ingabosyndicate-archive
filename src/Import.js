@@ -7,10 +7,15 @@ import Papa from "papaparse";
 Amplify.configure(awsconfig);
 
 function Import() {
+
+    const formatDate = (date) => {
+       return date.split("/").reverse().join("-")
+    }
+
   const transformer = (row) => {
     const updatedRecord = {
       fullname: row.fullName,
-      dateofbirth: row.dateofbirth,
+      dateofbirth: formatDate(row.dateofbirth),
       nationalID: String(row.nationalID),
       cooperative: row.cooperative,
       telephone: String(row.telephone),
@@ -60,16 +65,41 @@ function Import() {
     Papa.parse(file, {
       header: true,
       dynamicTyping: true,
-      complete: (results, parser) => {
-        console.log(results.data, file);
+      complete: async(results, parser) => {
         transformedData = results.data.map(transformer);
+        await DataStore.save(
+            new Ingabo({
+                fullname: transformedData[0].fullname,
+                dateofbirth: transformedData[0].dateofbirth,
+                nationalID: transformedData[0].nationalID,
+                cooperative: transformedData[0].cooperative,
+                telephone: transformedData[0].telephone,
+                cell: transformedData[0].cell,
+                sector: transformedData[0].sector,
+                district: transformedData[0].district,
+                gender: transformedData[0].gender,
+                signature: transformedData[0].signature,
+                aroroye: transformedData[0].aroroye,
+                arahinga: transformedData[0].arahinga,
+                imyumbati: transformedData[0].imyumbati,
+                umuceri: transformedData[0].umuceri,
+                ibigori: transformedData[0].ibigori,
+                ibinyamisogwe: transformedData[0].ibinyamisogwe,
+                imboga_imbuto: transformedData[0].imboga_imbuto,
+                inkoko: transformedData[0].inkoko,
+                ingurube: transformedData[0].ingurube,
+                inka: transformedData[0].inka,
+                ibirayi: transformedData[0].ibirayi,
+                ihene: transformedData[0].ihene,
+                intama: transformedData[0].intama,
+            })
+        )
+        console.log(transformedData[0]);
       },
     });
   };
 
-  const transformData = () => {
-    console.log(transformedData);
-  };
+
 
   return (
     <div className="import-container">
@@ -80,7 +110,7 @@ function Import() {
         onChange={handleUpload}
       ></input>
 
-      <input type="submit" value="Parse" onClick={transformData}></input>
+      <input type="submit" value="Parse"></input>
     </div>
   );
 }
