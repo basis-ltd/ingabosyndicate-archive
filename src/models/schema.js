@@ -10,8 +10,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "fullName": {
-                    "name": "fullName",
+                "fullname": {
+                    "name": "fullname",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -27,7 +27,7 @@ export const schema = {
                 "nationalID": {
                     "name": "nationalID",
                     "isArray": false,
-                    "type": "String",
+                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -42,90 +42,6 @@ export const schema = {
                     "name": "telephone",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "activity1": {
-                    "name": "activity1",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "activity2": {
-                    "name": "activity2",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "activity3": {
-                    "name": "activity3",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "activity4": {
-                    "name": "activity4",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "activity5": {
-                    "name": "activity5",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "activity6": {
-                    "name": "activity6",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "activity7": {
-                    "name": "activity7",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "activity8": {
-                    "name": "activity8",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "activity9": {
-                    "name": "activity9",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "activity10": {
-                    "name": "activity10",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "activity11": {
-                    "name": "activity11",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "no": {
-                    "name": "no",
-                    "isArray": false,
-                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -152,6 +68,13 @@ export const schema = {
                 },
                 "gender": {
                     "name": "gender",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "signature": {
+                    "name": "signature",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -248,13 +171,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "signature": {
-                    "name": "signature",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -301,5 +217,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.6",
-    "version": "32d36ccfc223ae5096a25e4b3e19c7c6"
+    "version": "f185eaf1ceb62f7d5d0dd3c177328730"
 };

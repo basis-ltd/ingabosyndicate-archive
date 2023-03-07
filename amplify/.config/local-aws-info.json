@@ -1,5 +1,7 @@
 {
-  "prod": {
-    "configLevel": "amplifyAdmin"
+  "staging": {
+    "configLevel": "project",
+    "useProfile": true,
+    "profileName": "nishimweprince-lens"
   }
 }

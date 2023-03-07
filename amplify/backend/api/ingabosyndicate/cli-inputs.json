@@ -5,13 +5,17 @@
     "serviceName": "AppSync",
     "defaultAuthType": {
       "mode": "API_KEY",
-      "expirationTime": 365,
-      "apiKeyExpirationDate": "2024-03-04T19:35:10.977Z",
-      "keyDescription": "API Key to authorize ingabosyndicate application hosted on lens"
+      "keyDescription": "api key description",
+      "expirationTime": 30
     },
+    "additionalAuthTypes": [
+      {
+        "mode": "AWS_IAM"
+      }
+    ],
     "conflictResolution": {
       "defaultResolutionStrategy": {
-        "type": "OPTIMISTIC_CONCURRENCY"
+        "type": "AUTOMERGE"
       }
     }
   }
