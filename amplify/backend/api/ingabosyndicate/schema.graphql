@@ -2,7 +2,7 @@ type Ingabo @model @auth(rules: [{allow: public}]) {
   id: ID!
   fullname: String
   dateofbirth: AWSDate
-  nationalID: Int
+  nationalID: String
   cooperative: String
   telephone: String
   cell: String

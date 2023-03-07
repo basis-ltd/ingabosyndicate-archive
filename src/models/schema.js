@@ -27,7 +27,7 @@ export const schema = {
                 "nationalID": {
                     "name": "nationalID",
                     "isArray": false,
-                    "type": "Int",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -217,5 +217,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.6",
-    "version": "f185eaf1ceb62f7d5d0dd3c177328730"
+    "version": "2a5893f8b0e1407c32dee2957458b8f9"
 };

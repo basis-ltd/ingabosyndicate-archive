@@ -12,6 +12,38 @@
       "AmplifyAppId": "d10nwkulad6ab7"
     }
   },
+  "api": {
+    "ingabosyndicate": {
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ],
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 30,
+              "description": "api key description"
+            }
+          }
+        },
+        "GraphQLAPIIdOutput": "3j52vp5pg5gongjzlc4ccmudcq",
+        "GraphQLAPIEndpointOutput": "https://guv6xaft2vd25aen7vedpky2na.appsync-api.us-east-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-gsmumtfyxvevhov3j6n6aemmum"
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync",
+      "lastPushTimeStamp": "2023-03-07T13:18:55.107Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-ingabosyndicate-staging-83852-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apiingabosyndicate"
+      },
+      "lastPushDirHash": "BevGc3FG6V33+6p/KsO0Lr8uTGc="
+    }
+  },
   "auth": {
     "ingabosyndicate": {
       "customAuth": false,
@@ -51,43 +83,11 @@
         "IdentityPoolName": "testAuthIdentityPool__staging",
         "UserPoolName": "ingabosyndicate"
       },
-      "lastPushTimeStamp": "2023-03-07T08:01:38.880Z",
+      "lastPushTimeStamp": "2023-03-07T13:18:55.108Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ingabosyndicate-staging-83852-deployment/amplify-cfn-templates/auth/ingabosyndicate-cloudformation-template.json",
         "logicalId": "authingabosyndicate"
       }
-    }
-  },
-  "api": {
-    "ingabosyndicate": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "output": {
-        "authConfig": {
-          "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 30,
-              "description": "api key description"
-            }
-          },
-          "additionalAuthenticationProviders": [
-            {
-              "authenticationType": "AWS_IAM"
-            }
-          ]
-        },
-        "GraphQLAPIIdOutput": "3j52vp5pg5gongjzlc4ccmudcq",
-        "GraphQLAPIEndpointOutput": "https://guv6xaft2vd25aen7vedpky2na.appsync-api.us-east-1.amazonaws.com/graphql",
-        "GraphQLAPIKeyOutput": "da2-gsmumtfyxvevhov3j6n6aemmum"
-      },
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-ingabosyndicate-staging-83852-deployment/amplify-cfn-templates/api/cloudformation-template.json",
-        "logicalId": "apiingabosyndicate"
-      },
-      "lastPushTimeStamp": "2023-03-07T08:01:38.882Z",
-      "lastPushDirHash": "G7M7qDdIVSkcZuCFxXcBTDWw3OY="
     }
   }
 }

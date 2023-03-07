@@ -14,7 +14,7 @@ type EagerIngabo = {
   readonly id: string;
   readonly fullname?: string | null;
   readonly dateofbirth?: string | null;
-  readonly nationalID?: number | null;
+  readonly nationalID?: string | null;
   readonly cooperative?: string | null;
   readonly telephone?: string | null;
   readonly cell?: string | null;
@@ -47,7 +47,7 @@ type LazyIngabo = {
   readonly id: string;
   readonly fullname?: string | null;
   readonly dateofbirth?: string | null;
-  readonly nationalID?: number | null;
+  readonly nationalID?: string | null;
   readonly cooperative?: string | null;
   readonly telephone?: string | null;
   readonly cell?: string | null;
