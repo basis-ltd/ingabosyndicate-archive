@@ -42,7 +42,7 @@ function NavBar() {
         </li>
         <li>
           <a className="nav-btn">
-            <Link to="/input">Add member</Link>
+            <Link to="/create">Add member</Link>
           </a>
         </li>
         <li>

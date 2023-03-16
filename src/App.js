@@ -15,11 +15,11 @@ import IngaboCreateForm from "./ui-components/IngaboCreateForm";
 import IngaboUpdateForm from "./ui-components/IngaboUpdateForm";
 import NavBar from "./NavBar";
 import { Helmet } from "react-helmet";
-import Input from "./Input.js";
 import { Ingabo } from "./models";
 import LandingPage from "./Landing-Page";
 import Footer from "./Footer";
 import Import from "./Import.js";
+import Create from "./Create.js";
 
 Amplify.configure(awsconfig);
 
@@ -44,14 +44,6 @@ function App() {
           }
         />
         <Route
-          path="/input"
-          element={
-            <div className="input-container">
-              <Input />
-            </div>
-          }
-        />
-        <Route
           path="/"
           element={
             <div className="landing-page">
@@ -71,6 +63,8 @@ function App() {
           }
         />
         <Route path="/import" element={<Import />} />
+
+        <Route path="/create" element={<Create />} />
         
       </Routes>
 

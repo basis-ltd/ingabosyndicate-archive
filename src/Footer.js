@@ -10,9 +10,9 @@ function Footer () {
 
     return (
       <>
-        <div class="footer">
-          <div class="footer-links">
-            <div class="footer-contact">
+        <div className="footer">
+          <div className="footer-links">
+            <div className="footer-contact">
               <a>
                 <img
                   src={require("./images/logo.png")}
@@ -21,10 +21,10 @@ function Footer () {
                 />
               </a>
 
-              <div class="contact-addresses">
+              <div className="contact-addresses">
                 <h1>Connect with us</h1>
 
-                <ul class="social-media-icons">
+                <ul className="social-media-icons">
                   <li>
                     <a href="#">
                       <img
@@ -56,7 +56,7 @@ function Footer () {
               </div>
             </div>
 
-            <div class="footer-quick-links">
+            <div className="footer-quick-links">
               <h1>Quick links</h1>
 
               <ul>
@@ -72,13 +72,13 @@ function Footer () {
                 </li>
                 <li>
                   <a href="">
-                    <Link to="/input">Add member</Link>
+                    <Link to="/create">Add member</Link>
                   </a>
                 </li>
               </ul>
             </div>
 
-            <div class="footer-support">
+            <div className="footer-support">
               <h1>Support</h1>
 
               <p>
@@ -123,7 +123,7 @@ function Footer () {
             </div>
           </div>
 
-          <div class="footer-text">
+          <div className="footer-text">
             <p>&copy; 2023 Ingabo Syndicate. All rights reserved.</p>
           </div>
         </div>
