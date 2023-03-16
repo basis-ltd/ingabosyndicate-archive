@@ -26,7 +26,6 @@ import { Ingabo } from "./models";
 import "./Table.css";
 import { Helmet } from "react-helmet";
 import IngaboUpdateForm from "./ui-components/IngaboUpdateForm";
-import "./Update.css";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import * as XLSX from "xlsx";
 
@@ -63,6 +62,12 @@ export function sendMessage(to, message) {
       console.log(err);
     });
 }
+
+/**
+ * 
+ * EXPORT DATA
+ * 
+ */
 
 // This is a custom filter UI for selecting
 // a unique option from a list
@@ -113,6 +118,7 @@ function GlobalFilter({
   const [value, setValue] = React.useState(globalFilter);
   const onChange = useAsyncDebounce((value) => {
     setGlobalFilter(value || undefined);
+    console.log(value);
   }, 200);
 
   return (
@@ -138,48 +144,7 @@ function Table() {
   let [records, setRecords] = useState([]);
 
   const pullData = async () => {
-    let prevRecords = await DataStore.query(Ingabo);
-    let filteredRecords = [];
-
-    records = prevRecords
-      .filter((record) => record.fullName !== null)
-      .map((record, index) => {
-        const updatedRecord = {
-          ...record,
-          no: index + 1,
-          imyumbati: record.activity1 ? "Yego" : "Oya",
-          umuceri: record.activity2 ? "Yego" : "Oya",
-          ibigori: record.activity3 ? "Yego" : "Oya",
-          ibinyamisogwe: record.activity4 ? "Yego" : "Oya",
-          imboga_imbuto: record.activity5 ? "Yego" : "Oya",
-          inkoko: record.activity6 ? "Yego" : "Oya",
-          ingurube: record.activity7 ? "Yego" : "Oya",
-          inka: record.activity8 ? "Yego" : "Oya",
-          ibirayi: record.activity9 ? "Yego" : "Oya",
-          ihene: record.activity10 ? "Yego" : "Oya",
-          intama: record.activity11 ? "Yego" : "Oya",
-          arahinga:
-            record.activity1 ||
-            record.activity2 ||
-            record.activity3 ||
-            record.activity4 ||
-            record.activity5 ||
-            record.activity9
-              ? "Yego"
-              : "Oya",
-          aroroye:
-            record.activity6 ||
-            record.activity7 ||
-            record.activity8 ||
-            record.activity10 ||
-            record.activity11
-              ? "Yego"
-              : "Oya",
-          signature: "",
-        };
-
-        return updatedRecord;
-      });
+    let records = await DataStore.query(Ingabo);
 
     setRecords(records);
   };
@@ -451,9 +416,9 @@ function Table() {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
-                class="w-6 h-6"
+                className="w-6 h-6"
               >
                 <path
                   stroke-linecap="round"
@@ -463,7 +428,7 @@ function Table() {
               </svg>
             </Button>
 
-            {/* MESSAGE BUTTON */}
+            {/* MESSAGE BUTTON
             <Button
               id="message-btn"
               className="relative inline-flex items-center px-2 py-1.5 border border-gray-100 rounded-full"
@@ -485,22 +450,19 @@ function Table() {
                   d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"
                 />
               </svg>
-            </Button>
+            </Button> */}
           </div>
         ),
       },
-      // {
-      //   id: "checkbox",
-      //   Header: "",
-      //   Cell: ({ row }) => (
-      //     <input
-      //       id="default-checkbox"
-      //       type="checkbox"
-      //       value=""
-      //       class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-      //     />
-      //   ),
-      // },
+      {
+        id: "no",
+        Header: "No",
+        Cell: ({ row, index }) => (
+          <p>
+            {row.index + 1}
+          </p>
+        ),
+      },
       ...columns,
     ]);
   };
@@ -539,8 +501,7 @@ function Table() {
 
     data.forEach((element, index, array) => {
       info.push([
-        element.no,
-        element.fullName,
+        element.fullname,
         element.dateofbirth,
         element.district,
         element.gender,
@@ -555,6 +516,9 @@ function Table() {
         element.inkoko,
         element.ingurube,
         element.inka,
+        element.intama,
+        element.ingurube,
+        element.inka,
         element.signature,
       ]);
     });
@@ -564,7 +528,6 @@ function Table() {
     doc.autoTable({
       head: [
         [
-          "No",
           "Amazina Yombi",
           "Igihe Yavukiye",
           "Aho Atuye",
@@ -647,14 +610,11 @@ function Table() {
           <div className="overlay">
             <div className="modal-content">
               <IngaboUpdateForm
-                onSuccess={async () => {
-                  toggleEditModal();
-                }}
-                id={editId}
-                onCancel={() => {
-                  toggleEditModal();
-                  console.log("Cancel is working!");
-                }}
+              id={editId}
+              onSuccess={async () => {
+                toggleEditModal();
+              }}
+              onCancel={toggleEditModal}
               />
             </div>
           </div>
@@ -668,19 +628,19 @@ function Table() {
           <div className="overlay">
             <div className="modal-content">
               <div className="message-container">
-                <form action="" class="message-form">
-                  <div class="address-name">
+                <form action="" className="message-form">
+                  <div className="address-name">
                     <input
                       type="text"
                       name="name"
                       placeholder="Full Name"
                       id="fullname"
                       required
-                      value={messageID.fullName}
+                      value={messageID.fullname}
                     />
                   </div>
 
-                  <div class="message">
+                  <div className="message">
                     <textarea
                       name="message"
                       id="message"
@@ -756,7 +716,7 @@ function Table() {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="w-6 h-6"
+                  className="w-6 h-6"
                 >
                   <path
                     stroke-linecap="round"
@@ -778,7 +738,7 @@ function Table() {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="w-6 h-6"
+                  className="w-6 h-6"
                 >
                   <path
                     stroke-linecap="round"

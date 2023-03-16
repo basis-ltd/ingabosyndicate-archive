@@ -1,12 +1,15 @@
 import { Amplify } from "aws-amplify/";
 import awsconfig from "./aws-exports";
 import { Ingabo } from "./models";
-import { DataStore } from "@aws-amplify/datastore";
+import { DataStore, Predicates } from "@aws-amplify/datastore";
 import Papa from "papaparse";
+import React, { useState, useEffect } from "react";
 
 Amplify.configure(awsconfig);
 
 function Import() {
+
+  let newData = [];
 
     const formatDate = (date) => {
        return date.split("/").reverse().join("-")
@@ -26,43 +29,11 @@ function Import() {
 
     }
 
-    const transformerDatabase = (row) => {
-
-      const updatedRecord = {
-        fullname: row["Amazina Yombi"],
-        dateofbirth: row["Igihe Yavukiye"],
-        nationalID: String(row["Indangamuntu"]),
-        cooperative: row["Cooperative"],
-        telephone: String(row["Telephone"]),
-        gender: row["Igitsina"],
-        district: row["Aho Atuye"],
-        imyumbati: row["Imyumbati"],
-        umuceri: row["Umuceri"],
-        ibigori: row["Ibigori"],
-        ibinyamisogwe: row["Ibinyamisogwe"],
-        imboga_imbuto: row["Imboga n' Imbuto"],
-        inkoko: row["Inkoko"],
-        ingurube: row["Ingurube"],
-        inka: row["Inka"],
-        ibirayi: row["Ibirayi"],
-        ihene: row["Ihene"],
-        intama: row["Intama"],
-        arahinga: row["Arahinga"],
-        aroroye: row["Aroroye"],
-        signature: row["Signature"],
-      }
-
-      let modifiedRecord = formatObject(updatedRecord)
-
-      return modifiedRecord;
-
-    }
-
   const transformerCSV = (row) => {
 
     const updatedRecord = {
       fullname: row.fullName,
-      dateofbirth: row.dateOfBirth,
+      dateofbirth: formatDate(row.dateofbirth),
       nationalID: String(row.nationalID),
       cooperative: row.cooperative,
       telephone: String(row.telephone),
@@ -70,17 +41,17 @@ function Import() {
       cell: row.cell,
       sector: row.sector,
       district: row.district,
-      imyumbati: row.activity1 ? "Yego" : "Oya",
-      umuceri: row.activity2 ? "Yego" : "Oya",
-      ibigori: row.activity3 ? "Yego" : "Oya",
-      ibinyamisogwe: row.activity4 ? "Yego" : "Oya",
-      imboga_imbuto: row.activity5 ? "Yego" : "Oya",
-      inkoko: row.activity6 ? "Yego" : "Oya",
-      ingurube: row.activity7 ? "Yego" : "Oya",
-      inka: row.activity8 ? "Yego" : "Oya",
-      ibirayi: row.activity9 ? "Yego" : "Oya",
-      ihene: row.activity10 ? "Yego" : "Oya",
-      intama: row.activity11 ? "Yego" : "Oya",
+      imyumbati: row.activity1 == "TRUE" ? "Yego" : "Oya",
+      umuceri: row.activity2 == "TRUE" ? "Yego" : "Oya",
+      ibigori: row.activity3 == "TRUE" ? "Yego" : "Oya",
+      ibinyamisogwe: row.activity4 == "TRUE" ? "Yego" : "Oya",
+      imboga_imbuto: row.activity5 == "TRUE" ? "Yego" : "Oya",
+      inkoko: row.activity6 == "TRUE" ? "Yego" : "Oya",
+      ingurube: row.activity7 == "TRUE" ? "Yego" : "Oya",
+      inka: row.activity8 == "TRUE" ? "Yego" : "Oya",
+      ibirayi: row.activity9 == "TRUE" ? "Yego" : "Oya",
+      ihene: row.activity10 == "TRUE" ? "Yego" : "Oya",
+      intama: row.activity11 == "TRUE" ? "Yego" : "Oya",
       arahinga:
         row.activity1 ||
         row.activity2 ||
@@ -106,128 +77,135 @@ function Import() {
     return modifiedRecord;
   };
 
-  let transformedData = [];
+  let ingabobackup = [];
+  let ingaboexported = [];
+
+  let recordsToSubmit = [];
 
   const handleUpload = (e) => {
-    const backup = e.target.files[0];
-    const downloads = e.target.files[1];
 
-    console.log(backup, downloads);
+    const backup = e.target.files[1];
+    const exported = e.target.files[0];
 
-    Papa.parse(downloads, {
+    Papa.parse(exported, {
       header: true,
-      complete: async(results, parser) => {
-        let transformedDatabase = [];
-        let filteredRecords = results.data.filter((record) => record.fullName !== "null");
-        transformedDatabase = filteredRecords.map(transformerDatabase);
-        console.log(results.data);
+      dynamicTyping: true,
+      complete: (results) => {
+        const records = results.data;
+        console.log("Exported " + records.length)
+
+        records.forEach((record) => {
+          const nationalids = {
+            nationalID: String(record["Indangamuntu"]),
+            fullname: record["Amazina Yombi"],
+            cooperative: record["Cooperative"],
+            district: record["Aho Atuye"]
+          }
+          // console.log(nationalids)
+          ingaboexported.push(nationalids)
+        });
       },
     });
 
     Papa.parse(backup, {
       header: true,
       dynamicTyping: true,
-      complete: async(results, parser) => {
-        let filteredRecords = results.data.filter((record) => record.fullName !== "null");
-        transformedData = filteredRecords.map(transformerCSV);
-        console.log(transformedData)
-      },
+      complete: (results) => {
+        const records = results.data;
+        console.log("Backup " + records.length)
+
+        ingabobackup = records.map((element, index) => {
+          return transformerCSV(element);
+        });
+      }
     });
+
   };
 
-  function transformer(arr1, arr2) {
+  const [records, setRecords] = useState([]);
 
-    let transformedArray = [];
+  const pullData = async () => {
 
-    let updatedObj = {};
+    const results = await DataStore.query(Ingabo);
 
-    arr1.forEach((record, index) => {
+    console.log(`Length: ${results.length}`)
 
-      updatedObj = {
-        fullname: record.fullName,
-        dateofbirth: record.dateOfBirth,
-        nationalID: String(arr2[index].Indangamuntu),
-        cooperative: record.cooperative,
-        telephone: String(record.telephone),
-        gender: record.gender,
-        cell: record.cell,
-        sector: record.sector,
-        district: record.district,
-        imyumbati: record.activity1 ? "Yego" : "Oya",
-        umuceri: record.activity2 ? "Yego" : "Oya",
-        ibigori: record.activity3 ? "Yego" : "Oya",
-        ibinyamisogwe: record.activity4 ? "Yego" : "Oya",
-        imboga_imbuto: record.activity5 ? "Yego" : "Oya",
-        inkoko: record.activity6 ? "Yego" : "Oya",
-        ingurube: record.activity7 ? "Yego" : "Oya",
-        inka: record.activity8 ? "Yego" : "Oya",
-        ibirayi: record.activity9 ? "Yego" : "Oya",
-        ihene: record.activity10 ? "Yego" : "Oya",
-        intama: record.activity11 ? "Yego" : "Oya",
-        arahinga:
-          record.activity1 ||
-          record.activity2 ||
-          record.activity3 ||
-          record.activity4 ||
-          record.activity5 ||
-          record.activity9
-            ? "Yego"
-            : "Oya",
-        aroroye:
-          record.activity6 ||
-          record.activity7 ||
-          record.activity8 ||
-          record.activity10 ||
-          record.activity11
-            ? "Yego"
-            : "Oya",
-            signature: record.signature,
-      };
-
-      transformedArray.push(updatedObj);
-
-    });
-
-    console.log(transformedArray);
-    return transformedArray;
     
-  }
+    setRecords(results);
 
-  const saveData = async () => {
+  };
+
+  useEffect(() => {
+    pullData()
+  }, []);
+
+  const migrate = async (exported, backup) => {
     
-    transformedData.forEach(async (record, index) => {
-    //   await DataStore.save(
-    //     new Ingabo({
-    //         fullname: record.fullname,
-    //         dateofbirth: record.dateofbirth,
-    //         nationalID: record.nationalID,
-    //         cooperative: record.cooperative,
-    //         telephone: record.telephone,
-    //         cell: record.cell,
-    //         sector: record.sector,
-    //         district: record.district,
-    //         gender: record.gender,
-    //         signature: record.signature,
-    //         aroroye: record.aroroye,
-    //         arahinga: record.arahinga,
-    //         imyumbati: record.imyumbati,
-    //         umuceri: record.umuceri,
-    //         ibigori: record.ibigori,
-    //         ibinyamisogwe: record.ibinyamisogwe,
-    //         imboga_imbuto: record.imboga_imbuto,
-    //         inkoko: record.inkoko,
-    //         ingurube: record.ingurube,
-    //         inka: record.inka,
-    //         ibirayi: record.ibirayi,
-    //         ihene: record.ihene,
-    //         intama: record.intama,
-    //     })
-    // )
-    console.log(record);
-    });
+    let counter = 0;
+    const duplicates = [];
+
+    for (let i=0; i<exported.length; i++) {
+
+      for (let j=0; j<backup.length; j++) {
+          
+          if (exported[i].fullname == backup[j].fullname &&
+              exported[i].cooperative == backup[j].cooperative &&
+              exported[i].district == backup[j].district &&
+              backup[i].fullname != "null"
+            ) {
+            // backup[j].nationalID = exported[i].nationalID
+            counter++;
+            duplicates.push(backup[j])
+            console.log(backup[j], exported[i]);
+
+            await DataStore.save(
+              Ingabo.copyOf(backup[j], (updated) => {
+                updated.nationalID = exported[i].nationalID;
+              })
+            )
+            .then((saved) => {
+              console.log("Saved: " + saved.nationalID)
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+          }
+  
+      }
+  };
+  console.log(counter)
+
+}
+
+const checkDuplicates = (arr) => {
+
+  let counter = 0;
+  let duplicates = [];
+
+  for (let i=0; i<arr.length -1; i++) {
+
+    for (let j=i+1; j<arr.length; j++) {
+      if (
+        arr[i].nationalID == arr[j].nationalID &&
+        arr[i].fullname == arr[j].fullname &&
+        arr[i].cooperative == arr[j].cooperative &&
+        arr[i].district == arr[j].district
+      ) {
+        counter++;
+        duplicates.push(arr[j]);
+      }
+    }
 
   }
 
+  console.log(counter, duplicates.length);
+
+}; 
+
+const clearIngabo = async () => {
+  await DataStore.delete(Ingabo, Predicates.ALL);
+  console.log("Cleared Ingabo")
+}
 
 
   return (
@@ -236,18 +214,21 @@ function Import() {
         type="file"
         accept=".csv"
         name="file"
-        onChange={handleUpload}
         multiple={true}
+        onChange={handleUpload}
       ></input>
 
-      <input type="submit" value="Parse" onClick={() => saveData()}></input>
+      <input type="submit" value="Migrate" onClick={() => migrate(ingaboexported, records)}></input>
+      <input type="submit" value="Clear Ingabo" onClick={() => clearIngabo()}></input>
+
+      <input type="submit" value="Check Duplicates" onClick={checkDuplicates(records)}></input>
     </div>
   );
 }
 
 export default Import;
 
-/*
+/**
 
 PAPA PARSE:
 
