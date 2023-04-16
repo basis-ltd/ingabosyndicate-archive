@@ -1,13 +1,13 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   ChevronDoubleLeftIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronDoubleRightIcon,
-} from "@heroicons/react/solid";
-import { Button, PageButton } from "./Button";
-import React, { Component, useState, useMemo, useEffect } from "react";
-import "./App.css";
+} from '@heroicons/react/solid';
+import { Button, PageButton } from './Button';
+import React, { Component, useState, useMemo, useEffect } from 'react';
+import './App.css';
 import {
   useGlobalFilter,
   useTable,
@@ -16,29 +16,29 @@ import {
   usesortBy,
   useSortBy,
   usePagination,
-} from "react-table";
-import { Amplify, API } from "aws-amplify";
-import awsconfig from "./aws-exports";
-import jsPDF from "jspdf";
-import "jspdf-autotable";
-import { DataStore } from "@aws-amplify/datastore";
-import { Ingabo } from "./models";
-import "./Table.css";
-import { Helmet } from "react-helmet";
-import IngaboUpdateForm from "./ui-components/IngaboUpdateForm";
-import { withAuthenticator } from "@aws-amplify/ui-react";
-import * as XLSX from "xlsx";
+} from 'react-table';
+import { Amplify, API } from 'aws-amplify';
+import awsconfig from './aws-exports';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import { DataStore } from '@aws-amplify/datastore';
+import { Ingabo } from './models';
+import './Table.css';
+import { Helmet } from 'react-helmet';
+import IngaboUpdateForm from './ui-components/IngaboUpdateForm';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import * as XLSX from 'xlsx';
 
 Amplify.configure(awsconfig);
 
 // TWILIO SMS
 export function sendMessage(to, message) {
   const endpoint = process.env.REACT_APP_ENDPOINT_URL;
-  const ec2 = "http://44.209.248.214";
-  const port = "5000" || process.env.PORT;
+  const ec2 = 'http://44.209.248.214';
+  const port = '5000' || process.env.PORT;
   console.log(endpoint);
 
-  const recipient = "+250" + to.slice(-9);
+  const recipient = '+250' + to.slice(-9);
 
   axios
     .post(
@@ -49,8 +49,8 @@ export function sendMessage(to, message) {
       },
       {
         headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*', // Required for CORS support to work
         },
       }
     )
@@ -64,9 +64,9 @@ export function sendMessage(to, message) {
 }
 
 /**
- * 
+ *
  * EXPORT DATA
- * 
+ *
  */
 
 // This is a custom filter UI for selecting
@@ -87,7 +87,7 @@ export function SelectColumnFilter({
   // Render a multi-select box
   return (
     <label className="flex gap-x-2 items-baseline">
-      <span className="text-gray-1000">{render("Header")}: </span>
+      <span className="text-gray-1000">{render('Header')}: </span>
       <select
         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         name={id}
@@ -127,7 +127,7 @@ function GlobalFilter({
       <input
         type="text"
         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        value={value || ""}
+        value={value || ''}
         onChange={(e) => {
           setValue(e.target.value);
           onChange(e.target.value);
@@ -140,140 +140,147 @@ function GlobalFilter({
 
 function Table() {
   // FETCH INGABO MODEL FROM DATASTORE
-
   let [records, setRecords] = useState([]);
 
   const pullData = async () => {
-    let records = await DataStore.query(Ingabo);
+    const data = await DataStore.query(Ingabo);
+    setRecords(data);
+  };
 
-    setRecords(records);
+  // Only update records if the data has changed
+  const updateRecords = async () => {
+    const data = await DataStore.query(Ingabo);
+    if (JSON.stringify(data) !== JSON.stringify(records)) {
+      setRecords(data);
+    }
   };
 
   useEffect(() => {
     pullData();
-    const resp = DataStore.observe(Ingabo).subscribe(() => {
-      pullData();
-    });
-    return () => resp.unsubscribe();
   }, []);
 
   let data = records;
-  console.log(data);
+
+  console.log(data, records);
 
   const columns = React.useMemo(
     () => [
       {
-        Header: "Amazina Yombi",
-        accessor: "fullname",
+        Header: 'Amazina Yombi',
+        accessor: 'fullname',
         width: 30,
       },
       {
-        Header: "Igihe Yavukiye",
-        accessor: "dateofbirth",
+        Header: 'Igihe Yavukiye',
+        accessor: 'dateofbirth',
         width: 30,
       },
       {
-        Header: "Igitsina",
-        accessor: "gender",
+        Header: 'Igitsina',
+        accessor: 'gender',
         width: 20,
       },
       {
-        Header: "Indangamuntu",
-        accessor: "nationalID",
+        Header: 'Indangamuntu',
+        accessor: 'nationalID',
         width: 30,
       },
       {
-        Header: "Telephone",
-        accessor: "telephone",
+        Header: 'Telephone',
+        accessor: 'telephone',
         width: 30,
       },
       {
-        Header: "Cooperative",
-        accessor: "cooperative",
+        Header: 'Cooperative',
+        accessor: 'cooperative',
         width: 30,
       },
       {
-        Header: "Aho Atuye",
-        accessor: "district",
+        Header: 'Aho Atuye',
+        accessor: 'district',
         width: 30,
       },
       {
-        Header: "Aroroye",
-        accessor: "aroroye",
+        Header: 'Aroroye',
+        accessor: 'aroroye',
         Filter: SelectColumnFilter,
-        filter: "includes",
+        filter: 'includes',
         width: 20,
       },
       {
-        Header: "Arahinga",
-        accessor: "arahinga",
+        Header: 'Arahinga',
+        accessor: 'arahinga',
         Filter: SelectColumnFilter,
-        filter: "includes",
+        filter: 'includes',
         width: 20,
       },
       {
-        Header: "Imyumbati",
-        accessor: "imyumbati",
+        Header: 'Imyumbati',
+        accessor: 'imyumbati',
         width: 20,
       },
       {
-        Header: "Umuceri",
-        accessor: "umuceri",
+        Header: 'Umuceri',
+        accessor: 'umuceri',
         width: 20,
       },
       {
-        Header: "Ibigori",
-        accessor: "ibigori",
+        Header: 'Ibigori',
+        accessor: 'ibigori',
         width: 20,
       },
       {
-        Header: "Ibinyamisogwe",
-        accessor: "ibinyamisogwe",
+        Header: 'Ibinyamisogwe',
+        accessor: 'ibinyamisogwe',
         width: 20,
       },
       {
         Header: "Imboga n' Imbuto",
-        accessor: "imboga_imbuto",
+        accessor: 'imboga_imbuto',
         width: 20,
       },
       {
-        Header: "Ibirayi",
-        accessor: "ibirayi",
+        Header: 'Ibirayi',
+        accessor: 'ibirayi',
         width: 20,
       },
       {
-        Header: "Ihene",
-        accessor: "ihene",
+        Header: 'Ihene',
+        accessor: 'ihene',
         width: 20,
       },
       {
-        Header: "Intama",
-        accessor: "intama",
+        Header: 'Intama',
+        accessor: 'intama',
         width: 20,
       },
       {
-        Header: "Inkoko",
-        accessor: "inkoko",
+        Header: 'Inkoko',
+        accessor: 'inkoko',
         width: 20,
       },
       {
-        Header: "Ingurube",
-        accessor: "ingurube",
+        Header: 'Ingurube',
+        accessor: 'ingurube',
         width: 20,
       },
       {
-        Header: "Inka",
-        accessor: "inka",
+        Header: 'Inka',
+        accessor: 'inka',
         width: 20,
       },
       {
-        Header: "Signature",
-        accessor: "",
+        Header: 'Signature',
+        accessor: '',
         width: 20,
       },
     ],
     []
   );
+
+  /**
+   * EXPORT TO EXCEL
+   */
 
   let exportExcel = () => {
     let headers = columns.map((column, index) => {
@@ -284,27 +291,27 @@ function Table() {
     });
 
     const columnsToInclude = [
-      "no",
-      "fullName",
-      "dateofbirth",
-      "gender",
-      "nationalID",
-      "telephone",
-      "cooperative",
-      "district",
-      "aroroye",
-      "arahinga",
-      "imyumbati",
-      "umuceri",
-      "ibigori",
-      "ibinyamisogwe",
-      "imboga_imbuto",
-      "ibirayi",
-      "ihene",
-      "intama",
-      "inkoko",
-      "ingurube",
-      "inka",
+      'no',
+      'fullName',
+      'dateofbirth',
+      'gender',
+      'nationalID',
+      'telephone',
+      'cooperative',
+      'district',
+      'aroroye',
+      'arahinga',
+      'imyumbati',
+      'umuceri',
+      'ibigori',
+      'ibinyamisogwe',
+      'imboga_imbuto',
+      'ibirayi',
+      'ihene',
+      'intama',
+      'inkoko',
+      'ingurube',
+      'inka',
     ];
 
     const filteredData = data.map((row) => {
@@ -323,10 +330,10 @@ function Table() {
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(filteredData);
 
-    ws["!cols"] = [];
+    ws['!cols'] = [];
 
     headers.forEach((column) => {
-      ws["!cols"][column.idx] = { width: column.width };
+      ws['!cols'][column.idx] = { width: column.width };
       console.log(column.width);
     });
 
@@ -337,14 +344,14 @@ function Table() {
       cell.v = header;
     });
 
-    XLSX.utils.book_append_sheet(wb, ws, "Page 1");
-    XLSX.writeFile(wb, "Ingabo Syndicate Database.xlsx");
+    XLSX.utils.book_append_sheet(wb, ws, 'Page 1');
+    XLSX.writeFile(wb, 'Ingabo Syndicate Database.xlsx');
   };
 
   // EDIT MODAL
 
   const [modalEdit, setModalEdit] = useState(false);
-  const [editId, setEditId] = useState("");
+  const [editId, setEditId] = useState('');
 
   const toggleEditModal = async (id) => {
     let modelEdit = await DataStore.query(Ingabo, id);
@@ -355,7 +362,7 @@ function Table() {
   // DELETE MODAL
 
   const [modalDelete, setModalDelete] = useState(false);
-  const [deleteId, setDeleteId] = useState("");
+  const [deleteId, setDeleteId] = useState('');
 
   const toggleDeleteModal = async (id) => {
     setDeleteId(id);
@@ -365,7 +372,7 @@ function Table() {
   // MESSAGE POP-UP
 
   const [modalMessage, setModalMessage] = useState(false);
-  const [messageID, setMessageID] = useState("");
+  const [messageID, setMessageID] = useState('');
 
   const toggleMessageModal = async (id) => {
     let nameModel = await DataStore.query(Ingabo, id);
@@ -376,8 +383,8 @@ function Table() {
   const tableHooks = (hooks) => {
     hooks.visibleColumns.push((columns) => [
       {
-        id: "edit",
-        Header: "Edit",
+        id: 'edit',
+        Header: 'Edit',
         Cell: ({ row }) => (
           <div className="edit-delete-message">
             <Button
@@ -455,13 +462,9 @@ function Table() {
         ),
       },
       {
-        id: "no",
-        Header: "No",
-        Cell: ({ row, index }) => (
-          <p>
-            {row.index + 1}
-          </p>
-        ),
+        id: 'no',
+        Header: 'No',
+        Cell: ({ row, index }) => <p>{row.index + 1}</p>,
       },
       ...columns,
     ]);
@@ -523,30 +526,30 @@ function Table() {
       ]);
     });
 
-    const doc = new jsPDF("landscape", "mm", "a3");
+    const doc = new jsPDF('landscape', 'mm', 'a3');
 
     doc.autoTable({
       head: [
         [
-          "Amazina Yombi",
-          "Igihe Yavukiye",
-          "Aho Atuye",
-          "Igitsina",
-          "Koperative",
-          "Telephone",
-          "Indangamuntu",
-          "Imyumbati",
-          "Umuceri",
-          "Ibigori",
-          "Ibinyamisogwe",
+          'Amazina Yombi',
+          'Igihe Yavukiye',
+          'Aho Atuye',
+          'Igitsina',
+          'Koperative',
+          'Telephone',
+          'Indangamuntu',
+          'Imyumbati',
+          'Umuceri',
+          'Ibigori',
+          'Ibinyamisogwe',
           "Imboga n'Imbuto",
-          "Inkoko",
-          "Ibirayi",
-          "Ihene",
-          "Intama",
-          "Ingurube",
-          "Inka",
-          "Signature",
+          'Inkoko',
+          'Ibirayi',
+          'Ihene',
+          'Intama',
+          'Ingurube',
+          'Inka',
+          'Signature',
         ],
       ],
       body: info,
@@ -556,7 +559,7 @@ function Table() {
       ],
     });
 
-    doc.save("Ingabo Syndicate PDF Report.pdf");
+    doc.save('Ingabo Syndicate PDF Report.pdf');
     console.log(info);
   };
 
@@ -610,11 +613,11 @@ function Table() {
           <div className="overlay">
             <div className="modal-content">
               <IngaboUpdateForm
-              id={editId}
-              onSuccess={async () => {
-                toggleEditModal();
-              }}
-              onCancel={toggleEditModal}
+                id={editId}
+                onSuccess={async () => {
+                  toggleEditModal();
+                }}
+                onCancel={toggleEditModal}
               />
             </div>
           </div>
@@ -665,7 +668,7 @@ function Table() {
                   <Button
                     className="message-btn-send"
                     onClick={() => {
-                      let message = document.getElementById("message").value;
+                      let message = document.getElementById('message').value;
                       console.log(messageID.telephone);
                       sendMessage(messageID.telephone, message);
                     }}
@@ -693,7 +696,7 @@ function Table() {
                 column.Filter ? (
                   <div key={column.id}>
                     <label for={column.id}></label>
-                    {column.render("Filter")}
+                    {column.render('Filter')}
                   </div>
                 ) : null
               )
@@ -774,13 +777,13 @@ function Table() {
                                 column.getSortByToggleProps()
                               )}
                             >
-                              {column.render("Header")}
+                              {column.render('Header')}
                               <span>
                                 {column.isSorted
                                   ? column.isSortedDesc
-                                    ? " ▼"
-                                    : " ▲"
-                                  : ""}
+                                    ? ' ▼'
+                                    : ' ▲'
+                                  : ''}
                               </span>
                             </th>
                           ))}
@@ -801,7 +804,7 @@ function Table() {
                                   {...cell.getCellProps()}
                                   className="px-6 py-4 whitespace-nowrap"
                                 >
-                                  {cell.render("Cell")}
+                                  {cell.render('Cell')}
                                 </td>
                               );
                             })}
@@ -829,10 +832,10 @@ function Table() {
           <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
             <div className="flex gap-x-2">
               <span className="text-sm text-gray-700">
-                {" "}
+                {' '}
                 <span className="font-medium">
                   {state.pageIndex + 1}
-                </span> of{" "}
+                </span> of{' '}
                 <span className="font-medium">{pageOptions.length}</span>
               </span>
               <label>
