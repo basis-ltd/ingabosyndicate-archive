@@ -152,6 +152,112 @@
         }
       }
     },
+    "AuthTriggerCustomLambdaStack": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabosyndicate-staging-83852-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json",
+        "Parameters": {
+          "env": "staging",
+          "userpoolId": {
+            "Fn::GetAtt": [
+              "authingabosyndicate",
+              "Outputs.UserPoolId"
+            ]
+          },
+          "userpoolArn": {
+            "Fn::GetAtt": [
+              "authingabosyndicate",
+              "Outputs.UserPoolArn"
+            ]
+          },
+          "snsRoleArn": {
+            "Fn::GetAtt": [
+              "authingabosyndicate",
+              "Outputs.CreatedSNSRole"
+            ]
+          },
+          "functioningabosyndicateDefineAuthChallengeLambdaExecutionRole": {
+            "Fn::GetAtt": [
+              "functioningabosyndicateDefineAuthChallenge",
+              "Outputs.LambdaExecutionRoleArn"
+            ]
+          },
+          "functioningabosyndicateDefineAuthChallengeArn": {
+            "Fn::GetAtt": [
+              "functioningabosyndicateDefineAuthChallenge",
+              "Outputs.Arn"
+            ]
+          },
+          "functioningabosyndicateDefineAuthChallengeName": {
+            "Fn::GetAtt": [
+              "functioningabosyndicateDefineAuthChallenge",
+              "Outputs.Name"
+            ]
+          },
+          "functioningabosyndicateCreateAuthChallengeLambdaExecutionRole": {
+            "Fn::GetAtt": [
+              "functioningabosyndicateCreateAuthChallenge",
+              "Outputs.LambdaExecutionRoleArn"
+            ]
+          },
+          "functioningabosyndicateCreateAuthChallengeArn": {
+            "Fn::GetAtt": [
+              "functioningabosyndicateCreateAuthChallenge",
+              "Outputs.Arn"
+            ]
+          },
+          "functioningabosyndicateCreateAuthChallengeName": {
+            "Fn::GetAtt": [
+              "functioningabosyndicateCreateAuthChallenge",
+              "Outputs.Name"
+            ]
+          },
+          "functioningabosyndicateVerifyAuthChallengeResponseLambdaExecutionRole": {
+            "Fn::GetAtt": [
+              "functioningabosyndicateVerifyAuthChallengeResponse",
+              "Outputs.LambdaExecutionRoleArn"
+            ]
+          },
+          "functioningabosyndicateVerifyAuthChallengeResponseArn": {
+            "Fn::GetAtt": [
+              "functioningabosyndicateVerifyAuthChallengeResponse",
+              "Outputs.Arn"
+            ]
+          },
+          "functioningabosyndicateVerifyAuthChallengeResponseName": {
+            "Fn::GetAtt": [
+              "functioningabosyndicateVerifyAuthChallengeResponse",
+              "Outputs.Name"
+            ]
+          },
+          "functioningabosyndicateCustomMessageLambdaExecutionRole": {
+            "Fn::GetAtt": [
+              "functioningabosyndicateCustomMessage",
+              "Outputs.LambdaExecutionRoleArn"
+            ]
+          },
+          "functioningabosyndicateCustomMessageArn": {
+            "Fn::GetAtt": [
+              "functioningabosyndicateCustomMessage",
+              "Outputs.Arn"
+            ]
+          },
+          "functioningabosyndicateCustomMessageName": {
+            "Fn::GetAtt": [
+              "functioningabosyndicateCustomMessage",
+              "Outputs.Name"
+            ]
+          }
+        }
+      },
+      "DependsOn": [
+        "authingabosyndicate",
+        "functioningabosyndicateDefineAuthChallenge",
+        "functioningabosyndicateCreateAuthChallenge",
+        "functioningabosyndicateVerifyAuthChallengeResponse",
+        "functioningabosyndicateCustomMessage"
+      ]
+    },
     "apiingabosyndicate": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
@@ -167,7 +273,7 @@
             "Ref": "UnauthRoleName"
           },
           "S3DeploymentBucket": "amplify-ingabosyndicate-staging-83852-deployment",
-          "S3DeploymentRootKey": "amplify-appsync-files/17f0d04c2f8231e9a556ad7c0c1e22a3d198b5b7",
+          "S3DeploymentRootKey": "amplify-appsync-files/73ec00edbc10d23e5b49af0194027a58513e9dfc",
           "env": "staging"
         }
       }
@@ -178,27 +284,27 @@
         "TemplateURL": "https://s3.amazonaws.com/amplify-ingabosyndicate-staging-83852-deployment/amplify-cfn-templates/auth/ingabosyndicate-cloudformation-template.json",
         "Parameters": {
           "identityPoolName": "testAuthIdentityPool",
-          "allowUnauthenticatedIdentities": false,
+          "allowUnauthenticatedIdentities": true,
           "resourceNameTruncated": "ingabo3fce4ebf",
           "userPoolName": "ingabosyndicate",
           "autoVerifiedAttributes": "email",
           "mfaConfiguration": "OPTIONAL",
           "mfaTypes": "SMS Text Message",
-          "smsAuthenticationMessage": "Ingabo Syndicate sent you a login verification code: {####}",
-          "smsVerificationMessage": "Ingabo Syndicate signup verification page: {####}",
-          "emailVerificationSubject": "Ingabo Syndicate Signup Verification.",
-          "emailVerificationMessage": "Ingabo Syndicate signup verification page: {####}",
-          "defaultPasswordPolicy": false,
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": "Requires Lowercase,Requires Numbers,Requires Symbols,Requires Uppercase",
+          "smsAuthenticationMessage": "Your authentication code is {####}",
+          "smsVerificationMessage": "Your verification code is {####}",
+          "emailVerificationSubject": "Ingabo Syndicate has sent you a verification code to recover your password",
+          "emailVerificationMessage": "Your verification code is {####}",
+          "defaultPasswordPolicy": true,
+          "passwordPolicyMinLength": "8",
+          "passwordPolicyCharacters": "Requires Uppercase,Requires Numbers",
           "requiredAttributes": "",
           "aliasAttributes": "",
           "userpoolClientGenerateSecret": false,
-          "userpoolClientRefreshTokenValidity": 30,
-          "userpoolClientWriteAttributes": "",
-          "userpoolClientReadAttributes": "",
+          "userpoolClientRefreshTokenValidity": "1000",
+          "userpoolClientWriteAttributes": "email",
+          "userpoolClientReadAttributes": "email",
           "userpoolClientLambdaRole": "ingabo3fce4ebf_userpoolclient_lambda_role",
-          "userpoolClientSetAttributes": false,
+          "userpoolClientSetAttributes": true,
           "sharedId": "3fce4ebf",
           "resourceName": "ingabosyndicate",
           "authSelections": "identityPoolAndUserPool",
@@ -208,8 +314,6 @@
           "userPoolGroups": false,
           "userPoolGroupList": "",
           "adminQueries": false,
-          "thirdPartyAuth": false,
-          "authProviders": "",
           "usernameCaseSensitive": false,
           "useEnabledMfas": true,
           "authRoleArn": {
@@ -225,8 +329,73 @@
             ]
           },
           "breakCircularDependency": true,
-          "dependsOn": "",
+          "dependsOn": "[object Object],[object Object],[object Object],[object Object]",
           "hostedUI": false,
+          "authProviders": "",
+          "thirdPartyAuth": false,
+          "triggers": "{\"DefineAuthChallenge\":[\"captcha-define-challenge\"],\"CreateAuthChallenge\":[\"captcha-create-challenge\"],\"VerifyAuthChallengeResponse\":[\"captcha-verify\"],\"CustomMessage\":[\"verification-link\"]}",
+          "verificationBucketName": "ingabosyndicateverificationbucket",
+          "parentStack": {
+            "Ref": "AWS::StackId"
+          },
+          "authTriggerConnections": "{\"triggerType\":\"DefineAuthChallenge\",\"lambdaFunctionName\":\"ingabosyndicateDefineAuthChallenge\"},{\"triggerType\":\"CreateAuthChallenge\",\"lambdaFunctionName\":\"ingabosyndicateCreateAuthChallenge\"},{\"triggerType\":\"VerifyAuthChallengeResponse\",\"lambdaFunctionName\":\"ingabosyndicateVerifyAuthChallengeResponse\"},{\"triggerType\":\"CustomMessage\",\"lambdaFunctionName\":\"ingabosyndicateCustomMessage\"}",
+          "permissions": "",
+          "env": "staging"
+        }
+      }
+    },
+    "functioningabosyndicateDefineAuthChallenge": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabosyndicate-staging-83852-deployment/amplify-cfn-templates/function/ingabosyndicateDefineAuthChallenge-cloudformation-template.json",
+        "Parameters": {
+          "modules": "captcha-define-challenge",
+          "resourceName": "ingabosyndicateDefineAuthChallenge",
+          "deploymentBucketName": "amplify-ingabosyndicate-staging-83852-deployment",
+          "s3Key": "amplify-builds/ingabosyndicateDefineAuthChallenge-33344951537433577446-build.zip",
+          "env": "staging"
+        }
+      }
+    },
+    "functioningabosyndicateCreateAuthChallenge": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabosyndicate-staging-83852-deployment/amplify-cfn-templates/function/ingabosyndicateCreateAuthChallenge-cloudformation-template.json",
+        "Parameters": {
+          "modules": "captcha-create-challenge",
+          "resourceName": "ingabosyndicateCreateAuthChallenge",
+          "deploymentBucketName": "amplify-ingabosyndicate-staging-83852-deployment",
+          "s3Key": "amplify-builds/ingabosyndicateCreateAuthChallenge-6831326c732f546b674e-build.zip",
+          "env": "staging"
+        }
+      }
+    },
+    "functioningabosyndicateVerifyAuthChallengeResponse": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabosyndicate-staging-83852-deployment/amplify-cfn-templates/function/ingabosyndicateVerifyAuthChallengeResponse-cloudformation-template.json",
+        "Parameters": {
+          "modules": "captcha-verify",
+          "resourceName": "ingabosyndicateVerifyAuthChallengeResponse",
+          "RECAPTCHASECRET": "6LdrIJIlAAAAANqsMiZ0ajXZl5jqlik2qX5cJhwf",
+          "deploymentBucketName": "amplify-ingabosyndicate-staging-83852-deployment",
+          "s3Key": "amplify-builds/ingabosyndicateVerifyAuthChallengeResponse-56614438756235684364-build.zip",
+          "env": "staging"
+        }
+      }
+    },
+    "functioningabosyndicateCustomMessage": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabosyndicate-staging-83852-deployment/amplify-cfn-templates/function/ingabosyndicateCustomMessage-cloudformation-template.json",
+        "Parameters": {
+          "modules": "verification-link",
+          "resourceName": "ingabosyndicateCustomMessage",
+          "REDIRECTURL": "https://ingabosyndicate.web.app/",
+          "EMAILSUBJECT": "To prevent malicious activity on our platform, we require members to pass this verification.",
+          "EMAILMESSAGE": "To prevent malicious activity on our platform, we require members to pass this verification. Please verify your connection before you can proceed.",
+          "deploymentBucketName": "amplify-ingabosyndicate-staging-83852-deployment",
+          "s3Key": "amplify-builds/ingabosyndicateCustomMessage-6a4965766b5565495659-build.zip",
           "env": "staging"
         }
       }

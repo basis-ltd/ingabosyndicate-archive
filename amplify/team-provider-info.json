@@ -9,7 +9,8 @@
       "UnauthRoleName": "amplify-ingabosyndicate-staging-83852-unauthRole",
       "StackName": "amplify-ingabosyndicate-staging-83852",
       "StackId": "arn:aws:cloudformation:us-east-1:049778465641:stack/amplify-ingabosyndicate-staging-83852/bfeb68b0-bcb2-11ed-807d-12f455ec0cb1",
-      "AmplifyAppId": "d10nwkulad6ab7"
+      "AmplifyAppId": "d10nwkulad6ab7",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-ingabosyndicate-staging-83852-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "auth": {
@@ -17,6 +18,34 @@
       },
       "api": {
         "ingabosyndicate": {}
+      },
+      "function": {
+        "ingabosyndicateDefineAuthChallenge": {
+          "deploymentBucketName": "amplify-ingabosyndicate-staging-83852-deployment",
+          "s3Key": "amplify-builds/ingabosyndicateDefineAuthChallenge-33344951537433577446-build.zip"
+        },
+        "ingabosyndicateCreateAuthChallenge": {
+          "deploymentBucketName": "amplify-ingabosyndicate-staging-83852-deployment",
+          "s3Key": "amplify-builds/ingabosyndicateCreateAuthChallenge-6831326c732f546b674e-build.zip"
+        },
+        "ingabosyndicateVerifyAuthChallengeResponse": {
+          "RECAPTCHASECRET": "6LdrIJIlAAAAANqsMiZ0ajXZl5jqlik2qX5cJhwf",
+          "deploymentBucketName": "amplify-ingabosyndicate-staging-83852-deployment",
+          "s3Key": "amplify-builds/ingabosyndicateVerifyAuthChallengeResponse-56614438756235684364-build.zip"
+        },
+        "ingabosyndicateCustomMessage": {
+          "REDIRECTURL": "https://ingabosyndicate.web.app/",
+          "EMAILSUBJECT": "To prevent malicious activity on our platform, we require members to pass this verification.",
+          "EMAILMESSAGE": "To prevent malicious activity on our platform, we require members to pass this verification. Please verify your connection before you can proceed.",
+          "deploymentBucketName": "amplify-ingabosyndicate-staging-83852-deployment",
+          "s3Key": "amplify-builds/ingabosyndicateCustomMessage-6a4965766b5565495659-build.zip"
+        }
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d10nwkulad6ab7",
+          "type": "cicd"
+        }
       }
     }
   }
