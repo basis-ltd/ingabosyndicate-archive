@@ -5,23 +5,11 @@ export const getIngabo = /* GraphQL */ `
   query GetIngabo($id: ID!) {
     getIngabo(id: $id) {
       id
-      fullName
+      fullname
       dateofbirth
       nationalID
       cooperative
       telephone
-      activity1
-      activity2
-      activity3
-      activity4
-      activity5
-      activity6
-      activity7
-      activity8
-      activity9
-      activity10
-      activity11
-      no
       cell
       sector
       district
@@ -51,29 +39,16 @@ export const getIngabo = /* GraphQL */ `
 export const listIngabos = /* GraphQL */ `
   query ListIngabos(
     $filter: ModelIngaboFilterInput
-    $limit: Int
     $nextToken: String
   ) {
-    listIngabos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listIngabos(filter: $filter, limit: 10000, nextToken: $nextToken) {
       items {
         id
-        fullName
+        fullname
         dateofbirth
         nationalID
         cooperative
         telephone
-        activity1
-        activity2
-        activity3
-        activity4
-        activity5
-        activity6
-        activity7
-        activity8
-        activity9
-        activity10
-        activity11
-        no
         cell
         sector
         district

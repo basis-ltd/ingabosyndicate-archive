@@ -163,6 +163,23 @@ function Table() {
 
   console.log(data, records);
 
+  // CHECK DUPLICATES
+  const checkDuplicates = (data) => {
+    const duplicates = [], toReturn = [];
+    const unique = {};
+    data.forEach((item, index) => {
+      if (!unique[item.nationalID] && !unique[item.fullname]) {
+        unique[item.nationalID] = true;
+      } else {
+        duplicates.push(item);
+      }
+    });
+    return duplicates;
+  };
+
+  const duplicates = checkDuplicates(data);
+  console.log(duplicates);
+
   const columns = React.useMemo(
     () => [
       {
@@ -314,7 +331,7 @@ function Table() {
       'inka',
     ];
 
-    const filteredData = data.map((row) => {
+    const filteredData = duplicates.map((row) => {
       const filteredRow = {};
       columnsToInclude.forEach((column) => {
         filteredRow[column] = row[column];
@@ -502,7 +519,7 @@ function Table() {
   const exportPDF = () => {
     let info = [];
 
-    data.forEach((element, index, array) => {
+    duplicates.forEach((element, index, array) => {
       info.push([
         element.fullname,
         element.dateofbirth,
