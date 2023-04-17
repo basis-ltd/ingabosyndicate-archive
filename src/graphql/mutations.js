@@ -8,23 +8,11 @@ export const createIngabo = /* GraphQL */ `
   ) {
     createIngabo(input: $input, condition: $condition) {
       id
-      fullName
+      fullname
       dateofbirth
       nationalID
       cooperative
       telephone
-      activity1
-      activity2
-      activity3
-      activity4
-      activity5
-      activity6
-      activity7
-      activity8
-      activity9
-      activity10
-      activity11
-      no
       cell
       sector
       district
@@ -58,22 +46,11 @@ export const updateIngabo = /* GraphQL */ `
   ) {
     updateIngabo(input: $input, condition: $condition) {
       id
-      fullName
+      fullname
       dateofbirth
       nationalID
       cooperative
       telephone
-      activity1
-      activity2
-      activity3
-      activity4
-      activity5
-      activity6
-      activity7
-      activity8
-      activity9
-      activity10
-      activity11
       no
       cell
       sector
@@ -108,23 +85,11 @@ export const deleteIngabo = /* GraphQL */ `
   ) {
     deleteIngabo(input: $input, condition: $condition) {
       id
-      fullName
+      fullname
       dateofbirth
       nationalID
       cooperative
       telephone
-      activity1
-      activity2
-      activity3
-      activity4
-      activity5
-      activity6
-      activity7
-      activity8
-      activity9
-      activity10
-      activity11
-      no
       cell
       sector
       district
