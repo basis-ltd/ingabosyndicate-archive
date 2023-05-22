@@ -2,124 +2,50 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
-    "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "ingabo3fce4ebf",
+    "allowUnauthenticatedIdentities": false,
+    "resourceNameTruncated": "ingaboca1d9fe8",
     "userPoolName": "ingabosyndicate",
     "autoVerifiedAttributes": [
       "email"
     ],
-    "mfaConfiguration": "OPTIONAL",
+    "mfaConfiguration": "OFF",
     "mfaTypes": [
       "SMS Text Message"
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
-    "emailVerificationSubject": "Ingabo Syndicate has sent you a verification code to recover your password",
-    "emailVerificationMessage": "Your verification code is {####}",
-    "defaultPasswordPolicy": true,
-    "passwordPolicyMinLength": "8",
+    "emailVerificationSubject": "Verification code from Ingabo Syndicate: {####}",
+    "emailVerificationMessage": "Verification code: {####}",
+    "defaultPasswordPolicy": false,
+    "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [
-      "Requires Uppercase",
-      "Requires Numbers"
+      "Requires Lowercase",
+      "Requires Numbers",
+      "Requires Uppercase"
     ],
     "requiredAttributes": [],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
-    "userpoolClientRefreshTokenValidity": "1000",
-    "userpoolClientWriteAttributes": [
-      "email"
-    ],
-    "userpoolClientReadAttributes": [
-      "email"
-    ],
-    "userpoolClientLambdaRole": "ingabo3fce4ebf_userpoolclient_lambda_role",
-    "userpoolClientSetAttributes": true,
-    "sharedId": "3fce4ebf",
+    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientWriteAttributes": [],
+    "userpoolClientReadAttributes": [],
+    "userpoolClientLambdaRole": "ingaboca1d9fe8_userpoolclient_lambda_role",
+    "userpoolClientSetAttributes": false,
+    "sharedId": "ca1d9fe8",
     "resourceName": "ingabosyndicate",
     "authSelections": "identityPoolAndUserPool",
     "serviceName": "Cognito",
     "usernameAttributes": [
-      "email"
+      "email",
+      "phone_number"
     ],
     "useDefault": "manual",
     "userPoolGroups": false,
     "userPoolGroupList": [],
     "adminQueries": false,
-    "usernameCaseSensitive": false,
-    "useEnabledMfas": true,
-    "authRoleArn": {
-      "Fn::GetAtt": [
-        "AuthRole",
-        "Arn"
-      ]
-    },
-    "unauthRoleArn": {
-      "Fn::GetAtt": [
-        "UnauthRole",
-        "Arn"
-      ]
-    },
-    "breakCircularDependency": true,
-    "dependsOn": [
-      {
-        "category": "function",
-        "resourceName": "ingabosyndicateDefineAuthChallenge",
-        "triggerProvider": "Cognito",
-        "attributes": [
-          "Arn",
-          "Name"
-        ]
-      },
-      {
-        "category": "function",
-        "resourceName": "ingabosyndicateCreateAuthChallenge",
-        "triggerProvider": "Cognito",
-        "attributes": [
-          "Arn",
-          "Name"
-        ]
-      },
-      {
-        "category": "function",
-        "resourceName": "ingabosyndicateVerifyAuthChallengeResponse",
-        "triggerProvider": "Cognito",
-        "attributes": [
-          "Arn",
-          "Name"
-        ]
-      },
-      {
-        "category": "function",
-        "resourceName": "ingabosyndicateCustomMessage",
-        "triggerProvider": "Cognito",
-        "attributes": [
-          "Arn",
-          "Name"
-        ]
-      }
-    ],
-    "hostedUI": false,
-    "authProviders": [],
     "thirdPartyAuth": false,
-    "triggers": {
-      "DefineAuthChallenge": [
-        "captcha-define-challenge"
-      ],
-      "CreateAuthChallenge": [
-        "captcha-create-challenge"
-      ],
-      "VerifyAuthChallengeResponse": [
-        "captcha-verify"
-      ],
-      "CustomMessage": [
-        "verification-link"
-      ]
-    },
-    "verificationBucketName": "ingabosyndicateverificationbucket",
-    "parentStack": {
-      "Ref": "AWS::StackId"
-    },
-    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"DefineAuthChallenge\",\n    \"lambdaFunctionName\": \"ingabosyndicateDefineAuthChallenge\"\n  },\n  {\n    \"triggerType\": \"CreateAuthChallenge\",\n    \"lambdaFunctionName\": \"ingabosyndicateCreateAuthChallenge\"\n  },\n  {\n    \"triggerType\": \"VerifyAuthChallengeResponse\",\n    \"lambdaFunctionName\": \"ingabosyndicateVerifyAuthChallengeResponse\"\n  },\n  {\n    \"triggerType\": \"CustomMessage\",\n    \"lambdaFunctionName\": \"ingabosyndicateCustomMessage\"\n  }\n]",
-    "permissions": []
+    "authProviders": [],
+    "usernameCaseSensitive": false,
+    "useEnabledMfas": true
   }
 }

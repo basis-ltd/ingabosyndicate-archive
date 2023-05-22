@@ -8,13 +8,12 @@
 import * as React from "react";
 import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Ingabo } from "../models";
+import { Ingab } from "../models";
 import { fetchByPath, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
-export default function IngaboUpdateForm(props) {
+export default function IngabCreateForm(props) {
   const {
-    id: idProp,
-    ingabo: ingaboModelProp,
+    clearOnSuccess = true,
     onSuccess,
     onError,
     onSubmit,
@@ -81,45 +80,31 @@ export default function IngaboUpdateForm(props) {
   const [intama, setIntama] = React.useState(initialValues.intama);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    const cleanValues = ingaboRecord
-      ? { ...initialValues, ...ingaboRecord }
-      : initialValues;
-    setFullname(cleanValues.fullname);
-    setDateofbirth(cleanValues.dateofbirth);
-    setNationalID(cleanValues.nationalID);
-    setCooperative(cleanValues.cooperative);
-    setTelephone(cleanValues.telephone);
-    setCell(cleanValues.cell);
-    setSector(cleanValues.sector);
-    setDistrict(cleanValues.district);
-    setGender(cleanValues.gender);
-    setSignature(cleanValues.signature);
-    setAroroye(cleanValues.aroroye);
-    setArahinga(cleanValues.arahinga);
-    setImyumbati(cleanValues.imyumbati);
-    setUmuceri(cleanValues.umuceri);
-    setIbigori(cleanValues.ibigori);
-    setIbinyamisogwe(cleanValues.ibinyamisogwe);
-    setImboga_imbuto(cleanValues.imboga_imbuto);
-    setInkoko(cleanValues.inkoko);
-    setIngurube(cleanValues.ingurube);
-    setInka(cleanValues.inka);
-    setIbirayi(cleanValues.ibirayi);
-    setIhene(cleanValues.ihene);
-    setIntama(cleanValues.intama);
+    setFullname(initialValues.fullname);
+    setDateofbirth(initialValues.dateofbirth);
+    setNationalID(initialValues.nationalID);
+    setCooperative(initialValues.cooperative);
+    setTelephone(initialValues.telephone);
+    setCell(initialValues.cell);
+    setSector(initialValues.sector);
+    setDistrict(initialValues.district);
+    setGender(initialValues.gender);
+    setSignature(initialValues.signature);
+    setAroroye(initialValues.aroroye);
+    setArahinga(initialValues.arahinga);
+    setImyumbati(initialValues.imyumbati);
+    setUmuceri(initialValues.umuceri);
+    setIbigori(initialValues.ibigori);
+    setIbinyamisogwe(initialValues.ibinyamisogwe);
+    setImboga_imbuto(initialValues.imboga_imbuto);
+    setInkoko(initialValues.inkoko);
+    setIngurube(initialValues.ingurube);
+    setInka(initialValues.inka);
+    setIbirayi(initialValues.ibirayi);
+    setIhene(initialValues.ihene);
+    setIntama(initialValues.intama);
     setErrors({});
   };
-  const [ingaboRecord, setIngaboRecord] = React.useState(ingaboModelProp);
-  React.useEffect(() => {
-    const queryData = async () => {
-      const record = idProp
-        ? await DataStore.query(Ingabo, idProp)
-        : ingaboModelProp;
-      setIngaboRecord(record);
-    };
-    queryData();
-  }, [idProp, ingaboModelProp]);
-  React.useEffect(resetStateValues, [ingaboRecord]);
   const validations = {
     fullname: [],
     dateofbirth: [],
@@ -223,13 +208,12 @@ export default function IngaboUpdateForm(props) {
               modelFields[key] = undefined;
             }
           });
-          await DataStore.save(
-            Ingabo.copyOf(ingaboRecord, (updated) => {
-              Object.assign(updated, modelFields);
-            })
-          );
+          await DataStore.save(new Ingab(modelFields));
           if (onSuccess) {
             onSuccess(modelFields);
+          }
+          if (clearOnSuccess) {
+            resetStateValues();
           }
         } catch (err) {
           if (onError) {
@@ -237,7 +221,7 @@ export default function IngaboUpdateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "IngaboUpdateForm")}
+      {...getOverrideProps(overrides, "IngabCreateForm")}
       {...rest}
     >
       <TextField
@@ -1303,14 +1287,13 @@ export default function IngaboUpdateForm(props) {
         {...getOverrideProps(overrides, "CTAFlex")}
       >
         <Button
-          children="Reset"
+          children="Clear"
           type="reset"
           onClick={(event) => {
             event.preventDefault();
             resetStateValues();
           }}
-          isDisabled={!(idProp || ingaboModelProp)}
-          {...getOverrideProps(overrides, "ResetButton")}
+          {...getOverrideProps(overrides, "ClearButton")}
         ></Button>
         <Flex
           gap="15px"
@@ -1320,10 +1303,7 @@ export default function IngaboUpdateForm(props) {
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={
-              !(idProp || ingaboModelProp) ||
-              Object.values(errors).some((e) => e?.hasError)
-            }
+            isDisabled={Object.values(errors).some((e) => e?.hasError)}
             {...getOverrideProps(overrides, "SubmitButton")}
           ></Button>
         </Flex>
