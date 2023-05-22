@@ -274,7 +274,6 @@ export default function IngaboCreateForm(props) {
         label="Dateofbirth"
         isRequired={false}
         isReadOnly={false}
-        type="date"
         value={dateofbirth}
         onChange={(e) => {
           let { value } = e.target;

@@ -2,6 +2,5 @@
   "AppSyncApiName": "ingabosyndicate",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
-  "APIKeyExpirationEpoch": -1,
-  "createAPIKey": 1
+  "AuthModeLastUpdated": "2023-05-22T22:54:54.671Z"
 }
