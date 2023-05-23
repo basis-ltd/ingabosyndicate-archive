@@ -36,7 +36,6 @@ export function sendMessage(to, message) {
   const endpoint = process.env.REACT_APP_ENDPOINT_URL;
   const ec2 = 'http://44.209.248.214';
   const port = '5000' || process.env.PORT;
-  console.log(endpoint);
 
   const recipient = '+250' + to.slice(-9);
 
@@ -56,10 +55,10 @@ export function sendMessage(to, message) {
     )
 
     .then((res) => {
-      console.log(res.data.status);
+      return res;
     })
     .catch((err) => {
-      console.log(err);
+      throw err;
     });
 }
 
@@ -118,7 +117,6 @@ function GlobalFilter({
   const [value, setValue] = React.useState(globalFilter);
   const onChange = useAsyncDebounce((value) => {
     setGlobalFilter(value || undefined);
-    console.log(value);
   }, 200);
 
   return (
@@ -161,7 +159,6 @@ function Table() {
 
   let data = records;
 
-  console.log(data, records);
 
   // CHECK DUPLICATES
   const checkDuplicates = (data) => {
@@ -178,7 +175,6 @@ function Table() {
   };
 
   const duplicates = checkDuplicates(data);
-  console.log(duplicates);
 
   const columns = React.useMemo(
     () => [
@@ -351,7 +347,6 @@ function Table() {
 
     headers.forEach((column) => {
       ws['!cols'][column.idx] = { width: column.width };
-      console.log(column.width);
     });
 
     // define the column headers
@@ -577,7 +572,6 @@ function Table() {
     });
 
     doc.save('Ingabo Syndicate PDF Report.pdf');
-    console.log(info);
   };
 
   return (
@@ -603,7 +597,6 @@ function Table() {
                   className="delete-confirmation"
                   onClick={async () => {
                     let modelDelete = await DataStore.query(Ingabo, deleteId);
-                    console.log(modelDelete.fullName);
                     await DataStore.delete(modelDelete);
                     toggleDeleteModal();
                   }}
@@ -686,7 +679,6 @@ function Table() {
                     className="message-btn-send"
                     onClick={() => {
                       let message = document.getElementById('message').value;
-                      console.log(messageID.telephone);
                       sendMessage(messageID.telephone, message);
                     }}
                   >

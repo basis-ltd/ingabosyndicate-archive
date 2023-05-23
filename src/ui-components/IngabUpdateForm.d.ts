@@ -7,13 +7,13 @@
 import * as React from "react";
 import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { Ingabo } from "../models";
+import { Ingab } from "../models";
 export declare type ValidationResponse = {
     hasError: boolean;
     errorMessage?: string;
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
-export declare type IngaboUpdateFormInputValues = {
+export declare type IngabUpdateFormInputValues = {
     fullname?: string;
     dateofbirth?: string;
     nationalID?: string;
@@ -38,7 +38,7 @@ export declare type IngaboUpdateFormInputValues = {
     ihene?: string;
     intama?: string;
 };
-export declare type IngaboUpdateFormValidationValues = {
+export declare type IngabUpdateFormValidationValues = {
     fullname?: ValidationFunction<string>;
     dateofbirth?: ValidationFunction<string>;
     nationalID?: ValidationFunction<string>;
@@ -64,8 +64,8 @@ export declare type IngaboUpdateFormValidationValues = {
     intama?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type IngaboUpdateFormOverridesProps = {
-    IngaboUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
+export declare type IngabUpdateFormOverridesProps = {
+    IngabUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     fullname?: PrimitiveOverrideProps<TextFieldProps>;
     dateofbirth?: PrimitiveOverrideProps<TextFieldProps>;
     nationalID?: PrimitiveOverrideProps<TextFieldProps>;
@@ -90,15 +90,15 @@ export declare type IngaboUpdateFormOverridesProps = {
     ihene?: PrimitiveOverrideProps<TextFieldProps>;
     intama?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
-export declare type IngaboUpdateFormProps = React.PropsWithChildren<{
-    overrides?: IngaboUpdateFormOverridesProps | undefined | null;
+export declare type IngabUpdateFormProps = React.PropsWithChildren<{
+    overrides?: IngabUpdateFormOverridesProps | undefined | null;
 } & {
     id?: string;
-    ingabo?: Ingabo;
-    onSubmit?: (fields: IngaboUpdateFormInputValues) => IngaboUpdateFormInputValues;
-    onSuccess?: (fields: IngaboUpdateFormInputValues) => void;
-    onError?: (fields: IngaboUpdateFormInputValues, errorMessage: string) => void;
-    onChange?: (fields: IngaboUpdateFormInputValues) => IngaboUpdateFormInputValues;
-    onValidate?: IngaboUpdateFormValidationValues;
+    ingab?: Ingab;
+    onSubmit?: (fields: IngabUpdateFormInputValues) => IngabUpdateFormInputValues;
+    onSuccess?: (fields: IngabUpdateFormInputValues) => void;
+    onError?: (fields: IngabUpdateFormInputValues, errorMessage: string) => void;
+    onChange?: (fields: IngabUpdateFormInputValues) => IngabUpdateFormInputValues;
+    onValidate?: IngabUpdateFormValidationValues;
 } & React.CSSProperties>;
-export default function IngaboUpdateForm(props: IngaboUpdateFormProps): React.ReactElement;
+export default function IngabUpdateForm(props: IngabUpdateFormProps): React.ReactElement;

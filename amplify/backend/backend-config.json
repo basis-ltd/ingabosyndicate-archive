@@ -25,55 +25,19 @@
   "auth": {
     "ingabosyndicate": {
       "customAuth": false,
-      "dependsOn": [
-        {
-          "attributes": [
-            "Arn",
-            "Name"
-          ],
-          "category": "function",
-          "resourceName": "ingabosyndicateDefineAuthChallenge",
-          "triggerProvider": "Cognito"
-        },
-        {
-          "attributes": [
-            "Arn",
-            "Name"
-          ],
-          "category": "function",
-          "resourceName": "ingabosyndicateCreateAuthChallenge",
-          "triggerProvider": "Cognito"
-        },
-        {
-          "attributes": [
-            "Arn",
-            "Name"
-          ],
-          "category": "function",
-          "resourceName": "ingabosyndicateVerifyAuthChallengeResponse",
-          "triggerProvider": "Cognito"
-        },
-        {
-          "attributes": [
-            "Arn",
-            "Name"
-          ],
-          "category": "function",
-          "resourceName": "ingabosyndicateCustomMessage",
-          "triggerProvider": "Cognito"
-        }
-      ],
+      "dependsOn": [],
       "frontendAuthConfig": {
-        "mfaConfiguration": "OPTIONAL",
+        "mfaConfiguration": "OFF",
         "mfaTypes": [
           "SMS"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyCharacters": [
-            "REQUIRES_UPPERCASE",
-            "REQUIRES_NUMBERS"
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_NUMBERS",
+            "REQUIRES_UPPERCASE"
           ],
-          "passwordPolicyMinLength": "8"
+          "passwordPolicyMinLength": 8
         },
         "signupAttributes": [],
         "socialProviders": [],
@@ -89,144 +53,34 @@
     }
   },
   "function": {
-    "ingabosyndicateCreateAuthChallenge": {
+    "ingabosyndicate71ce621bPostConfirmation": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
-    },
-    "ingabosyndicateCustomMessage": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "ingabosyndicateDefineAuthChallenge": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "ingabosyndicateVerifyAuthChallengeResponse": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
-  "hosting": {
-    "amplifyhosting": {
-      "lastPushTimeStamp": "2023-04-16T22:16:25.442Z",
-      "service": "amplifyhosting",
-      "type": "cicd"
     }
   },
   "parameters": {
-    "AMPLIFY_function_ingabosyndicateCreateAuthChallenge_deploymentBucketName": {
+    "AMPLIFY_function_ingabosyndicate71ce621bPostConfirmation_GROUP": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "ingabosyndicateCreateAuthChallenge"
+          "resourceName": "ingabosyndicate71ce621bPostConfirmation"
         }
       ]
     },
-    "AMPLIFY_function_ingabosyndicateCreateAuthChallenge_s3Key": {
+    "AMPLIFY_function_ingabosyndicate71ce621bPostConfirmation_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "ingabosyndicateCreateAuthChallenge"
+          "resourceName": "ingabosyndicate71ce621bPostConfirmation"
         }
       ]
     },
-    "AMPLIFY_function_ingabosyndicateCustomMessage_EMAILMESSAGE": {
+    "AMPLIFY_function_ingabosyndicate71ce621bPostConfirmation_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "ingabosyndicateCustomMessage"
-        }
-      ]
-    },
-    "AMPLIFY_function_ingabosyndicateCustomMessage_EMAILSUBJECT": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "ingabosyndicateCustomMessage"
-        }
-      ]
-    },
-    "AMPLIFY_function_ingabosyndicateCustomMessage_REDIRECTURL": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "ingabosyndicateCustomMessage"
-        }
-      ]
-    },
-    "AMPLIFY_function_ingabosyndicateCustomMessage_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "ingabosyndicateCustomMessage"
-        }
-      ]
-    },
-    "AMPLIFY_function_ingabosyndicateCustomMessage_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "ingabosyndicateCustomMessage"
-        }
-      ]
-    },
-    "AMPLIFY_function_ingabosyndicateDefineAuthChallenge_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "ingabosyndicateDefineAuthChallenge"
-        }
-      ]
-    },
-    "AMPLIFY_function_ingabosyndicateDefineAuthChallenge_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "ingabosyndicateDefineAuthChallenge"
-        }
-      ]
-    },
-    "AMPLIFY_function_ingabosyndicateVerifyAuthChallengeResponse_RECAPTCHASECRET": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "ingabosyndicateVerifyAuthChallengeResponse"
-        }
-      ]
-    },
-    "AMPLIFY_function_ingabosyndicateVerifyAuthChallengeResponse_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "ingabosyndicateVerifyAuthChallengeResponse"
-        }
-      ]
-    },
-    "AMPLIFY_function_ingabosyndicateVerifyAuthChallengeResponse_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "ingabosyndicateVerifyAuthChallengeResponse"
-        }
-      ]
-    },
-    "AMPLIFY_hosting_amplifyhosting_appId": {
-      "usedBy": [
-        {
-          "category": "hosting",
-          "resourceName": "amplifyhosting"
-        }
-      ]
-    },
-    "AMPLIFY_hosting_amplifyhosting_type": {
-      "usedBy": [
-        {
-          "category": "hosting",
-          "resourceName": "amplifyhosting"
+          "resourceName": "ingabosyndicate71ce621bPostConfirmation"
         }
       ]
     }

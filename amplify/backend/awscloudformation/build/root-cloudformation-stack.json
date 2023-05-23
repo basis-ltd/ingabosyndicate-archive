@@ -152,116 +152,10 @@
         }
       }
     },
-    "AuthTriggerCustomLambdaStack": {
-      "Type": "AWS::CloudFormation::Stack",
-      "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabosyndicate-staging-83852-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json",
-        "Parameters": {
-          "env": "staging",
-          "userpoolId": {
-            "Fn::GetAtt": [
-              "authingabosyndicate",
-              "Outputs.UserPoolId"
-            ]
-          },
-          "userpoolArn": {
-            "Fn::GetAtt": [
-              "authingabosyndicate",
-              "Outputs.UserPoolArn"
-            ]
-          },
-          "snsRoleArn": {
-            "Fn::GetAtt": [
-              "authingabosyndicate",
-              "Outputs.CreatedSNSRole"
-            ]
-          },
-          "functioningabosyndicateDefineAuthChallengeLambdaExecutionRole": {
-            "Fn::GetAtt": [
-              "functioningabosyndicateDefineAuthChallenge",
-              "Outputs.LambdaExecutionRoleArn"
-            ]
-          },
-          "functioningabosyndicateDefineAuthChallengeArn": {
-            "Fn::GetAtt": [
-              "functioningabosyndicateDefineAuthChallenge",
-              "Outputs.Arn"
-            ]
-          },
-          "functioningabosyndicateDefineAuthChallengeName": {
-            "Fn::GetAtt": [
-              "functioningabosyndicateDefineAuthChallenge",
-              "Outputs.Name"
-            ]
-          },
-          "functioningabosyndicateCreateAuthChallengeLambdaExecutionRole": {
-            "Fn::GetAtt": [
-              "functioningabosyndicateCreateAuthChallenge",
-              "Outputs.LambdaExecutionRoleArn"
-            ]
-          },
-          "functioningabosyndicateCreateAuthChallengeArn": {
-            "Fn::GetAtt": [
-              "functioningabosyndicateCreateAuthChallenge",
-              "Outputs.Arn"
-            ]
-          },
-          "functioningabosyndicateCreateAuthChallengeName": {
-            "Fn::GetAtt": [
-              "functioningabosyndicateCreateAuthChallenge",
-              "Outputs.Name"
-            ]
-          },
-          "functioningabosyndicateVerifyAuthChallengeResponseLambdaExecutionRole": {
-            "Fn::GetAtt": [
-              "functioningabosyndicateVerifyAuthChallengeResponse",
-              "Outputs.LambdaExecutionRoleArn"
-            ]
-          },
-          "functioningabosyndicateVerifyAuthChallengeResponseArn": {
-            "Fn::GetAtt": [
-              "functioningabosyndicateVerifyAuthChallengeResponse",
-              "Outputs.Arn"
-            ]
-          },
-          "functioningabosyndicateVerifyAuthChallengeResponseName": {
-            "Fn::GetAtt": [
-              "functioningabosyndicateVerifyAuthChallengeResponse",
-              "Outputs.Name"
-            ]
-          },
-          "functioningabosyndicateCustomMessageLambdaExecutionRole": {
-            "Fn::GetAtt": [
-              "functioningabosyndicateCustomMessage",
-              "Outputs.LambdaExecutionRoleArn"
-            ]
-          },
-          "functioningabosyndicateCustomMessageArn": {
-            "Fn::GetAtt": [
-              "functioningabosyndicateCustomMessage",
-              "Outputs.Arn"
-            ]
-          },
-          "functioningabosyndicateCustomMessageName": {
-            "Fn::GetAtt": [
-              "functioningabosyndicateCustomMessage",
-              "Outputs.Name"
-            ]
-          }
-        }
-      },
-      "DependsOn": [
-        "authingabosyndicate",
-        "functioningabosyndicateDefineAuthChallenge",
-        "functioningabosyndicateCreateAuthChallenge",
-        "functioningabosyndicateVerifyAuthChallengeResponse",
-        "functioningabosyndicateCustomMessage"
-      ]
-    },
     "apiingabosyndicate": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabosyndicate-staging-83852-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabosyndicate-staging-221600-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "Parameters": {
           "AppSyncApiName": "ingabosyndicate",
           "DynamoDBBillingMode": "PAY_PER_REQUEST",
@@ -272,8 +166,8 @@
           "unauthRoleName": {
             "Ref": "UnauthRoleName"
           },
-          "S3DeploymentBucket": "amplify-ingabosyndicate-staging-83852-deployment",
-          "S3DeploymentRootKey": "amplify-appsync-files/73ec00edbc10d23e5b49af0194027a58513e9dfc",
+          "S3DeploymentBucket": "amplify-ingabosyndicate-staging-221600-deployment",
+          "S3DeploymentRootKey": "amplify-appsync-files/e9152cb0970f9fca929662acb5cfca54a5eece46",
           "env": "staging"
         }
       }
@@ -281,39 +175,41 @@
     "authingabosyndicate": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabosyndicate-staging-83852-deployment/amplify-cfn-templates/auth/ingabosyndicate-cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabosyndicate-staging-221600-deployment/amplify-cfn-templates/auth/ingabosyndicate-cloudformation-template.json",
         "Parameters": {
           "identityPoolName": "testAuthIdentityPool",
-          "allowUnauthenticatedIdentities": true,
-          "resourceNameTruncated": "ingabo3fce4ebf",
+          "allowUnauthenticatedIdentities": false,
+          "resourceNameTruncated": "ingaboca1d9fe8",
           "userPoolName": "ingabosyndicate",
           "autoVerifiedAttributes": "email",
-          "mfaConfiguration": "OPTIONAL",
+          "mfaConfiguration": "OFF",
           "mfaTypes": "SMS Text Message",
           "smsAuthenticationMessage": "Your authentication code is {####}",
           "smsVerificationMessage": "Your verification code is {####}",
-          "emailVerificationSubject": "Ingabo Syndicate has sent you a verification code to recover your password",
-          "emailVerificationMessage": "Your verification code is {####}",
-          "defaultPasswordPolicy": true,
-          "passwordPolicyMinLength": "8",
-          "passwordPolicyCharacters": "Requires Uppercase,Requires Numbers",
+          "emailVerificationSubject": "Verification code from Ingabo Syndicate: {####}",
+          "emailVerificationMessage": "Verification code: {####}",
+          "defaultPasswordPolicy": false,
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": "Requires Lowercase,Requires Numbers,Requires Uppercase",
           "requiredAttributes": "",
           "aliasAttributes": "",
           "userpoolClientGenerateSecret": false,
-          "userpoolClientRefreshTokenValidity": "1000",
-          "userpoolClientWriteAttributes": "email",
-          "userpoolClientReadAttributes": "email",
-          "userpoolClientLambdaRole": "ingabo3fce4ebf_userpoolclient_lambda_role",
-          "userpoolClientSetAttributes": true,
-          "sharedId": "3fce4ebf",
+          "userpoolClientRefreshTokenValidity": 30,
+          "userpoolClientWriteAttributes": "",
+          "userpoolClientReadAttributes": "",
+          "userpoolClientLambdaRole": "ingaboca1d9fe8_userpoolclient_lambda_role",
+          "userpoolClientSetAttributes": false,
+          "sharedId": "ca1d9fe8",
           "resourceName": "ingabosyndicate",
           "authSelections": "identityPoolAndUserPool",
           "serviceName": "Cognito",
-          "usernameAttributes": "email",
+          "usernameAttributes": "email,phone_number",
           "useDefault": "manual",
           "userPoolGroups": false,
           "userPoolGroupList": "",
           "adminQueries": false,
+          "thirdPartyAuth": false,
+          "authProviders": "",
           "usernameCaseSensitive": false,
           "useEnabledMfas": true,
           "authRoleArn": {
@@ -329,73 +225,21 @@
             ]
           },
           "breakCircularDependency": true,
-          "dependsOn": "[object Object],[object Object],[object Object],[object Object]",
-          "hostedUI": false,
-          "authProviders": "",
-          "thirdPartyAuth": false,
-          "triggers": "{\"DefineAuthChallenge\":[\"captcha-define-challenge\"],\"CreateAuthChallenge\":[\"captcha-create-challenge\"],\"VerifyAuthChallengeResponse\":[\"captcha-verify\"],\"CustomMessage\":[\"verification-link\"]}",
-          "verificationBucketName": "ingabosyndicateverificationbucket",
-          "parentStack": {
-            "Ref": "AWS::StackId"
-          },
-          "authTriggerConnections": "{\"triggerType\":\"DefineAuthChallenge\",\"lambdaFunctionName\":\"ingabosyndicateDefineAuthChallenge\"},{\"triggerType\":\"CreateAuthChallenge\",\"lambdaFunctionName\":\"ingabosyndicateCreateAuthChallenge\"},{\"triggerType\":\"VerifyAuthChallengeResponse\",\"lambdaFunctionName\":\"ingabosyndicateVerifyAuthChallengeResponse\"},{\"triggerType\":\"CustomMessage\",\"lambdaFunctionName\":\"ingabosyndicateCustomMessage\"}",
-          "permissions": "",
+          "dependsOn": "",
           "env": "staging"
         }
       }
     },
-    "functioningabosyndicateDefineAuthChallenge": {
+    "functioningabosyndicate71ce621bPostConfirmation": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabosyndicate-staging-83852-deployment/amplify-cfn-templates/function/ingabosyndicateDefineAuthChallenge-cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabosyndicate-staging-221600-deployment/amplify-cfn-templates/function/ingabosyndicate71ce621bPostConfirmation-cloudformation-template.json",
         "Parameters": {
-          "modules": "captcha-define-challenge",
-          "resourceName": "ingabosyndicateDefineAuthChallenge",
-          "deploymentBucketName": "amplify-ingabosyndicate-staging-83852-deployment",
-          "s3Key": "amplify-builds/ingabosyndicateDefineAuthChallenge-33344951537433577446-build.zip",
-          "env": "staging"
-        }
-      }
-    },
-    "functioningabosyndicateCreateAuthChallenge": {
-      "Type": "AWS::CloudFormation::Stack",
-      "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabosyndicate-staging-83852-deployment/amplify-cfn-templates/function/ingabosyndicateCreateAuthChallenge-cloudformation-template.json",
-        "Parameters": {
-          "modules": "captcha-create-challenge",
-          "resourceName": "ingabosyndicateCreateAuthChallenge",
-          "deploymentBucketName": "amplify-ingabosyndicate-staging-83852-deployment",
-          "s3Key": "amplify-builds/ingabosyndicateCreateAuthChallenge-6831326c732f546b674e-build.zip",
-          "env": "staging"
-        }
-      }
-    },
-    "functioningabosyndicateVerifyAuthChallengeResponse": {
-      "Type": "AWS::CloudFormation::Stack",
-      "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabosyndicate-staging-83852-deployment/amplify-cfn-templates/function/ingabosyndicateVerifyAuthChallengeResponse-cloudformation-template.json",
-        "Parameters": {
-          "modules": "captcha-verify",
-          "resourceName": "ingabosyndicateVerifyAuthChallengeResponse",
-          "RECAPTCHASECRET": "6LdrIJIlAAAAANqsMiZ0ajXZl5jqlik2qX5cJhwf",
-          "deploymentBucketName": "amplify-ingabosyndicate-staging-83852-deployment",
-          "s3Key": "amplify-builds/ingabosyndicateVerifyAuthChallengeResponse-56614438756235684364-build.zip",
-          "env": "staging"
-        }
-      }
-    },
-    "functioningabosyndicateCustomMessage": {
-      "Type": "AWS::CloudFormation::Stack",
-      "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-ingabosyndicate-staging-83852-deployment/amplify-cfn-templates/function/ingabosyndicateCustomMessage-cloudformation-template.json",
-        "Parameters": {
-          "modules": "verification-link",
-          "resourceName": "ingabosyndicateCustomMessage",
-          "REDIRECTURL": "https://ingabosyndicate.web.app/",
-          "EMAILSUBJECT": "To prevent malicious activity on our platform, we require members to pass this verification.",
-          "EMAILMESSAGE": "To prevent malicious activity on our platform, we require members to pass this verification. Please verify your connection before you can proceed.",
-          "deploymentBucketName": "amplify-ingabosyndicate-staging-83852-deployment",
-          "s3Key": "amplify-builds/ingabosyndicateCustomMessage-6a4965766b5565495659-build.zip",
+          "modules": "add-to-group",
+          "resourceName": "ingabosyndicate71ce621bPostConfirmation",
+          "GROUP": "Admin",
+          "deploymentBucketName": "amplify-ingabosyndicate-staging-221600-deployment",
+          "s3Key": "amplify-builds/ingabosyndicate71ce621bPostConfirmation-6a71734e744766315375-build.zip",
           "env": "staging"
         }
       }
@@ -414,68 +258,85 @@
               "\n",
               [
                 "const response = require('cfn-response');",
-                "const aws = require('aws-sdk');",
-                "let responseData = {};",
+                "const { IAMClient, GetRoleCommand, UpdateAssumeRolePolicyCommand } = require('@aws-sdk/client-iam');",
                 "exports.handler = function(event, context) {",
-                "  try {",
-                "    let authRoleName = event.ResourceProperties.authRoleName;",
-                "    let unauthRoleName = event.ResourceProperties.unauthRoleName;",
-                "    let idpId = event.ResourceProperties.idpId;",
-                "    let promises = [];",
-                "    let getPromises = [];",
-                "    let authParamsJson = { 'Version': '2012-10-17','Statement': [{'Effect': 'Allow','Principal': {'Federated': 'cognito-identity.amazonaws.com'},'Action': 'sts:AssumeRoleWithWebIdentity','Condition': {'StringEquals': {'cognito-identity.amazonaws.com:aud': idpId},'ForAnyValue:StringLike': {'cognito-identity.amazonaws.com:amr': 'authenticated'}}}]};",
-                "    let unauthParamsJson = { 'Version': '2012-10-17','Statement': [{'Effect': 'Allow','Principal': {'Federated': 'cognito-identity.amazonaws.com'},'Action': 'sts:AssumeRoleWithWebIdentity','Condition': {'StringEquals': {'cognito-identity.amazonaws.com:aud': idpId},'ForAnyValue:StringLike': {'cognito-identity.amazonaws.com:amr': 'unauthenticated'}}}]};",
-                "    if (event.RequestType == 'Delete') {",
-                "        delete authParamsJson.Statement[0].Condition;",
-                "        delete unauthParamsJson.Statement[0].Condition;",
-                "        let authParams = { PolicyDocument: JSON.stringify(authParamsJson),RoleName: authRoleName};",
-                "        let unauthParams = {PolicyDocument: JSON.stringify(unauthParamsJson),RoleName: unauthRoleName};",
-                "        const iam = new aws.IAM({ apiVersion: '2010-05-08', region: event.ResourceProperties.region});",
-                "        getPromises.push(iam.getRole({RoleName: authParams.RoleName}).promise());",
-                "        getPromises.push(iam.getRole({RoleName: unauthParams.RoleName}).promise());",
-                "        Promise.all(getPromises)",
-                "         .then((res) => {",
-                "        console.log('in res' , res)",
-                "           promises.push(iam.updateAssumeRolePolicy(authParams).promise());",
-                "           promises.push(iam.updateAssumeRolePolicy(unauthParams).promise());",
-                "           return Promise.all(promises)",
-                "             .then((res) => {",
-                "               console.log(\"delete response data\" + JSON.stringify(res));",
-                "               response.send(event, context, response.SUCCESS, {});",
-                "             });",
-                "          })",
-                "           .catch((err) => {",
-                "             console.log(err.stack);",
-                "             responseData = {Error: err};",
-                "             response.send(event, context, response.SUCCESS, responseData);",
-                "             })",
-                "    }",
-                "    if (event.RequestType == 'Update' || event.RequestType == 'Create') {",
-                "       const iam = new aws.IAM({ apiVersion: '2010-05-08', region: event.ResourceProperties.region});",
-                "        let authParams = { PolicyDocument: JSON.stringify(authParamsJson),RoleName: authRoleName};",
-                "        let unauthParams = {PolicyDocument: JSON.stringify(unauthParamsJson),RoleName: unauthRoleName};",
-                "        promises.push(iam.updateAssumeRolePolicy(authParams).promise());",
-                "        promises.push(iam.updateAssumeRolePolicy(unauthParams).promise());",
-                "        Promise.all(promises)",
-                "         .then((res) => {",
-                "            console.log(\"createORupdate\" + res);",
-                "            console.log(\"response data\" + JSON.stringify(res));",
+                "    // Don't return promise, response.send() marks context as done internally",
+                "    const ignoredPromise = handleEvent(event, context)",
+                "};",
+                "async function handleEvent(event, context) {",
+                "    try {",
+                "        let authRoleName = event.ResourceProperties.authRoleName;",
+                "        let unauthRoleName = event.ResourceProperties.unauthRoleName;",
+                "        let idpId = event.ResourceProperties.idpId;",
+                "        let authParamsJson = {",
+                "            'Version': '2012-10-17',",
+                "            'Statement': [{",
+                "                'Effect': 'Allow',",
+                "                'Principal': {'Federated': 'cognito-identity.amazonaws.com'},",
+                "                'Action': 'sts:AssumeRoleWithWebIdentity',",
+                "                'Condition': {",
+                "                    'StringEquals': {'cognito-identity.amazonaws.com:aud': idpId},",
+                "                    'ForAnyValue:StringLike': {'cognito-identity.amazonaws.com:amr': 'authenticated'}",
+                "                }",
+                "            }]",
+                "        };",
+                "        let unauthParamsJson = {",
+                "            'Version': '2012-10-17',",
+                "            'Statement': [{",
+                "                'Effect': 'Allow',",
+                "                'Principal': {'Federated': 'cognito-identity.amazonaws.com'},",
+                "                'Action': 'sts:AssumeRoleWithWebIdentity',",
+                "                'Condition': {",
+                "                    'StringEquals': {'cognito-identity.amazonaws.com:aud': idpId},",
+                "                    'ForAnyValue:StringLike': {'cognito-identity.amazonaws.com:amr': 'unauthenticated'}",
+                "                }",
+                "            }]",
+                "        };",
+                "        if (event.RequestType === 'Delete') {",
+                "            try {",
+                "                delete authParamsJson.Statement[0].Condition;",
+                "                delete unauthParamsJson.Statement[0].Condition;",
+                "                let authParams = {PolicyDocument: JSON.stringify(authParamsJson), RoleName: authRoleName};",
+                "                let unauthParams = {PolicyDocument: JSON.stringify(unauthParamsJson), RoleName: unauthRoleName};",
+                "                const iam = new IAMClient({region: event.ResourceProperties.region});",
+                "                let res = await Promise.all([",
+                "                    iam.send(new GetRoleCommand({RoleName: authParams.RoleName})),",
+                "                    iam.send(new GetRoleCommand({RoleName: unauthParams.RoleName}))",
+                "                ]);",
+                "                console.log('in res', res);",
+                "                res = await Promise.all([",
+                "                    iam.send(new UpdateAssumeRolePolicyCommand(authParams)),",
+                "                    iam.send(new UpdateAssumeRolePolicyCommand(unauthParams))",
+                "                ]);",
+                "                console.log('delete response data' + JSON.stringify(res));",
+                "                response.send(event, context, response.SUCCESS, {});",
+                "            } catch (err) {",
+                "                console.log(err.stack);",
+                "                response.send(event, context, response.SUCCESS, {Error: err});",
+                "            }",
+                "        } else if (event.RequestType === 'Update' || event.RequestType === 'Create') {",
+                "            const iam = new IAMClient({region: event.ResourceProperties.region});",
+                "            let authParams = {PolicyDocument: JSON.stringify(authParamsJson), RoleName: authRoleName};",
+                "            let unauthParams = {PolicyDocument: JSON.stringify(unauthParamsJson), RoleName: unauthRoleName};",
+                "            const res = await Promise.all([",
+                "                iam.send(new UpdateAssumeRolePolicyCommand(authParams)),",
+                "                iam.send(new UpdateAssumeRolePolicyCommand(unauthParams))",
+                "            ]);",
+                "            console.log('createORupdate' + res);",
+                "            console.log('response data' + JSON.stringify(res));",
                 "            response.send(event, context, response.SUCCESS, {});",
-                "         });",
+                "        }",
+                "    } catch (err) {",
+                "        console.log(err.stack);",
+                "        response.send(event, context, response.FAILED, {Error: err});",
                 "    }",
-                "  } catch(err) {",
-                "       console.log(err.stack);",
-                "       responseData = {Error: err};",
-                "       response.send(event, context, response.FAILED, responseData);",
-                "       throw err;",
-                "  }",
                 "};"
               ]
             ]
           }
         },
         "Handler": "index.handler",
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs18.x",
         "Timeout": 300,
         "Role": {
           "Fn::GetAtt": [

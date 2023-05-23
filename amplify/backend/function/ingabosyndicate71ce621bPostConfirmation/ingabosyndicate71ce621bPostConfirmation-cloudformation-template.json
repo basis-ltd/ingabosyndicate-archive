@@ -1,8 +1,8 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"10.8.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"11.1.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
-    "RECAPTCHASECRET": {
+    "GROUP": {
       "Type": "String",
       "Default": ""
     },
@@ -67,12 +67,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "ingabosyndicateVerifyAuthChallengeResponse",
+            "ingabosyndicate71ce621bPostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "ingabosyndicateVerifyAuthChallengeResponse",
+                  "ingabosyndicate71ce621bPostConfirmation",
                   "-",
                   {
                     "Ref": "env"
@@ -93,8 +93,8 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "RECAPTCHASECRET": {
-              "Ref": "RECAPTCHASECRET"
+            "GROUP": {
+              "Ref": "GROUP"
             }
           }
         },
@@ -104,7 +104,7 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs16.x",
         "Timeout": 25,
         "Code": {
           "S3Bucket": {
@@ -122,12 +122,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "ingabosyndicateVerifyAuthChallengeResponse",
+            "ingabosyndicate71ce621bPostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "ingabosyndicateVerifyAuthChallengeResponse",
+                  "ingabosyndicate71ce621bPostConfirmation",
                   "-",
                   {
                     "Ref": "env"

@@ -4,7 +4,7 @@ import { Ingabo } from "./models";
 import { DataStore, Predicates } from "@aws-amplify/datastore";
 import React, { useState, useEffect } from "react";
 import "./Create.css";
-import { useHistory, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 Amplify.configure(awsconfig);
 
@@ -60,11 +60,9 @@ const Create = () => {
         break;
       case "dateofbirth":
         setDateofbirth(e.target.value);
-        console.log(e.target.value);
         break;
       case "gender":
         setGender(e.target.value);
-        console.log(e.target.value);
         break;
       case "nationalID":
         setNationalID(e.target.value);
@@ -175,7 +173,7 @@ const Create = () => {
     });
 
     if (fullnameRegex.test(fullname)) {
-      await DataStore.save(Record).then((record) => console.log(record));
+      await DataStore.save(Record).then((record) => record);
 
       form_success.style.display = "block";
       form_error.style.display = "none";
@@ -184,7 +182,6 @@ const Create = () => {
         navigate("/home")
       }, 1500);
     } else {
-      console.log("Test failed");
       form_error.style.display = "block";
       form_success.style.display = "none";
     }
