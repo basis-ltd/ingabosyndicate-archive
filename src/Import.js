@@ -89,7 +89,6 @@ function Import() {
       dynamicTyping: true,
       complete: (results) => {
         const records = results.data;
-        console.log('Exported ' + records.length);
 
         records.forEach((record) => {
           const nationalids = {
@@ -98,7 +97,6 @@ function Import() {
             cooperative: record['Cooperative'],
             district: record['Aho Atuye'],
           };
-          // console.log(nationalids)
           ingaboexported.push(nationalids);
         });
       },
@@ -109,7 +107,6 @@ function Import() {
       dynamicTyping: true,
       complete: (results) => {
         const records = results.data;
-        console.log('Backup ' + records.length);
         // FORMAT BACKUP DATA TO REMOVE NULL VALUES AND FORMAT PHONE
         ingabobackup = records.map((element, index) => {
           return transformerCSV(element);
@@ -117,6 +114,13 @@ function Import() {
       },
     });
   };
+
+  /**
+   * 
+   * @description This function is used to migrate data from the exported file to the backup file to include the nationalID
+   * @returns Number of records added in the backup file
+   * 
+   */
 
   const migrate = async (exported, backup) => {
     let counter = 0;
@@ -133,12 +137,23 @@ function Import() {
           backup[j].nationalID = exported[i].nationalID
           counter++;
           duplicates.push(backup[j]);
+          // CREATE A NEW RECORD IN THE GRAPHQL API
+          try {
+            const newRecord = await API.graphql(graphqlOperation(mutations.createIngabo, {input: backup[j]}))
+            return newRecord
+          } catch (error) {
+            return error
+          }
         }
       }
     }
-    console.log(`${counter} records added in DataStore`);
   };
 
+  /**
+   * 
+   * @description This function is used to check for duplicates in the backup file
+   * @returns Number of duplicates and the duplicates
+   */
   const checkDuplicates = (arr) => {
     let counter = 0;
     let duplicates = [];
@@ -157,7 +172,6 @@ function Import() {
       }
     }
 
-    console.log(counter, duplicates.length);
   };
 
   return (
@@ -176,41 +190,18 @@ function Import() {
         onClick={() => migrate(ingaboexported, ingabobackup)}
       ></input> */}
 
-      {/* <input
+      <input
         type="submit"
         value="Clear Ingabo"
-        onClick={async() => {
-          await DataStore.delete(Ingabo, Predicates.ALL)
-          .then((message) => console.log(message))
-          .catch(err => console.log(err));
-        }}
-      ></input> */}
-
-      <input
-      type="submit"
-      value="Fetch data"
-      onClick={async() => {
-        const newIngabo = await API.graphql(graphqlOperation(listIngabos))
-        .then((data) => {
-          const results = data.data.listIngabos.items;
-          results.forEach(async (result, index) => {
-            const deleteIngabo = {
-              id: result.id,
-              _version: result._version
-            }
-           await API.graphql(graphqlOperation(listIngabos))
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
-          }) 
-        });
-      }}
+        onClick={async () => migrate(ingaboexported, ingabobackup)}
       ></input>
 
-      {/* <input
+
+      <input
         type="submit"
         value="Check Duplicates"
         onClick={checkDuplicates(ingabobackup)}
-      ></input> */}
+      ></input>
     </div>
   );
 }
@@ -227,7 +218,6 @@ PAPA PARSE:
 - dynamicTyping: true
 
 - complete: (results, parser) => {
-    console.log(results.data);
 }
 
 - 

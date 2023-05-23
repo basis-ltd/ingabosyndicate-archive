@@ -8,13 +8,13 @@
 import * as React from "react";
 import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Ingabo } from "../models";
+import { Ingab } from "../models";
 import { fetchByPath, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
-export default function IngaboUpdateForm(props) {
+export default function IngabUpdateForm(props) {
   const {
     id: idProp,
-    ingabo: ingaboModelProp,
+    ingab: ingabModelProp,
     onSuccess,
     onError,
     onSubmit,
@@ -81,8 +81,8 @@ export default function IngaboUpdateForm(props) {
   const [intama, setIntama] = React.useState(initialValues.intama);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    const cleanValues = ingaboRecord
-      ? { ...initialValues, ...ingaboRecord }
+    const cleanValues = ingabRecord
+      ? { ...initialValues, ...ingabRecord }
       : initialValues;
     setFullname(cleanValues.fullname);
     setDateofbirth(cleanValues.dateofbirth);
@@ -109,17 +109,17 @@ export default function IngaboUpdateForm(props) {
     setIntama(cleanValues.intama);
     setErrors({});
   };
-  const [ingaboRecord, setIngaboRecord] = React.useState(ingaboModelProp);
+  const [ingabRecord, setIngabRecord] = React.useState(ingabModelProp);
   React.useEffect(() => {
     const queryData = async () => {
       const record = idProp
-        ? await DataStore.query(Ingabo, idProp)
-        : ingaboModelProp;
-      setIngaboRecord(record);
+        ? await DataStore.query(Ingab, idProp)
+        : ingabModelProp;
+      setIngabRecord(record);
     };
     queryData();
-  }, [idProp, ingaboModelProp]);
-  React.useEffect(resetStateValues, [ingaboRecord]);
+  }, [idProp, ingabModelProp]);
+  React.useEffect(resetStateValues, [ingabRecord]);
   const validations = {
     fullname: [],
     dateofbirth: [],
@@ -224,7 +224,7 @@ export default function IngaboUpdateForm(props) {
             }
           });
           await DataStore.save(
-            Ingabo.copyOf(ingaboRecord, (updated) => {
+            Ingab.copyOf(ingabRecord, (updated) => {
               Object.assign(updated, modelFields);
             })
           );
@@ -237,7 +237,7 @@ export default function IngaboUpdateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "IngaboUpdateForm")}
+      {...getOverrideProps(overrides, "IngabUpdateForm")}
       {...rest}
     >
       <TextField
@@ -1309,7 +1309,7 @@ export default function IngaboUpdateForm(props) {
             event.preventDefault();
             resetStateValues();
           }}
-          isDisabled={!(idProp || ingaboModelProp)}
+          isDisabled={!(idProp || ingabModelProp)}
           {...getOverrideProps(overrides, "ResetButton")}
         ></Button>
         <Flex
@@ -1321,7 +1321,7 @@ export default function IngaboUpdateForm(props) {
             type="submit"
             variation="primary"
             isDisabled={
-              !(idProp || ingaboModelProp) ||
+              !(idProp || ingabModelProp) ||
               Object.values(errors).some((e) => e?.hasError)
             }
             {...getOverrideProps(overrides, "SubmitButton")}

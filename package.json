@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "@aws-amplify/cdk-exported-backend": "^0.0.6",
-    "@aws-amplify/ui-react": "^4.2.0",
+    "@aws-amplify/ui-react": "^4.6.3",
+    "@aws-amplify/ui-react-storage": "^1.2.2",
     "@babel/core": "^7.16.0",
     "@heroicons/react": "^1.0.6",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
