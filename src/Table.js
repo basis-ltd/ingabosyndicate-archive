@@ -159,23 +159,6 @@ function Table() {
 
   let data = records;
 
-
-  // CHECK DUPLICATES
-  const checkDuplicates = (data) => {
-    const duplicates = [], toReturn = [];
-    const unique = {};
-    data.forEach((item, index) => {
-      if (!unique[item.nationalID] && !unique[item.fullname]) {
-        unique[item.nationalID] = true;
-      } else {
-        duplicates.push(item);
-      }
-    });
-    return duplicates;
-  };
-
-  const duplicates = checkDuplicates(data);
-
   const columns = React.useMemo(
     () => [
       {
@@ -304,8 +287,8 @@ function Table() {
     });
 
     const columnsToInclude = [
-      'no',
-      'fullName',
+      'No',
+      'fullname',
       'dateofbirth',
       'gender',
       'nationalID',
@@ -325,20 +308,21 @@ function Table() {
       'inkoko',
       'ingurube',
       'inka',
+      'signature'
     ];
 
-    const filteredData = duplicates.map((row) => {
+    const filteredData = data.map((row, idx) => {
       const filteredRow = {};
-      columnsToInclude.forEach((column) => {
+      columnsToInclude.forEach((column, index) => {
         filteredRow[column] = row[column];
+        filteredRow['No'] = idx + 1;
       });
       return filteredRow;
     });
 
     //FILTERING COLUMNS TO APPEAR IN EXCEL EXPORT
-    const filteredColumns = columnsToInclude.map(
-      (col) => headers.find((h) => h.accessor === col).Header
-    );
+    const filteredColumns = headers.map((col) => col.Header);
+    filteredColumns.unshift('No');
 
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(filteredData);
@@ -349,10 +333,11 @@ function Table() {
       ws['!cols'][column.idx] = { width: column.width };
     });
 
-    // define the column headers
-    const titles = filteredColumns;
-    titles.forEach((header, i) => {
+    console.log(filteredColumns);
+
+    filteredColumns.forEach((header, i) => {
       const cell = ws[`${String.fromCharCode(65 + i)}1`]; // e.g. A1, B1, C1, etc.
+      console.log(cell, header);
       cell.v = header;
     });
 
@@ -514,7 +499,7 @@ function Table() {
   const exportPDF = () => {
     let info = [];
 
-    duplicates.forEach((element, index, array) => {
+    data.forEach((element, index, array) => {
       info.push([
         element.fullname,
         element.dateofbirth,
