@@ -1,4 +1,17 @@
 {
+  "test": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ingabosyndicate-test-170254-authRole",
+      "UnauthRoleArn": "arn:aws:iam::049778465641:role/amplify-ingabosyndicate-test-170254-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::049778465641:role/amplify-ingabosyndicate-test-170254-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-ingabosyndicate-test-170254-deployment",
+      "UnauthRoleName": "amplify-ingabosyndicate-test-170254-unauthRole",
+      "StackName": "amplify-ingabosyndicate-test-170254",
+      "StackId": "arn:aws:cloudformation:us-east-1:049778465641:stack/amplify-ingabosyndicate-test-170254/09e182b0-5a33-11ee-871a-0ac78f4fb7b9",
+      "AmplifyAppId": "d3d8b8zq3mdclc"
+    }
+  },
   "staging": {
     "awscloudformation": {
       "AuthRoleName": "amplify-ingabosyndicate-staging-221600-authRole",
@@ -20,11 +33,32 @@
           "s3Key": "amplify-builds/ingabosyndicate71ce621bPostConfirmation-6a71734e744766315375-build.zip"
         }
       },
-      "api": {
-        "ingabosyndicate": {}
-      },
       "auth": {
         "ingabosyndicate": {}
+      }
+    }
+  },
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ingabosyndicate-dev-185713-authRole",
+      "UnauthRoleArn": "arn:aws:iam::049778465641:role/amplify-ingabosyndicate-dev-185713-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::049778465641:role/amplify-ingabosyndicate-dev-185713-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-ingabosyndicate-dev-185713-deployment",
+      "UnauthRoleName": "amplify-ingabosyndicate-dev-185713-unauthRole",
+      "StackName": "amplify-ingabosyndicate-dev-185713",
+      "StackId": "arn:aws:cloudformation:us-east-1:049778465641:stack/amplify-ingabosyndicate-dev-185713/49a74e30-5a32-11ee-a4a9-0ad358cdb7d5",
+      "AmplifyAppId": "d3d8b8zq3mdclc"
+    },
+    "categories": {
+      "auth": {
+        "ingabosyndicate": {},
+        "ingabosyndicate71ce621b": {}
+      },
+      "function": {
+        "ingabosyndicate71ce621bPostConfirmation": {
+          "GROUP": "Admin"
+        }
       }
     }
   }

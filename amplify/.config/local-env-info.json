@@ -1,5 +1,6 @@
 {
   "projectPath": "/Users/nishimweprince/Documents/Ingabo Syndicate/ingabosyndicate",
-  "envName": "staging",
-  "defaultEditor": "vscode"
+  "envName": "test",
+  "defaultEditor": "vscode",
+  "noUpdateBackend": true
 }

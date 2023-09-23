@@ -4,6 +4,6 @@
  * Any changes to this file will be overwritten when running amplify pull. *
  **************************************************************************/
 
-export { default as studioTheme } from "./studioTheme";
 export { default as IngaboCreateForm } from "./IngaboCreateForm";
 export { default as IngaboUpdateForm } from "./IngaboUpdateForm";
+export { default as studioTheme } from "./studioTheme";
