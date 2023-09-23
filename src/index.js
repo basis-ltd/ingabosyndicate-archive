@@ -1,4 +1,5 @@
 import React from 'react';
+import { AuthModeStrategyType } from 'aws-amplify'
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -25,7 +26,13 @@ const theme = createTheme({
   }
 })
 
-Amplify.configure(awsconfig);
+Amplify.configure({
+  ...awsconfig,
+  aws_appsync_authenticationType: 'API_KEY',
+  DataStore: {
+    authModeStrategyType: AuthModeStrategyType.MULTI_AUTH
+  }
+})
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
