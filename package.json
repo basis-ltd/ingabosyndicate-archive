@@ -16,7 +16,7 @@
     "@testing-library/user-event": "^13.5.0",
     "amplify-form": "^1.2.2",
     "assert": "^2.0.0",
-    "aws-amplify": "^5.0.10",
+    "aws-amplify": "^5.3.16",
     "axios": "^1.2.2",
     "babel-jest": "^27.4.2",
     "babel-loader": "^8.2.3",
